@@ -35,5 +35,3 @@ If you get style errors, fix them, save and re-run the command above.
 ## Conclusion
 
 The goal of this exercise was to show you how to run the tests to automatically evaluate your code (both style & content) and introduce you to this tight feedback loop.
-
-Once you are done, please go to the [`02-System-Parameters`](https://class.lewagon.com/a/le-wagon/c/<klass.id>/b/<block.id>) exercise :pray:
