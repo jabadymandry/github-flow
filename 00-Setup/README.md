@@ -169,4 +169,4 @@ git commit -m "I am ready"
 git push origin master
 ```
 
-You should get a green dot in the left to track your progression. Thanks!
+You should get a green dot in the left to track your progression. Cheers!
