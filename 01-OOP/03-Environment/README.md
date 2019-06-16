@@ -5,7 +5,7 @@ Another way of modifying the behavior of a Python script (other than command lin
 ## Getting started
 
 ```bash
-cd ~/code/<your_username>/reboot-python
+cd ~/code/<user.github_nickname>/reboot-python
 cd 01-OOP/03-Environment
 subl .
 pipenv run nosetests

@@ -9,7 +9,7 @@ Now that we have played a bit with Flask, it's time to start the exercises which
 Let's start a new Flask project:
 
 ```bash
-cd ~/code/<your_username>
+cd ~/code/<user.github_nickname>
 mkdir twitter-api & cd twitter-api
 pipenv --python 3.7
 pipenv install flask

@@ -15,7 +15,7 @@ A sudoku is valid if and only if:
 ## Getting started
 
 ```bash
-cd ~/code/<your_username>/reboot-python
+cd ~/code/<user.github_nickname>/reboot-python
 cd 01-OOP/09-Optional-Sudoku
 subl .
 ```

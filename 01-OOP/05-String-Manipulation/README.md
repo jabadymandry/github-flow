@@ -31,7 +31,7 @@ type(4)
 
 
 ```bash
-cd ~/code/<your_username>/reboot-python
+cd ~/code/<user.github_nickname>/reboot-python
 cd 01-OOP/05-String-Manipulation
 subl .
 pipenv run nosetests

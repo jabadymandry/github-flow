@@ -11,7 +11,7 @@ In this exercise, we will quickly go over every important features of Flask.
 You will work in a dedicated repository to apply the best practices covered in the previous lecture.
 
 ```bash
-cd ~/code/<your_username>
+cd ~/code/<user.github_nickname>
 mkdir flask-101 && cd $_
 pipenv --python 3.7
 pipenv install flask gunicorn

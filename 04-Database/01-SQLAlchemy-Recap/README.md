@@ -24,7 +24,7 @@ You should leave the port as the default suggested value (`5432`), and choose `E
 Let's start a new repository from scratch:
 
 ```bash
-cd ~/code/<your_username>
+cd ~/code/<user.github_nickname>
 mkdir flask-with-sqlalchemy
 cd flask-with-sqlalchemy
 git init

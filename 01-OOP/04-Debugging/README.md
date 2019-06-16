@@ -9,7 +9,7 @@ In this exercise, we will focus on Interactive debugging & control flow analysis
 ## Getting started
 
 ```bash
-cd ~/code/<your_username>/reboot-python
+cd ~/code/<user.github_nickname>/reboot-python
 cd 01-OOP/04-Debugging
 subl .
 ```
