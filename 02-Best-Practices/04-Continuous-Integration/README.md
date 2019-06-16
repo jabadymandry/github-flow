@@ -29,7 +29,7 @@ git push origin master
 
 Head over to [github.com/marketplace/travis-ci](https://github.com/marketplace/travis-ci) and click on the green button "Set up a free trial". It will scroll down to a section where you can choose the `Open Source - $0` option. Then click on the "Install it for free" green button. Follow the guides.
 
-Once this configuration step, you can go to https://github.com/<user.github_nickname>/longest-word/settings/installations and see that **Travis CI** has been installed into your repository. Neat!
+Once this configuration step, you can go to [github.com/<user.github_nickname>/longest-word/settings/installations](https://github.com/<user.github_nickname>/longest-word/settings/installations) and see that **Travis CI** has been installed into your repository. Neat!
 
 ## Configuration
 
@@ -64,7 +64,7 @@ git commit -m "Configure Travis to run nosetests"
 
 Awesome! Before we actually push, go to this page:
 
-https://github.com/<user.github_nickname>/longest-word/commits/master
+[github.com/<user.github_nickname>/longest-word/commits/master](https://github.com/<user.github_nickname>/longest-word/commits/master)
 
 You should have one commit. Now go back to the terminal:
 
