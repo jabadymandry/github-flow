@@ -15,7 +15,7 @@ Jenkins was first released in **2011** and is widely used by companies around th
 Let's create a new simple project to be configured in Continuous Integration with Jenkins.
 
 ```bash
-cd ~/code/$YOUR_GITHUB_USERNAME
+cd ~/code/<user.github_nickname>
 mkdir morse
 cd morse
 

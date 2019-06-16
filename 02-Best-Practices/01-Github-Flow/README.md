@@ -17,8 +17,7 @@ Before we actually do our first commit, we need to create a GitHub repository!
 1. Go to your terminal and create a new repository locall. Add GitHub as the `origin` remote:
 
 ```bash
-# 💡 Be careful with this one! Don't blindly copy/paste!
-mkdir -p ~/code/$YOUR_GITHUB_USERNAME/github-flow && cd $_
+mkdir -p ~/code/<user.github_nickname>/github-flow && cd $_
 
 git init
 touch README.md

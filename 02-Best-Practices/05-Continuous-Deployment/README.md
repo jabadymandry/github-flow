@@ -17,7 +17,7 @@ When clicking the button, the form will be submitted and will reload the page to
 Go back to your code, and create a branch to start working on this feature.
 
 ```bash
-cd ~/code/$YOUR_GITHUB_USERNAME/longest-word
+cd ~/code/<user.github_nickname>/longest-word
 
 git status # is that clean?
 git checkout master

@@ -71,7 +71,7 @@ We can create a `Game` class which will have the following blueprint:
 Now that we have a better idea of the object we want to build, we can start writing a test. First of all, let's create a new Python project:
 
 ```bash
-cd ~/code/$YOUR_GITHUB_USERNAME
+cd ~/code/<user.github_nickname>
 mkdir longest-word && cd $_
 pipenv --python 3.7
 pipenv install nose pylint --dev
