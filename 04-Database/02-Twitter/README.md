@@ -1,6 +1,6 @@
 # Twitter API - Day 2
 
-The goal of this exercise is to continue the work on yesterday's exercise [Twitter API](../03-Back-end/02-Twitter-API). In this exercise, the database was _mocked_ with a made-up class `TweetRepository`.
+The goal of this exercise is to continue the work on yesterday's exercise **Twitter API**. In this exercise, the database was _mocked_ with a made-up class `TweetRepository`.
 
 ## Setup
 
@@ -400,7 +400,7 @@ class TweetsResource(Resource):
 
 ## Setting up Travis
 
-Setting up Travis for a project where you have a real PostgreSQL database is not as trivial as for a project without. Let's see how we can iterate on the [Travis setup](../02-Best-Practices/04-Continuous-Integration):
+Setting up Travis for a project where you have a real PostgreSQL database is not as trivial as for a project without. Let's see how we can iterate on the **Travis setup** already covered:
 
 ```bash
 touch .travis.yml

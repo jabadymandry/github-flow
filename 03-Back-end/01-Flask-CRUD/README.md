@@ -183,7 +183,7 @@ Just add a third element to the `PRODUCTS` array!
 
 Congratulations :tada: ! You wrote the first route of the RESTful API. Now it's time to implement the four other endpoints to properly implement CRUD on the `product` resource.
 
-Practise the [GitHub Flow](../../02-Best-Practices/01-Github-Flow) with four feature branches (one per `CRUD` acronym letter), and push to `heroku` after each Pull Request merge!
+Practise the **GitHub Flow** with four feature branches (one per `CRUD` acronym letter), and push to `heroku` after each Pull Request merge!
 
 ### Read
 

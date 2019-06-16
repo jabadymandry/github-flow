@@ -1,6 +1,6 @@
 # Jenkins
 
-In the previous [Continuous Integration](../04-Continuous-Integration) exercise, we have covered how to use the cloud provider [Travis CI](https://travis-ci.com/) to quickly put in place a "build farm" for our GitHub repository. The tight integration between GitHub and Travis CI combined with the usage of GitHub's OAuth capabilities gets any developer up & running in minutes. The trickiest part of this setup is always getting the `.travis.yml` configuration right.
+In the previous **Continuous Integration** exercise, we have covered how to use the cloud provider [Travis CI](https://travis-ci.com/) to quickly put in place a "build farm" for our GitHub repository. The tight integration between GitHub and Travis CI combined with the usage of GitHub's OAuth capabilities gets any developer up & running in minutes. The trickiest part of this setup is always getting the `.travis.yml` configuration right.
 
 In this exercise, we will replace Travis CI with **Jenkins**.
 

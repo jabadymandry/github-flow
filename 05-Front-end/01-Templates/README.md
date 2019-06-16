@@ -1,6 +1,6 @@
 # Flask templates
 
-In this exercise, we will re-use the yesterday's application from the [01-SQLAlchemy-Recap](../../04-Database/01-SQLAlchemy-Recap) exercise:
+In this exercise, we will re-use the yesterday's application from the `01-SQLAlchemy-Recap` exercise:
 
 ```bash
 cd ~/code/<github_username>/flask-with-sqlalchemy
