@@ -138,11 +138,11 @@ Last but not least, a keyboard shortcut is `Ctrl-K`, `Ctrl-B` to open/close the 
 
 ## Exercises
 
-This repository contains all the exercises for the week. To work on them, clone them on your laptop. Still in Git Bash, run:
+The repository which you just forked contains all the exercises for the week. To work on them, clone them on your laptop. Still in Git Bash, run:
 
 ```bash
-mkdir -p ~/code/lewagon && cd $_
-git clone git@github.com:lewagon/reboot-python.git
+mkdir -p ~/code/<user.github_nickname> && cd $_
+git clone git@github.com:<user.github_nickname>/reboot-python.git
 cd reboot-python
 pwd # This is your exercise repository!
 ```
