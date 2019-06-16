@@ -4,7 +4,7 @@ When building an API, sometimes the work that needs to be done in the Controller
 
 We will use the [Celery](http://www.celeryproject.org/) project which provides a **distributed task queue** to run these background jobs. Here's a sequence diagram of what we want to do:
 
-![](../../img/celery.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714606/celery_thtll5.png)
 
 Let's try to put that in place into our Flask Application
 
@@ -249,7 +249,7 @@ heroku ps:scale worker=1 web=1
 
 You can check that this has been activated on your Heroku dashboard for your app. You should see something along those lines:
 
-![](../../img/heroku_celery.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714714/heroku_celery_nr43t1.png)
 
 Let's observe our application in the wild. Launch the following command to observe production logs:
 

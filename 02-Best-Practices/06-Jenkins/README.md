@@ -172,22 +172,22 @@ git push origin master
 
 Go to [jenkins.lewagon.com](http://jenkins.lewagon.com) and sign in with your GitHub account. If all goes well you should arrive on the following log-in screen.
 
-![](../../img/jenkins-after-login.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714819/jenkins-after-login_rmgpbu.png)
 
 Click on "New item" to create a new configuration.
 
-![](../../img/jenkins-create-project.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714835/jenkins-create-project_ktaqas.png)
 
 You should arrive on this screen:
 
-![](../../img/jenkins-add-1.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714745/jenkins-add-1_tgeslg.png)
 
 Once "GitHub" has been selected as a source, it gets trickier. The idea is that we will provide a way for Jenkins to:
 
 1. Download the source from GitHub. For a public repo it mights seems obvious as the code is open-source, so no auth needed right? Well, that's true but would defat the second item:
 1. Set the status of every commit of every branch and Pull Request, allowing the developers to be aware of breakage directly from GitHub
 
-![](../../img/jenkins-add-2.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714760/jenkins-add-2_tz9oso.png)
 
 Select the project to store the credentials (and not a global Jenkins configuration). You will be prompted with a pop-in asking you for a username and password. **Don't put your password** in here. Go to [github.com/settings/tokens](https://github.com/settings/tokens) to generate a new one.
 
@@ -198,17 +198,17 @@ You need the following permissions:
 - `read:org`
 - `user:email`
 
-![](../../img/jenkins-add-3.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714771/jenkins-add-3_ebbb5l.png)
 
-![](../../img/jenkins-add-4.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714784/jenkins-add-4_e7rqs7.png)
 
 Save your credentials configuration, it will close the pop up. It's now time to select the right GitHub repository as a source.
 
-![](../../img/jenkins-add-5.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714797/jenkins-add-5_dtqxan.png)
 
 Finally it should scan your repository for branches. In each branch, it will look for a `Jenkinsfile`, which it won't find.
 
-![](../../img/jenkins-add-6.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714808/jenkins-add-6_yacmsb.png)
 
 ### Jenkinsfile
 
@@ -268,7 +268,7 @@ You want to add a Webhook for the following events:
 
 It should look like this:
 
-![](../../img/github-add-webhook.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714654/github-add-webhook_mtor6z.png)
 
 That's it! GitHub will report Jenkins everytime you push or open a Pull Request.
 
@@ -282,11 +282,11 @@ git push origin master
 
 Go to Jenkins and watch a **#1** build start, finish and be **red**.
 
-![](../../img/jenkins-first-build-red-1.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714848/jenkins-first-build-red-1_tjtpjz.png)
 
-![](../../img/jenkins-first-build-red-2.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714884/jenkins-first-build-red-2_dkamdz.png)
 
-![](../../img/jenkins-first-build-red-3.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714895/jenkins-first-build-red-3_vxygvy.png)
 
 ### Turning Jenkins's project green (blue)
 
@@ -354,7 +354,7 @@ git push origin master
 
 Go back to Jenkins, and watch your build run.
 
-![](../../img/jenkins-second-build-green.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714907/jenkins-second-build-green_rb7mxy.png)
 
 Hooray! Travis is now passing.
 
@@ -441,7 +441,7 @@ Go ahead and merge the branch. Go back to Jenkins, you should see `master` build
 https://github.com/YOUR_GITHUB_NICKNAME/morse/network
 ```
 
-![](../../img/github-morse-network.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714675/github-morse-network_jesjkb.png)
 
 ## Conclusion
 

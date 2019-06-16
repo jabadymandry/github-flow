@@ -80,7 +80,7 @@ git push origin html-skeleton
 
 Now head to your repository on GitHub and refresh the page. You should see this:
 
-![](../../img/html-skeleton-pr-suggestion.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714729/html-skeleton-pr-suggestion_ilh5o4.png)
 
 Click on the green button to create your first pull request.
 
@@ -158,7 +158,7 @@ It is really simple to enable. On your `github-flow` repository, go to `Settings
 
 Under the `Source`, click on the dropdown list and select the `master` branch. Then click `Save`
 
-![](../../img/enable-github-pages.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714628/enable-github-pages_w5clbv.png)
 
 It will reload the page. If you scroll down you should see a sentence: Your site is ready to be published at:... And here your are! The URL of your website:
 

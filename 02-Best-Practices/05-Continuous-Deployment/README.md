@@ -12,7 +12,7 @@ We will build a simple page which will display the random grid. Underneath this 
 
 When clicking the button, the form will be submitted and will reload the page to showcase the results.
 
-![](../../img/longest-word-mockup.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714935/longest-word-mockup_mwtd3d.png)
 
 Go back to your code, and create a branch to start working on this feature.
 

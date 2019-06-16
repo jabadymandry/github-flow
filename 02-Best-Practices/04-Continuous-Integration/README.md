@@ -125,11 +125,11 @@ If you are stuck in the progress of your feature or branch and need help or advi
 
 At Le Wagon, developers open Pull Request early on for their feature branches to show teammates what they are doing and sollicitate feedback early. No need to wait to be code-complete to open the Pull Request! Here is a screenshot of our main application, using the `[WIP]` prefix in the pull request titles to showcase the fact that the branch is not ready yet to be merged:
 
-![](../../img/kitt-wip-prs.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714921/kitt-wip-prs_obp6e7.png)
 
 Back to our Pull Request. If you scroll a bit below the PR description and the list of commits, you will see the Travis CI integration shine:
 
-![](../../img/github-travis-failing.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714687/github-travis-failing_n0d78e.png)
 
 The benefit is really important. You have a direct feedback, right in GitHub, about the build status of your branch. Of course here we actually _want_ to have a red branch as we added a test but did not implement the behavior yet. Still, you can imagine that someone pushing some code and forgetting to run the tests locally on their machine will be warned directly on GitHub that they broke the build.
 
@@ -184,7 +184,7 @@ git push origin dictionary-api
 
 Go back to your Pull Request page, you should see the icons turning from red crosses to yellow dots. It means that Travis CI is building the code against the latest commit. Wait a few seconds, and it should update the status. This is what you should see:
 
-![](../../img/github-travis-passing.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714701/github-travis-passing_vppc1l.png)
 
 Awesome job 🎉! Invite your buddy as a repo collaborator to review the code in the Pull Request and **merge** it.
 

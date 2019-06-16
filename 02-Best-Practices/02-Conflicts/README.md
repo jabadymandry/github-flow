@@ -19,7 +19,7 @@ Imagine the following scenario:
 
 <details><summary>View solution</summary><p>
 
-![](../../img/merge-a.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714952/merge-a_onl0os.png)
 
 </p></details>
 
@@ -118,7 +118,7 @@ git commit --no-edit # Preserve the original merge commit
 
 The commit tree now looks like this:
 
-![](../../img/merge-master-in-b.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714980/merge-master-in-b_vpds1x.png)
 
 The conflict is solved, Developer B can keep working in `feature-b` until the feature is finished. At that point he/she will `push` and open a Pull Request on GitHub.
 
@@ -126,7 +126,7 @@ The conflict is solved, Developer B can keep working in `feature-b` until the fe
 
 <details><summary>View solution</summary><p>
 
-![](../../img/merge-b.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560714962/merge-b_ason4h.png)
 
 </p></details>
 

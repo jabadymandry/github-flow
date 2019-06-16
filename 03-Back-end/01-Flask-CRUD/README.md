@@ -234,7 +234,7 @@ print(ID.next())
 }
 ```
 
-![](../../img/postman-workelo.png)
+![](https://res.cloudinary.com/wagon/image/upload/v1560715014/postman-workelo_ztvqyf.png)
 
 ### Update
 
