@@ -21,7 +21,7 @@ Make sure your `git status` is clean and don't forget to work in a branch! As yo
 ```bash
 # Make sure `git status` is clean.
 git checkout master
-git pull origin master
+git pull upstream master
 git checkout -b celery
 ```
 

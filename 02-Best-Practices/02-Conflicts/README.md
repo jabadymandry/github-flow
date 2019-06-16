@@ -62,7 +62,7 @@ How do we solve this conflict then? First of all, we need to __reveal__ it, by u
 ```bash
 git status # Make sure that it's clean. Commit if not
 git checkout master
-git pull origin master
+git pull upstream master
 
 # As of now, our local `master` is synced with remote `master` from GitHub
 

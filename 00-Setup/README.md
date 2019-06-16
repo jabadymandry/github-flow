@@ -144,6 +144,8 @@ The repository which you just forked contains all the exercises for the week. To
 mkdir -p ~/code/<user.github_nickname> && cd $_
 git clone git@github.com:<user.github_nickname>/reboot-python.git
 cd reboot-python
+git remote add upstream git@github.com:lewagon/reboot-python.git
+
 pwd # This is your exercise repository!
 ```
 

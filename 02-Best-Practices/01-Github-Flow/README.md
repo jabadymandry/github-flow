@@ -105,7 +105,7 @@ Here is what you need to do:
 git checkout master
 
 # Get your `master` branch up to date with GitHub's
-git pull origin master
+git pull upstream master
 
 # The feature branch is dead. Remove it! Keep a clean repo
 git branch -d html-skeleton
@@ -143,7 +143,7 @@ git push origin $FEATURE_BRANCH
 
 git status # ⚠️ Make sure there is no work pending before changing branches!
 git checkout master
-git pull origin master
+git pull upstream master
 git branch -d $FEATURE_BRANCH
 
 # Start over!
