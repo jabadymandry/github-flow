@@ -157,5 +157,16 @@ pipenv install --dev # to install `packages` **and** `dev-packages`
 
 It will create the Virtualenv for this folder, using Python 3.7 as [specified](https://github.com/lewagon/reboot-python/blob/master/Pipfile#L15-L16)
 
-Let's start working on the first exercise! Go to [`01-OOP/01-Sum-Of-Three`](../01-OOP/01-Sum-Of-Three). Good luck!
+## Getting the green dot
 
+For each challenge, we encourage you to **commit** and **push** your progression. Let's start now with:
+
+```bash
+cd 00-Setup
+touch READY
+git add READY
+git commit -m "I am ready"
+git push origin master
+```
+
+You should get a green dot in the left to track your progression. Thanks!
