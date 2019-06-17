@@ -49,7 +49,7 @@ subl .
 
 Open the `index.html` file and write some HTML code.
 
-<details><summary>Some inspiration
+<details><summary markdown='span'>Some inspiration
 </summary>
 
 <span>👉 Here is some [inspiration](https://gist.github.com/ssaunier/faa9965201153555bc954fb4713eea7c) if you need.</span>
