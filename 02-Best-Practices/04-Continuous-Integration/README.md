@@ -145,7 +145,8 @@ pipenv run nosetests tests/test_game.py:TestGame.test_unknown_word_is_invalid
 - You can use Le Wagon's homemade simple [Dictionary API](https://wagon-dictionary.herokuapp.com/)
 - You can `pipenv install requests` to make [HTTP requests](http://docs.python-requests.org/en/master/) to this API.
 
-<details><summary>View solution</summary><p>
+<details><summary markdown='span'>View solution
+</summary>
 
 We can implement a private `__check_dictionary` method to run an API call.
 
@@ -168,7 +169,7 @@ class Game:
         return response['found']
 ```
 
-</p></details>
+</details>
 
 <br>
 

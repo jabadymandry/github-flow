@@ -375,7 +375,8 @@ heroku open
 
 :question: You should get the `Hello world` from the Home page. Head to `/products`. How many products do you see? Why is it different from `localhost`?
 
-<details><summary>View solution</summary><p>
+<details><summary markdown='span'>View solution
+</summary>
 
 The production database and the local (development) database are **different**!
 
@@ -395,7 +396,7 @@ heroku run flask shell
 
 Now reload the page. See, you get the newly added product!
 
-</p></details>
+</details>
 
 ## Your turn!
 

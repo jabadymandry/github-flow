@@ -33,7 +33,8 @@ Asking this question means you need to think about your code like a black box. I
 
 ❓ Take a few minutes to think about the **two main functions** of our game.
 
-<details><summary>View solution</summary><p>
+<details><summary markdown="span">View solution
+</summary>
 
 We need a first function to compute a grid of nine random letters:
 
@@ -49,20 +50,21 @@ def is_valid(word, grid):
     pass
 ```
 
-</p></details>
+</details>
 
 <br>
 
 ❓ How can we use the Object-Oriented paradigm on this problem? Again, take some time to think about it.
 
-<details><summary>View solution</summary><p>
+<details><summary markdown='span'>View solution
+</summary>
 
 We can create a `Game` class which will have the following blueprint:
 
 1. Generate and hold a 9-letter random list
 1. Test the validity of a word against this grid
 
-</p></details>
+</details>
 
 <br>
 
@@ -134,7 +136,8 @@ OK so the error message is `ImportError: cannot import name 'Game' from 'game'`.
 
 ❓ How can we fix it?
 
-<details><summary>View solution</summary><p>
+<details><summary markdown='span'>View solution
+</summary>
 
 We need to create a `Game` class in the `./game.py` file:
 
@@ -144,7 +147,7 @@ class Game:
     pass
 ```
 
-</p></details>
+</details>
 
 <br>
 
@@ -184,7 +187,8 @@ Did you get this quick feedback loop? We run the test, we get an error message, 
 
 💡 You can use `print()` or `import pdb; pdb.set_trace()` in combination with `nosetests -s`.
 
-<details><summary>View solution</summary><p>
+<details><summary markdown='span'>View solution
+</summary>
 
 One possible implementation is:
 
@@ -200,7 +204,7 @@ class Game:
             self.grid.append(random.choice(string.ascii_uppercase))
 ```
 
-</p></details>
+</details>
 
 <br>
 
@@ -212,7 +216,8 @@ We use **TDD**, which means that we need to write the test **first**. For the fi
 
 ❓ It's your turn to implement a test for this new `is_valid(self, word)` method! See, we already gave you the method [signature](https://en.wikipedia.org/wiki/Type_signature#Method_signature)...
 
-<details><summary>View solution</summary><p>
+<details><summary markdown='span'>View solution
+</summary>
 
 A possible implementation of the test would be:
 
@@ -237,8 +242,7 @@ A possible implementation of the test would be:
         self.assertIs(new_game.is_valid('SANDWICH'), False)
         self.assertEqual(new_game.grid, list('KWEUEAKRZ')) # Make sure the grid remained untouched
 ```
-
-</p></details>
+</details>
 
 <br>
 
@@ -250,7 +254,8 @@ pipenv run nosetests
 
 ❓ It's your turn! Update the `game.py` implementation to make the tests pass!
 
-<details><summary>View solution</summary><p>
+<details><summary markdown='span'>View solution
+</summary>
 
 A possible implemantation is:
 
@@ -271,7 +276,7 @@ A possible implemantation is:
         return True
 ```
 
-</p></details>
+</details>
 
 <br>
 

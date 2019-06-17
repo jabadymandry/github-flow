@@ -69,14 +69,12 @@ git commit -m "Add basic skeleton HTML"
 
 Commit is now done locally. Time to push. What will be the command?
 
-<details>
-  <summary>View solution</summary>
-  <p>
+<details><summary markdown='span'>View solution
+</summary>
 
 ```bash
 git push origin html-skeleton
 ```
-  </p>
 </details>
 
 Now head to your repository on GitHub and refresh the page. You should see this:

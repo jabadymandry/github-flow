@@ -300,7 +300,8 @@ pipenv run nosetests
 
 Stuck? Ask your buddy! Still stuck? Ask a TA!
 
-<details><summary>View solution</summary><p>
+<details><summary markdown='span'>View solution
+</summary>
 
 ```python
 class Morse:
@@ -341,8 +342,7 @@ class Morse:
         letters = [self.ALPHABET[s] for s in symbols]
         return ''.join(letters)
 ```
-
-</p></details>
+</details>
 
 Once your test are passing locally, it's time to commit & push:
 
@@ -414,7 +414,8 @@ You now have 2 branches! And you can see that the `multi-word-decode` branch is 
 
 **Your turn**! Try to make this branch green by implementing the feature. If you are stuck, talk to your buddy. Ask a TA for help.
 
-<details><summary>View solution</summary><p>
+<details><summary markdown='span'>View solution
+</summary>
 
 ```python
     def decode(self, message):
@@ -431,7 +432,7 @@ You now have 2 branches! And you can see that the `multi-word-decode` branch is 
         return ''.join(letters)
 ```
 
-</p></details>
+</details>
 
 Commit your work and push your branch. Go on GitHub and click on the "New pull request" button. You want to merge the `multi-word-decode` (`HEAD`) into `master` (base branch). Create the Pull Request and enjoy the integration between Jenkins and GitHub, thanks to the webhook **and** you personal access token.
 

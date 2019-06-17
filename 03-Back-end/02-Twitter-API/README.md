@@ -247,14 +247,15 @@ You should get something which looks like this:
 
 :question: What's next? **Read the error message and try to fix it**
 
-<details><summary>View solution</summary><p>
+<details><summary markdown='span'>View solution
+</summary>
 
 You must create the `models.py` file so that this module is defined!
 
 ```bash
 touch app/models.py
 ```
-</p></details>
+</details>
 
 <br />
 
@@ -272,7 +273,8 @@ Run the tests again **until the error message changes**. You should get this one
 
 :question: What is the **minimum** code change you can do to fix this error?
 
-<details><summary>View solution</summary><p>
+<details><summary markdown='span'>View solution
+</summary>
 
 The error complains about the fact that `Tweet` is not defined. The minimum code
 change we can do is to create an **empty** class:
@@ -282,7 +284,7 @@ change we can do is to create an **empty** class:
 class Tweet:
     pass
 ```
-</p></details>
+</details>
 
 <br />
 
@@ -300,7 +302,8 @@ The next error should be:
 
 :question: What is the **minimum** code change you can do to fix this error?
 
-<details><summary>View solution</summary><p>
+<details><summary markdown='span'>View solution
+</summary>
 
 Our `Tweet` class is empty and needs an [instance variable](https://docs.python.org/3/tutorial/classes.html#class-and-instance-variables) `text`:
 
@@ -311,7 +314,7 @@ class Tweet:
         self.text = text
 ```
 
-</p></details>
+</details>
 
 <br />
 
@@ -324,7 +327,8 @@ The next two errors should complain about:
 
 :question: How can we fix this last two errors and make the test pass?
 
-<details><summary>View solution</summary><p>
+<details><summary markdown='span'>View solution
+</summary>
 
 Our `Tweet` class is missing the `created_at` instance variable, automatically
 set to [the current time](https://stackoverflow.com/questions/415511/how-to-get-current-time-in-python).
@@ -341,7 +345,7 @@ class Tweet:
         self.created_at = datetime.now()
 ```
 
-</p></details>
+</details>
 
 <br />
 
@@ -369,7 +373,8 @@ touch tests/test_repositories.py
 
 :question: This time, try to write the test yourself.
 
-<details><summary>View solution (Really try first 🙏)</summary><p>
+<details><summary markdown='span'>View solution (Really try first 🙏)
+</summary>
 
 ```python
 # tests/test_repositories.py
@@ -405,14 +410,15 @@ class TestTweetRepository(TestCase):
         self.assertIsNone(repository.get(2))
 ```
 
-</p></details>
+</details>
 
 <br />
 
 :question: Once the test is written, try to implement the `TweetRepository` class using the
 same TDD technique we used to implement the `Tweet` class.
 
-<details><summary>View solution</summary><p>
+<details><summary markdown='span'>View solution
+</summary>
 
 ```python
 # app/repositories.py
@@ -438,7 +444,7 @@ class TweetRepository:
 
 💡 See how the test file is way longer than the actual implementation?
 
-</p></details>
+</details>
 
 <br />
 
@@ -586,7 +592,8 @@ pipenv run nosetests tests/apis/test_tweet_views.py
 
 :bulb: **Hint**: have a look at the [full example](https://flask-restplus.readthedocs.io/en/stable/example.html) from the documentation!
 
-<details><summary>View solution (Really try first 🙏)</summary><p>
+<details><summary markdown='span'>View solution (Really try first 🙏)
+</summary>
 
 We will use the FlaskRESTPlus built-in serialization:
 
@@ -616,7 +623,7 @@ class TweetResource(Resource):
             return tweet
 ```
 
-</p></details>
+</details>
 
 <br />
 
@@ -632,7 +639,8 @@ Now open your browser and go to [`localhost:5000/tweets/1`](http://localhost:500
 
 :question: Read the error message and find which line of your code triggers it. Why?
 
-<details><summary>View solution</summary><p>
+<details><summary markdown='span'>View solution
+</summary>
 
 On line 8 of `app/api/tweets.py`, we retrieve a tweet with id == 1 **but** there is no tweet in the repository
 yet! Then `tweet` is `None`, thus the error:
@@ -640,8 +648,6 @@ yet! Then `tweet` is `None`, thus the error:
 ```bash
 AttributeError: 'NoneType' object has no attribute 'id'
 ```
-
-</p>
 
 To solve this problem, we need to simulate a database with pre-existing tweets at server boot. We can do so with:
 
