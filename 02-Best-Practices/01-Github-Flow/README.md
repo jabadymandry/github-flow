@@ -53,7 +53,8 @@ Open the `index.html` file and write some HTML code.
 
 👉 Here is some [inspiration](https://gist.github.com/ssaunier/faa9965201153555bc954fb4713eea7c) if you need.
 
-</p></details>
+</p>
+</details>
 
 You can open this file in Chrome (go to File Explorer, browse to the right folder and then drag/drop or the `index.html` file into a Google Chrome window).
 
@@ -75,7 +76,8 @@ Commit is now done locally. Time to push. What will be the command?
 git push origin html-skeleton
 ```
 
-</p></details>
+</p>
+</details>
 
 Now head to your repository on GitHub and refresh the page. You should see this:
 
