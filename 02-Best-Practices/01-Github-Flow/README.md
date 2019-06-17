@@ -49,11 +49,11 @@ subl .
 
 Open the `index.html` file and write some HTML code.
 
-<details><summary>Some inspiration</summary><p>
+<details>
+  <summary>Some inspiration
+</summary>
 
-👉 Here is some [inspiration](https://gist.github.com/ssaunier/faa9965201153555bc954fb4713eea7c) if you need.
-
-</p>
+<span>👉 Here is some [inspiration](https://gist.github.com/ssaunier/faa9965201153555bc954fb4713eea7c) if you need.</span>
 </details>
 
 You can open this file in Chrome (go to File Explorer, browse to the right folder and then drag/drop or the `index.html` file into a Google Chrome window).
