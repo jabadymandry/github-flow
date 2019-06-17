@@ -17,17 +17,19 @@ Imagine the following scenario:
 
 ❓ Let's pause for a minute. Can you draw a picture of the scenario `git`-wise? ✏️ Take a pencil and a sheet of paper.
 
-<details><summary>View solution</summary><p>
+<details><summary markdown='span'>View solution
+</summary>
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714952/merge-a_onl0os.png)
 
-</p></details>
+</details>
 
 <br>
 
 ❓ This exact situation may or may not provoke a conflict. Can you guess the condition when a conflict will arise?
 
-<details><summary>View solution</summary><p>
+<details><summary markdown='span'>View solution
+</summary>
 
 Let's suppose that on Monday, 9am, the latest commit in `master` held the following content for `./index.html`:
 
@@ -53,7 +55,7 @@ Now suppose that in `feature-a`, Developer A changed line 6 of this file to put 
 
 As `feature-a` got merged, `master` now has `color: green` on line 6. That's a conflict that will arise as this line changed since `feature-b` was created **and** it was changed in a commit of `feature-b`. If those two conditions are met, **then** you will always have a conflict.
 
-</p></details>
+</details>
 
 <br>
 
@@ -124,11 +126,12 @@ The conflict is solved, Developer B can keep working in `feature-b` until the fe
 
 ❓ Once the second pull request is merged, how will the commit graph look?
 
-<details><summary>View solution</summary><p>
+<details><summary markdown="span">View solution
+</summary>
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714962/merge-b_ason4h.png)
 
-</p></details>
+</details>
 
 <br>
 

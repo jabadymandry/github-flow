@@ -11,7 +11,8 @@ import random
 random.choice([ "a", "b", "c" ])
 ```
 
-<details><summary>View solution</summary><p>
+<details><summary markdown="span">View solution
+</summary>
 
 ```python
 import random
@@ -71,4 +72,4 @@ if __name__ == '__main__':
     game.play()
 ```
 
-</p></details>
+</details>

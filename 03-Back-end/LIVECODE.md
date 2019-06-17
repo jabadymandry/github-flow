@@ -92,7 +92,8 @@ What are you looking for?
 
 Please do not peek _before_ the livecode session!
 
-<details><summary>View solution</summary><p>
+<details><summary markdown='span'>View solution
+</summary>
 
 ```python
 # tests/test_news.py
@@ -153,5 +154,4 @@ def main():
 if __name__ == '__main__':
     main()
 ```
-
-</p></details>
+</details>

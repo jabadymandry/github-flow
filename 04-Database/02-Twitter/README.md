@@ -228,7 +228,8 @@ FLASK_ENV=development pipenv run flask run
 
 Look at the error message in the terminal and try to fix the code _yourself_. There's only one line of code to add (an `import`) and another one to change. You can do it :muscle: !
 
-<details><summary>View solution</summary><p>
+<details><summary markdown='span'>View solution
+</summary>
 
 ```python
 # Add this at the beginning of the file:
@@ -242,7 +243,7 @@ tweet = db.session.query(Tweet).get(id)
 
 Congrats! [localhost:5000/tweets/1](http://localhost:5000/tweets/1) is now working!
 
-</p></details>
+</details>
 
 Let's leave only the `GET /tweets/:id` route working, not touching the ones, and try to fix the tests first before going back to it.
 
@@ -304,7 +305,8 @@ To check if you are making some progress, run the tests:
 pipenv run nosetests
 ```
 
-<details><summary>View solution</summary><p>
+<details><summary markdown='span'>View solution
+</summary>
 
 Here is the updated code for the `TestTweetViews` test case:
 
@@ -396,7 +398,7 @@ class TweetsResource(Resource):
             return abort(422, "Tweet text can't be empty")
 ```
 
-</p></details>
+</details>
 
 ## Setting up Travis
 

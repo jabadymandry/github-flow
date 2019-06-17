@@ -48,7 +48,8 @@ class MachineTest(unittest.TestCase):
 
 Please do not peek _before_ the livecode session!
 
-<details><summary>View solution</summary><p>
+<details><summary markdown="span">View solution
+</summary>
 
 ```python
 # test/test_machine.py
@@ -138,4 +139,4 @@ class Machine:
                 self.coins[coin] -= count
 ```
 
-</p></details>
+</details>

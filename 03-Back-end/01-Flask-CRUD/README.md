@@ -172,11 +172,11 @@ pipenv run nosetests -s
 
 (`-s` flag is useful to actually view your `print()` statements, or use `pdb`).
 
-<details><summary>View solution</summary><p>
+<details><summary markdown='span'>View solution
+</summary>
 
 Just add a third element to the `PRODUCTS` array!
 
-</p>
 </details>
 
 ## CRUD
