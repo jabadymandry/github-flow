@@ -164,7 +164,7 @@ git commit -m "Morse code. Failing tests. Pending Jenkins configuration"
 Go to [github.com/new](https://github.com/new) and create a `morse` repository. Push your code:
 
 ```bash
-git remote add origin git@github.com:YOUR_GITHUB_USERNAME/morse.git
+git remote add origin git@github.com:<user.github_nickname>/morse.git
 git push origin master
 ```
 
@@ -449,3 +449,15 @@ https://github.com/YOUR_GITHUB_NICKNAME/morse/network
 Like for Travis CI, adding tests to a repository and coupling GitHub with Jenkins gives the developer peace of mind when adding code, checking for possible regressions, exercising the whole test suite for _every single_ commit!
 
 Bear in mind that depending on your project, the `Jenkinsfile` will vary. For this exercise, we are using a **Docker agent** run by Jenkins, with `pipenv` to install dependencies from the `Pipfile` and `nose` as a test launcher. Other projects might use a Python distribution like [Anaconda](https://www.anaconda.com/) and [`tox`](https://tox.readthedocs.io/en/latest/) as virtualenv manager / test launcher. Talk with your team!
+
+## I'm done!
+
+Before you jump to the next exercise, let's mark your progress with the following:
+
+```bash
+cd ~/code/<user.github_nickname>/reboot-python
+cd 02-Best-Practices/06-Jenkins
+touch DONE.md
+git add DONE.md && git commit -m "02-Best-Practices/06-Jenkins done"
+git push origin master
+```

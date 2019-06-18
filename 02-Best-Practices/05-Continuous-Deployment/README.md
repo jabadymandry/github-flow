@@ -327,3 +327,16 @@ This kind of development with small feature branches which are automatically dep
 If you are done with all the exercises of the day, go back to the optional sudoku from yesterday if you did not finish it (or exercises before).
 
 If this is done as well, have a look at the [Flask documentation](http://flask.pocoo.org/). We will cover Flask in tomorrow's lecture, in the meantime, you can try to implement a feature in the Longest Word Game: a global **score**! The idea is that every time a user finds a valid word, you increments points (1 point per letter). As HTTP is stateless, you need to use [this Flask extension](https://pythonhosted.org/Flask-Session/) to handle the concept of **session** (with `SESSION_TYPE='filesystem'`).
+
+## I'm done!
+
+Before you jump to the next exercise, let's mark your progress with the following:
+
+```bash
+cd ~/code/<user.github_nickname>/reboot-python
+cd 02-Best-Practices/05-Continuous-Deployment
+touch DONE.md
+git add DONE.md && git commit -m "02-Best-Practices/05-Continuous-Deployment done"
+git push origin master
+```
+

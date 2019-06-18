@@ -147,7 +147,6 @@ git branch -d $FEATURE_BRANCH
 # Start over!
 ```
 
-
 ## Bonus - GitHub Pages
 
 If you have a simple **static** website to host, GitHub provides a great solution: [GitHub Pages](https://pages.github.com/). You can turn a repository into a host provider!
@@ -161,7 +160,7 @@ Under the `Source`, click on the dropdown list and select the `master` branch. T
 It will reload the page. If you scroll down you should see a sentence: Your site is ready to be published at:... And here your are! The URL of your website:
 
 ```bash
-http://$GITHUB_NICKNAME.github.io/$REPO_NAME/
+https://<user.github_nickname>.github.io/$REPO_NAME/
 ```
 
 Every time a commit happens in `master` (through a merged Pull Request using the GitHub flow), GitHub Pages will automatically deploy the changes to this URL. With this set up, the `Merge` button under a Pull Request becomes a **Deploy** one.
@@ -174,3 +173,14 @@ The power of the GitHub flow comes from being accessible even to `git` beginners
 
 If you talk with other developers about `git`, some advanced concepts might come up, like `stash`, `cherry-pick`, `rebase`, `reset` or `reflog`. There is plenty of time to learn about those topics (`stash` being in our opinion the easiest and most useful) and adapt your knowledge to your team. We won't cover these topics but at least you have some keywords to Google!
 
+## I'm done!
+
+Before you jump to the next exercise, let's mark your progress with the following:
+
+```bash
+cd ~/code/<user.github_nickname>/reboot-python
+cd 02-Best-Practices/01-Github-Flow
+touch DONE.md
+git add DONE.md && git commit -m "02-Best-Practices/01-Github-Flow done"
+git push origin master
+```

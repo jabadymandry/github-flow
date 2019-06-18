@@ -158,3 +158,15 @@ Conflicts are not the only problem you will have using `git`. Sometimes you just
 Also, sometimes you have work in progress in a branch that you don't want to commit, but you need to change branches and can't do so if your `git status` is clean. The solution is to use [`git stash`](https://www.atlassian.com/git/tutorials/saving-changes/git-stash)!
 
 Finally, `git` can also be used with advanced GUIs. Usually, developers tend to stick in the command line but sometimes, especially to **visualize diffs**, using a GUI can help a lot. You can download [GitHub Desktop](https://desktop.github.com/) and try it. The interface is very simple, browsing the history pleasant and re-reading a diff before a `commit` something worth considering the tool.
+
+## I'm done!
+
+Before you jump to the next exercise, let's mark your progress with the following:
+
+```bash
+cd ~/code/<user.github_nickname>/reboot-python
+cd 02-Best-Practices/02-Conflicts
+touch DONE.md
+git add DONE.md && git commit -m "02-Best-Practices/02-Conflicts done"
+git push origin master
+```

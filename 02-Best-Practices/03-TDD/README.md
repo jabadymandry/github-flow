@@ -295,3 +295,15 @@ You can disable those rules:
 # pylint: disable=missing-docstring
 # pylint: disable=too-few-public-methods
 ```
+
+## I'm done!
+
+Before you jump to the next exercise, let's mark your progress with the following:
+
+```bash
+cd ~/code/<user.github_nickname>/reboot-python
+cd 02-Best-Practices/03-TDD
+touch DONE.md
+git add DONE.md && git commit -m "02-Best-Practices/03-TDD done"
+git push origin master
+```
