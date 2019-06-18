@@ -103,7 +103,7 @@ Here is what you need to do:
 git checkout master
 
 # Get your `master` branch up to date with GitHub's
-git pull upstream master
+git pull origin master
 
 # The feature branch is dead. Remove it! Keep a clean repo
 git branch -d html-skeleton
