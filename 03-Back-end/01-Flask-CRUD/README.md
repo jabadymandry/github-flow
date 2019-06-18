@@ -73,8 +73,8 @@ pipenv run gunicorn wsgi:app --access-logfile=-
 
 :bulb: If you launch this on Windows, it will fail as gunicorn does not support (yet?) Windows:
 
-- https://github.com/benoitc/gunicorn/issues/524
-- https://stackoverflow.com/questions/11087682/does-gunicorn-run-on-windows (they talk about [`waitress`](https://docs.pylonsproject.org/projects/waitress))
+- [github.com/benoitc/gunicorn/issues/524](https://github.com/benoitc/gunicorn/issues/524)
+- [stackoverflow.com/questions/11087682/does-gunicorn-run-on-windows](https://stackoverflow.com/questions/11087682/does-gunicorn-run-on-windows) (they talk about [`waitress`](https://docs.pylonsproject.org/projects/waitress))
 
 ## Heroku
 
@@ -240,3 +240,14 @@ print(ID.next())
 
 Finally, add a test for the `PATCH /api/v1/products/:id` route which will **update** an existing product (based on its id). Return a `204` when completed, or `422` if there is a validation error (needs a separate test case, validation error could be that supplied product name is _empty_)
 
+## I'm done!
+
+Before you jump to the next exercise, let's mark your progress with the following:
+
+```bash
+cd ~/code/<user.github_nickname>/reboot-python
+cd 03-Back-end/01-Flask-CRUD
+touch DONE.md
+git add DONE.md && git commit -m "03-Back-end/01-Flask-CRUD done"
+git push origin master
+```

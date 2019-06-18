@@ -687,3 +687,15 @@ If you reached this part, you get the gist of building a RESTful API with Flask.
 - Deploy often! Everytime you merge a branch with a new endpoint, `git push heroku master`!
 
 Good luck 😉
+
+## I'm done!
+
+Before you jump to the next exercise, let's mark your progress with the following:
+
+```bash
+cd ~/code/<user.github_nickname>/reboot-python
+cd 03-Back-end/02-Twitter-API
+touch DONE.md
+git add DONE.md && git commit -m "03-Back-end/02-Twitter-API done"
+git push origin master
+```
