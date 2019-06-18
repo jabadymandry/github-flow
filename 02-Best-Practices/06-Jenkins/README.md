@@ -37,16 +37,14 @@ Let's write an empty class definition for our `morse.py` main package:
 # morse.py
 # pylint: disable=missing-docstring
 
-class Morse:
-    def decode(self, message):
-        pass # TODO: implement the behavior!
+def decode(message):
+    pass # TODO: implement the behavior!
 ```
 
 Our goal is to code a [Morse code](https://en.wikipedia.org/wiki/Morse_code) **decoder** which behaves like this:
 
 ```python
-morse = Morse()
-sentence = morse.decode(".- .-.. .-.. / -.-- --- ..- / -. . . -.. / .. ... / -.-. --- -.. .")
+sentence = decode(".- .-.. .-.. / -.-- --- ..- / -. . . -.. / .. ... / -.-. --- -.. .")
 # => ALL YOU NEED IS CODE
 ```
 
@@ -55,92 +53,92 @@ We want to use Jenkins, so we need tests! let's write a few unit tests for the `
 ```python
 # tests/test_game.py
 import unittest
-from morse import Morse
+from morse import decode
 
 class TestMorse(unittest.TestCase):
     def test_empty_message(self):
-        self.assertEqual(Morse().decode(""), "")
+        self.assertEqual(decode(""), "")
 
     def test_a(self):
-        self.assertEqual(Morse().decode(".-"), "A")
+        self.assertEqual(decode(".-"), "A")
 
     def test_b(self):
-        self.assertEqual(Morse().decode("-..."), "B")
+        self.assertEqual(decode("-..."), "B")
 
     def test_c(self):
-        self.assertEqual(Morse().decode("-.-."), "C")
+        self.assertEqual(decode("-.-."), "C")
 
     def test_d(self):
-        self.assertEqual(Morse().decode("-.."), "D")
+        self.assertEqual(decode("-.."), "D")
 
     def test_e(self):
-        self.assertEqual(Morse().decode("."), "E")
+        self.assertEqual(decode("."), "E")
 
     def test_f(self):
-        self.assertEqual(Morse().decode("..-."), "F")
+        self.assertEqual(decode("..-."), "F")
 
     def test_g(self):
-        self.assertEqual(Morse().decode("--."), "G")
+        self.assertEqual(decode("--."), "G")
 
     def test_h(self):
-        self.assertEqual(Morse().decode("...."), "H")
+        self.assertEqual(decode("...."), "H")
 
     def test_i(self):
-        self.assertEqual(Morse().decode(".."), "I")
+        self.assertEqual(decode(".."), "I")
 
     def test_j(self):
-        self.assertEqual(Morse().decode(".---"), "J")
+        self.assertEqual(decode(".---"), "J")
 
     def test_k(self):
-        self.assertEqual(Morse().decode("-.-"), "K")
+        self.assertEqual(decode("-.-"), "K")
 
     def test_l(self):
-        self.assertEqual(Morse().decode(".-.."), "L")
+        self.assertEqual(decode(".-.."), "L")
 
     def test_m(self):
-        self.assertEqual(Morse().decode("--"), "M")
+        self.assertEqual(decode("--"), "M")
 
     def test_n(self):
-        self.assertEqual(Morse().decode("-."), "N")
+        self.assertEqual(decode("-."), "N")
 
     def test_o(self):
-        self.assertEqual(Morse().decode("---"), "O")
+        self.assertEqual(decode("---"), "O")
 
     def test_p(self):
-        self.assertEqual(Morse().decode(".--."), "P")
+        self.assertEqual(decode(".--."), "P")
 
     def test_q(self):
-        self.assertEqual(Morse().decode("--.-"), "Q")
+        self.assertEqual(decode("--.-"), "Q")
 
     def test_r(self):
-        self.assertEqual(Morse().decode(".-."), "R")
+        self.assertEqual(decode(".-."), "R")
 
     def test_s(self):
-        self.assertEqual(Morse().decode("..."), "S")
+        self.assertEqual(decode("..."), "S")
 
     def test_t(self):
-        self.assertEqual(Morse().decode("-"), "T")
+        self.assertEqual(decode("-"), "T")
 
     def test_u(self):
-        self.assertEqual(Morse().decode("..-"), "U")
+        self.assertEqual(decode("..-"), "U")
 
     def test_v(self):
-        self.assertEqual(Morse().decode("...-"), "V")
+        self.assertEqual(decode("...-"), "V")
 
     def test_w(self):
-        self.assertEqual(Morse().decode(".--"), "W")
+        self.assertEqual(decode(".--"), "W")
 
     def test_x(self):
-        self.assertEqual(Morse().decode("-..-"), "X")
+        self.assertEqual(decode("-..-"), "X")
 
     def test_y(self):
-        self.assertEqual(Morse().decode("-.--"), "Y")
+        self.assertEqual(decode("-.--"), "Y")
 
     def test_z(self):
-        self.assertEqual(Morse().decode("--.."), "Z")
+        self.assertEqual(decode("--.."), "Z")
 
     def test_sos(self):
-        self.assertEqual(Morse().decode("... --- ..."), "SOS")
+        self.assertEqual(decode("... --- ..."), "SOS")
 
     # NOTE: we will add a test for *sentences* later
 ```
@@ -304,43 +302,42 @@ Stuck? Ask your buddy! Still stuck? Ask a TA!
 </summary>
 
 ```python
-class Morse:
-    ALPHABET = {
-        '.-':   'A',
-        '-...': 'B',
-        '-.-.': 'C',
-        '-..':  'D',
-        '.':    'E',
-        '..-.': 'F',
-        '--.':  'G',
-        '....': 'H',
-        '..':   'I',
-        '.---': 'J',
-        '-.-':  'K',
-        '.-..': 'L',
-        '--':   'M',
-        '-.':   'N',
-        '---':  'O',
-        '.--.': 'P',
-        '--.-': 'Q',
-        '.-.':  'R',
-        '...':  'S',
-        '-':    'T',
-        '..-':  'U',
-        '...-': 'V',
-        '.--':  'W',
-        '-..-': 'X',
-        '-.--': 'Y',
-        '--..': 'Z'
-    }
+ALPHABET = {
+    '.-':   'A',
+    '-...': 'B',
+    '-.-.': 'C',
+    '-..':  'D',
+    '.':    'E',
+    '..-.': 'F',
+    '--.':  'G',
+    '....': 'H',
+    '..':   'I',
+    '.---': 'J',
+    '-.-':  'K',
+    '.-..': 'L',
+    '--':   'M',
+    '-.':   'N',
+    '---':  'O',
+    '.--.': 'P',
+    '--.-': 'Q',
+    '.-.':  'R',
+    '...':  'S',
+    '-':    'T',
+    '..-':  'U',
+    '...-': 'V',
+    '.--':  'W',
+    '-..-': 'X',
+    '-.--': 'Y',
+    '--..': 'Z'
+}
 
-    def decode(self, message):
-        if message == "":
-            return ""
+def decode(message):
+    if message == "":
+        return ""
 
-        symbols = message.split(" ")
-        letters = [self.ALPHABET[s] for s in symbols]
-        return ''.join(letters)
+    symbols = message.split(" ")
+    letters = [ALPHABET[s] for s in symbols]
+    return ''.join(letters)
 ```
 </details>
 
@@ -371,7 +368,7 @@ Open the `tests/test_morse.py` file and add the following test at the bottom:
 
 ```bash
     def test_whole_sentence(self):
-        message = Morse().decode(".- .-.. .-.. / -.-- --- ..- / -. . . -.. / .. ... / -.-. --- -.. .")
+        message = decode(".- .-.. .-.. / -.-- --- ..- / -. . . -.. / .. ... / -.-. --- -.. .")
         self.assertEqual(message, "ALL YOU NEED IS CODE")
 ```
 
