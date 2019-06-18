@@ -25,8 +25,7 @@ touch index.html
 git add .
 git commit -m "Initialize repository"
 
-# 💡 Be careful with this one! Don't blindly copy/paste!
-git remote add origin git@github.com:$YOUR_USERNAME/github-flow.git
+git remote add origin git@github.com:<user.github_nickname>/github-flow.git
 
 git push origin master
 ```
@@ -87,7 +86,7 @@ Click on the green button to create your first pull request.
 
 You now need someone to look at your code, give some feedback and eventually merge it (a rule when using the GitHub flow is that someone other than the author should merge a Pull Request).
 
-Head over to `github.com/$YOUR_USERNAME/github-flow/settings/collaboration` (accessible through `Settings` > `Collaborators`) and add your seat neighbour to the repository by asking his/her github nickname. They should receive an email invitation to opt-in.
+Head over to `github.com/<user.github_nickname>/github-flow/settings/collaboration` (accessible through `Settings` > `Collaborators`) and add your seat neighbour to the repository by asking his/her github nickname. They should receive an email invitation to opt-in.
 
 Once this setup is done, ask them to go to the Pull Request page (should be PR #1) and review the code. If they have some comments (indentation, error, etc.) and you need to do some fixes, go back to Sublime Text, in the same branch, update the code and do another commit. Push this commit to GitHub: you will see that the Pull Request automatically updates!
 
