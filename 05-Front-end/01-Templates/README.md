@@ -3,7 +3,7 @@
 In this exercise, we will re-use the yesterday's application from the `01-SQLAlchemy-Recap` exercise:
 
 ```bash
-cd ~/code/<github_username>/flask-with-sqlalchemy
+cd ~/code/<user.github_nickname>/flask-with-sqlalchemy
 ```
 
 Make sure your `git status` is clean (`add` and `commit` the WIP), and that your server can still be started:

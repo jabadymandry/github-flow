@@ -3,8 +3,8 @@
 Let's go back to our Twitter API. You can start from the following code (using the `sqlalchemy` branch):
 
 ```bash
-mkdir -p ~/code/<github_username>
-cd ~/code/<github_username>
+mkdir -p ~/code/<user.github_nickname>
+cd ~/code/<user.github_nickname>
 git clone git@github.com:ssaunier/twitter-api.git twitter-api-authentication
 cd twitter-api-authentication
 git remote rm origin

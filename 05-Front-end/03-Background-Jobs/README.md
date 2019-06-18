@@ -13,7 +13,7 @@ Let's try to put that in place into our Flask Application
 Once again, we can use our product app to test the `celery` package:
 
 ```bash
-cd ~/code/<github_username>/flask-with-sqlalchemy
+cd ~/code/<user.github_nickname>/flask-with-sqlalchemy
 ```
 
 Make sure your `git status` is clean and don't forget to work in a branch! As you might have worked in the `experiment-with-flask-admin`, you might want to commit this branch, push it to GitHub to archive it and then go back to master. You could also open a Pull Request, ask you buddy to review it, merge it and then `pull` `master` locally on your computer.

@@ -9,7 +9,7 @@ Here is a [live example](http://examples.flask-admin.org/sqla/simple/admin/post/
 Once again, we can use our product app to test the `flask-admin` package:
 
 ```bash
-cd ~/code/<github_username>/flask-with-sqlalchemy
+cd ~/code/<user.github_nickname>/flask-with-sqlalchemy
 ```
 
 Make sure your `git status` is clean and don't forget to work in a branch! This way it's easy to [discard the WIP](https://stackoverflow.com/a/14075772/197944).

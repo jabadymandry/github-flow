@@ -11,8 +11,8 @@ If you did not have time to finish, here is a starting point:
 Go to this repo and **fork** it to your own account. Then **clone** it to your computer:
 
 ```bash
-cd ~/code/<github_username>
-git clone git@github.com:<github_username>/twitter-api.git
+cd ~/code/<user.github_nickname>
+git clone git@github.com:<user.github_nickname>/twitter-api.git
 cd twitter-api
 ```
 
