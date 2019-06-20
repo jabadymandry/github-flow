@@ -75,3 +75,13 @@ Don't forget to commit and push your branch.
 You might worry that you users get access to this admin panel, and you should! Flask-admin's documentation has [a section about this](https://flask-admin.readthedocs.io/en/latest/introduction/#authorization-permissions).
 
 ## I'm done!
+
+Before you jump to the next exercise, let's mark your progress with the following:
+
+```bash
+cd ~/code/<user.github_nickname>/reboot-python
+cd 05-Front-end/02-Flask-Admin
+touch DONE.md
+git add DONE.md && git commit -m "05-Front-end/02-Flask-Admin done"
+git push origin master
+```
