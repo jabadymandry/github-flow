@@ -16,18 +16,28 @@ Once again, we can use our product app to test the `celery` package:
 cd ~/code/<user.github_nickname>/flask-with-sqlalchemy
 ```
 
-Make sure your `git status` is clean and don't forget to work in a branch! As you might have worked in the `experiment-with-flask-admin`, you might want to commit this branch, push it to GitHub to archive it and then go back to master. You could also open a Pull Request, ask you buddy to review it, merge it and then `pull` `master` locally on your computer.
+Make sure your `git status` is clean and don't forget to work in a branch! Don't hesitate to ask a TA for help.
 
 ```bash
 # Make sure `git status` is clean.
 git checkout master
-git pull upstream master
 git checkout -b celery
 ```
 
-Before jumping in the code, please read the [Introduction to Celery](http://docs.celeryproject.org/en/latest/getting-started/introduction.html) from the documentation to have an overview.
+Before jumping in the code, please read the [Introduction to Celery](http://docs.celeryproject.org/en/latest/getting-started/introduction.html) from the documentation to have an overview of what it is and how it works.
 
-We will use [**Redis**](https://redis.io/) for the Celery back-end. This is another service we need to install on Windows and run it so that our app works. Please [download](https://github.com/dmajkic/redis/downloads) the latest Redis compiled for Windows. Then launch it (under `64bits/redis-server.exe`) in a separate Terminal window.
+### Redis
+
+We will use [**Redis**](https://redis.io/) for the Celery back-end. This is an external service that is required and will live next to the Postgresql service. To install it on Windows, please [download](https://github.com/MicrosoftArchive/redis/releases) the latest Redis compiled for Windows (look for the `.zip` file). Extract the downloaded archive to `C:\Users\Le Wagon\code\redis`.
+
+You are now ready to start the Redis server in the background. Open another Terminal tab and run:
+
+```bash
+cd ~/code/redis
+./redis-server.exe
+```
+
+### Celery
 
 Now that we have the Redis service running in the background, we can proceed with the code. First install Celery and its Redis dependency:
 
@@ -71,7 +81,6 @@ def make_celery(app):
         backend=app.config['CELERY_RESULT_BACKEND'],
         broker=app.config['CELERY_BROKER_URL']
     )
-    celery.conf.update(app.config)
 
     class ContextTask(celery.Task):
         def __call__(self, *args, **kwargs):
@@ -87,30 +96,12 @@ celery = make_celery(create_app())
 We've just created the boilerplate code to run the Celery service. No background task has been defined yet. Still, we can launch the service to make sure everything is working properly:
 
 ```bash
-pipenv run celery -A tasks.celery worker --loglevel=INFO
+pipenv run celery worker -A tasks.celery --loglevel=info info --pool=solo
 ```
 
 You should see something along those lines:
 
 ```
-Loading .env environment variables…
-
- -------------- celery@Macbook v4.3.0 (rhubarb)
----- **** -----
---- * ***  * -- Darwin-18.2.0-x86_64-i386-64bit 2019-04-04 15:42:38
--- * - **** ---
-- ** ---------- [config]
-- ** ---------- .> app:         wsgi:0x103c4a438
-- ** ---------- .> transport:   redis://localhost:6379//
-- ** ---------- .> results:     redis://localhost:6379/
-- *** --- * --- .> concurrency: 4 (prefork)
--- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
---- ***** -----
- -------------- [queues]
-                .> celery           exchange=celery(direct) key=celery
-
-[tasks]
-
 [2019-04-04 15:42:38,497: INFO/MainProcess] Connected to redis://localhost:6379//
 [2019-04-04 15:42:38,508: INFO/MainProcess] mingle: searching for neighbors
 [2019-04-04 15:42:39,529: INFO/MainProcess] mingle: all alone
@@ -144,16 +135,7 @@ We've just implemented a `very_slow_add(a, b)` method. Let's test it!
 Relaunch the Celery worker with:
 
 ```bash
-pipenv run celery -A tasks.celery worker --loglevel=INFO
-```
-
-This time you should see that the rask has been detected:
-
-```bash
-# [...]
-[tasks]
-  . tasks.very_slow_add
-# [...]
+pipenv run celery worker -A tasks.celery --loglevel=info info --pool=solo
 ```
 
 Open another terminal window and launch a Flask Shell:
@@ -200,7 +182,7 @@ Open (once again!) another terminal window and launch the Flask server:
 FLASK_ENV=development pipenv run flask run
 ```
 
-Go to [`http://localhost:5000/products`](http://localhost:5000/hello) and watch the Celery logs. Can you see the job getting enqueued without slowing down your API endpoint?
+Go to [`http://localhost:5000/products`](http://localhost:5000/products) and watch the Celery logs. Can you see the job getting enqueued without slowing down your API endpoint?
 
 ## Deployment
 
@@ -228,7 +210,7 @@ To solve point `2.`, we need to update the `Procfile` with a **new line**:
 
 ```yaml
 # Procfile
-worker: celery -A tasks.celery worker --loglevel=INFO
+worker: celery -A tasks.celery worker --loglevel=info
 ```
 
 The Procfile will now have 3 lines, a `web` to launch the flask app, a `release` to automatically upgrade the database at each deployment and now a `worker` one to run Celery!

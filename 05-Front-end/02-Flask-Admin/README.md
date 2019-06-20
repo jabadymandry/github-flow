@@ -1,4 +1,4 @@
-## Flask Admin
+# Flask Admin
 
 If you want to easily add a back-office to your application, the [`flask-admin`](https://flask-admin.readthedocs.io/en/latest/) package might help you. The main idea of this package is to build a simple CRUD app from a few python lines.
 
