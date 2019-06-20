@@ -110,11 +110,11 @@ Before:
 <li>{{ product.name }}</li>
 ```
 
-After:
+After (using [`url_for`](http://flask.pocoo.org/docs/1.0/api/#flask.url_for)):
 
 ```html
 <li>
-  <a href="/{{ product.id }}">{{ product.name }}</a>
+  <a href="{{ url_for('product_html', id=product.id) }}">{{ product.name }}</a>
 </li>
 ```
 
@@ -151,7 +151,7 @@ Let's create the Product page with the `product` variable passed in the `render_
 {% extends 'base.html' %}
 
 {% block content %}
-  <a href="/">← Back to list</a>
+  <a href="{{ url_for('home') }}">← Back to list</a>
 
   <h1>{{ product.name }}</h1>
 
