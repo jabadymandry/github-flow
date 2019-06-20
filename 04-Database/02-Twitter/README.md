@@ -449,3 +449,15 @@ Once you have basic CRUD for tweets, let's introduce a second model: `User`. The
 1. `username`
 1. `email`
 1. `api_key`
+
+## I'm done!
+
+Let's mark your progress with the following:
+
+```bash
+cd ~/code/<user.github_nickname>/reboot-python
+cd 04-Database/02-Twitter
+touch DONE.md
+git add DONE.md && git commit -m "04-Database/02-Twitter done"
+git push origin master
+```

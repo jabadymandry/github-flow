@@ -411,3 +411,15 @@ These documentation links should help you:
 
 - [SQLAlchemy - `Query.get()`](http://docs.sqlalchemy.org/en/latest/orm/query.html#sqlalchemy.orm.query.Query.get)
 - [SQLAlchemy - Adding and Updating Objects](http://docs.sqlalchemy.org/en/latest/orm/tutorial.html#adding-and-updating-objects)
+
+## I'm done!
+
+Before you jump to the next exercise, let's mark your progress with the following:
+
+```bash
+cd ~/code/<user.github_nickname>/reboot-python
+cd 04-Database/01-SQLAlchemy-Recap
+touch DONE.md
+git add DONE.md && git commit -m "04-Database/01-SQLAlchemy-Recap done"
+git push origin master
+```
