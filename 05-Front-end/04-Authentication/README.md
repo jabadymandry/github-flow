@@ -61,7 +61,7 @@ We want to protect the following three APIs routes behind a user auth (as a twee
 pipenv install flask-oauthlib
 ```
 
-Consider the official Twitter API, or the GitHub API. THey both provide authentication through OAuth meaning they allow third-party developers to let their users connect to Twitter/GitHub and grand access to a given `scope` of their API.
+Consider the official Twitter API, or the GitHub API. They both provide authentication through OAuth meaning they allow third-party developers to let their users connect to Twitter/GitHub and grand access to a given `scope` of their API.
 
 As we are building an API ourselves, we may want to protect it using the same kind of mechanism. Instead of having an API key for each user stored in the database, we may provide third-party developers who want to use our API with a OAuth service. This way, they would let users of our service log in through our OAuth server, and generate a token for them to use and query the API.
 
