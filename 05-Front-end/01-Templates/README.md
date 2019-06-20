@@ -22,7 +22,7 @@ def hello():
     return "Hello World!"
 ```
 
-Instead of returning a plain text sentence, we want to actually build a nice html pages. This time, we won't guide you too much to achieve the result, but give you some pointers:
+Instead of returning a plain text sentence, we want to actually build a nice html pages.
 
 We want you to build two pages: a home page with a grid of products (`/`), and a dynamic "show" page with a given product (`/:id`). When a user browses the home page, it should be able to easily go to a "show" page with a click on a link
 
@@ -56,24 +56,33 @@ Let's start with the [Bootstrap template](https://getbootstrap.com/docs/4.1/gett
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   </body>
 </html>
-
 ```
 
-In the controller (`wsgi.py`, you can instantiate
+In the controller (`wsgi.py`), you can instantiate:
 
 ```python
 from flask import Flask, render_template
 
 # [...]
 
-    # Use this in the home route
+@app.route('/')
+def home():
     products = db.session.query(Product).all()
+
     return render_template('home.html', products=products)
 ```
 
-Now you can create a new file `templates/home.html` and use the `products` variable you passed thanks to `render_template`:
+Try to navigate to the [`localhost:5000`](http://localhost:5000) on the Homepage. What error do you get? What should we do?
+
+We need to create a new file `templates/home.html` and use the `products` variable from the `wsgi.py` to the `home.html` file thanks to the `render_template` arguments.
+
+```bash
+touch templates/home.html
+```
 
 ```html
+<!-- templates/home.html -->
+
 {% extends 'base.html' %}
 
 {% block content %}
@@ -93,8 +102,73 @@ The content within the `block content` is inserted back into the `base.html`.
 
 ## Product page
 
-Now it's your turn to do some work. We want you to add a route to display information about a single product. Put links (`<a href=""></a>`) from the home page to this new page.
+We now want to implement a **dynamic** product page display information about a single one. The idea is to change the `<li>` elements from the `home.html` and put **links** on them:
 
-Don't hesitate to enrich the `Product` model with other fields and enrich the existing data in the database (via `flask shell` for instance).
+Before:
 
-**NB**: Those endpoints are different from the API endpoints we implemented yesterday. Don't try to tie them together!
+```html
+<li>{{ product.name }}</li>
+```
+
+After:
+
+```html
+<li>
+  <a href="/{{ product.id }}">{{ product.name }}</a>
+</li>
+```
+
+First, we need to add a new route to the controller (`wsgi.py`):
+
+```python
+# [...]
+
+@app.route('/<int:id>')
+def product_html(id):
+    product = db.session.query(Product).get(id)
+    return render_template('product.html', product=product)
+```
+
+If you reload your `/` home page, you should be able to click on a link in the list. If you do so, you should get a `jinja2.exceptions.TemplateNotFound` once again, which tells you which file you are missing.
+
+:point_right: Go ahead and **create** the missing template.
+
+<details><summary markdown="span">View solution
+</summary>
+
+You need to run:
+
+```bash
+touch templates/product.html
+```
+
+</details>
+
+
+Let's create the Product page with the `product` variable passed in the `render_template` call:
+
+```html
+{% extends 'base.html' %}
+
+{% block content %}
+  <a href="/">← Back to list</a>
+
+  <h1>{{ product.name }}</h1>
+
+  <!-- What other columns do you have in the `products` table? Use them here! -->
+{% endblock %}
+```
+
+Do not forget to commit and push your changes to your GitHub repository.
+
+## I'm done!
+
+Before you jump to the next exercise, let's mark your progress with the following:
+
+```bash
+cd ~/code/<user.github_nickname>/reboot-python
+cd 05-Front-end/01-Templates
+touch DONE.md
+git add DONE.md && git commit -m "05-Front-end/01-Templates done"
+git push origin master
+```
