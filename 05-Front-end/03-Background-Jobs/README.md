@@ -96,7 +96,7 @@ celery = make_celery(app)
 We've just created the boilerplate code to run the Celery service. No background task has been defined yet. Still, we can launch the service to make sure everything is working properly:
 
 ```bash
-pipenv run celery worker -A tasks.celery --loglevel=info info --pool=solo
+pipenv run celery worker -A tasks.celery --loglevel=info --pool=solo
 ```
 
 You should see something along those lines:
@@ -135,7 +135,7 @@ We've just implemented a `very_slow_add(a, b)` method. Let's test it!
 Relaunch the Celery worker with:
 
 ```bash
-pipenv run celery worker -A tasks.celery --loglevel=info info --pool=solo
+pipenv run celery worker -A tasks.celery --loglevel=info --pool=solo
 ```
 
 Open another terminal window and launch a Flask Shell:
