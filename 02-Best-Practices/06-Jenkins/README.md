@@ -53,7 +53,7 @@ sentence = morse.decode(".- .-.. .-.. / -.-- --- ..- / -. . . -.. / .. ... / -.-
 We want to use Jenkins, so we need tests! let's write a few unit tests for the `decode()` method:
 
 ```python
-# tests/test_game.py
+# tests/test_morse.py
 import unittest
 from morse import Morse
 
@@ -356,7 +356,7 @@ Go back to Jenkins, and watch your build run.
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714907/jenkins-second-build-green_rb7mxy.png)
 
-Hooray! Travis is now passing.
+Hooray! Jenkins is now passing.
 
 ### Using Jenkins in a Pull Request
 

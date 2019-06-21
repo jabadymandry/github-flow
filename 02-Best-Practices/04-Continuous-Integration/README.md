@@ -112,7 +112,7 @@ Following the TDD paradigm, we need to add a test:
 Let's commit this right now:
 
 ```bash
-git add tests
+git add test_game.py
 git commit -m "TDD: Check that attempt exists in the English dictionary"
 git push origin dictionary-api
 ```

@@ -28,6 +28,8 @@ There still some configuration left for **you** to do.
 
 We will use your personal public `github.com` account. If you are reading this, it means that you have one and are logged in with it!
 
+First, ensure to have this repository forked to your own personal github account
+
 We need to create a SSH key on your computer and link it to your GitHub account. At the end of the week, don't forget to remove this key from your GitHub account as this is not your computer. Protecting your key with a strong **passphrase** will guarantee security during the week.
 
 GitHub has handy tutorials. Follow them:
@@ -50,11 +52,11 @@ git config --global user.email "your_github_email@domain.com"
 git config --global user.name "Your Full Name"
 ```
 
-It's important to use the same email as the one you use on [GitHub](https://github.com/settings/emails) so that [commits are linkedin to your profile](https://help.github.com/articles/why-are-my-commits-linked-to-the-wrong-user/#commits-are-not-linked-to-any-user).
+It's important to use the same email as the one you use on [GitHub](https://github.com/settings/emails) so that [commits are linked to your profile](https://help.github.com/articles/why-are-my-commits-linked-to-the-wrong-user/#commits-are-not-linked-to-any-user).
 
 ## Environment
 
-Let's save ourselves sometimes by configuring the environment. Open the `bashrc` file with `vim`:
+Let's save ourselves sometimes by configuring the environment. Open the `profile` file with `vim`:
 
 ```bash
 vim ~/.profile
