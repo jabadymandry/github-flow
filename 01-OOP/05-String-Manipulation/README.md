@@ -50,3 +50,7 @@ Code is all about being smart and knowing how and where to look for the info you
 * [The python doc](https://docs.python.org/3) if you have a rough idea of the method you are looking for.
 
 When you think you've found the method you're looking for, and you think you know how to use it, use the Python interpreter to test this method on something! Experimenting on the Python interpreter is a crucial step for beginners.
+
+## (Optional) Additional reading on Strings in PowerShell
+
+Like any programming language, PowerShell gives the developer a lot of built-in handy tools to use with Strings. [This article](https://4sysops.com/archives/strings-in-powershell-replace-compare-concatenate-split-substring/) is a good introduction to those.
