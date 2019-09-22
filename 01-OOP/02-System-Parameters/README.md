@@ -54,3 +54,31 @@ Open the `calc.py` file and implement this behavior! You will find that a `main`
 ## Going Further
 
 If you have to build a serious CLI tool with Python, please consider the built-in [`argparse`](https://docs.python.org/3/library/argparse.html).
+
+## (Optional) Command-line arguments in PowerShell
+
+
+Let's write another [PowerShell script](https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_scripts) using an argument passed on the command line. We can improve the `hello.ps1` script from the previous exercise with something which will say "Hello $SOMEONE", someone being a variable passed on the command line, like so:
+
+```bash
+powershell -ExecutionPolicy bypass ./hello_name.ps1 -Name Boris
+# => Hello Boris
+
+powershell -ExecutionPolicy bypass ./hello_name.ps1 -Name Charlotte
+# => Hello Charlotte
+
+powershell -ExecutionPolicy bypass ./hello_name.ps1
+# => Name parameter is required.
+```
+
+Open the `hello_name.ps1` file and try implementing this 2-lines script with the `param` keyword.
+
+<details><summary markdown="span">View solution
+</summary>
+
+```powershell
+param($Name = $(throw "Name parameter is required."))
+Write-Output "Hello $Name"
+```
+
+</details>
