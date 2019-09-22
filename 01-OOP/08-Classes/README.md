@@ -32,3 +32,26 @@ spec of what you should do translated to code.
 
 💡 If you want to use the debugger introduced earlier with `nosetests`, you need to run the tests with the [`--no-capture` flag](http://nose.readthedocs.io/en/latest/man.html#cmdoption-s) (shortcut: `-s`).
 
+## (Optional) PowerShell Classes
+
+Since inception, PowerShell uses the .Net framework, an object-oriented platform, allowing the developer access to a collection of types.
+
+Since PowerShell 5.0, there is a formal syntax to define classes and other user-defined types. It goes like this:
+
+```powershell
+# Defining the class:
+class Device {
+    [string]$Brand # An instance variable
+}
+
+# Creating an instance of the new `Device` class
+$dev = [Device]::new()
+
+# And setting/calling instance variables:
+$dev.Brand = "Microsoft"
+$dev
+```
+
+The difference with Python here is that you are invited to specify the type of each instance variable in the class definition (`[string]` for the `$Brand` instance variable).
+
+You can read the [whole Microsoft Docs article](https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_classes) to dive into PowerShell user-defined classes.
