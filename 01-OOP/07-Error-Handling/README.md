@@ -56,3 +56,33 @@ pipenv run python square.py wagon
 ```
 
 It's now time to use `int()` to convert those string arguments and use them. When run, your program should display the number square. If the argument is not a number, it should display "Not a number". To test your code, just run the commands above 👆, there is no unit test associated with this exercise. Call a teacher if you need some help.
+
+## (Optional) Error Handling in PowerShell
+
+PowerShell provides a `try / catch` structure directly in the language:
+
+```powershell
+try {
+  NonsenseString
+}
+catch {
+  "An error occurred."
+}
+```
+
+It's possible to catch a specific exception by providing a type in squared brackets just after the `catch` keyword, allowing several behavior based on the error type:
+
+```powershell
+try {
+   $wc = new-object System.Net.WebClient
+   $wc.DownloadFile("http://www.contoso.com/MyDoc.doc","c:\temp\MyDoc.doc")
+}
+catch [System.Net.WebException],[System.IO.IOException] {
+    "Unable to download MyDoc.doc from http://www.contoso.com."
+}
+catch {
+    "An error occurred that could not be resolved."
+}
+```
+
+These examples are taken from the [Microsoft Docs](https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_try_catch_finally), we encourage you to read the whole article for more details.
