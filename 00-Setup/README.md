@@ -107,7 +107,7 @@ This text editor comes with great support for Python coding, still experience ca
 
 - A File Icon (Restart Sublime after installing this one)
 - Magic Python
-- Git Gutter
+- PowerShell
 
 Then open the preferences (`Preferences > Settings` in the menu). On the right panel, you will find a JSON you can override with the following:
 

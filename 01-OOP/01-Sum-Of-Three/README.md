@@ -35,3 +35,23 @@ If you get style errors, fix them, save and re-run the command above.
 ## Conclusion
 
 The goal of this exercise was to show you how to run the tests to automatically evaluate your code (both style & content) and introduce you to this tight feedback loop.
+
+## (Optional) PowerShell
+
+If you work in a Windows environment, you will benefit from learning [**Powershell**](https://docs.microsoft.com/powershell/), and you can actually use it on macOS and Linux too.
+
+Let's write our very first PowerShell script. Open the `hello.ps1` file in Sublime Text and copy-paste the following [`Write-Output`](https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/write-output) instruction:
+
+```powershell
+Write-Output "Hello World"
+```
+
+Then you can run the script from Git Bash with:
+
+```bash
+powershell -ExecutionPolicy bypass ./hello.ps1
+```
+
+You should get a `Hello World` output! If you don't, ask a TA.
+
+You may not have administrative rights on the computer you are working on, that's why the `-ExecutionPolicy bypass` flag is needed. On a computer you are administrator on, you can set up the policy to `RemoteSigned` by [reading the documentation](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-6). It will override a Registry key.
