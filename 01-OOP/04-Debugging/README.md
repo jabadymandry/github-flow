@@ -125,3 +125,7 @@ The previous section was about understanding the basic commands of the debugger.
 - Play (`continue`)
 
 There are [many more debugger commands](https://docs.python.org/3/library/pdb.html#debugger-commands) like `step` or `return`.
+
+## (Optional) Debugging in PowerShell
+
+Windows comes with **PowerShell ISE**, an interactive program to debug your scripts. Go ahead and [read the article](https://docs.microsoft.com/powershell/scripting/components/ise/how-to-debug-scripts-in-windows-powershell-ise) on Microsoft Docs.
