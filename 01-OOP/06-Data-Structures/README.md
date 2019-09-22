@@ -48,3 +48,55 @@ At last, check your style with:
 ```bash
 pipenv run pylint currencies.py
 ```
+
+## (Optional) Data Structures in PowerShell
+
+PowerShell come with the following:
+
+- [Arrays](https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_arrays) (equivalent of Python's `list`)
+- [Hash Tables](https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_hash_tables) (equivalent of Python's `dict`)
+
+Now try to implement a script which behaves like the following examples:
+
+```bash
+powershell -ExecutionPolicy bypass ./convertor.ps1
+# => Amount is required.
+
+powershell -ExecutionPolicy bypass ./convertor.ps1 -Amount 12.4
+# => Destination currency is required.
+
+powershell -ExecutionPolicy bypass ./convertor.ps1 -Amount 12.4 -Currency AAA
+# => Sorry, currency AAA is not yet supported
+
+powershell -ExecutionPolicy bypass ./convertor.ps1 -Amount 12.4 -Currency GBP
+# => 12.4 EUR => 14.012 GBP
+```
+
+You may need to use [`Hashtable.ContainsKey(key)`](https://docs.microsoft.com/dotnet/api/system.collections.hashtable.containskey).
+
+<details><summary markdown="span">View solution
+</summary>
+
+```powershell
+param(
+  [double]$Amount = $(throw "Amount is required."),
+  [string]$Currency = $(throw "Destination currency is required.")
+)
+
+$rates = @{
+  USDEUR = 0.85;
+  GBPEUR = 1.13;
+  CHFEUR = 0.86
+}
+
+$key = $Currency + "EUR"
+
+if ($rates.ContainsKey($key)) {
+  $result = ($Amount * $rates[$key])
+  Write-Output "$Amount EUR => $result $Currency"
+} else {
+  Write-Error "Sorry, currency $Currency is not yet supported"
+}
+```
+
+</details>
