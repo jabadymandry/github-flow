@@ -30,3 +30,24 @@ pipenv run python flask_option.py
 ```
 
 :bulb: **Tip**: have a look at the [`os`](https://docs.python.org/3/library/os.html) module.
+
+## (Optional) Environment variables in PowerShell
+
+Let's write a third [Hello World program](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program) with the following behavior:
+
+```bash
+THE_NAME=Boris powershell -ExecutionPolicy bypass ./hello_env.ps1
+# => Hello Boris
+```
+
+You should be able to figure out from the [documentation](https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_environment_variables) how to implement this 2-lines script.
+
+<details><summary markdown="span">View solution
+</summary>
+
+```powershell
+$name = (Get-Item -Path Env:THE_NAME).value
+Write-Output "Hello $name"
+```
+
+</details>
