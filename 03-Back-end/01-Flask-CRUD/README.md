@@ -240,6 +240,88 @@ print(ID.next())
 
 Finally, add a test for the `PATCH /api/v1/products/:id` route which will **update** an existing product (based on its id). Return a `204` when completed, or `422` if there is a validation error (needs a separate test case, validation error could be that supplied product name is _empty_)
 
+## (Optional) PowerShell REST API Client
+
+Let's use Powershell to **consume** this API. Keep a tab with the API running so that we can run queries against it:
+
+```bash
+cd ~/code/<user.github_nickname>/flask-101
+FLASK_ENV=development pipenv run flask run
+```
+
+Then open a new terminal window. Let's create a PowerShell script file:
+
+```bash
+cd ~/code/<user.github_nickname>/flask-101
+touch consumer.ps1
+
+# To run the script:
+powershell -ExecutionPolicy bypass ./consumer.ps1
+```
+
+Open your `consumer.ps1` file in Sublime Text. We want you to implement a function `Get-Products` so that the following code queries the API and prints all the products.
+
+:bulb: Hint: you might need the [`Invoke-RestMethod`](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/invoke-restmethod?view=powershell-6) function!
+
+```powershell
+Write-Output "# Printing all products"
+Get-Products | Write-Output
+```
+
+<details><summary markdown="span">View solution
+</summary>
+
+```powershell
+function Get-Products {
+  return Invoke-RestMethod "$BASE_URL/products"
+}
+```
+
+</details>
+
+Go ahead and implement four other method consuming the REST API so that the following scenario goes through:
+
+```powershell
+Write-Output "# Printing all products"
+Get-Products | Write-Output
+
+Write-Output "-----------------------"
+
+Write-Output "# Printing one product"
+Get-Product -Id 1 | Write-Output
+
+Write-Output "-----------------------"
+
+Write-Output "# Update product 1's name"
+Update-Product -Id 1 -Name "Skello v$(Get-Random)"
+Get-Product -Id 1 | Write-Output
+
+Write-Output "-----------------------"
+
+Write-Output "# Adding a product"
+New-Product -Name "Basecamp"
+
+Write-Output "-----------------------"
+
+Write-Output "# Printing all products once again"
+$products = Get-Products
+$products | Write-Output
+
+Write-Output "-----------------------"
+
+$lastId = $products[-1].id
+Write-Output "# Removing product with id $lastId"
+Remove-Product $lastId
+Write-Output "Done"
+
+Write-Output "-----------------------"
+
+Write-Output "# Printing all products once last time"
+$products = Get-Products
+$products | Write-Output
+```
+
+
 ## I'm done!
 
 Before you jump to the next exercise, let's mark your progress with the following:
