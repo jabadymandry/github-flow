@@ -322,6 +322,58 @@ $products | Write-Output
 ```
 
 
+<details><summary markdown='span'>View solution for `Get-Product`
+</summary>
+
+```powershell
+function Get-Product {
+  param($Id)
+  return Invoke-RestMethod "$BASE_URL/products/$id"
+}
+```
+
+</details>
+
+<details><summary markdown='span'>View solution for `New-Product`
+</summary>
+
+```powershell
+function New-Product {
+  param($Name)
+  $body = @{name=$Name} | ConvertTo-Json
+  $uri = "$BASE_URL/products"
+  return Invoke-RestMethod -Method 'POST' -Uri $uri -Body $body -ContentType "application/json"
+}
+```
+
+</details>
+
+<details><summary markdown='span'>View solution for `Update-Product`
+</summary>
+
+```powershell
+function Update-Product {
+  param($Id, $Name)
+  $body = @{name=$Name} | ConvertTo-Json
+  $uri = "$BASE_URL/products/$id"
+  return Invoke-RestMethod -Method 'PATCH' -Uri $uri -Body $body -ContentType "application/json"
+}
+```
+
+</details>
+
+<details><summary markdown='span'>View solution for `Remove-Product`
+</summary>
+
+```powershell
+function Remove-Product {
+  param($Id)
+  return Invoke-RestMethod -Method 'DELETE' "$BASE_URL/products/$id"
+}
+```
+
+</details>
+
 ## I'm done!
 
 Before you jump to the next exercise, let's mark your progress with the following:
