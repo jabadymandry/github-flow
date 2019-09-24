@@ -1,8 +1,8 @@
 # Flask CRUD
 
-![](http://flask.pocoo.org/static/logo/flask.png)
+![](http://flask.palletsprojects.com/en/1.1.x/_images/flask-logo.png)
 
-[Flask](http://flask.pocoo.org/) is a **microframework** for Python to quickly build a web application.
+[Flask](http://flask.palletsprojects.com/en/1.1.x/) is a **microframework** for Python to quickly build a web application.
 
 In this exercise, we will quickly go over every important features of Flask.
 
