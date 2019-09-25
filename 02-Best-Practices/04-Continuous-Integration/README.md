@@ -16,7 +16,7 @@ To keep this exercise simple, we will use Travis, as it integreates perfectly wi
 
 ## Service installation
 
-We will deploy the repository you created in the previous exercise:
+We will deploy the repository you created in the previous exercise. First, create an empty `longest-word` repository in your Github account. After that you can push your changes:
 
 ```bash
 cd ~/code/<user.github_nickname>/longest-word
@@ -24,6 +24,9 @@ cd ~/code/<user.github_nickname>/longest-word
 git init
 git add .
 git commit -m "Game development with TDD"
+
+git remote add origin git@github.com:<user.github_nickname>/longest-word.git
+
 git push origin master
 ```
 
