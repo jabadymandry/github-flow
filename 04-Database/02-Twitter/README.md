@@ -236,7 +236,7 @@ Look at the error message in the terminal and try to fix the code _yourself_. Th
 from app import db
 
 # Then in the `TweetResource#get` replace this line:
-#   tweet = db.session.query(Tweet).get(id)
+#   tweet = tweet_repository.get(id))
 # with:
 tweet = db.session.query(Tweet).get(id)
 ```
