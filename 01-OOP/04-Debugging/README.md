@@ -114,7 +114,7 @@ You can let the program runs until the next breakpoint (or the end of it) with:
 (Pdb) continue
 ```
 
-Fix the `full_name` method in `hello.py`, and run the program again. Don't forget to remote the debugger line! That's something that easily forget and add to a commit. Some teams might want to add a [pre-commit hook](http://blog.keul.it/2013/11/no-more-pdbsettrace-committed-git-pre.html) to prevent this from happening.
+Fix the `full_name` method in `hello.py`, and run the program again. Don't forget to remove the debugger line! That's something that easily forget and add to a commit. Some teams might want to add a [pre-commit hook](http://blog.keul.it/2013/11/no-more-pdbsettrace-committed-git-pre.html) to prevent this from happening.
 
 ## Going further
 
