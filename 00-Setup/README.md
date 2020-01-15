@@ -5,7 +5,6 @@ You will work on Windows 10 with the Le Wagon PCs.
 Here is a list of what we already installed for you:
 
 - Google Chrome
-- Slack
 - **Sublime Text 3** (Unlicensed but unlimited usage) with [Package Control](https://packagecontrol.io/)
 - Python 3.7 & [`pipenv`](https://docs.pipenv.org/)
 - `git` & **Git Bash**
