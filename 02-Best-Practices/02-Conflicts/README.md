@@ -4,7 +4,7 @@ When using a source control software like `git`, conflicts **always** arise at s
 
 ## GitHub flow most common conflict scenario
 
-Imagine the following scenario:
+Imagine the following scenario (**Do not do anything for now, just try to understand what is going on**):
 
 1. 2 developers are working on the same git repository
 1. On Monday, at 9am, the two developers `pull` master.
@@ -144,7 +144,7 @@ Find a buddy to replicate this scenario:
 1. The same developer adds the **remote** and `push`es.
 1. The other developer **clones** the repository.
 1. `git log` should show only one commit on both laptop
-1. You are ready to replicate the above scenario with the two feature branches! Remember to open two pull request. The first one will be merged easily, and the second one won't be mergeable because of the conflict.
+1. You are ready to replicate the above scenario with the two feature branches! Remember that the two developers will need to change at least one same line of a same file in order to have a conflict. Also remember to open two pull request: the first one will be merged easily, and the second one won't be mergeable because of the conflict.
 
 Don't hesitate to ask a teacher if you are confused with a step.
 
