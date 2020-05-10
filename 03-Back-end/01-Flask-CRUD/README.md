@@ -86,7 +86,7 @@ touch Procfile
 
 ```bash
 # Procfile
-web: gunicorn wsgi:app --access-logfile=-
+web: gunicorn --workers=1 wsgi:app --access-logfile=-
 ```
 
 ```bash
