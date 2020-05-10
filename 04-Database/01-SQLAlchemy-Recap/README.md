@@ -220,7 +220,7 @@ To manually check that the schema now contains a `product` table, re-connect to 
 ```bash
 export PATH="$PATH:/c/Program Files/PostgreSQL/10/bin"
 winpty psql -U postgres -d flask_db
-flask_db=# \dt
+flask_db#= \dt
 # You should see two tables: `products` and `alembic_version`!
 flask_db#= \d products
 # You should see the two columns of the table `product`: `id` and `name`
