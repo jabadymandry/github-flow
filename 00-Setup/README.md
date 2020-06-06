@@ -4,10 +4,10 @@ You will work on Windows 10 with the Le Wagon PCs.
 
 Here is a list of what we already installed for you:
 
-- Google Chrome
-- **Sublime Text 3** (Unlicensed but unlimited usage) with [Package Control](https://packagecontrol.io/)
-- Python 3.7 & [`pipenv`](https://docs.pipenv.org/)
-- `git` & **Git Bash**
+- Google Chrome or Mozilla Firefox
+- [**Sublime Text 3**](https://www.sublimetext.com/) (Unlicensed but unlimited usage) with [Package Control](https://packagecontrol.io/)
+- [Python 3.7](https://www.python.org/downloads/) & [`pipenv`](https://pipenv.pypa.io/en/latest/)
+- `git` through [**Git Bash**](https://git-scm.com/downloads)
 
 Your `$PATH` should be all set to work with the required binaries.
 
