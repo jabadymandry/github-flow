@@ -1,13 +1,25 @@
 # Setup
 
-You will work on Windows 10 with the Le Wagon PCs.
+## Physical Laptop
 
-Here is a list of what we already installed for you:
+If you were issued a physical Laptop from Le Wagon, here is what should already be there:
 
-- Google Chrome or Mozilla Firefox
-- [**Sublime Text 3**](https://www.sublimetext.com/) (Unlicensed but unlimited usage) with [Package Control](https://packagecontrol.io/)
-- [Python 3.7](https://www.python.org/downloads/) & [`pipenv`](https://pipenv.pypa.io/en/latest/)
-- `git` through [**Git Bash**](https://git-scm.com/downloads)
+- Google Chrome
+- [**Sublime Text 3**](https://www.sublimetext.com/) (Unlicensed but unlimited usage) with [Package Control](https://packagecontrol.io/) installed.
+- [Python 3.7](https://www.python.org/downloads/) & [`pip install pipenv`](https://pipenv.pypa.io/en/latest/)
+- `git` with [**Git Bash**](https://git-scm.com/downloads) which will be your main command line tool this week.
+
+## AWS WorkSpace
+
+If you have been issued with a AWS Workspace invitation (and not a physical laptop), then there is some additional work you need to do:
+
+- Download and run [Python 3.7.7 Installer](https://www.python.org/ftp/python/3.7.7/python-3.7.7-amd64.exe). Make sure that you tick the option "Add Python 3.y to PATH" at the bottom of
+- Open `Git Bash` and run `pip install pipenv`
+- Open Sublime Text, type `Ctrl` + `Shift` + `P` to open Command Palette, type `Install Package Control` and then `Enter`
+
+You can proceed:
+
+## Checking your path
 
 Your `$PATH` should be all set to work with the required binaries.
 
