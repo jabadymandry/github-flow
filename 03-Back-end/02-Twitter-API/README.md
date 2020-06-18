@@ -595,7 +595,7 @@ pipenv run nosetests tests/apis/test_tweet_views.py
 <details><summary markdown='span'>View solution (Really try first 🙏)
 </summary>
 
-We will use the FlaskRESTPlus built-in serialization:
+We will use the Flask-RESTX built-in serialization:
 
 ```python
 # app/apis/tweets.py
