@@ -672,7 +672,7 @@ Try again [`localhost:5000/tweets/1`](http://localhost:5000/tweets/1). Do you ge
 
 ## Bonus: Swagger documentation
 
-The Flask-RESTPlus package comes with [swagger doc](https://flask-restx.readthedocs.io/en/stable/swagger.html) embeded. Run your server and access the root URL:
+The Flask-RESTx package comes with [swagger doc](https://flask-restx.readthedocs.io/en/stable/swagger.html) embeded. Run your server and access the root URL:
 
 :point_right: [http://localhost:5000](http://localhost:5000)
 
