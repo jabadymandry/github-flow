@@ -459,19 +459,19 @@ GET /tweets/1
 => a JSON of the given tweet
 ```
 
-Instead of coding everyting manually like we did in the previous exercise, we will use the [`flask-restplus`](https://flask-restplus.readthedocs.io/) package.
+Instead of coding everyting manually like we did in the previous exercise, we will use the [`flask-restx`](https://flask-restx.readthedocs.io/) package.
 
 ```bash
-pipenv install flask-restplus
+pipenv install flask-restx
 ```
 
 Take some time to read the following article:
 
-:point_right: [Quick Start](https://flask-restplus.readthedocs.io/en/stable/quickstart.html)
+:point_right: [Quick Start](https://flask-restx.readthedocs.io/en/stable/quickstart.html)
 
 We want to start on the right foot in term of scalability, again take some time to read this:
 
-:point_right: [Scaling your project](https://flask-restplus.readthedocs.io/en/stable/scaling.html)
+:point_right: [Scaling your project](https://flask-restx.readthedocs.io/en/stable/scaling.html)
 
 Let's put this into practise:
 
@@ -537,7 +537,7 @@ touch app/apis/tweets.py
 
 ```python
 # app/apis/tweets.py
-from flask_restplus import Namespace, Resource, fields
+from flask_restx import Namespace, Resource, fields
 from app.db import tweet_repository
 
 api = Namespace('tweets')
@@ -558,7 +558,7 @@ Connect this right away to the main Flask app:
 ```python
 # app/__init__.py
 from flask import Flask
-from flask_restplus import Api
+from flask_restx import Api
 
 def create_app():
     app = Flask(__name__)
@@ -578,7 +578,7 @@ def create_app():
 
 :question: Implement the rest of `app/apis/tweets.py` to make the test pass.
 
-:bulb: **Hint**: you need to use the `api.model()` and `@api.marshal_with` described [in the doc](https://flask-restplus.readthedocs.io/en/stable/quickstart.html#data-formatting) to overcome the following error:
+:bulb: **Hint**: you need to use the `api.model()` and `@api.marshal_with` described [in the doc](https://flask-restx.readthedocs.io/en/stable/quickstart.html#data-formatting) to overcome the following error:
 
 ```bash
 TypeError: Object of type Tweet is not JSON serializable
@@ -590,16 +590,16 @@ Do you understand this error? If not, ask your buddy then ask a TA!
 pipenv run nosetests tests/apis/test_tweet_views.py
 ```
 
-:bulb: **Hint**: have a look at the [full example](https://flask-restplus.readthedocs.io/en/stable/example.html) from the documentation!
+:bulb: **Hint**: have a look at the [full example](https://flask-restx.readthedocs.io/en/stable/example.html) from the documentation!
 
 <details><summary markdown='span'>View solution (Really try first 🙏)
 </summary>
 
-We will use the FlaskRESTPlus built-in serialization:
+We will use the Flask-RESTX built-in serialization:
 
 ```python
 # app/apis/tweets.py
-from flask_restplus import Namespace, Resource, fields
+from flask_restx import Namespace, Resource, fields
 from app.db import tweet_repository
 
 api = Namespace('tweets')
@@ -672,7 +672,7 @@ Try again [`localhost:5000/tweets/1`](http://localhost:5000/tweets/1). Do you ge
 
 ## Bonus: Swagger documentation
 
-The Flask-RESTPlus package comes with [swagger doc](https://flask-restplus.readthedocs.io/en/stable/swagger.html) embeded. Run your server and access the root URL:
+The Flask-RESTx package comes with [swagger doc](https://flask-restx.readthedocs.io/en/stable/swagger.html) embeded. Run your server and access the root URL:
 
 :point_right: [http://localhost:5000](http://localhost:5000)
 
@@ -682,7 +682,7 @@ Can you see the documentation? You can try your endpoints right within it!
 
 If you reached this part, you get the gist of building a RESTful API with Flask. It's time to practise!
 
-- Implement the remaining endpoints to have a full `CRUD` RESTful API! Today we don't care about User Authorization for create, update & delete. [The doc is your friend](https://flask-restplus.readthedocs.io/en/stable/)
+- Implement the remaining endpoints to have a full `CRUD` RESTful API! Today we don't care about User Authorization for create, update & delete. [The doc is your friend](https://flask-restx.readthedocs.io/en/stable/)
 - Use the GitHub flow for each new endpoint!
 - Deploy often! Everytime you merge a branch with a new endpoint, `git push heroku master`!
 
