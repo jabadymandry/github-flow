@@ -10,7 +10,7 @@ Let's start a new Flask project:
 
 ```bash
 cd ~/code/<user.github_nickname>
-mkdir twitter-api & cd twitter-api
+mkdir twitter-api && cd twitter-api
 pipenv --python 3.7
 pipenv install flask
 touch wsgi.py
