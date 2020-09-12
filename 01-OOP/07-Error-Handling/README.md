@@ -2,7 +2,7 @@
 
 Errors and Exceptions are part of every programming language. At runtime, our code may not behave like we expect. Suppose you have a dictionary and try to access a key which _does not exist_. That's an error, and Python actually provide types for those (here it would be a `KeyError`). Fortunately, there is a way to deal with these errors in the code.
 
-Start by reading Chapter 8 of the Python Tutorial about [Errors and Exceptions](https://docs.python.org/3.7/tutorial/errors.html).
+Start by reading Chapter 8 of the Python Tutorial about [Errors and Exceptions](https://docs.python.org/3.8/tutorial/errors.html).
 
 ## Syntax
 
@@ -13,7 +13,7 @@ Here are the important ones you should know in Python:
 - `try / except` for the control flow to handle errors from called code
 - `raise` when your code raises an Error
 - `finally` to **always** execute some code after a `try`
-- `with` is specific to Python and helps with properly closing IO streams ([cf 8.7](https://docs.python.org/3.7/tutorial/errors.html#predefined-clean-up-actions))
+- `with` is specific to Python and helps with properly closing IO streams ([cf 8.7](https://docs.python.org/3.8/tutorial/errors.html#predefined-clean-up-actions))
 
 ## Exercise
 

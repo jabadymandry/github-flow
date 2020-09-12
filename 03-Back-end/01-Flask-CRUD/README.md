@@ -13,7 +13,7 @@ You will work in a dedicated repository to apply the best practices covered in t
 ```bash
 cd ~/code/<user.github_nickname>
 mkdir flask-101 && cd $_
-pipenv --python 3.7
+pipenv --python 3.8
 pipenv install flask gunicorn
 touch wsgi.py
 subl . # Open Sublime Text in the current folder.

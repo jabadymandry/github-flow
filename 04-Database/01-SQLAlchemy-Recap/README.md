@@ -28,7 +28,7 @@ cd ~/code/<user.github_nickname>
 mkdir flask-with-sqlalchemy
 cd flask-with-sqlalchemy
 git init
-pipenv --python 3.7
+pipenv --python 3.8
 pipenv install flask psycopg2-binary gunicorn flask-sqlalchemy flask-migrate flask-script
 ```
 
