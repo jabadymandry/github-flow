@@ -18,7 +18,7 @@ subl .
 
 One great thing about Python is that it comes with an included debugger, ready to use! The documentation has an [extensive article about the `pdb` module](https://docs.python.org/3/library/pdb.html) that you can should have a look to.
 
-Let's get to the bottom of it right away. In this exercise folder, you will find an `app.py` which contains a program. This program has a bug, let's use the Python debugger to find it!
+Let's get to the bottom of it right away. In this exercise folder, you will find an `hello.py` which contains a program. This program has a bug, let's use the Python debugger to find it!
 
 ```bash
 pipenv run python hello.py john lennon
