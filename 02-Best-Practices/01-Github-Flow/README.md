@@ -14,7 +14,7 @@ Before we actually do our first commit, we need to create a GitHub repository!
 
 1. Log in to GitHub
 1. Go to [github.com/new](https://github.com/new) and create a _public_ repository under your _personal_ account, name it `github-flow`.
-1. Go to your terminal and create a new repository locall. Add GitHub as the `origin` remote:
+1. Go to your terminal and create a new local repository. Add GitHub as the `origin` remote:
 
 ```bash
 mkdir -p ~/code/<user.github_nickname>/github-flow && cd $_
@@ -54,9 +54,10 @@ Open the `index.html` file and write some HTML code.
 👉 Here is some [inspiration](https://gist.github.com/ssaunier/faa9965201153555bc954fb4713eea7c) if you need.
 </details>
 
-You can open this file in Chrome (go to File Explorer, browse to the right folder and then drag/drop or the `index.html` file into a Google Chrome window).
+You can open this file in Chrome, then click on the "Raw" button. You can now copy the html code and put it into your own `index.html` file.
+You now have a sample to modify.
 
-When you are happy with your code and with the way it look in the browse, it's time to commit!
+When you are happy with your code and with the way it look in the browser, it's time to commit!
 
 ```bash
 git status # Which files were changed?
@@ -88,7 +89,7 @@ You now need someone to look at your code, give some feedback and eventually mer
 
 Head over to `github.com/<user.github_nickname>/github-flow/settings/collaboration` (accessible through `Settings` > `Collaborators`) and add your seat neighbour to the repository by asking his/her github nickname. They should receive an email invitation to opt-in.
 
-Once this setup is done, ask them to go to the Pull Request page (should be PR #1) and review the code. If they have some comments (indentation, error, etc.) and you need to do some fixes, go back to Sublime Text, in the same branch, update the code and do another commit. Push this commit to GitHub: you will see that the Pull Request automatically updates!
+Once this setup is done, ask them to go to the Pull Request page (should be PR #1) and review the code. If they have some comments (indentation, error, etc.), you need to do some fixes: go back to Sublime Text, in the same branch, update the code and do another commit. Push this commit to GitHub: you will see that the Pull Request automatically updates!
 
 In the end, if you and your reviewer agree on the code, the reviewer should **merge** the Pull Request. After merging, there is a button "Delete branch". We advise that you click on it, because in the GitHub flow, a **merged branch is a dead branch** and no work should be pushed to it anymore.
 
