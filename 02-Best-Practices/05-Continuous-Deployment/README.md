@@ -79,6 +79,8 @@ def home():
 ```
 
 In the code above, we are initializing a new `Game` instance to generate a grid. We pass this grid as a local variable to the `home.html` template, so that we can use it in the view.
+Since our `Game` logic only take care of uppercase letters, we decided to force the `<input name="word">` content to uppercase using some JavaScript.
+Let's add this code in `templates/home.html`:
 
 ```html
 <!-- templates/home.html -->
@@ -98,7 +100,7 @@ In the code above, we are initializing a new `Game` instance to generate a grid.
     </div>
     <form action="/check" id="form" method="post">
       <input type="hidden" name="grid" value="{{ ''.join(grid) }}">
-      <input type="text" name="word">
+      <input type="text" name="word" onkeyup="this.value = this.value.toUpperCase();">
       <button>Check!</button>
     </form>
   </body>
