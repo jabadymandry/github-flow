@@ -38,6 +38,8 @@ Open the `wsgi.py` file and copy paste the following code:
 
 ```python
 # wsgi.py
+# pylint: disable=missing-docstring
+
 from flask import Flask
 app = Flask(__name__)
 
@@ -67,6 +69,8 @@ We just created a CSS stylesheet and the HTML template for the Home page. Let's 
 
 ```python
 # wsgi.py
+# pylint: disable=missing-docstring
+
 from flask import Flask, render_template
 from game import Game
 
@@ -145,6 +149,8 @@ Let's do it :
 
 ```python
 # wsgi.py
+# pylint: disable=missing-docstring
+
 from flask import Flask, render_template, request
 
 # [...]
