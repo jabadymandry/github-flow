@@ -303,6 +303,8 @@ Stuck? Ask your buddy! Still stuck? Ask a TA!
 </summary>
 
 ```python
+# pylint: disable=missing-docstring
+
 ALPHABET = {
     '.-':   'A',
     '-...': 'B',
@@ -416,17 +418,19 @@ You now have 2 branches! And you can see that the `multi-word-decode` branch is 
 </summary>
 
 ```python
-    def decode(self, message):
+    # [...]
+
+    def decode(message):
         if message == "":
             return ""
 
         words = message.split(" / ")
-        decoded_words = [self.decode_word(word) for word in words]
+        decoded_words = [decode_word(word) for word in words]
         return ' '.join(decoded_words)
 
-    def decode_word(self, word):
+    def decode_word(word):
         symbols = word.split(" ")
-        letters = [self.ALPHABET[s] for s in symbols]
+        letters = [ALPHABET[s] for s in symbols]
         return ''.join(letters)
 ```
 
