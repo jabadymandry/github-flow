@@ -107,7 +107,7 @@ Let's add this code in `templates/home.html`:
 </html>
 ```
 
-We give you also some CSS:
+We give you also some CSS to add in `static/style.css`:
 
 ```css
 /* static/style.css */
@@ -141,6 +141,7 @@ body {
 Phew! Now let's try this, head over to your browser and reload the page. Can you see the grid with a form? Awesome!
 
 If you try to play, you will get an error. It's because we have not implemented the `/check` endpoint yet (the one where the form gets submitted to).
+Let's do it :
 
 ```python
 # wsgi.py
@@ -160,6 +161,10 @@ def check():
 The idea is that we get the grid (as a hidden field) and the word (the one you typed in the input) from the previous request, then we build a `Game` instance and check if the word is valid. We feed this information back to the `check.html` view to be used to display the results.
 
 💡 We need to actually pass the grid in the `POST` request as HTTP is **stateless**.
+
+```bash
+touch templates/check.html
+```
 
 ```html
 <!-- templates/check.html -->
