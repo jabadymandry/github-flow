@@ -21,7 +21,7 @@ cd ~/code/<user.github_nickname>/longest-word
 
 git status # is that clean?
 git checkout master
-git pull upstream master
+git pull origin master
 git branch -d dictionary-api
 git checkout -b http-server
 ```
@@ -233,7 +233,7 @@ We can now prepare our app to run on Heroku. There is just one little missing pi
 ```bash
 git status # is it clean?
 git checkout master
-git pull upstream master
+git pull origin master
 
 # Let's work on `master` for this specific case, not in a branch.
 touch Procfile
