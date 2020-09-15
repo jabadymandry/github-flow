@@ -154,7 +154,7 @@ pipenv run nosetests tests/test_game.py:TestGame.test_unknown_word_is_invalid
 We can implement a private `__check_dictionary` method to run an API call.
 
 ```python
-# game.rb
+# game.py
 # [...]
 import requests
 
