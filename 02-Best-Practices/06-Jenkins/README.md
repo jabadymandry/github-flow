@@ -268,6 +268,7 @@ It should look like this:
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714654/github-add-webhook_mtor6z.png)
 
+Click on the bottom-left button "Add webhook".
 That's it! GitHub will report Jenkins everytime you push or open a Pull Request.
 
 So let's push!
@@ -431,9 +432,17 @@ You now have 2 branches! And you can see that the `multi-word-decode` branch is 
 
 </details>
 
-Commit your work and push your branch. Go on GitHub and click on the "New pull request" button. You want to merge the `multi-word-decode` (`HEAD`) into `master` (base branch). Create the Pull Request and enjoy the integration between Jenkins and GitHub, thanks to the webhook **and** you personal access token.
+Commit your work and push your branch :
 
-Go ahead and merge the branch. Go back to Jenkins, you should see `master` build one more time (as merging a branch on GitHub actually creates on more commit, a merge commit). You can visualize it here:
+```bash
+git add morse.py
+git commit -m "Implement multi-word decoding. All green!"
+git push origin multi-word-decode
+```
+
+You want to merge the `multi-word-decode` (`HEAD`) into `master` (base branch). Go on GitHub and click on the "New pull request" button. Create the Pull Request and enjoy the integration between Jenkins and GitHub, thanks to the webhook **and** you personal access token.
+
+Go ahead and merge the branch. Go back to Jenkins, you should see `master` build one more time (as merging a branch on GitHub actually creates one more commit, a merge commit). You can visualize it here:
 
 ```
 https://github.com/<user.github_nickname>/morse/network
