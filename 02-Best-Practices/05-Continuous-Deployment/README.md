@@ -323,7 +323,8 @@ git push origin yellow-letter
 
 Go to github.com, create a Pull Request and wait for Travis to turn it green.
 
-While Travis is working, open another Chrome tab and go the `Activity` tab (the 5th one) of your Heroku application to visualize your acitivty feed. Leave this tab open.
+While Travis is working, open another Chrome tab and go back to [dashboard.heroku.com](https://dashboard.heroku.com), then select your `longest-word` project.
+Look at the `Activity` tab (the 5th one) of your Heroku application to visualize your acitivty feed. Leave this tab open.
 
 Come back to the Pull Request, and as soon as it is green, merge it to `master`. Go back to the Heroku tab, and wait ~1 minute (in GitHub you can have a look at the `Commits` page and see that the latest merge commit is being tested by Travis, thanks to the little orange dot).
 
