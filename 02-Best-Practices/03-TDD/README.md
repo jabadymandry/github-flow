@@ -143,6 +143,8 @@ We need to create a `Game` class in the `./game.py` file:
 
 ```python
 # game.py
+# pylint: disable=missing-docstring
+
 class Game:
     pass
 ```
@@ -194,6 +196,8 @@ One possible implementation is:
 
 ```python
 # game.py
+# pylint: disable=missing-docstring
+
 import string
 import random
 
