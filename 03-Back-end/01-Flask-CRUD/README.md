@@ -33,6 +33,8 @@ In your `wsgi.py` file, copy paste the following boilerplate:
 
 ```python
 # wsgi.py
+# pylint: disable=missing-docstring
+
 from flask import Flask
 app = Flask(__name__)
 
