@@ -254,7 +254,7 @@ print(next(IDENTIFIER_GENERATOR))
 
 ```
 {
-    "name": "Workelo"
+    "name": "HistoVec"
 }
 ```
 
