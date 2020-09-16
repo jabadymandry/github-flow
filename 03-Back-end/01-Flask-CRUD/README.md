@@ -107,13 +107,13 @@ heroku logs -n 1000 --tail # Check the access logs are coming up. Reload the bro
 
 Right now, our app returns some plain text. Today's goal is to build a REST API.
 
-👉 Add a `/api/v1/products` route which will return a JSON array out of the plain list of dict:
+👉 Add a `/api/v1/products` route which will return **a JSON array**:
 
 ```python
-PRODUCTS = [
-    { 'id': 1, 'name': 'Skello' },
-    { 'id': 2, 'name': 'Socialive.tv' }
-]
+PRODUCTS = {
+    1: { 'id': 1, 'name': 'Skello' },
+    2: { 'id': 2, 'name': 'Socialive.tv' },
+}
 ```
 
 :bulb: **Tip**: Have a look at [`jsonify`](http://flask.pocoo.org/docs/api/#flask.json.jsonify)
@@ -190,6 +190,13 @@ pipenv run nosetests -s
 </summary>
 
 Just add a third element to the `PRODUCTS` array!
+```python
+PRODUCTS = {
+    1: { 'id': 1, 'name': 'Skello' },
+    2: { 'id': 2, 'name': 'Socialive.tv'},
+    3: { 'id': 3, 'name': 'Le Wagon'},
+}
+```
 
 </details>
 
