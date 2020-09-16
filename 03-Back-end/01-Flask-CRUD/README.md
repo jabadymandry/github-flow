@@ -236,19 +236,18 @@ from flask import request
 request.get_json()
 ```
 
-:bulb: **Tip** You might need to introduce a a way to generate auto-incremented ids:
+:bulb: **Tip** You might need to introduce a way to generate auto-incremented ids:
 
 ```python
-class Counter:
-    def __init__(self):
-        self.id = 3
+import itertools
 
-    def next(self):
-        self.id += 1
-        return self.id
+# [...]
 
-ID = Counter()
-print(ID.next())
+START_INDEX = len(PRODUCTS) + 1
+IDENTIFIER_GENERATOR = itertools.count(START_INDEX)
+
+# Here is how to use it :
+print(next(IDENTIFIER_GENERATOR))
 ```
 
 :bulb: **Tip** Here is a payload you can use in Postman to test this route:
