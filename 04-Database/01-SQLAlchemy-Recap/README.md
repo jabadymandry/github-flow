@@ -1,27 +1,32 @@
 # SQLAlchemy Recap
 
-Before going back to yesterday's `twitter-api` repository, let's create a brand new Flask app (without the factory pattern `create_app`) and:
+Before going back to yesterday's `twitter-api` repository, let's create a brand new Flask app (without the factory pattern `create_app`).
+Here is the list of what you will need (`don't install anything for now`, we'll do it together in a few moments) :
 
-1. Add [psycopg2](http://initd.org/psycopg/) to use PostgreSQL
-1. Use [SQLAlchemy](https://www.sqlalchemy.org/) as the ORM on top of PostgreSQL
-1. Add [Alembic](http://alembic.zzzcomputing.com/) to manage schema migration with the [`Flask-Migrate`](http://flask-migrate.readthedocs.io/) package.
-1. Deploy to Heroku
+- Add [psycopg2](http://initd.org/psycopg/) to use PostgreSQL
+- Use [SQLAlchemy](https://www.sqlalchemy.org/) as the ORM on top of PostgreSQL
+- Add [Alembic](http://alembic.zzzcomputing.com/) to manage schema migration with the [`Flask-Migrate`](http://flask-migrate.readthedocs.io/) package.
+- Deploy to Heroku
 
 ## PostgreSQL
 
-Head over to [postgresql.org/download/windows/](https://www.postgresql.org/download/windows/) and download the installer for PostgreSQL 10+. Run it. It will install:
+Head over to [postgresql.org/download/windows/](https://www.postgresql.org/download/windows/) and `download` the installer for `PostgreSQL 10+`.
+(`Don't install postgres` if you're using a `computer from Le Wagon`. It should be already installed. If not, install it)
+Run it. It will install:
 
 - the PostgreSQL Server
 - pgAdmin 4, a very useful GUI client to run queries and administrate the server
 - Command line tools, useful to install the `psycopg2` package
 
-The setup wizard will ask you for a superadmin password. Put something you can remember easily.
+The setup wizard will ask you for a superadmin password. Put something you can remember easily (usually `root`).
 
 You should leave the port as the default suggested value (`5432`), and choose `English, United States` as the default locale.
 
+After installation finished, `stack-builder` will open. Just `cancel`. We don't need to install other postgreSQL tools.
+
 ## Getting started
 
-Let's start a new repository from scratch:
+Let's start a new repository from scratch (this is the moment to install all our dependencies):
 
 ```bash
 cd ~/code/<user.github_nickname>
@@ -30,6 +35,7 @@ cd flask-with-sqlalchemy
 git init
 pipenv --python 3.7
 pipenv install flask psycopg2-binary gunicorn flask-sqlalchemy flask-migrate flask-script
+pipenv install pylint --dev
 ```
 
 ```bash
@@ -43,6 +49,8 @@ In your `wsgi.py` file, copy paste the following boilerplate:
 
 ```python
 # wsgi.py
+# pylint: disable=missing-docstring
+
 from flask import Flask
 app = Flask(__name__)
 
@@ -83,7 +91,13 @@ logging.warn(os.environ["DUMMY"])
 # [...]
 ```
 
-Relaunch the `FLASK_ENV=development pipenv run flask run` server. You should see this:
+Stop and restart the server:
+
+```bash
+FLASK_ENV=development pipenv run flask run
+```
+
+You should see this:
 
 ```bash
 Loading .env environment variables...
@@ -92,6 +106,16 @@ WARNING:root:dummy
 ```
 
 See? It automatically populates the `os.environ` with the content of the `.env` file!
+
+You can now `remove these 3 lines`, you don't need it anymore :
+
+```bash
+import os
+import logging
+logging.warn(os.environ["DUMMY"])
+
+# [...]
+```
 
 ## `Config` class
 
@@ -103,6 +127,8 @@ touch config.py
 
 ```python
 # config.py
+# pylint: disable=missing-docstring
+
 import os
 
 class Config(object):
@@ -110,10 +136,13 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
 ```
 
-Once we have this file, we can **bind** the Flask application to SQLAlchemy:
+Once we have this file, we can **bind** the Flask application to SQLAlchemy.
+At this point, here is the `full content` of your `wsgi.py` file:
 
 ```python
 # wsgi.py
+# pylint: disable=missing-docstring
+
 from flask import Flask
 from config import Config
 app = Flask(__name__)
@@ -123,24 +152,31 @@ app.config.from_object(Config)
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy(app)
 
-# [...]
+@app.route('/hello')
+def hello():
+    return "Hello World!"
 ```
 
 ## `DATABASE_URL`
 
 The `DATABASE_URL` environment variable is the cornerstone of the SQLAlchemy configuration. That's where you put all the information needed by the python code to actually connect to the database server.
 
-In development, we will use this:
+
+Let's complete the `.env` file!
+`Remove` the `DUMMY` variable.
+In development, we will use this database url:
 
 ```bash
 # .env
 DATABASE_URL="postgresql://postgres:<password_if_necessary>@localhost/flask_db"
 ```
 
-It means that we are using the PostgreSQL server we installed earlier and the `flask_db` database. Database that we actually need to created!
+It means that we are using the PostgreSQL server we installed earlier and the `flask_db` database. Database that we actually need to create!
+
+For the first command, use your `postgreSQL version number` depending on installer you choosed (usually `10` on Le Wagon computers, `12` for a fresh install).
 
 ```bash
-export PATH="$PATH:/c/Program Files/PostgreSQL/10/bin"
+echo 'PATH="/c/Program Files/PostgreSQL/<YOUR_POSTGRESQL_VERSION/bin":$PATH' >> ~/.profile
 winpty psql -U postgres -c "CREATE DATABASE flask_db"
 ```
 
@@ -154,6 +190,8 @@ touch models.py
 
 ```python
 # models.py
+# pylint: disable=missing-docstring
+
 from wsgi import db
 
 class Product(db.Model):
@@ -173,7 +211,7 @@ Once the first model has been created, we can include it into the main file:
 from models import Product
 ```
 
-We are now going to set up Alambic to generate our first migration and upgrade the database to actually **create** the `products` table.
+We are now going to set up Alembic to generate our first migration and upgrade the database to actually **create** the `products` table.
 
 ```bash
 touch manage.py
@@ -218,7 +256,6 @@ pipenv run python manage.py db upgrade
 To manually check that the schema now contains a `product` table, re-connect to the PostgreSQL database:
 
 ```bash
-export PATH="$PATH:/c/Program Files/PostgreSQL/10/bin"
 winpty psql -U postgres -d flask_db
 flask_db#= \dt
 # You should see two tables: `products` and `alembic_version`!
@@ -235,16 +272,29 @@ Alembic (the package behind `manage.py db`) shines when we update a model. It wi
 
 ```python
 # models.py
+# pylint: disable=missing-docstring
 
 class Product(db.Model):
     # [...]
     description = db.Column(db.Text())
 ```
 
-Go back to the terminal and run the `migrate -m "add description to products"` command. What happened in `migrations/versions`? Read this new file and then run the `upgrade` command. You can check that this worked with:
+Go back to the terminal and run the `migrate` command:
 
 ```bash
-export PATH="$PATH:/c/Program Files/PostgreSQL/10/bin"
+pipenv run python manage.py db migrate -m "add description to products"
+```
+
+What happened in `migrations/versions`?
+Read this new file and then run the `upgrade` command:
+
+```bash
+pipenv run python manage.py db upgrade
+```
+
+You can check that this worked with:
+
+```bash
 winpty psql -U postgres -d flask_db
 flask_db#= \d products
 # You should now see three columns in this table
@@ -253,7 +303,7 @@ flask_db#= \q
 
 ## Inserting a record
 
-Our database schema is ready. We used the command line `psql` to query it. We can now use pgAdmin 4 to query the database for records. Launch pgAdmin from the Windows Start menu. It should open `localhost:53042` in Chrome. In the tree, go to `Servers` > `PostgreSQL 10` > `Databases` > `flask_db` > `Schemas` > `public` > `Tables` > `products` and right clic on it: `View/Edit Data` > `All rows`. It will generate the `SELECT` SQL query for you. Click on the button with a little thunder ⚡️ to run the query. There should be _no_ records.
+Our database schema is ready. We used the command line `psql` to query it. We can now use pgAdmin 4 to query the database for records. Launch pgAdmin from the Windows Start menu. It should open `localhost:53042` in Chrome. In the tree, go to `Servers` > `PostgreSQL 10` > `Databases` > `flask_db` > `Schemas` > `public` > `Tables` > `products` and right clic on it: `View/Edit Data` > `All rows`. It will generate the `SELECT` SQL query for you. Click on the button with a little thunder ⚡️ (or play ▶️) to run the query. There should be _no_ records.
 
 Let's insert two products in the Database! We can use the [flask shell feature](http://flask.pocoo.org/docs/1.0/cli/#open-a-shell).
 
@@ -271,7 +321,15 @@ pipenv run flask shell
 >>> quit()
 ```
 
-Go back to pgAdmin 4 in Chrome and re-click on the thunder ⚡ button. Hooray! You now have two records in the database!
+Go back to pgAdmin 4 in Chrome and re-click on the thunder ⚡ (or play ▶️) button. Hooray! You now have two records in the database!
+
+
+## About models, migrations and commits
+
+Since our `models` generate database tables, they are `strongly correlated` to our `database schemas`.
+For this reason, for each model creation/update, we need to `commit` code about `models` and generated `migrations` together to ensure `atomicity` of our functional logic.
+`Ask a TA` if this is not clear for you, this point is `really important`.
+
 
 ## Creating our first API endpoint
 
@@ -287,13 +345,16 @@ We can now instantiate the `Marshmallow` app with:
 
 ```python
 # wsgi.py
+# pylint: disable=missing-docstring
 
-# [...]
+# [all previous imports]
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow # Order is important here!
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
+
+# ['hello' route definition]
 ```
 
 We also need to define a serialization schema for each model we want to output as a JSON resource through our API endpoints:
@@ -304,6 +365,8 @@ touch schemas.py
 
 ```python
 # schemas.py
+# pylint: disable=missing-docstring
+
 from wsgi import ma
 from models import Product
 
@@ -312,25 +375,27 @@ class ProductSchema(ma.Schema):
         model = Product
         fields = ('id', 'name') # These are the fields we want in the JSON!
 
-product_schema = ProductSchema()
-products_schema = ProductSchema(many=True)
+one_product_schema = ProductSchema()
+many_product_schema = ProductSchema(many=True)
 ```
 
 Now we have our schemas we can actually use them and implement our API endpoint!
 
 ```python
 # wsgi.py
-# [...]
+# pylint: disable=missing-docstring
+
+# [all previous imports]
 
 from models import Product
-from schemas import products_schema
+from schemas import many_product_schema
 
-# [...]
+# ['hello' route definition]
 
 @app.route('/products')
-def products():
+def get_many_products():
     products = db.session.query(Product).all() # SQLAlchemy request => 'SELECT * FROM products'
-    return products_schema.jsonify(products)
+    return many_product_schema.jsonify(products)
 ```
 
 And that should be it! Launch your server and head to `localhost:5000/products`. You should see the two products in the database as JSON!
@@ -347,6 +412,8 @@ touch Procfile
 ```
 
 ```bash
+# Procfile
+
 release: python manage.py db upgrade
 web: gunicorn wsgi:app --access-logfile=-
 ```
@@ -361,7 +428,7 @@ heroku create --region=eu
 git push heroku master
 ```
 
-Once more, you can enjoy Heroku's **magic**! From the `Pipfile`, it detected the package psycopg2 so it automatically reserver a (free - hobby plan) PostgreSQL instance and configured the `DATABASE_URL`. You can check it with:
+Once more, you can enjoy Heroku's **magic**! From the `Pipfile`, it detected the package psycopg2 so it automatically reserved a (free - hobby plan) PostgreSQL instance and configured the `DATABASE_URL`. You can check it with:
 
 ```bash
 heroku config:get DATABASE_URL
@@ -380,7 +447,7 @@ heroku open
 
 The production database and the local (development) database are **different**!
 
-To add products to the production database, you can use the Flask shell, remotely connecting to the Heroku dyno (_à la SSH_):
+To add products to the production database, you can use the Flask shell, remotely connecting to the Heroku dyno (_like with SSH_):
 
 ```bash
 heroku run flask shell
