@@ -149,6 +149,26 @@ You can also go to `View > Hide Minimap`.
 
 Last but not least, a keyboard shortcut is `Ctrl-K`, `Ctrl-B` to open/close the file drawer on the left. Closing it allows you to focus on a single file. To switch files, you don't have to click on the file drawer, you can just type `Ctrl` + `P` and start typing the filename / select it in the list. Very handy to switch files!
 
+## About Git Bash copy/paste
+
+**Copy from Git Bash:**
+
+Go to your Git Bash terminal and `select text` (`let it highlighted`).
+Then, go to your target (another editor, a web browser, etc.) and paste using `CTRL+V` keyboard shortcut.
+
+**Common error:**
+
+Here is the scenario:
+I copy some text ex: "git --version") using `CTRL+C` keyboard shortcut (outside of my Git Bash terminal).
+I want to paste using `CTRL+V` keyboard shortcut twice (it's a misake, I'm only human).
+Then an error message appears : `"bash: $'\302\226': command not found"`
+No worries, it's only the keyboard shortcut interpreted as a special char.
+
+**Conlusion: Avoid to use keyboard shortcuts in Git Bash.**
+
+PS: You can use keyboard shortcut (for copy/paste too) if you find how to activate `quick edition` option in yout Git Bash settings. It depends of your Git Bash version. (`Don't waste too much time with it`)
+PS2: If you find another solution, please let us know, we'll update this page.
+
 ## Exercises
 
 The repository which you just forked contains all the exercises for the week. To work on them, clone them on your laptop. Still in Git Bash, run:
