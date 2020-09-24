@@ -54,9 +54,9 @@ In your `wsgi.py` file, copy paste the following boilerplate:
 from flask import Flask
 app = Flask(__name__)
 
-@app.route('/hello')
+@app.route('/hello', methods=['GET'])
 def hello():
-    return "Hello World!"
+    return "Hello World!", 200
 ```
 
 Check that your application is starting with:
@@ -148,13 +148,12 @@ from config import Config
 app = Flask(__name__)
 app.config.from_object(Config)
 
-
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy(app)
 
-@app.route('/hello')
+@app.route('/hello', methods=['GET'])
 def hello():
-    return "Hello World!"
+    return "Hello World!", 200
 ```
 
 ## `DATABASE_URL`
@@ -341,20 +340,28 @@ Yesterday, we used a fake database and did not had any trouble with `jsonify`. N
 pipenv install flask-marshmallow marshmallow-sqlalchemy
 ```
 
-We can now instantiate the `Marshmallow` app with:
+We can now instantiate the `Marshmallow` app (`take care` of `NEW LINE` lines and their position):
 
 ```python
 # wsgi.py
 # pylint: disable=missing-docstring
 
-# [all previous imports]
+# [ all previous imports ...
+#   from flask import Flask, abort, request
+#   from config import Config
+#   app = Flask(__name__)
+#   app.config.from_object(Config)
+# ]
 
 from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow # Order is important here!
+from flask_marshmallow import Marshmallow  # NEW LINE (Order is important here!)
 db = SQLAlchemy(app)
-ma = Marshmallow(app)
+ma = Marshmallow(app)  # NEW LINE
 
-# ['hello' route definition]
+
+# [Product model import]
+
+# [ 'hello' route definition ]
 ```
 
 We also need to define a serialization schema for each model we want to output as a JSON resource through our API endpoints:
@@ -385,17 +392,18 @@ Now we have our schemas we can actually use them and implement our API endpoint!
 # wsgi.py
 # pylint: disable=missing-docstring
 
-# [all previous imports]
+BASE_URL = '/api/v1'
 
-from models import Product
+# [all previous imports... ending with Product model import]
+
 from schemas import many_product_schema
 
 # ['hello' route definition]
 
-@app.route('/products')
-def get_many_products():
+@app.route(f'{BASE_URL}/products', methods=['GET'])
+def get_many_product():
     products = db.session.query(Product).all() # SQLAlchemy request => 'SELECT * FROM products'
-    return many_product_schema.jsonify(products)
+    return many_product_schema.jsonify(products), 200
 ```
 
 And that should be it! Launch your server and head to `localhost:5000/products`. You should see the two products in the database as JSON!
