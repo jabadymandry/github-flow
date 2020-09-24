@@ -181,7 +181,35 @@ git add .
 git commit -m "New flask project boilerplate"
 ```
 
-And create an app to be deployed on Heroku:
+By that time, you should already have created 5 applications (which is the free limit).
+
+So we need to `do to some cleaning`.
+First we want to get application name in order to remove it :
+
+```bash
+heroku apps  # Display created apps
+# === <your_mail> Apps
+# <app_name_1> (eu)
+# <app_name_2> (eu)
+# <app_name_3> (eu)
+# <app_name_4> (eu)
+# <app_name_5> (eu)
+```
+
+Then we can remove it :
+```bash
+heroku apps:destroy <app_name_1>
+# !    WARNING: This will delete <app_name_1> including all add-ons.
+# !    To proceed, type <app_name_1> or re-run this command with
+# !    --confirm <app_name_1>
+
+<app_name_1>  # Type <app_name_1> and press <Enter>
+# Destroying <app_name_1> (including all add-ons)... done
+```
+
+**Proceed to this operation each time needed.**
+
+We can now create an app to be deployed on Heroku:
 
 ```bash
 heroku create --region=eu
