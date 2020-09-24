@@ -2,7 +2,7 @@
 
 Now that we have played a bit with Flask, it's time to start the exercises which will keep us busy for the next three days. The goal is to build a clone of the [Twitter API](https://developer.twitter.com/en/docs/api-reference-index) using Flask and different Flask plugins (like [these](https://github.com/humiaozuzu/awesome-flask)).
 
-⚠️ In this exercise, we will implement some API endpoints with the a big restriction: we don't have a relational database yet! This constraint will help you focus on the HTTP layer of the API, not on the information retrieval. To abstract the database, we will use the [data access object (DAO)](https://en.wikipedia.org/wiki/Data_access_object) pattern and tomorrow we will replace it with actual queries to the database.
+⚠️ In this exercise, we will implement some API endpoints with a big restriction: we don't have a relational database yet! This constraint will help you focus on the HTTP layer of the API, not on the information retrieval. To abstract the database, we will use the [data access object (DAO)](https://en.wikipedia.org/wiki/Data_access_object) pattern and tomorrow we will replace it with actual queries to the database.
 
 ## Getting started
 
@@ -225,7 +225,7 @@ class TestTweet(TestCase):
 
 👉 Take some time to read the [26.4. `unittest`](https://docs.python.org/3/library/unittest.html) chapter.
 
-OK, the test is written, let's run the test! (it should not be green):
+OK, the test is written, let's run it! (it should not be green):
 
 ```bash
 pipenv run nosetests tests/test_models.py
@@ -349,7 +349,7 @@ class Tweet:
 
 <br />
 
-✨ Congrats! you juse implemented the `Tweet` class using TDD.
+✨ Congrats! You just implemented the `Tweet` class using TDD.
 
 ### Repository
 
