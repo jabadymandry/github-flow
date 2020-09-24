@@ -31,6 +31,8 @@ touch app/__init__.py # And open this file in Sublime Text
 
 ```python
 # app/__init__.py
+# pylint: disable=missing-docstring
+
 from flask import Flask
 
 def create_app():
@@ -47,6 +49,7 @@ Then open the `./wsgi.py` file and import this new `create_app` to use it right 
 
 ```python
 # ./wsgi.py
+
 from app import create_app
 
 application = create_app()
@@ -77,6 +80,8 @@ touch app/main/controllers.py
 
 ```python
 # app/main/controllers.py
+# pylint: disable=missing-docstring
+
 from flask import Blueprint
 
 main = Blueprint('main', __name__)
@@ -90,6 +95,8 @@ We can now import our simple blueprint into our main application, like this:
 
 ```python
 # app/__init.py__
+# pylint: disable=missing-docstring
+
 from flask import Flask
 
 def create_app():
@@ -149,7 +156,7 @@ class TestHomeView(TestCase):
 Open the terminal and run:
 
 ```bash
-pipenv run nosetests -s
+pipenv run nosetests -s tests/main/test_home_view.py
 ```
 
 The test should be red!
@@ -309,6 +316,8 @@ Our `Tweet` class is empty and needs an [instance variable](https://docs.python.
 
 ```python
 # app/models.py
+# pylint: disable=missing-docstring
+
 class Tweet:
     def __init__(self, text):
         self.text = text
@@ -336,6 +345,8 @@ It's also missing the `id` instance variable, set to `None` on instance creation
 
 ```python
 # app/models.py
+# pylint: disable=missing-docstring
+
 from datetime import datetime
 
 class Tweet:
@@ -420,8 +431,14 @@ same TDD technique we used to implement the `Tweet` class.
 <details><summary markdown='span'>View solution
 </summary>
 
+```bash
+touch app/repositories.py
+```
+
 ```python
 # app/repositories.py
+# pylint: disable=missing-docstring
+
 class TweetRepository:
     def __init__(self):
         self.__clear()
@@ -445,6 +462,11 @@ class TweetRepository:
 💡 See how the test file is way longer than the actual implementation?
 
 </details>
+
+Let's run the test :
+```bash
+pipenv run nosetests tests/test_repositories.py
+```
 
 <br />
 
@@ -515,7 +537,12 @@ class TestTweetViews(TestCase):
 ```
 
 💡 If you run the test, it will complain that `tweet_repository` does not exist.
-This is our fake database. This is just an instance of `TweetRepository`. Create it:
+
+```bash
+pipenv run nosetests tests/apis/test_tweet_views.py
+```
+
+`tweet_repository` is our fake database. This is just an instance of `TweetRepository`. Create it:
 
 ```bash
 touch app/db.py
@@ -537,6 +564,8 @@ touch app/apis/tweets.py
 
 ```python
 # app/apis/tweets.py
+# pylint: disable=missing-docstring
+
 from flask_restx import Namespace, Resource, fields
 from app.db import tweet_repository
 
@@ -557,12 +586,15 @@ Connect this right away to the main Flask app:
 
 ```python
 # app/__init__.py
+# pylint: disable=missing-docstring
+
 from flask import Flask
 from flask_restx import Api
 
 def create_app():
     app = Flask(__name__)
 
+    # We only keep it for quick debug
     @app.route('/hello')
     def hello():
         return "Goodbye World!"
@@ -599,6 +631,8 @@ We will use the Flask-RESTX built-in serialization:
 
 ```python
 # app/apis/tweets.py
+# pylint: disable=missing-docstring
+
 from flask_restx import Namespace, Resource, fields
 from app.db import tweet_repository
 
@@ -653,14 +687,17 @@ To solve this problem, we need to simulate a database with pre-existing tweets a
 
 ```python
 # app/__init__.py
+# pylint: disable=missing-docstring
+
 from flask import Flask # This line already exists
+from flask_restx import Api # This line already exists
 
 from .db import tweet_repository
 from .models import Tweet
 tweet_repository.add(Tweet("a first tweet"))
 tweet_repository.add(Tweet("a second tweet"))
 
-def create_app():
+def create_app():  # This line already exists
     # [...]
 ```
 
