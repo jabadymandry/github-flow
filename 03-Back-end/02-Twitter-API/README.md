@@ -584,8 +584,12 @@ from .repositories import TweetRepository
 tweet_repository = TweetRepository()
 ```
 
-Now, let's make the test pass! We need to create a new API namespace:
+Since we are using Flask-RESTx `namespaces`, let's remove our `Blueprint`:
+```bash
+rm -rf app/main
+```
 
+Now, let's make the test pass! We need to create a new API namespace:
 ```bash
 touch app/apis/tweets.py
 ```
@@ -610,7 +614,7 @@ class TweetResource(Resource):
             return tweet
 ```
 
-Connect this right away to the main Flask app:
+Connect this right away to the main Flask app, and don't forget to clean `Blueprint`. Here is the file content now:
 
 ```python
 # app/__init__.py
@@ -622,7 +626,6 @@ from flask_restx import Api
 def create_app():
     app = Flask(__name__)
 
-    # We only keep it for quick debug
     @app.route('/hello')
     def hello():
         return "Goodbye World!"
@@ -691,7 +694,7 @@ class TweetResource(Resource):
 
 ### Running the server
 
-Let's leave the tests for now (running `pipenv run nosetests` should yield 7 passing tests) and launch the server:
+Let's leave the tests for now (running `pipenv run nosetests` should yield 6 passing tests) and launch the server:
 
 ```bash
 FLASK_ENV=development pipenv run flask run
