@@ -100,6 +100,7 @@ Let's continue bravely by instantiating our SQLAlchemy session we will use for a
 
 ```python
 # app/__init__.py
+# pylint: disable=missing-docstring
 
 # [...]
 from flask_sqlalchemy import SQLAlchemy
@@ -122,6 +123,8 @@ Now it's time to **convert** our existing `Tweet` model to a proper SQLAlchemy m
 
 ```python
 # app/models.py
+# pylint: disable=missing-docstring
+
 from datetime import datetime
 
 from app import db
@@ -237,6 +240,7 @@ Look at the error message in the terminal and try to fix the code _yourself_. Th
 </summary>
 
 ```python
+# app/apis/tweets.py
 # Add this at the beginning of the file:
 from app import db
 
@@ -274,15 +278,16 @@ The solution is to:
 Here is how we are going to achieve this goal. First we need to create a new database locally:
 
 ```bash
-export PATH="$PATH:/c/Program Files/PostgreSQL/10/bin"
 winpty psql -U postgres -c "CREATE DATABASE twitter_api_flask_test"
 ```
 
 And then we can update our `TestTweetViews` class with:
 
 ```python
+# tests/apis/test_tweet_views.py
+
 from flask_testing import TestCase
-from app import create_app, db
+from app import create_app, db  # Don't forget to take the db import
 from app.models import Tweet
 
 class TestTweetViews(TestCase):
@@ -316,6 +321,7 @@ pipenv run nosetests
 Here is the updated code for the `TestTweetViews` test case:
 
 ```python
+    # tests/apis/test_tweet_views.py
     # [...]
 
     def test_tweet_show(self):
