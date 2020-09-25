@@ -382,6 +382,7 @@ class TweetResource(Resource):
             api.abort(404, "Tweet {} doesn't exist".format(id))
         else:
             tweet.text = api.payload["text"]
+            db.session.commit()
             return tweet
 
     def delete(self, id):
