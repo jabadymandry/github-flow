@@ -4,16 +4,21 @@ The goal of this exercise is to continue the work on yesterday's exercise **Twit
 
 ## Setup
 
-If you did not have time to finish, here is a starting point:
-
+We're going to continue from yesterday correction :
 :point_right: [github.com/ssaunier/twitter-api](https://github.com/ssaunier/twitter-api)
-
-Go to this repo and **fork** it to your own account. Then **clone** it to your computer:
 
 ```bash
 cd ~/code/<user.github_nickname>
-git clone git@github.com:<user.github_nickname>/twitter-api.git
-cd twitter-api
+git clone git@github.com:ssaunier/twitter-api.git twitter-api-database
+cd twitter-api-database
+git remote rm origin
+```
+
+Go to [github.com/new](https://github.com/new) and create a _public_ repository under your _personal_ account, name it `twitter-api-database`.
+
+```bash
+git remote add origin https://github.com/<user.github_nickname>/twitter-api-database.git
+git push -u origin master
 ```
 
 Now that you have the repo, you need to create the virtualenv and install the packages:
