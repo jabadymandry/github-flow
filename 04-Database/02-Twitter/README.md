@@ -43,7 +43,7 @@ FLASK_ENV=development pipenv run flask run
 
 ## Setting up SQLAlchemy
 
-Like in the previous exercise, we n
+Like in the previous exercise, we need to install some tools :
 
 ```bash
 pipenv install psycopg2-binary gunicorn
@@ -95,7 +95,8 @@ Open the `app/apis/tweets.py` and the `tests/test_test_views.py` and remove the 
 from app.db import tweet_repository
 ```
 
-It's official, the tests are now broken :scream: But the `flask run` is still working :muscle:. Let's continue bravely by instantiating our SQLAlchemy session we will use for all SQL queries (CRUD).
+It's official, the tests are now broken :scream: But the `flask run` is still working :muscle: !
+Let's continue bravely by instantiating our SQLAlchemy session we will use for all SQL queries (CRUD).
 
 ```python
 # app/__init__.py
@@ -146,11 +147,10 @@ rm tests/test_models.py
 We need a local database for our application:
 
 ```bash
-export PATH="$PATH:/c/Program Files/PostgreSQL/10/bin"
 winpty psql -U postgres -c "CREATE DATABASE twitter_api_flask"
 ```
 
-Then we need to isolate a utility file to run the commands without polluting the main `wsgi.py`. Here how it goes:
+Then we need to isolate an utility file to run the commands without polluting the main `wsgi.py`. Here how it goes:
 
 ```bash
 touch manage.py
@@ -182,7 +182,7 @@ Now we can use Alembic (run `pipenv graph` to see where it stands)!
 pipenv run python manage.py db init
 ```
 
-This command has created a `migrations` foder, with an empty `versions` in it. Time to run the first migration with the creation of the `tweets` table from the `app/models.py`'s `Tweet` class.
+This command has created a `migrations` folder, with an empty `versions` in it. Time to run the first migration with the creation of the `tweets` table from the `app/models.py`'s `Tweet` class.
 
 ```bash
 pipenv run python manage.py db migrate -m "Create tweets table"
@@ -254,9 +254,9 @@ Let's leave only the `GET /tweets/:id` route working, not touching the ones, and
 
 ## Updating the tests
 
-Open the `tests/main/test_tweet_views.py`. Before we dive into replacing the `tweet_repository` with some `db.session` in here, let's pause and think about what we are doing.
+Open the `tests/apis/test_tweet_views.py`. Before we dive into replacing the `tweet_repository` with some `db.session` in here, let's pause and think about what we are doing.
 
-What happens if you run the followign in one of your test method?
+What happens if you run the following in one of your test method?
 
 ```python
 tweet = Tweet(text="A test tweet")
