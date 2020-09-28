@@ -72,6 +72,8 @@ touch tasks.py
 
 ```python
 # tasks.py
+# pylint: disable=missing-docstring
+
 from celery import Celery
 from wsgi import app
 
@@ -176,7 +178,8 @@ def products():
 # [...]
 ```
 
-Open (once again!) another terminal window and launch the Flask server:
+Exit from your previous `flask shell` typing `quit()` or `exit()` then pressing the `<ENTER>` key.
+Then launch the Flask server:
 
 ```bash
 FLASK_ENV=development pipenv run flask run
@@ -213,7 +216,10 @@ To solve point `2.`, we need to update the `Procfile` with a **new line**:
 worker: celery -A tasks.celery worker --loglevel=info
 ```
 
-The Procfile will now have 3 lines, a `web` to launch the flask app, a `release` to automatically upgrade the database at each deployment and now a `worker` one to run Celery!
+The Procfile will now have 3 lines:
+- a `web` to launch the flask app
+- a `release` to automatically upgrade the database at each deployment
+- a `worker` one to run Celery!
 
 It's now time to push our Branch to Heroku:
 
