@@ -3,14 +3,23 @@
 Let's go back to our Twitter API. You can start from the following code (using the `sqlalchemy` branch):
 
 ```bash
-mkdir -p ~/code/<user.github_nickname>
 cd ~/code/<user.github_nickname>
 git clone git@github.com:ssaunier/twitter-api.git twitter-api-authentication
 cd twitter-api-authentication
+git checkout sqlalchemy  # get these branch before changing the remote
 git remote rm origin
-# You might want to create another repo + set up the `origin` remote to push your code
+```
 
-git checkout sqlalchemy
+Go to [github.com/new](https://github.com/new) and create a _public_ repository under your _personal_ account, name it `twitter-api-authentication`.
+
+```bash
+git remote add origin https://github.com/<user.github_nickname>/twitter-api-authentication.git
+git push -u origin master
+```
+
+Now that you have the repo, you need to create the virtualenv and install the packages:
+
+```bash
 pipenv install --dev
 ```
 
