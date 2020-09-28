@@ -117,7 +117,7 @@ After (using [`url_for`](http://flask.pocoo.org/docs/1.0/api/#flask.url_for)):
 
 ```html
 <li>
-  <a href="{{ url_for('product_html', id=product.id) }}">{{ product.name }}</a>
+  <a href="{{ url_for('product_html', product_id=product.id) }}">{{ product.name }}</a>
 </li>
 ```
 
@@ -126,9 +126,9 @@ First, we need to add a new route to the controller (`wsgi.py`):
 ```python
 # [...]
 
-@app.route('/<int:id>')
-def product_html(id):
-    product = db.session.query(Product).get(id)
+@app.route('/<int:product_id>')
+def product_html(product_id):
+    product = db.session.query(Product).get(product_id)
     return render_template('product.html', product=product)
 ```
 
