@@ -198,6 +198,10 @@ We are almost done with Celery, one last point we need to cover is **deployment*
 
 For point `1.`, we need to add an **add-on** on our Heroku app. We will use [Heroku Redis](https://elements.heroku.com/addons/heroku-redis) which is free up to 25M, enough to tinker.
 
+In order to use Heroku Redis, Heroku need you to `verify your account` by `entering a credit card` as mentioned [here](https://devcenter.heroku.com/articles/account-verification#how-to-verify-your-heroku-account).
+Don't panic, **you'll not be debited**.
+We'll `remove your credit card` from your Heroku account `together at the end of this exercise`.
+
 ```bash
 heroku addons:create heroku-redis:hobby-dev
 ```
@@ -239,14 +243,53 @@ By default, Heroku only starts a [dyno](https://www.heroku.com/dynos) for the `w
 heroku ps:scale worker=1 web=1
 ```
 
-You can check that this has been activated on your Heroku dashboard for your app. You should see something along those lines:
+You can check that this has been activated on your [Heroku dashboard](https://dashboard.heroku.com/apps) on `selecting your app`. You should see something along those lines:
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714714/heroku_celery_nr43t1.png)
 
-Let's observe our application in the wild. Launch the following command to observe production logs:
+Let's observe our application in the wild.
+
+```bash
+heroku open
+```
+
+Then launch the following command to observe production logs:
 
 ```bash
 heroku logs --tail
 ```
 
-Then `heroku open` and go to `/products`. Observe your log. Can you see the task getting enqueued and the result being process? Awesome job :clap: !
+And go to `/products`. Observe your log. Can you see the task getting enqueued and the result being process? Awesome job :clap: !
+
+## Remove your credit card from Heroku
+
+Now it's time to `remove your credit card` from your Heroku account!
+
+Display your applications in order to `remove the latest app` (**which use 2 dynos**):
+
+```bash
+heroku apps  # Display created apps
+# === <your_mail> Apps
+# <app_name_1> (eu)
+# <app_name_2> (eu)
+# <app_name_3> (eu)
+# <app_name_4> (eu)
+# <app_name_5> (eu)
+```
+
+Once you recognize the `latest`, use his name to `remove it`:
+```bash
+heroku apps:destroy <latest_app_name>
+# !    WARNING: This will delete <latest_app_name> including all add-ons.
+# !    To proceed, type <latest_app_name> or re-run this command with
+# !    --confirm <latest_app_name>
+
+<latest_app_name>  # Type <latest_app_name> and press <Enter>
+# Destroying <latest_app_name> (including all add-ons)... done
+```
+
+If you don't remember the name of your latest app, go on your [Heroku dashboard](https://dashboard.heroku.com/apps) and click on each app to find `the app with 2 dyno` (with a `celery worker`).
+
+Or you can simply `remove all your apps`.
+
+Just go [here](https://dashboard.heroku.com/account/billing) and click on the `Remove credit card` red button.
