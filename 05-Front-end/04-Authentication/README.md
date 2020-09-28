@@ -76,7 +76,7 @@ We want to protect the following three APIs routes behind a user auth (as a twee
 ## OAuth with a sample code
 
 ```bash
-pipenv install “requests-oauthlib<1.2.0”
+pipenv install "requests-oauthlib<1.2.0"
 pipenv install flask-oauthlib
 ```
 
