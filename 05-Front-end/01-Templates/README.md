@@ -22,9 +22,12 @@ def hello():
     return "Hello World!"
 ```
 
-Instead of returning a plain text sentence, we want to actually build a nice html pages.
+Instead of returning a plain text sentence, we want to actually build a nice HTML page.
 
-We want you to build two pages: a home page with a grid of products (`/`), and a dynamic "show" page with a given product (`/:id`). When a user browses the home page, it should be able to easily go to a "show" page with a click on a link
+We want you to build two pages:
+- a `home` page with a grid of products (`/`)
+- and a dynamic `detail` page with a given product (`/:id`)
+When a user browses the home page, it should be able to easily go to a "show" page by clicking on a link.
 
 First take some time to read the [Flask Templates](http://flask.pocoo.org/docs/1.0/tutorial/templates/) documentation. This is part of the `flask` package. Take also some time to read more about [Jinja](http://jinja.pocoo.org/docs/2.10/templates/), the templating language used by Flask.
 
@@ -61,7 +64,7 @@ Let's start with the [Bootstrap template](https://getbootstrap.com/docs/4.1/gett
 In the controller (`wsgi.py`), you can instantiate:
 
 ```python
-from flask import Flask, render_template
+from flask import Flask, abort, request, render_template
 
 # [...]
 
@@ -148,6 +151,8 @@ touch templates/product.html
 Let's create the Product page with the `product` variable passed in the `render_template` call:
 
 ```html
+<!-- templates/product.html -->
+
 {% extends 'base.html' %}
 
 {% block content %}
