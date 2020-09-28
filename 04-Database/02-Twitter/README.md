@@ -67,6 +67,16 @@ DATABASE_URL="postgresql://postgres:<password_if_necessary>@localhost/twitter_ap
 # DATABASE_URL="postgresql://localhost/twitter_api_flask"
 ```
 
+If you got a `sqlalchemy.exc.OperationalError` verify your `DATABASE_URL`. Your password shouldn't contains `<`, `>` symbols.
+
+```bash
+# Valid example
+DATABASE_URL="postgresql://postgres:root@localhost/twitter_api_flask"
+
+# Invalid example
+DATABASE_URL="postgresql://postgres:<root>@localhost/twitter_api_flask"
+```
+
 We now need to create a config object to pass to the Flask application. This will link the env variables to the actual Flask / SQLAlchemy configuration:
 
 ```bash

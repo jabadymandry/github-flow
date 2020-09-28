@@ -170,6 +170,16 @@ In development, we will use this database url:
 DATABASE_URL="postgresql://postgres:<password_if_necessary>@localhost/flask_db"
 ```
 
+If you got a `sqlalchemy.exc.OperationalError` verify your `DATABASE_URL`. Your password shouldn't contains `<`, `>` symbols.
+
+```bash
+# Valid example
+DATABASE_URL="postgresql://postgres:root@localhost/flask_db"
+
+# Invalid example
+DATABASE_URL="postgresql://postgres:<root>@localhost/flask_db"
+```
+
 It means that we are using the PostgreSQL server we installed earlier and the `flask_db` database. Database that we actually need to create!
 
 For the first command, use your `postgreSQL version number` depending on installer you choosed (usually `10` on Le Wagon computers, `12` for a fresh install).

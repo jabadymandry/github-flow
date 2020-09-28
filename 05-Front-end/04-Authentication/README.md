@@ -32,6 +32,16 @@ winpty psql -U postgres -c "CREATE DATABASE twitter_api_flask"
 pipenv run python manage.py db upgrade
 ```
 
+If you got a `sqlalchemy.exc.OperationalError` verify your `DATABASE_URL`. Your password shouldn't contains `<`, `>` symbols.
+
+```bash
+# Valid example
+DATABASE_URL="postgresql://postgres:root@localhost/twitter_api_flask_authentication"
+
+# Invalid example
+DATABASE_URL="postgresql://postgres:<root>@localhost/twitter_api_flask_authentication"
+```
+
 All the API endpoints are available for anyone to call. Nothing is protected. Still, we need to apply some basic security rules like:
 
 - A user must be "logged in" to the API to create a Tweet
