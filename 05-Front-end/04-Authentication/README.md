@@ -31,12 +31,11 @@ touch .env
 
 ```bash
 # .env
-DATABASE_URL="postgresql://postgres:<password_if_necessary>@localhost/twitter_api_flask"
+DATABASE_URL="postgresql://postgres:<password_if_necessary>@localhost/twitter_api_flask_authentication"
 ```
 
 ```bash
-winpty psql -U postgres -c "DROP DATABASE twitter_api_flask"
-winpty psql -U postgres -c "CREATE DATABASE twitter_api_flask"
+winpty psql -U postgres -c "CREATE DATABASE twitter_api_flask_authentication"
 
 pipenv run python manage.py db upgrade
 ```
