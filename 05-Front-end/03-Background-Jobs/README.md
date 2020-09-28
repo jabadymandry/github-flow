@@ -168,13 +168,14 @@ That's it! You now know how to create function to be run by Celery as tasks, and
 
 # [...]
 
-@app.route('/products')
-def products():
+@app.route('/products', methods=['GET'])
+def get_many_product():
     from tasks import very_slow_add
     very_slow_add.delay(1, 2) # This pushes a task to Celery and does not block.
 
-    products = db.session.query(Product).all()
-    return products_schema.jsonify(products)
+    products = db.session.query(Product).all() # SQLAlchemy request => 'SELECT * FROM products'
+    return many_product_schema.jsonify(products), 200
+
 # [...]
 ```
 
