@@ -191,7 +191,7 @@ pipenv run nosetests -s
 <details><summary markdown='span'>View solution
 </summary>
 
-Just add a third element to the `PRODUCTS` array!
+Just add a third element to the `PRODUCTS` dict!
 ```python
 PRODUCTS = {
     1: { 'id': 1, 'name': 'Skello' },
