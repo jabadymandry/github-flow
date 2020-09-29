@@ -185,7 +185,7 @@ It means that we are using the PostgreSQL server we installed earlier and the `f
 For the first command, use your `postgreSQL version number` depending on installer you choosed (usually `10` on Le Wagon computers, `12` for a fresh install).
 
 ```bash
-echo 'PATH="/c/Program Files/PostgreSQL/<YOUR_POSTGRESQL_VERSION/bin":$PATH' >> ~/.profile
+echo 'PATH="/c/Program Files/PostgreSQL/<YOUR_POSTGRESQL_VERSION>/bin":$PATH' >> ~/.profile
 winpty psql -U postgres -c "CREATE DATABASE flask_db"
 ```
 
