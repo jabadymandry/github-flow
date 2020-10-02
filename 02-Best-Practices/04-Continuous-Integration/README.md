@@ -49,7 +49,7 @@ subl .travis.yml
 # .travis.yml
 
 language: python
-python: 3.7
+python: 3.8
 dist: xenial
 install:
   - pip install pipenv

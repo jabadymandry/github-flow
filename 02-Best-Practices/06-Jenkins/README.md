@@ -19,7 +19,7 @@ cd ~/code/<user.github_nickname>
 mkdir morse
 cd morse
 
-pipenv --python 3.7
+pipenv --python 3.8
 pipenv install nose pylint --dev
 ```
 
@@ -222,7 +222,7 @@ Open this file in Sublime Text and copy-paste the following configuration:
 pipeline {
     agent {
         docker {
-            image 'python:3.7'
+            image 'python:3.8'
         }
     }
     environment {

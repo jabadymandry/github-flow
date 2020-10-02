@@ -75,7 +75,7 @@ Now that we have a better idea of the object we want to build, we can start writ
 ```bash
 cd ~/code/<user.github_nickname>
 mkdir longest-word && cd $_
-pipenv --python 3.7
+pipenv --python 3.8
 pipenv install nose pylint --dev
 pipenv install --pre --dev astroid # Fix for https://github.com/PyCQA/pylint/issues/2241
 
@@ -86,7 +86,7 @@ touch tests/test_game.py
 subl .
 ```
 
-Let's set up our test class, inheriting from [`unittest.TestCase`](https://docs.python.org/3.7/library/unittest.html#basic-example)
+Let's set up our test class, inheriting from [`unittest.TestCase`](https://docs.python.org/3.8/library/unittest.html#basic-example)
 
 ```python
 # tests/test_game.py

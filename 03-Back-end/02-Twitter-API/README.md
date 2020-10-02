@@ -11,7 +11,7 @@ Let's start a new Flask project:
 ```bash
 cd ~/code/<user.github_nickname>
 mkdir twitter-api && cd twitter-api
-pipenv --python 3.7
+pipenv --python 3.8
 pipenv install flask
 touch wsgi.py
 ```

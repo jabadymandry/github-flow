@@ -6,14 +6,14 @@ If you were issued a physical Laptop from Le Wagon, here is what should already 
 
 - Google Chrome
 - [**Sublime Text 3**](https://www.sublimetext.com/) (Unlicensed but unlimited usage) with [Package Control](https://packagecontrol.io/) installed.
-- [Python 3.7](https://www.python.org/downloads/) & [`pip install pipenv`](https://pipenv.pypa.io/en/latest/)
+- [Python 3.8](https://www.python.org/downloads/) & [`pip install pipenv`](https://pipenv.pypa.io/en/latest/)
 - `git` with [**Git Bash**](https://git-scm.com/downloads) which will be your main command line tool this week.
 
 ## AWS WorkSpace
 
 If you have been issued with a AWS Workspace invitation (and not a physical laptop), then there is some additional work you need to do:
 
-- Download and run [Python 3.7.7 Installer](https://www.python.org/ftp/python/3.7.7/python-3.7.7-amd64.exe). Make sure that you tick the option "Add Python 3.y to PATH" at the bottom of
+- Download and run the latest Python Installer. Actually it's the [Python 3.8.6rc1 Installer](https://www.python.org/ftp/python/3.8.6/python-3.8.6rc1-amd64.exe). If it changes, you will find the latest Python Installer [here](https://www.python.org/ftp/python/). Make sure that you tick the option "Add Python 3.y to PATH" at the bottom of
 - Open `Git Bash` and run `pip install pipenv`
 - Open Sublime Text, type `Ctrl` + `Shift` + `P` to open Command Palette, type `Install Package Control` and then `Enter`
 

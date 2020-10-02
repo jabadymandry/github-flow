@@ -412,7 +412,7 @@ touch .travis.yml
 # .travis.yml
 
 language: python
-python: 3.7
+python: 3.8
 cache: pip
 dist: xenial
 addons:
