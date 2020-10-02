@@ -21,7 +21,7 @@ cd ~/code/<user.github_nickname>/longest-word
 
 git status # is that clean?
 git checkout master
-git pull upstream master
+git pull origin master
 git branch -d dictionary-api
 git checkout -b http-server
 ```
@@ -38,6 +38,8 @@ Open the `wsgi.py` file and copy paste the following code:
 
 ```python
 # wsgi.py
+# pylint: disable=missing-docstring
+
 from flask import Flask
 app = Flask(__name__)
 
@@ -67,6 +69,8 @@ We just created a CSS stylesheet and the HTML template for the Home page. Let's 
 
 ```python
 # wsgi.py
+# pylint: disable=missing-docstring
+
 from flask import Flask, render_template
 from game import Game
 
@@ -79,6 +83,8 @@ def home():
 ```
 
 In the code above, we are initializing a new `Game` instance to generate a grid. We pass this grid as a local variable to the `home.html` template, so that we can use it in the view.
+Since our `Game` logic only take care of uppercase letters, we decided to force the `<input name="word">` content to uppercase using some JavaScript.
+Let's add this code in `templates/home.html`:
 
 ```html
 <!-- templates/home.html -->
@@ -98,14 +104,14 @@ In the code above, we are initializing a new `Game` instance to generate a grid.
     </div>
     <form action="/check" id="form" method="post">
       <input type="hidden" name="grid" value="{{ ''.join(grid) }}">
-      <input type="text" name="word">
+      <input type="text" name="word" onkeyup="this.value = this.value.toUpperCase();">
       <button>Check!</button>
     </form>
   </body>
 </html>
 ```
 
-We give you also some CSS:
+We give you also some CSS to add in `static/style.css`:
 
 ```css
 /* static/style.css */
@@ -139,9 +145,12 @@ body {
 Phew! Now let's try this, head over to your browser and reload the page. Can you see the grid with a form? Awesome!
 
 If you try to play, you will get an error. It's because we have not implemented the `/check` endpoint yet (the one where the form gets submitted to).
+Let's do it :
 
 ```python
 # wsgi.py
+# pylint: disable=missing-docstring
+
 from flask import Flask, render_template, request
 
 # [...]
@@ -158,6 +167,10 @@ def check():
 The idea is that we get the grid (as a hidden field) and the word (the one you typed in the input) from the previous request, then we build a `Game` instance and check if the word is valid. We feed this information back to the `check.html` view to be used to display the results.
 
 💡 We need to actually pass the grid in the `POST` request as HTTP is **stateless**.
+
+```bash
+touch templates/check.html
+```
 
 ```html
 <!-- templates/check.html -->
@@ -220,7 +233,7 @@ We can now prepare our app to run on Heroku. There is just one little missing pi
 ```bash
 git status # is it clean?
 git checkout master
-git pull upstream master
+git pull origin master
 
 # Let's work on `master` for this specific case, not in a branch.
 touch Procfile
@@ -310,7 +323,8 @@ git push origin yellow-letter
 
 Go to github.com, create a Pull Request and wait for Travis to turn it green.
 
-While Travis is working, open another Chrome tab and go the `Activity` tab (the 5th one) of your Heroku application to visualize your acitivty feed. Leave this tab open.
+While Travis is working, open another Chrome tab and go back to [dashboard.heroku.com](https://dashboard.heroku.com), then select your `longest-word` project.
+Look at the `Activity` tab (the 5th one) of your Heroku application to visualize your acitivty feed. Leave this tab open.
 
 Come back to the Pull Request, and as soon as it is green, merge it to `master`. Go back to the Heroku tab, and wait ~1 minute (in GitHub you can have a look at the `Commits` page and see that the latest merge commit is being tested by Travis, thanks to the little orange dot).
 
@@ -326,7 +340,7 @@ This kind of development with small feature branches which are automatically dep
 
 If you are done with all the exercises of the day, go back to the optional sudoku from yesterday if you did not finish it (or exercises before).
 
-If this is done as well, have a look at the [Flask documentation](http://flask.pocoo.org/). We will cover Flask in tomorrow's lecture, in the meantime, you can try to implement a feature in the Longest Word Game: a global **score**! The idea is that every time a user finds a valid word, you increments points (1 point per letter). As HTTP is stateless, you need to use [this Flask extension](https://pythonhosted.org/Flask-Session/) to handle the concept of **session** (with `SESSION_TYPE='filesystem'`).
+If this is done as well, have a look at the [Flask documentation](http://flask.pocoo.org/). We will cover Flask in tomorrow's lecture, in the meantime, you can try to implement a feature in the Longest Word Game: a global **score**! The idea is that every time a user finds a valid word, you increments points (1 point per letter). As HTTP is stateless, you need to use the Flask extension [Flask-Session](https://flask-session.readthedocs.io/en/latest/) to handle the concept of **session** (with `SESSION_TYPE='filesystem'`).
 
 ## I'm done!
 

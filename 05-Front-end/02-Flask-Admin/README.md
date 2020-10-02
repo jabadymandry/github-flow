@@ -54,7 +54,7 @@ admin.add_view(ModelView(Product, db.session))
 
 Reload the [`localhost:5000/admin`](http://localhost:5000/admin) page. Isn't it lovely?
 
-To be able to use all the CRUD features, you need to make sure that your app has a [**secret**](flask.pocoo.org/docs/1.0/quickstart/?highlight=secret#sessions). To do so, open the `config.py` and add another line to your `Config` object:
+To be able to use all the CRUD features, you need to make sure that your app has a [**secret**](https://flask.pocoo.org/docs/1.0/quickstart/?highlight=secret#sessions). To do so, open the `config.py` and add another line to your `Config` object:
 
 ```python
 SECRET_KEY = os.environ['SECRET_KEY']

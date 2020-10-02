@@ -9,4 +9,4 @@ pipenv --python 3.8
 pipenv install django
 ```
 
-Then head over to the [Message Board tutorial](https://djangoforbeginners.com/message-board/) to implement a basic blog!
+Then head over to the [Django official tutorial](https://docs.djangoproject.com/en/3.1/intro/tutorial01/) to implement a Basic Poll application!

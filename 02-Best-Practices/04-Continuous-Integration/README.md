@@ -1,6 +1,6 @@
 # Continuous Integration
 
-Having tests on a repository gives you a tremendous advantage: you can set up [**Continuous Integration**](https://en.wikipedia.org/wiki/Continuous_integration). The _Best Practises_ section of this Wikipedia article is worth a read.
+Having tests on a repository gives you a tremendous advantage: you can set up [**Continuous Integration**](https://en.wikipedia.org/wiki/Continuous_integration). The _Best Practices_ section of this Wikipedia article is worth a read.
 
 The goal of this exercise is to link our version control software with a build automation tool. The idea is that you want the build automation to run every time a commit reaches the version control, in any branch, a build is triggered to give feedback to the developers as soon as possible if this commit is _green_ or _red_ (meaning the tests are passing / the build can complete).
 
@@ -154,7 +154,7 @@ pipenv run nosetests tests/test_game.py:TestGame.test_unknown_word_is_invalid
 We can implement a private `__check_dictionary` method to run an API call.
 
 ```python
-# game.rb
+# game.py
 # [...]
 import requests
 
@@ -166,10 +166,12 @@ class Game:
 
         return self.__check_dictionary(word)
 
-    def __check_dictionary(self, word):
-        r = requests.get(f"https://wagon-dictionary.herokuapp.com/{word}")
-        response = r.json()
-        return response['found']
+
+    @staticmethod
+    def __check_dictionary(word):
+        response = requests.get(f"https://wagon-dictionary.herokuapp.com/{word}")
+        json_response = response.json()
+        return json_response['found']
 ```
 
 </details>

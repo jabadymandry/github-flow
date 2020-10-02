@@ -2,7 +2,7 @@
 
 When building an API, sometimes the work that needs to be done in the Controller receiving an HTTP request might take a long time (think more than 1 second). That could be sending an email (SMTP is a slow protocol), updating a lot of records in the database, calling another API which might take some time to respond, etc.
 
-We will use the [Celery](http://www.celeryproject.org/) project which provides a **distributed task queue** to run these background jobs. Here's a sequence diagram of what we want to do:
+We will use the [Celery](https://docs.celeryproject.org/en/stable/getting-started/introduction.html) project which provides a **distributed task queue** to run these background jobs. Here's a sequence diagram of what we want to do:
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714606/celery_thtll5.png)
 
@@ -72,6 +72,8 @@ touch tasks.py
 
 ```python
 # tasks.py
+# pylint: disable=missing-docstring
+
 from celery import Celery
 from wsgi import app
 
@@ -96,7 +98,7 @@ celery = make_celery(app)
 We've just created the boilerplate code to run the Celery service. No background task has been defined yet. Still, we can launch the service to make sure everything is working properly:
 
 ```bash
-pipenv run celery worker -A tasks.celery --loglevel=info --pool=solo
+pipenv run celery -A tasks.celery worker --loglevel=INFO --pool=solo
 ```
 
 You should see something along those lines:
@@ -135,7 +137,7 @@ We've just implemented a `very_slow_add(a, b)` method. Let's test it!
 Relaunch the Celery worker with:
 
 ```bash
-pipenv run celery worker -A tasks.celery --loglevel=info --pool=solo
+pipenv run celery -A tasks.celery worker --loglevel=INFO --pool=solo
 ```
 
 Open another terminal window and launch a Flask Shell:
@@ -166,17 +168,19 @@ That's it! You now know how to create function to be run by Celery as tasks, and
 
 # [...]
 
-@app.route('/products')
-def products():
+@app.route('/products', methods=['GET'])
+def get_many_product():
     from tasks import very_slow_add
     very_slow_add.delay(1, 2) # This pushes a task to Celery and does not block.
 
-    products = db.session.query(Product).all()
-    return products_schema.jsonify(products)
+    products = db.session.query(Product).all() # SQLAlchemy request => 'SELECT * FROM products'
+    return many_product_schema.jsonify(products), 200
+
 # [...]
 ```
 
-Open (once again!) another terminal window and launch the Flask server:
+Exit from your previous `flask shell` typing `quit()` or `exit()` then pressing the `<ENTER>` key.
+Then launch the Flask server:
 
 ```bash
 FLASK_ENV=development pipenv run flask run
@@ -194,6 +198,10 @@ We are almost done with Celery, one last point we need to cover is **deployment*
 
 For point `1.`, we need to add an **add-on** on our Heroku app. We will use [Heroku Redis](https://elements.heroku.com/addons/heroku-redis) which is free up to 25M, enough to tinker.
 
+In order to use Heroku Redis, Heroku need you to `verify your account` by `entering a credit card` as mentioned [here](https://devcenter.heroku.com/articles/account-verification#how-to-verify-your-heroku-account).
+Don't panic, **you'll not be debited**.
+We'll `remove your credit card` from your Heroku account `together at the end of this exercise`.
+
 ```bash
 heroku addons:create heroku-redis:hobby-dev
 ```
@@ -210,10 +218,16 @@ To solve point `2.`, we need to update the `Procfile` with a **new line**:
 
 ```yaml
 # Procfile
-worker: celery -A tasks.celery worker --loglevel=info
+
+[...]
+
+worker: celery -A tasks.celery worker --loglevel=INFO
 ```
 
-The Procfile will now have 3 lines, a `web` to launch the flask app, a `release` to automatically upgrade the database at each deployment and now a `worker` one to run Celery!
+The Procfile will now have 3 lines:
+- a `web` to launch the flask app
+- a `release` to automatically upgrade the database at each deployment
+- a `worker` one to run Celery!
 
 It's now time to push our Branch to Heroku:
 
@@ -229,14 +243,53 @@ By default, Heroku only starts a [dyno](https://www.heroku.com/dynos) for the `w
 heroku ps:scale worker=1 web=1
 ```
 
-You can check that this has been activated on your Heroku dashboard for your app. You should see something along those lines:
+You can check that this has been activated on your [Heroku dashboard](https://dashboard.heroku.com/apps) on `selecting your app`. You should see something along those lines:
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714714/heroku_celery_nr43t1.png)
 
-Let's observe our application in the wild. Launch the following command to observe production logs:
+Let's observe our application in the wild.
+
+```bash
+heroku open
+```
+
+Then launch the following command to observe production logs:
 
 ```bash
 heroku logs --tail
 ```
 
-Then `heroku open` and go to `/products`. Observe your log. Can you see the task getting enqueued and the result being process? Awesome job :clap: !
+And go to `/products`. Observe your log. Can you see the task getting enqueued and the result being process? Awesome job :clap: !
+
+## Remove your credit card from Heroku
+
+Now it's time to `remove your credit card` from your Heroku account!
+
+Display your applications in order to `remove the latest app` (**which use 2 dynos**):
+
+```bash
+heroku apps  # Display created apps
+# === <your_mail> Apps
+# <app_name_1> (eu)
+# <app_name_2> (eu)
+# <app_name_3> (eu)
+# <app_name_4> (eu)
+# <app_name_5> (eu)
+```
+
+Once you recognize the `latest`, use his name to `remove it`:
+```bash
+heroku apps:destroy <latest_app_name>
+# !    WARNING: This will delete <latest_app_name> including all add-ons.
+# !    To proceed, type <latest_app_name> or re-run this command with
+# !    --confirm <latest_app_name>
+
+<latest_app_name>  # Type <latest_app_name> and press <Enter>
+# Destroying <latest_app_name> (including all add-ons)... done
+```
+
+If you don't remember the name of your latest app, go on your [Heroku dashboard](https://dashboard.heroku.com/apps) and click on each app to find `the app with 2 dyno` (with a `celery worker`).
+
+Or you can simply `remove all your apps`.
+
+Just go [here](https://dashboard.heroku.com/account/billing) and click on the `Remove credit card` red button.

@@ -4,16 +4,21 @@ The goal of this exercise is to continue the work on yesterday's exercise **Twit
 
 ## Setup
 
-If you did not have time to finish, here is a starting point:
-
+We're going to continue from yesterday correction :
 :point_right: [github.com/ssaunier/twitter-api](https://github.com/ssaunier/twitter-api)
-
-Go to this repo and **fork** it to your own account. Then **clone** it to your computer:
 
 ```bash
 cd ~/code/<user.github_nickname>
-git clone git@github.com:<user.github_nickname>/twitter-api.git
-cd twitter-api
+git clone git@github.com:ssaunier/twitter-api.git twitter-api-database
+cd twitter-api-database
+git remote rm origin
+```
+
+Go to [github.com/new](https://github.com/new) and create a _public_ repository under your _personal_ account, name it `twitter-api-database`.
+
+```bash
+git remote add origin https://github.com/<user.github_nickname>/twitter-api-database.git
+git push -u origin master
 ```
 
 Now that you have the repo, you need to create the virtualenv and install the packages:
@@ -38,7 +43,7 @@ FLASK_ENV=development pipenv run flask run
 
 ## Setting up SQLAlchemy
 
-Like in the previous exercise, we n
+Like in the previous exercise, we need to install some tools :
 
 ```bash
 pipenv install psycopg2-binary gunicorn
@@ -60,6 +65,16 @@ DATABASE_URL="postgresql://postgres:<password_if_necessary>@localhost/twitter_ap
 
 # On OSX:
 # DATABASE_URL="postgresql://localhost/twitter_api_flask"
+```
+
+If you got a `sqlalchemy.exc.OperationalError` verify your `DATABASE_URL`. Your password shouldn't contains `<`, `>` symbols.
+
+```bash
+# Valid example
+DATABASE_URL="postgresql://postgres:root@localhost/twitter_api_flask"
+
+# Invalid example
+DATABASE_URL="postgresql://postgres:<root>@localhost/twitter_api_flask"
 ```
 
 We now need to create a config object to pass to the Flask application. This will link the env variables to the actual Flask / SQLAlchemy configuration:
@@ -90,10 +105,12 @@ Open the `app/apis/tweets.py` and the `tests/test_test_views.py` and remove the 
 from app.db import tweet_repository
 ```
 
-It's official, the tests are now broken :scream: But the `flask run` is still working :muscle:. Let's continue bravely by instantiating our SQLAlchemy session we will use for all SQL queries (CRUD).
+It's official, the tests are now broken :scream: But the `flask run` is still working :muscle: !
+Let's continue bravely by instantiating our SQLAlchemy session we will use for all SQL queries (CRUD).
 
 ```python
 # app/__init__.py
+# pylint: disable=missing-docstring
 
 # [...]
 from flask_sqlalchemy import SQLAlchemy
@@ -116,6 +133,8 @@ Now it's time to **convert** our existing `Tweet` model to a proper SQLAlchemy m
 
 ```python
 # app/models.py
+# pylint: disable=missing-docstring
+
 from datetime import datetime
 
 from app import db
@@ -141,11 +160,10 @@ rm tests/test_models.py
 We need a local database for our application:
 
 ```bash
-export PATH="$PATH:/c/Program Files/PostgreSQL/10/bin"
 winpty psql -U postgres -c "CREATE DATABASE twitter_api_flask"
 ```
 
-Then we need to isolate a utility file to run the commands without polluting the main `wsgi.py`. Here how it goes:
+Then we need to isolate an utility file to run the commands without polluting the main `wsgi.py`. Here how it goes:
 
 ```bash
 touch manage.py
@@ -177,7 +195,7 @@ Now we can use Alembic (run `pipenv graph` to see where it stands)!
 pipenv run python manage.py db init
 ```
 
-This command has created a `migrations` foder, with an empty `versions` in it. Time to run the first migration with the creation of the `tweets` table from the `app/models.py`'s `Tweet` class.
+This command has created a `migrations` folder, with an empty `versions` in it. Time to run the first migration with the creation of the `tweets` table from the `app/models.py`'s `Tweet` class.
 
 ```bash
 pipenv run python manage.py db migrate -m "Create tweets table"
@@ -232,6 +250,7 @@ Look at the error message in the terminal and try to fix the code _yourself_. Th
 </summary>
 
 ```python
+# app/apis/tweets.py
 # Add this at the beginning of the file:
 from app import db
 
@@ -249,9 +268,9 @@ Let's leave only the `GET /tweets/:id` route working, not touching the ones, and
 
 ## Updating the tests
 
-Open the `tests/main/test_tweet_views.py`. Before we dive into replacing the `tweet_repository` with some `db.session` in here, let's pause and think about what we are doing.
+Open the `tests/apis/test_tweet_views.py`. Before we dive into replacing the `tweet_repository` with some `db.session` in here, let's pause and think about what we are doing.
 
-What happens if you run the followign in one of your test method?
+What happens if you run the following in one of your test method?
 
 ```python
 tweet = Tweet(text="A test tweet")
@@ -269,15 +288,16 @@ The solution is to:
 Here is how we are going to achieve this goal. First we need to create a new database locally:
 
 ```bash
-export PATH="$PATH:/c/Program Files/PostgreSQL/10/bin"
 winpty psql -U postgres -c "CREATE DATABASE twitter_api_flask_test"
 ```
 
 And then we can update our `TestTweetViews` class with:
 
 ```python
+# tests/apis/test_tweet_views.py
+
 from flask_testing import TestCase
-from app import create_app, db
+from app import create_app, db  # Don't forget to take the db import
 from app.models import Tweet
 
 class TestTweetViews(TestCase):
@@ -311,6 +331,7 @@ pipenv run nosetests
 Here is the updated code for the `TestTweetViews` test case:
 
 ```python
+    # tests/apis/test_tweet_views.py
     # [...]
 
     def test_tweet_show(self):
@@ -371,6 +392,7 @@ class TweetResource(Resource):
             api.abort(404, "Tweet {} doesn't exist".format(id))
         else:
             tweet.text = api.payload["text"]
+            db.session.commit()
             return tweet
 
     def delete(self, id):

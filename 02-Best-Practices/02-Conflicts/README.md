@@ -6,7 +6,7 @@ When using a source control software like `git`, conflicts **always** arise at s
 
 Imagine the following scenario (**Do not do anything for now, just try to understand what is going on**):
 
-1. 2 developers are working on the same git repository
+1. Two developers are working on the same git repository
 1. On Monday, at 9am, the two developers `pull` master.
 1. From the same commit (`HEAD`), they create a branch:
   1. Developer A creates the `feature-a` branch

@@ -33,6 +33,8 @@ In your `wsgi.py` file, copy paste the following boilerplate:
 
 ```python
 # wsgi.py
+# pylint: disable=missing-docstring
+
 from flask import Flask
 app = Flask(__name__)
 
@@ -107,13 +109,13 @@ heroku logs -n 1000 --tail # Check the access logs are coming up. Reload the bro
 
 Right now, our app returns some plain text. Today's goal is to build a REST API.
 
-👉 Add a `/api/v1/products` route which will return a JSON array out of the plain list of dict:
+👉 Add a `/api/v1/products` route which will return **a JSON array**:
 
 ```python
-PRODUCTS = [
-    { 'id': 1, 'name': 'Skello' },
-    { 'id': 2, 'name': 'Socialive.tv' }
-]
+PRODUCTS = {
+    1: { 'id': 1, 'name': 'Skello' },
+    2: { 'id': 2, 'name': 'Socialive.tv' },
+}
 ```
 
 :bulb: **Tip**: Have a look at [`jsonify`](http://flask.pocoo.org/docs/api/#flask.json.jsonify)
@@ -122,7 +124,21 @@ To test your code, open the browser and go to [`localhost:5000/api/v1/products`]
 
 :bulb: **Tip**: Install the [JSONView Chrome extension](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) to have a better visualisation of JSON HTTP responses.
 
-Commit and push your code to Heroku. Check the new `/api/v1/products` endpoint works in **production**.
+
+Commit and push your code to Heroku:
+```bash
+git add .
+git commit -m "Adding /api/v1/products endpoint"
+
+git push heroku master
+
+heroku ps
+
+heroku open
+heroku logs -n 1000 --tail
+```
+
+Check the new `/api/v1/products` endpoint works in **production**.
 
 ## Testing
 
@@ -175,7 +191,14 @@ pipenv run nosetests -s
 <details><summary markdown='span'>View solution
 </summary>
 
-Just add a third element to the `PRODUCTS` array!
+Just add a third element to the `PRODUCTS` dict!
+```python
+PRODUCTS = {
+    1: { 'id': 1, 'name': 'Skello' },
+    2: { 'id': 2, 'name': 'Socialive.tv'},
+    3: { 'id': 3, 'name': 'Le Wagon'},
+}
+```
 
 </details>
 
@@ -183,11 +206,13 @@ Just add a third element to the `PRODUCTS` array!
 
 Congratulations :tada: ! You wrote the first route of the RESTful API. Now it's time to implement the four other endpoints to properly implement CRUD on the `product` resource.
 
-Practise the **GitHub Flow** with four feature branches (one per `CRUD` acronym letter), and push to `heroku` after each Pull Request merge!
+Practice the **GitHub Flow** with four feature branches (one per `CRUD` acronym letter), and push to `heroku` after each Pull Request merge!
 
 ### Read
 
-First add a test for the `GET /api/v1/products/:id` route. Then implement it. This route retrieves a single `product` and serve a JSON representation of it (Status code: `200`). If the `:id` does not match any know product id then return a [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) (add a separate test case for this).
+First add a test for the `GET /api/v1/products/:id` route. Then implement it. This route retrieves a single `product` and serve a JSON representation of it (Status code: `200`). `:id` represents the dynamic part of the url asking our api. Here are some request urls examples matched by our url route: `/api/v1/products/3`, `/api/v1/products/1`, etc.
+If the `:id` does not match any known `product` id in the fake `PRODUCTS` database, then return a [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404).
+Add a separate test case for this.
 
 :bulb: **Tip**: Have a look at the [Variable Rules](http://flask.pocoo.org/docs/1.0/quickstart/#variable-rules) in the Flask documentation.
 
@@ -201,7 +226,7 @@ Add a test for the `DELETE /api/v1/products/:id` route. This route will **remove
 
 ### Create
 
-Start by adding a test for the `POST /api/v1/products` route. This route will **create** a new product in the fake `PRODUCTS` database and return the JSON representation of the newly created resource (Status code: [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201))
+Start by adding a test for the `POST /api/v1/products` route. This route will **create** a new `product` in the fake `PRODUCTS` database and return the JSON representation of the newly created resource (Status code: [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201))
 
 :bulb: **Tip** You may need to use the [`Request.get_json`](http://flask.pocoo.org/docs/1.0/api/#flask.Request.get_json) method.
 
@@ -211,34 +236,35 @@ from flask import request
 request.get_json()
 ```
 
-:bulb: **Tip** You might need to introduce a a way to generate auto-incremented ids:
+:bulb: **Tip** You might need to introduce a way to generate auto-incremented ids:
 
 ```python
-class Counter:
-    def __init__(self):
-        self.id = 3
+import itertools
 
-    def next(self):
-        self.id += 1
-        return self.id
+# [...]
 
-ID = Counter()
-print(ID.next())
+START_INDEX = len(PRODUCTS) + 1
+IDENTIFIER_GENERATOR = itertools.count(START_INDEX)
+
+# Here is how to use it :
+print(next(IDENTIFIER_GENERATOR))
 ```
 
 :bulb: **Tip** Here is a payload you can use in Postman to test this route:
 
 ```
 {
-    "name": "Workelo"
+    "name": "HistoVec"
 }
 ```
+
+Don't forget to select "Raw" and "JSON" to automatically add a `Content-Type: application/json` header. Without this header, your `request.get_json()` call will ignore the payload, as mentioned in the [`Request.get_json documentation`](http://flask.pocoo.org/docs/1.0/api/#flask.Request.get_json)
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560715014/postman-workelo_ztvqyf.png)
 
 ### Update
 
-Finally, add a test for the `PATCH /api/v1/products/:id` route which will **update** an existing product (based on its id). Return a `204` when completed, or `422` if there is a validation error (needs a separate test case, validation error could be that supplied product name is _empty_)
+Finally, add a test for the `PATCH /api/v1/products/:id` route which will **update** an existing `product` (based on its id). Return a `204` when completed, or `422` if there is a validation error (needs a separate test case, validation error could be that supplied product name is _empty_)
 
 ## (Optional) PowerShell REST API Client
 

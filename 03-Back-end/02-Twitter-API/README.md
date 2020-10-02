@@ -2,7 +2,7 @@
 
 Now that we have played a bit with Flask, it's time to start the exercises which will keep us busy for the next three days. The goal is to build a clone of the [Twitter API](https://developer.twitter.com/en/docs/api-reference-index) using Flask and different Flask plugins (like [these](https://github.com/humiaozuzu/awesome-flask)).
 
-⚠️ In this exercise, we will implement some API endpoints with the a big restriction: we don't have a relational database yet! This constraint will help you focus on the HTTP layer of the API, not on the information retrieval. To abstract the database, we will use the [data access object (DAO)](https://en.wikipedia.org/wiki/Data_access_object) pattern and tomorrow we will replace it with actual queries to the database.
+⚠️ In this exercise, we will implement some API endpoints with a big restriction: we don't have a relational database yet! This constraint will help you focus on the HTTP layer of the API, not on the information retrieval. To abstract the database, we will use the [data access object (DAO)](https://en.wikipedia.org/wiki/Data_access_object) pattern and tomorrow we will replace it with actual queries to the database.
 
 ## Getting started
 
@@ -31,6 +31,8 @@ touch app/__init__.py # And open this file in Sublime Text
 
 ```python
 # app/__init__.py
+# pylint: disable=missing-docstring
+
 from flask import Flask
 
 def create_app():
@@ -47,6 +49,7 @@ Then open the `./wsgi.py` file and import this new `create_app` to use it right 
 
 ```python
 # ./wsgi.py
+
 from app import create_app
 
 application = create_app()
@@ -77,6 +80,8 @@ touch app/main/controllers.py
 
 ```python
 # app/main/controllers.py
+# pylint: disable=missing-docstring
+
 from flask import Blueprint
 
 main = Blueprint('main', __name__)
@@ -90,6 +95,8 @@ We can now import our simple blueprint into our main application, like this:
 
 ```python
 # app/__init.py__
+# pylint: disable=missing-docstring
+
 from flask import Flask
 
 def create_app():
@@ -149,7 +156,7 @@ class TestHomeView(TestCase):
 Open the terminal and run:
 
 ```bash
-pipenv run nosetests -s
+pipenv run nosetests -s tests/main/test_home_view.py
 ```
 
 The test should be red!
@@ -174,7 +181,35 @@ git add .
 git commit -m "New flask project boilerplate"
 ```
 
-And create an app to be deployed on Heroku:
+By that time, you should already have created 5 applications (which is the free limit).
+
+So we need to `do to some cleaning`.
+First we want to get application name in order to remove it :
+
+```bash
+heroku apps  # Display created apps
+# === <your_mail> Apps
+# <app_name_1> (eu)
+# <app_name_2> (eu)
+# <app_name_3> (eu)
+# <app_name_4> (eu)
+# <app_name_5> (eu)
+```
+
+Then we can remove it :
+```bash
+heroku apps:destroy <app_name_1>
+# !    WARNING: This will delete <app_name_1> including all add-ons.
+# !    To proceed, type <app_name_1> or re-run this command with
+# !    --confirm <app_name_1>
+
+<app_name_1>  # Type <app_name_1> and press <Enter>
+# Destroying <app_name_1> (including all add-ons)... done
+```
+
+**Proceed to this operation each time needed.**
+
+We can now create an app to be deployed on Heroku:
 
 ```bash
 heroku create --region=eu
@@ -225,7 +260,7 @@ class TestTweet(TestCase):
 
 👉 Take some time to read the [26.4. `unittest`](https://docs.python.org/3/library/unittest.html) chapter.
 
-OK, the test is written, let's run the test! (it should not be green):
+OK, the test is written, let's run it! (it should not be green):
 
 ```bash
 pipenv run nosetests tests/test_models.py
@@ -309,6 +344,8 @@ Our `Tweet` class is empty and needs an [instance variable](https://docs.python.
 
 ```python
 # app/models.py
+# pylint: disable=missing-docstring
+
 class Tweet:
     def __init__(self, text):
         self.text = text
@@ -336,6 +373,8 @@ It's also missing the `id` instance variable, set to `None` on instance creation
 
 ```python
 # app/models.py
+# pylint: disable=missing-docstring
+
 from datetime import datetime
 
 class Tweet:
@@ -349,7 +388,7 @@ class Tweet:
 
 <br />
 
-✨ Congrats! you juse implemented the `Tweet` class using TDD.
+✨ Congrats! You just implemented the `Tweet` class using TDD.
 
 ### Repository
 
@@ -420,8 +459,14 @@ same TDD technique we used to implement the `Tweet` class.
 <details><summary markdown='span'>View solution
 </summary>
 
+```bash
+touch app/repositories.py
+```
+
 ```python
 # app/repositories.py
+# pylint: disable=missing-docstring
+
 class TweetRepository:
     def __init__(self):
         self.__clear()
@@ -445,6 +490,11 @@ class TweetRepository:
 💡 See how the test file is way longer than the actual implementation?
 
 </details>
+
+Let's run the test :
+```bash
+pipenv run nosetests tests/test_repositories.py
+```
 
 <br />
 
@@ -515,7 +565,12 @@ class TestTweetViews(TestCase):
 ```
 
 💡 If you run the test, it will complain that `tweet_repository` does not exist.
-This is our fake database. This is just an instance of `TweetRepository`. Create it:
+
+```bash
+pipenv run nosetests tests/apis/test_tweet_views.py
+```
+
+`tweet_repository` is our fake database. This is just an instance of `TweetRepository`. Create it:
 
 ```bash
 touch app/db.py
@@ -529,14 +584,20 @@ from .repositories import TweetRepository
 tweet_repository = TweetRepository()
 ```
 
-Now, let's make the test pass! We need to create a new API namespace:
+Since we are using Flask-RESTx `namespaces`, let's remove our `Blueprint`:
+```bash
+rm -rf app/main
+```
 
+Now, let's make the test pass! We need to create a new API namespace:
 ```bash
 touch app/apis/tweets.py
 ```
 
 ```python
 # app/apis/tweets.py
+# pylint: disable=missing-docstring
+
 from flask_restx import Namespace, Resource, fields
 from app.db import tweet_repository
 
@@ -553,10 +614,12 @@ class TweetResource(Resource):
             return tweet
 ```
 
-Connect this right away to the main Flask app:
+Connect this right away to the main Flask app, and don't forget to clean `Blueprint`. Here is the file content now:
 
 ```python
 # app/__init__.py
+# pylint: disable=missing-docstring
+
 from flask import Flask
 from flask_restx import Api
 
@@ -599,6 +662,8 @@ We will use the Flask-RESTX built-in serialization:
 
 ```python
 # app/apis/tweets.py
+# pylint: disable=missing-docstring
+
 from flask_restx import Namespace, Resource, fields
 from app.db import tweet_repository
 
@@ -629,7 +694,7 @@ class TweetResource(Resource):
 
 ### Running the server
 
-Let's leave the tests for now (running `pipenv run nosetests` should yield 7 passing tests) and launch the server:
+Let's leave the tests for now (running `pipenv run nosetests` should yield 6 passing tests) and launch the server:
 
 ```bash
 FLASK_ENV=development pipenv run flask run
@@ -653,14 +718,17 @@ To solve this problem, we need to simulate a database with pre-existing tweets a
 
 ```python
 # app/__init__.py
+# pylint: disable=missing-docstring
+
 from flask import Flask # This line already exists
+from flask_restx import Api # This line already exists
 
 from .db import tweet_repository
 from .models import Tweet
 tweet_repository.add(Tweet("a first tweet"))
 tweet_repository.add(Tweet("a second tweet"))
 
-def create_app():
+def create_app():  # This line already exists
     # [...]
 ```
 

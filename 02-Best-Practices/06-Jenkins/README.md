@@ -249,7 +249,7 @@ Compare this to the `.travis.yml` you had in a previous exercise. What is simila
 Before we commit and push, we need to link GitHub and Jenkins by configuring a webhook on the repository. Go to the following address:
 
 ```
-https://github.com/YOUR_GITHUB_NICKNAME/morse/settings/hooks
+https://github.com/<user.github_nickname>/morse/settings/hooks
 ```
 
 And click on the top-right button "Add webhook".
@@ -268,6 +268,7 @@ It should look like this:
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714654/github-add-webhook_mtor6z.png)
 
+Click on the bottom-left button "Add webhook".
 That's it! GitHub will report Jenkins everytime you push or open a Pull Request.
 
 So let's push!
@@ -302,6 +303,8 @@ Stuck? Ask your buddy! Still stuck? Ask a TA!
 </summary>
 
 ```python
+# pylint: disable=missing-docstring
+
 ALPHABET = {
     '.-':   'A',
     '-...': 'B',
@@ -404,7 +407,7 @@ git push origin multi-word-decode
 Go back to Jenkins, up in your project (don't stay in the `master` branch). The URL should look something like this:
 
 ```
-http://jenkins.lewagon.com/jenkins/me/my-views/view/all/job/YOUR_GITHUB_NICKNAME-morse/
+http://jenkins.lewagon.com/jenkins/me/my-views/view/all/job/<user.github_nickname>-morse/
 ```
 
 You now have 2 branches! And you can see that the `multi-word-decode` branch is actually red.
@@ -415,28 +418,38 @@ You now have 2 branches! And you can see that the `multi-word-decode` branch is 
 </summary>
 
 ```python
-    def decode(self, message):
+    # [...]
+
+    def decode(message):
         if message == "":
             return ""
 
         words = message.split(" / ")
-        decoded_words = [self.decode_word(word) for word in words]
+        decoded_words = [decode_word(word) for word in words]
         return ' '.join(decoded_words)
 
-    def decode_word(self, word):
+    def decode_word(word):
         symbols = word.split(" ")
-        letters = [self.ALPHABET[s] for s in symbols]
+        letters = [ALPHABET[s] for s in symbols]
         return ''.join(letters)
 ```
 
 </details>
 
-Commit your work and push your branch. Go on GitHub and click on the "New pull request" button. You want to merge the `multi-word-decode` (`HEAD`) into `master` (base branch). Create the Pull Request and enjoy the integration between Jenkins and GitHub, thanks to the webhook **and** you personal access token.
+Commit your work and push your branch :
 
-Go ahead and merge the branch. Go back to Jenkins, you should see `master` build one more time (as merging a branch on GitHub actually creates on more commit, a merge commit). You can visualize it here:
+```bash
+git add morse.py
+git commit -m "Implement multi-word decoding. All green!"
+git push origin multi-word-decode
+```
+
+You want to merge the `multi-word-decode` (`HEAD`) into `master` (base branch). Go on GitHub and click on the "New pull request" button. Create the Pull Request and enjoy the integration between Jenkins and GitHub, thanks to the webhook **and** you personal access token.
+
+Go ahead and merge the branch. Go back to Jenkins, you should see `master` build one more time (as merging a branch on GitHub actually creates one more commit, a merge commit). You can visualize it here:
 
 ```
-https://github.com/YOUR_GITHUB_NICKNAME/morse/network
+https://github.com/<user.github_nickname>/morse/network
 ```
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714675/github-morse-network_jesjkb.png)
