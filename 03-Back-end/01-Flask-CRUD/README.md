@@ -174,7 +174,7 @@ class TestViews(TestCase):
     def test_products_json(self):
         response = self.client.get("/api/v1/products")
         products = response.json
-        self.assertIsInstance(products, list)
+        self.assertIsInstance(products, dict)
         self.assertGreater(len(products), 2) # 2 is not a mistake here.
 ```
 
