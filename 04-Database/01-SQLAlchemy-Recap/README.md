@@ -416,7 +416,7 @@ def get_many_product():
     return many_product_schema.jsonify(products), 200
 ```
 
-And that should be it! Launch your server and head to `localhost:5000/products`. You should see the two products in the database as JSON!
+And that should be it! Launch your server and head to `localhost:5000/api/v1/products`. You should see the two products in the database as JSON!
 
 ## Heroku deployment
 
