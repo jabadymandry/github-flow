@@ -99,7 +99,7 @@ rm app/repositories.py
 rm tests/test_repositories.py
 ```
 
-Open the `app/apis/tweets.py` and the `tests/test_test_views.py` and remove the following line in both files:
+Open the `app/apis/tweets.py` and the `tests/apis/test_tweet_views.py` and remove the following line in both files:
 
 ```python
 from app.db import tweet_repository
