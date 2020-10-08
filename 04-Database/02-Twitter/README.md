@@ -17,7 +17,7 @@ git remote rm origin
 Go to [github.com/new](https://github.com/new) and create a _public_ repository under your _personal_ account, name it `twitter-api-database`.
 
 ```bash
-git remote add origin https://github.com/<user.github_nickname>/twitter-api-database.git
+git remote add origin git@github.com:<user.github_nickname>/twitter-api-database.git
 git push -u origin master
 ```
 
@@ -99,7 +99,7 @@ rm app/repositories.py
 rm tests/test_repositories.py
 ```
 
-Open the `app/apis/tweets.py` and the `tests/test_test_views.py` and remove the following line in both files:
+Open the `app/apis/tweets.py` and the `tests/apis/test_tweet_views.py` and remove the following line in both files:
 
 ```python
 from app.db import tweet_repository

@@ -60,7 +60,44 @@ All the API endpoints are available for anyone to call. Nothing is protected. St
 
 You should have a `User` model. If you don't, add one.
 
-Add a new column to your model: `api_key`. The goal is to store a long, unique and random token for a user at creation. You can achieve this with a [`before_insert` event](https://stackoverflow.com/a/12513904/197944).
+<details><summary markdown='span'>View solution
+</summary>
+
+```python
+# models.py
+# pylint: disable=missing-docstring
+
+from datetime import datetime
+from sqlalchemy.schema import ForeignKey
+
+from app import db
+
+class Tweet(db.Model):
+    __tablename__ = "tweets"
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String(280))
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, ForeignKey('users.id'))
+    user = db.relationship("User", back_populates="tweets")
+
+    def __repr__(self):
+        return f"<Tweet #{self.id}>"
+
+class User(db.Model):
+    __tablename__ = "users"
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80))
+    email = db.Column(db.String(200))
+    tweets = db.relationship('Tweet', back_populates="user")
+
+    def __repr__(self):
+        return f"<User {self.username}>"
+```
+</details>
+
+<br />
+
+Add a new column to your model: `api_key`. The goal is to store a long, unique and random token for a user at creation. You can achieve this unsing [`uuid` lib and `sqlalchemy.dialects.postgresql.UUID` on your field declaration](https://stackoverflow.com/a/49398042).
 
 Once a user has an `API key`, implement the logic to make sure that a valid user can create a tweet / only a tweet author can delete his/her tweet.
 
