@@ -60,7 +60,7 @@ All the API endpoints are available for anyone to call. Nothing is protected. St
 
 You should have a `User` model. If you don't, add one.
 
-Add a new column to your model: `api_key`. The goal is to store a long, unique and random token for a user at creation. You can achieve this with a [`before_insert` event](https://stackoverflow.com/a/12513904/197944).
+Add a new column to your model: `api_key`. The goal is to store a long, unique and random token for a user at creation. You can achieve this unsing [`uuid` lib and `sqlalchemy.dialects.postgresql.UUID` on your field declaration](https://stackoverflow.com/a/49398042).
 
 Once a user has an `API key`, implement the logic to make sure that a valid user can create a tweet / only a tweet author can delete his/her tweet.
 
