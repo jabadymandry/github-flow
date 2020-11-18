@@ -1,0 +1,161 @@
+# Install Docker Desktop
+
+Time to install **Docker** on your computer ! 🐳  
+We will use the **Community Edition** (which is free and more than enough for our training purpose 👌!)
+
+Do not forget to validate your installation.
+
+---
+
+### Pre-requisite
+Make sure you have the latest exercises locally: do you see a `05-Docker` folder in your exercises folder?
+
+✅ If yes: you can go to the next paragraph !
+
+❌ If not: that is because we made you fork Le Wagon's repository containing exercices **before** Docker exercises were added to it. So you need to re-sync with Le Wagon repository, to make sure you have the freshest version of it !
+
+* Save your potentially non saved-work from yesterday
+
+```
+git add .
+git commit -m "Save work from yesterday"
+git push origin master
+```
+
+* Add remote to point to Le Wagon's repository directly and fetch it
+
+```
+git remote add upstream https://github.com/lewagon/reboot-python.git
+git fetch upstream
+```
+
+* Checkout the folder of interest - that you do not have yet - `05-Docker`
+
+```
+git checkout upstream/master -- 05-Docker
+```
+
+You should now have the folder you were missing.
+If not, please ask a TA for help !
+
+---
+
+### ⚠️ **WINDOWS USERS ONLY** ⚠️ Install Docker on Windows
+**Docker Desktop for Windows** is the Community version of Docker for Microsoft Windows.  
+You can download Docker Desktop for Windows from Docker Hub.
+
+* Head over to 👉 [this page](https://docs.docker.com/docker-for-windows/install/) and click the "Download from Docker Hub" button.
+<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/download-docker-on-windows.png?raw=true" width="700"></p>
+
+* Then double-click `Docker Desktop Installer.exe` to run the installer
+
+* When prompted, ensure the **Enable Hyper-V Windows Features** option is selected on the Configuration page.
+
+* Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
+
+* When the installation is successful, click Close to complete the installation process.
+
+* ⚠️ Do not forget to **start** Docker Desktop !
+
+<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/docker-desktop.png?raw=true" width="400"></p>
+
+* When the whale icon in the status bar stays steady, Docker Desktop is up-and-running, and is accessible from any terminal window.
+<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/status-bar.png?raw=true" width="300"></p>
+
+---
+
+### ⚠️ **MAC USERS ONLY** ⚠️ Install Docker on MacOS
+**Docker Desktop for Mac** is the Community version of Docker for Microsoft Windows. You can download Docker Desktop for Mac from Docker Hub.
+
+* Head over to 👉 [this page](https://docs.docker.com/docker-for-mac/install/) and click the "Download from Docker Hub" button.
+<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/download-docker-on-mac.png?raw=true" width="700"></p>
+
+* Double-click Docker.dmg to open the installer, then drag the Docker icon to the Applications folder.
+
+* ⚠️ Do not forget to **start** Docker Desktop !
+
+<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/docker-desktop-mac.png?raw=true" width="400"></p>
+
+* When the whale icon in the status bar stays steady, Docker Desktop is up-and-running, and is accessible from any terminal window.
+<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/status-bar-mac.png?raw=true" width="300"></p>
+
+---
+
+### Installation validation ✅ 
+
+#### Signup on Docker Hub 💻
+Docker Hub is a hosted repository service provided by Docker for finding and sharing container images with your team. Once you create a Docker ID (a user), you will be able to pull and push images to the Hub.
+
+Create a personal account 👉  [here](https://hub.docker.com/signup).
+
+#### Login
+
+Open a terminal and type:
+```bash
+docker login
+```
+
+You will be prompted for your username and password:
+<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/docker-login.png?raw=true" width="700"></p>
+
+When successful, your terminal should tell you "Login Succeeded" 🙌! 
+
+#### Hello-World !
+
+Let's validate our Docker installation by running our first container: `hello-world`. To do so, run the following in your terminal:
+
+```bash
+docker run hello-world
+```
+
+Since you do not have any docker images on your host (as you just installed docker), 
+
+* it will first pull the `hello-world` image from the Hub
+* then run a container from this image (this one _only_ prints a message)
+
+You should end up with something like this:
+<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/hello-world.png?raw=true" width="700"></p>
+
+
+##### To see the containers you have running on your hosts 👀:
+
+```
+docker ps
+```
+
+You don't see any 🤔 ? That's normal !   
+Your `hello-world` container is not running anymore: it exited as soon as it was done. Its job was simply to print a message.
+
+##### To view all containers (even non-running ones), run:
+```
+docker ps -a
+```
+
+You should see a container here. What is its name ? Which image was used to run it ? What is its state ?
+
+##### To view images on your host:
+```
+docker images
+```
+
+You should see your `hello-world` image, freshly pulled. You also have access to other details such as 
+
+* the image ID, 
+* the image tag (used to convey important information about the image. By default, the tag is "latest". You can have a look at [this list of tags](https://hub.docker.com/_/python): do you understand what they are here for ?),
+* the image size
+
+---
+
+## I'm done! 🎉
+
+That's it for this installer, you are good to go to the next challenge where we will deep dive into Docker commands !
+
+But before you jump to it, let's mark your progress with the following:
+
+```bash
+cd ~/code/<user.github_nickname>/reboot-python
+cd 05-Docker/00-Install-Docker-Desktop
+touch DONE.md
+git add DONE.md && git commit -m "05-Docker/00-Install-Docker-Desktop done"
+git push origin master
+```
