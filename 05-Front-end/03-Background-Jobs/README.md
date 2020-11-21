@@ -75,7 +75,7 @@ touch tasks.py
 # pylint: disable=missing-docstring
 
 from celery import Celery
-from wsgi import app
+from wsgi import application
 
 def make_celery(app):
     celery = Celery(
@@ -92,7 +92,7 @@ def make_celery(app):
     celery.Task = ContextTask
     return celery
 
-celery = make_celery(app)
+celery = make_celery(application)
 ```
 
 We've just created the boilerplate code to run the Celery service. No background task has been defined yet. Still, we can launch the service to make sure everything is working properly:
@@ -159,16 +159,18 @@ The `response` should take exactly 3 seconds to return. Look at the logs from th
 ```bash
 [... INFO/MainProcess] Received task: tasks.very_slow_add[7da941c2-...]
 [... INFO/ForkPoolWorker-2] Task tasks.very_slow_add[7da941c2-...] succeeded in 3.00225233499998s: 12
-````
+```
 
 That's it! You now know how to create function to be run by Celery as tasks, and enqueue them! You can add them to the `wsgi.py` in the method receiving the HTTP requests for your API. They won't block the execution of the thread and keep your API endpoints fast:
 
 ```python
 # wsgi.py
 
-# [...]
+from app import create_app
 
-@app.route('/products', methods=['GET'])
+application = create_app()
+
+@application.route('/products', methods=['GET'])
 def get_many_product():
     from tasks import very_slow_add
     very_slow_add.delay(1, 2) # This pushes a task to Celery and does not block.
@@ -225,6 +227,7 @@ worker: celery -A tasks.celery worker --loglevel=INFO
 ```
 
 The Procfile will now have 3 lines:
+
 - a `web` to launch the flask app
 - a `release` to automatically upgrade the database at each deployment
 - a `worker` one to run Celery!
@@ -278,6 +281,7 @@ heroku apps  # Display created apps
 ```
 
 Once you recognize the `latest`, use his name to `remove it`:
+
 ```bash
 heroku apps:destroy <latest_app_name>
 # !    WARNING: This will delete <latest_app_name> including all add-ons.
