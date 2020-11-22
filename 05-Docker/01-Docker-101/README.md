@@ -60,19 +60,19 @@ Now, you should see an output in your terminal: it looks like your database is i
 <details>
 	<summary markdown='span'>View solution</summary>
 
-	Your terminal output should look like this:
+Your terminal output should look like this:
 
-	```bash
-	...
-	PostgreSQL init process complete; ready for start up.
+```bash
+...
+PostgreSQL init process complete; ready for start up.
 
-	2020-11-19 19:00:28.075 UTC [1] LOG:  starting PostgreSQL 13.1 (Debian 13.1-1.pgdg100+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 8.3.0-6) 8.3.0, 64-bit
-	2020-11-19 19:00:28.076 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
-	2020-11-19 19:00:28.076 UTC [1] LOG:  listening on IPv6 address "::", port 5432
-	2020-11-19 19:00:28.079 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-	2020-11-19 19:00:28.084 UTC [56] LOG:  database system was shut down at 2020-11-19 19:00:27 UTC
-	2020-11-19 19:00:28.091 UTC [1] LOG:  database system is ready to accept connections
-	```	
+2020-11-19 19:00:28.075 UTC [1] LOG:  starting PostgreSQL 13.1 (Debian 13.1-1.pgdg100+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 8.3.0-6) 8.3.0, 64-bit
+2020-11-19 19:00:28.076 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2020-11-19 19:00:28.076 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2020-11-19 19:00:28.079 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2020-11-19 19:00:28.084 UTC [56] LOG:  database system was shut down at 2020-11-19 19:00:27 UTC
+2020-11-19 19:00:28.091 UTC [1] LOG:  database system is ready to accept connections
+```	
 
 </details>
 

@@ -7,39 +7,6 @@ Do not forget to validate your installation.
 
 ---
 
-### Pre-requisite
-Make sure you have the latest exercises locally: do you see a `05-Docker` folder in your exercises folder?
-
-✅ If yes: you can go to the next paragraph !
-
-❌ If not: that is because we made you fork Le Wagon's repository containing exercices **before** Docker exercises were added to it. So you need to re-sync with Le Wagon repository, to make sure you have the freshest version of it !
-
-* Save your potentially non saved-work from yesterday
-
-```
-git add .
-git commit -m "Save work from yesterday"
-git push origin master
-```
-
-* Add remote to point to Le Wagon's repository directly and fetch it
-
-```
-git remote add upstream https://github.com/lewagon/reboot-python.git
-git fetch upstream
-```
-
-* Checkout the folder of interest - that you do not have yet - `05-Docker`
-
-```
-git checkout upstream/master -- 05-Docker
-```
-
-You should now have the folder you were missing.
-If not, please ask a TA for help !
-
----
-
 ### ⚠️ **WINDOWS USERS ONLY** ⚠️ Install Docker on Windows
 **Docker Desktop for Windows** is the Community version of Docker for Microsoft Windows.  
 You can download Docker Desktop for Windows from Docker Hub.

@@ -58,9 +58,9 @@ FLASK_ENV=development pipenv run flask run
 
 ## 2. Containerization - development mode
 
-When containerizing our app, we do not use `pipenv` anymore. But we need to have our requirements specs stored in a file, such that we can easily build an image with all these requirements.
+When containerizing our app, we generally do not use `pipenv` anymore. We prefer having the requirements listed in a static file (typically named `requirements.txt`) and use `pip` directly (as we do not need a virtual environment) to install them.
 
-We will store our requirements in two files: `requirements.txt` and `requirements-dev.txt`.
+We say "generally", because with Docker you can install and build pretty much anything, so we _could_ still use it. But here, we will use the common `requirements.txt`.
 
 :point_right: Run the following commands:
 

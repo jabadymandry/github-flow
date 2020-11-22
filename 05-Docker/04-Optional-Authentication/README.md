@@ -1,5 +1,9 @@
 # Optional - Authentication
 
+For this exercise, we will **not** use Docker and will work on Authentication on our **local setup** (as we did during the previous days). Indeed, it is easier to treat this subject without the containerization complexity in a first time.
+
+---
+
 Let's go back to our Twitter API from yesterday. You can start from the following code (using the `sqlalchemy` branch):
 
 ```bash

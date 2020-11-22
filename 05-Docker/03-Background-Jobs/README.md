@@ -1,5 +1,9 @@
 # Background Jobs
 
+For this exercise, we will **not** use Docker and will work on Background Jobs on our **local setup** (as we did during the previous days). Indeed, it is easier to treat this subject without the containerization complexity in a first time.
+
+---
+
 When building an API, sometimes the work that needs to be done in the Controller receiving an HTTP request might take a long time (think more than 1 second). That could be sending an email (SMTP is a slow protocol), updating a lot of records in the database, calling another API which might take some time to respond, etc.
 
 We will use the [Celery](https://docs.celeryproject.org/en/stable/getting-started/introduction.html) project which provides a **distributed task queue** to run these background jobs. Here's a sequence diagram of what we want to do:
