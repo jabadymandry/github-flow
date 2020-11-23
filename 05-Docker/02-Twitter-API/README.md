@@ -8,7 +8,7 @@ We have already set up an web application and a database, and today we will focu
 
 ## 0. Setup
 
-We're going to continue from yesterday correction :
+We're going to continue from yesterday's correction :
 :point_right: [github.com/ssaunier/twitter-api](https://github.com/ssaunier/twitter-api)
 
 Start from the following code (using the `docker` branch):
@@ -60,7 +60,7 @@ FLASK_ENV=development pipenv run flask run
 
 When containerizing our app, we generally do not use `pipenv` anymore. We prefer having the requirements listed in a static file (typically named `requirements.txt`) and use `pip` directly (as we do not need a virtual environment) to install them.
 
-We say "generally", because with Docker you can install and build pretty much anything, so we _could_ still use it. But here, we will use the common `requirements.txt`.
+We say "generally", because with Docker you can install and build pretty much anything, so we _could_ still use it. But here, we will use the common `requirements.txt` method.
 
 :point_right: Run the following commands:
 
@@ -121,8 +121,7 @@ Do you understand the instructions ? If we decompose them, we see that:
 
 🤔 Why do we have --host 0.0.0.0 in the `CMD` instruction ?
 
-<details>
-  <summary markdown='span'>View solution</summary>
+<details><summary markdown='span'>View solution</summary>
 
 We do not want to only bind to `localhost` interface as we did before: we bind to `0.0.0.0` so the container can be accessible from the outside (especially accessible from your docker host, which is your laptop !)
 
@@ -131,15 +130,13 @@ We do not want to only bind to `localhost` interface as we did before: we bind t
 
 :point_right: Now, build this image and tag it as `twitter-api`
 
-<details>
-  <summary markdown='span'>Hint</summary>
+<details><summary markdown='span'>Hint</summary>
 
 There is an example for building and tagging an image in the same command, in the previous exercise (`Docker-101`).
 
 </details>
 
-<details>
-  <summary markdown='span'>View solution</summary>
+<details><summary markdown='span'>View solution</summary>
 
 ```bash
 docker build -t twitter-api .
@@ -154,8 +151,7 @@ A few specs for this run:
 * you need to map a host port to the container port of your application, in order to access it from your host: add the `-p 5000:5000` option to your command. This way, the app will run in the container on port 5000, and you will be able to access it on your host (your machine) on port 5000 as well.
 * add the `--rm` option to your `docker run` command to automatically remove the container once it exits.
 
-<details>
-  <summary markdown='span'>View solution</summary>
+<details><summary markdown='span'>View solution</summary>
 
 ```bash
 docker run --name twitter-api -p 5000:5000 --rm twitter-api
@@ -167,8 +163,7 @@ You now have a container running.
 
 :point_right: Let's check http://localhost:5000/ to see if it worked: does it ?
 
-<details>
-  <summary markdown='span'>View solution</summary>
+<details><summary markdown='span'>View solution</summary>
 
 It should ! If not, double check the command you have run and if the problem still persists, please ask a TA !
 
@@ -177,8 +172,7 @@ It should ! If not, double check the command you have run and if the problem sti
 
 :point_right: What happens with http://localhost:5000/tweets ? Why ?
 
-<details>
-  <summary markdown='span'>View solution</summary>
+<details><summary markdown='span'>View solution</summary>
 
 When we hit this endpoint, it's crashing. Indeed, we are trying to make a call to our database, but it's not set up ! So our Flask app would not find its database ready for new connections, and it raises a `sqlalchemy.exc.OperationalError` exception.
 
@@ -201,7 +195,7 @@ We have seen in lecture that `docker-compose` was used to define multiple servic
 touch docker-compose.yml
 ```
 
-:point_right: Copy and paste the following content in it
+:point_right: Copy and paste the following content in it: here we define a single service: `web`, for our Flask app. It is mostly based on the Dockerfile previously created, through the `build` keyword.
 
 ```yaml
 version: '3.8'
@@ -221,11 +215,10 @@ services:
 docker-compose up
 ```
 
-Note that running `docker-compose up` or `docker-compose up web` would be the same here, as you only have one service defined in your docker-compose configuration.
-
 :point_right: Browse to http://localhost:5000
 
 Here, we have not changed much, as we only have one service (web) in our `docker-compose.yml` file, that relies on our previously defined `Dockerfile`.
+So in a way, we have only changed - so far - the way to run our container ! But we will do more now ...
 
 :point_right: You can now exit your container using `CTRL-C`
 
@@ -294,7 +287,19 @@ volumes:
   postgres_data:
 ```
 
-The idea here it to migrate what is _configurable_ in the `docker-compose.yml`, and only keep what is static (such as packages, dependencies definition) in the `Dockerfile`.
+The idea here it to migrate what is _configurable_ from the `Dockerfile` into the `docker-compose.yml`, and only keep what is static (such as packages, dependencies definition) in the `Dockerfile`.
+
+So now we have two services: `web` and `db`, that are respectively based on our custom image (created earlier through the `Dockerfile`), and the `postgres` image.
+
+👀 See the `volumes` keyword here ? In a few words - just to introduce the concept:
+
+* In order to be able to save (persist) data and also to share data between containers, Docker came up with the concept of **volumes**
+* Quite simply, volumes are directories (or files) that  live "outside" the container, on the host machine (in our case, your laptop)
+* From the container, the volume acts like a folder which you can use to store and retrieve data. It is simply a _mount point_ to a directory on the host
+* In other words: here the `/var/lib/postgresql/data/` directory from the `db` container "points towards" the `postgres_data` volume on your host. All the database data will end up in this volume
+* **But why ?** 🤔 Well if you stop and remove your container, you do not want its persistent data to be lost as well. So it is kept safe on the docker host, and you can re-attach the volume to any new container you would like to run !
+
+
 
 Let's perform a few initial steps to setup the containers and databases we will need:
 
@@ -319,8 +324,7 @@ Now our endpoints are fixed:
 
 :point_right: Visit http://localhost:5000 and http://localhost:5000/tweets
 
-<details>
-  <summary markdown='span'>View solution</summary>
+<details><summary markdown='span'>View solution</summary>
 
 You should see: the Swagger documentation as usual for the first endpoint, and an empty list for the second endpoint (you do not have any data yet !)
 

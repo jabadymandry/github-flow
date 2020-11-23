@@ -24,8 +24,7 @@ Note that for the subsequent executions, the same image will be re-used. Your ma
 But notice that when you ran `docker run postgres`, it actually did not work ! Why ?
 
 
-<details>
-	<summary markdown='span'>View solution</summary>
+<details><summary markdown='span'>View solution</summary>
 
 ```bash
 Error: Database is uninitialized and superuser password is not specified.
@@ -38,8 +37,7 @@ Well, it looks like the postgres image is expecting something on `docker run`!
 
 👉 Try to fix it !
 
-<details>
-	<summary markdown='span'>View solution</summary>
+<details><summary markdown='span'>View solution</summary>
 
 Well let's just do what `docker run` asks for:
 
@@ -57,8 +55,7 @@ The `-e` flag in `docker run -e ...` stands for environment variable. Here, we j
 
 Now, you should see an output in your terminal: it looks like your database is initialized and ready to accept connections !
 
-<details>
-	<summary markdown='span'>View solution</summary>
+<details><summary markdown='span'>View solution</summary>
 
 Your terminal output should look like this:
 
@@ -87,8 +84,7 @@ One other thing you can do, is run a container in the background (using the "det
 
 👉 Try run a new postgres container in detached mode, and give it a name: `pg`.
 
-<details>
-	<summary markdown='span'>Hint</summary>
+<details><summary markdown='span'>Hint</summary>
 	
 If you are not sure about the syntax and available options: ask for them !
 ```bash
@@ -97,8 +93,7 @@ docker run --help
 
 </details>
 
-<details>
-	<summary markdown='span'>View solution</summary>
+<details><summary markdown='span'>View solution</summary>
 	
 ```bash
 docker run -d -e POSTGRES_PASSWORD=password --name=pg postgres
@@ -110,14 +105,12 @@ docker run -d -e POSTGRES_PASSWORD=password --name=pg postgres
 What happens if we do not give it a name ?   
 👉 Run another postgres container without giving it a name: what name has it been assigned ?  
 
-<details>
-	<summary markdown='span'>Hint</summary>
+<details><summary markdown='span'>Hint</summary>
 	
 Hint know our to run a container already... Do you remember how to list all running containers ?
 
 </details>
-<details>
-	<summary markdown='span'>View solution</summary>
+<details><summary markdown='span'>View solution</summary>
 	
 ```bash
 docker run -d -e POSTGRES_PASSWORD=password postgres
@@ -166,8 +159,7 @@ To stop a container, use the `docker stop` command. You will need to pass the co
 👉 Stop your `pg` container, and check the list of running containers, and the list of non-running containers.
 
 
-<details>
-	<summary markdown='span'>View solution</summary>
+<details><summary markdown='span'>View solution</summary>
 	
 Stop the container:
 ```bash
@@ -185,16 +177,14 @@ You should see that your container changed state, from `running` to `exited`, bu
 
 👉 Remove your postgres container
 
-<details>
-	<summary markdown='span'>Hint</summary>
+<details><summary markdown='span'>Hint</summary>
 	
 ```bash
 docker rm --help
 ```
 
 </details>
-<details>
-	<summary markdown='span'>View solution</summary>
+<details><summary markdown='span'>View solution</summary>
 	
 ```bash
 docker rm pg
@@ -208,8 +198,7 @@ So you have stopped and removed your postgres container, but how about the postg
 
 👉 Do you remember how to list docker images ?
 
-<details>
-	<summary markdown='span'>View solution</summary>
+<details><summary markdown='span'>View solution</summary>
 	
 ```bash
 docker images
@@ -219,8 +208,7 @@ docker images
 
 👉 Try to remove the `postgres` image using `docker rmi` and double check it worked
 
-<details>
-	<summary markdown='span'>View solution</summary>
+<details><summary markdown='span'>View solution</summary>
 	
 ```bash
 docker rmi postgres
@@ -257,8 +245,7 @@ We will play with the `docker/whalesay` image, and create a custom image out of 
 
 👉 Pull the `docker/whalesay` image from the Hub
 
-<details>
-	<summary markdown='span'>View solution</summary>
+<details><summary markdown='span'>View solution</summary>
 	
 ```bash
 docker pull docker/whalesay
@@ -268,8 +255,7 @@ docker pull docker/whalesay
 
 👉 Run a container from this image (please check [how to use this image](https://hub.docker.com/r/docker/whalesay/))
 
-<details>
-	<summary markdown='span'>View solution</summary>
+<details><summary markdown='span'>View solution</summary>
 	
 ```bash
 docker run docker/whalesay cowsay "This whale is speaking ..."
@@ -336,8 +322,7 @@ You should see that it has been built layer by layer.
 
 👉 Run it to see what it does
 
-<details>
-	<summary markdown='span'>View solution</summary>
+<details><summary markdown='span'>View solution</summary>
 	
 ```bash
 docker run $DOCKER_ID/custom-whale

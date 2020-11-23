@@ -12,22 +12,45 @@ Do not forget to validate your installation.
 You can download Docker Desktop for Windows from Docker Hub.
 
 * Head over to 👉 [this page](https://docs.docker.com/docker-for-windows/install/) and click the "Download from Docker Hub" button.
-<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/download-docker-on-windows.png?raw=true" width="700"></p>
+<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/download-docker-on-windows.png?raw=true" width="800"></p>
 
-* Then double-click `Docker Desktop Installer.exe` to run the installer
+* Then, after being redirected, click on **"Get Docker Desktop for Windows (stable)"**
 
-* When prompted, ensure the **Enable Hyper-V Windows Features** option is selected on the Configuration page.
+* Once the download is done, double-click the program `Docker Desktop Installer.exe` to run the installer
+
+* You will be asked whether you want to **"allow this app to make changes to your device"**: click **"Yes"** !
+
+* If prompted, ensure that the **"Enable Hyper-V Windows Features"** and **"Add shortcut to Desktop"** options are selected on the configuration page
 
 * Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
 
-* When the installation is successful, click Close to complete the installation process.
+* When the installation is successful, click **"Close"** to complete the installation process.
+
+* You might have to restart Windows to complete your installation: if asked, please do so !
+
+<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/restart_windows.png?raw=true" width="400"></p>
 
 * ⚠️ Do not forget to **start** Docker Desktop !
 
-<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/docker-desktop.png?raw=true" width="400"></p>
+<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/docker-desktop.png?raw=true" width="300"></p>
 
 * When the whale icon in the status bar stays steady, Docker Desktop is up-and-running, and is accessible from any terminal window.
-<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/status-bar.png?raw=true" width="300"></p>
+<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/status-bar.png?raw=true" width="250"></p>
+Note that if you do not see the whale, you might have to click on the up-arrow on the taskbar !
+<br><br>
+✅ That's it ! You're done !
+<br><br>
+<details><summary markdown='span'><b>⚠️ ONLY IF WHALE ICON TURNS RED. OTHERWISE PLEASE SKIP ⚠️</b> If after 5 minutes, the whale icon is still not steady and turns red, follow these guidelines.</summary>
+<ul>
+	<li>In the Docker Desktop app, go to <b>"Settings"</b></li>
+	<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/docker_desktop_settings.png?raw=true" width="500"></p>
+	<li>Uncheck the <b>"Use the WSL 2 based engine"</b> option</li>
+	<li>Click on <b>"Apply & Restart"</b></li>
+	<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/uncheck_wsl.png?raw=true" width="500"></p>
+	<li>The whale should get steady and white. If not, please ask a TA for help.</li>
+</ul>
+
+</details>
 
 ---
 
@@ -45,10 +68,14 @@ You can download Docker Desktop for Windows from Docker Hub.
 
 * When the whale icon in the status bar stays steady, Docker Desktop is up-and-running, and is accessible from any terminal window.
 <p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/status-bar-mac.png?raw=true" width="300"></p>
+<br>
+✅ That's it ! You're done !
 
 ---
 
 ### Installation validation ✅ 
+
+You can now close the Docker Desktop window, as it is now running in the background.
 
 #### Signup on Docker Hub 💻
 Docker Hub is a hosted repository service provided by Docker for finding and sharing container images with your team. Once you create a Docker ID (a user), you will be able to pull and push images to the Hub.
