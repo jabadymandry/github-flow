@@ -24,7 +24,7 @@ git remote rm origin
 Go to [github.com/new](https://github.com/new) and create a _public_ repository under your _personal_ account, name it `twitter-api-docker`.
 
 ```bash
-git remote add origin https://github.com/<user.github_nickname>/twitter-api-docker.git
+git remote add origin git@github.com:<user.github_nickname>/twitter-api-docker.git
 git push -u origin master
 ```
 
