@@ -198,7 +198,7 @@ touch docker-compose.yml
 :point_right: Copy and paste the following content in it: here we define a single service: `web`, for our Flask app. It is mostly based on the Dockerfile previously created, through the `build` keyword.
 
 ```yaml
-version: '3.8'
+version: '2.2'
 
 services:
   web:
@@ -250,7 +250,7 @@ ENV FLASK_APP wsgi.py
 :point_right: Update your `docker-compose.yml` file with the following:
 
 ```yaml
-version: '3.8'
+version: '2.2'
 
 services:
   db:
