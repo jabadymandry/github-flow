@@ -386,7 +386,7 @@ Let's adjust our `docker-compose.yml` so we have a command to test locally and o
 Add the following paragraph to it:
 
 ```yaml
-version: '3.8'
+version: '2.2'
 
 services:
   ...

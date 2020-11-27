@@ -145,6 +145,8 @@ It gives you access to the Postgresql command line, where you could write SQL.
 
 <p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/psql-docker.png?raw=true" width="500"></p>
 
+👉 Exit the `psql` prompt: `\q` + **Enter**
+
 
 That is typically what developers do locally when they work on a webapp project (like you did for the Twitter API): they dockerize the webserver application, and the database. This way their setup is standardized, and they can easily share it !
 
