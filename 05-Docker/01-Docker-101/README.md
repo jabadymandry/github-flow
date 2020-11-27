@@ -128,7 +128,7 @@ Well Docker generates some names for us if we do not pass any.
 Now that your container is running, you might want to run a SQL query.  
 Let's first get a bash shell in the container:
 
-👉 Run ```docker run -it pg /bin/bash```
+👉 Run ```docker exec -it pg /bin/bash```
 
 What have we done here 🤔 ? We have asked Docker to run a command (`/bin/bash`: to get a bash shell) in the container, passing the flag `-i` and `-t` together: 
 
