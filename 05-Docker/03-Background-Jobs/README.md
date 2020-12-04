@@ -32,7 +32,11 @@ Before jumping in the code, please read the [Introduction to Celery](http://docs
 
 ### Redis
 
-We will use [**Redis**](https://redis.io/) for the Celery back-end. This is an external service that is required and will live next to the Postgresql service. To install it on Windows, please [download](https://github.com/MicrosoftArchive/redis/releases) the latest Redis compiled for Windows (look for the `.zip` file). Extract the downloaded archive to `C:\Users\Le Wagon\code\redis`.
+We will use [**Redis**](https://redis.io/) for the Celery back-end. This is an external service that is required and will live next to the Postgresql service.
+
+<details><summary markdown='span'><b>Install and start Redis on Windows</b> - click on arrow</summary>
+
+Please <a href="https://github.com/MicrosoftArchive/redis/releases">download</a> the latest Redis compiled for Windows (look for the `.zip` file). Extract the downloaded archive to `C:\Users\Le Wagon\code\redis`.
 
 You are now ready to start the Redis server in the background. Open another Terminal tab and run:
 
@@ -40,6 +44,31 @@ You are now ready to start the Redis server in the background. Open another Term
 cd ~/code/redis
 ./redis-server.exe
 ```
+
+</details>
+
+<details><summary markdown='span'><b>Install and start Redis on MacOS</b> - click on arrow</summary>
+
+We use `brew` as our package manager, and advise you to do the same.
+
+* If you do not have `brew` already, download it by running:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+* Then, you can install redis
+
+```bash
+brew install redis
+```
+
+* And launch it in a separate terminal window (or tab: `ctrl+T` in your terminal):
+
+```bash
+redis-server
+```
+</details>
 
 ### Celery
 

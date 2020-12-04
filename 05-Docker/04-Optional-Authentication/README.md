@@ -18,7 +18,7 @@ Go to [github.com/new](https://github.com/new) and create a _public_ repository 
 
 ```bash
 git remote add origin https://github.com/<user.github_nickname>/twitter-api-authentication.git
-git push -u origin master
+git push -u origin sqlalchemy
 ```
 
 Now that you have the repo, you need to create the virtualenv and install the packages:
@@ -142,3 +142,18 @@ Now open the browser and navigate to `localhost:5000`. What is happenning?
 1. With that token, the code is able to perform requests to the GitHub API **on the user's behalf**
 
 How can you update the `twitter-api` to use this GitHub OAuth gateway instead of an key-based auth?
+
+
+---
+
+## I'm done! 🎉
+
+That's it for today ! Let's mark your progress with the following:
+
+```bash
+cd ~/code/<user.github_nickname>/reboot-python
+cd 05-Docker/04-Optional-Authentication
+touch DONE.md
+git add DONE.md && git commit -m "05-Docker/04-Optional-Authentication done"
+git push origin sqlalchemy
+```

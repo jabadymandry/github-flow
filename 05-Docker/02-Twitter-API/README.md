@@ -25,7 +25,7 @@ Go to [github.com/new](https://github.com/new) and create a _public_ repository 
 
 ```bash
 git remote add origin git@github.com:<user.github_nickname>/twitter-api-docker.git
-git push -u origin master
+git push -u origin docker
 ```
 
 ---
@@ -436,7 +436,7 @@ With this kind of setup:
 
 ## I'm done! 🎉
 
-Clean up your docker host by running ```docker-compose down``` to stop and remove the containers used above.
+Clean up your docker host by running ```docker-compose down -v``` to stop and remove the containers, and remove the volumes used above.
 
 And that's it for this challenge ! Before you jump to the next challenge (`03-Background-Jobs`), let's mark your progress with the following:
 
@@ -445,5 +445,5 @@ cd ~/code/<user.github_nickname>/reboot-python
 cd 05-Docker/02-Twitter-API
 touch DONE.md
 git add DONE.md && git commit -m "05-Docker/02-Twitter-API"
-git push origin master
+git push origin docker
 ```
