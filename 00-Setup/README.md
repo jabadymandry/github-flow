@@ -9,6 +9,17 @@ If you were issued a physical Laptop from Le Wagon, here is what should already 
 - [Python 3.8](https://www.python.org/downloads/) & [`pip install pipenv`](https://pipenv.pypa.io/en/latest/)
 - `git` with [**Git Bash**](https://git-scm.com/downloads) which will be your main command line tool this week.
 
+## Upgrade package managers (pip, pipenv)
+
+Open the Windows Command Prompt **as Administrator** (in your search menu, you will see 2 command prompt: the default one, and the Administrator one. Pick the latter !)
+
+Run the following commands:
+
+```bash
+pip install --upgrade pip
+pip install --upgrade pipenv
+```
+
 ## Checking your path
 
 Your `$PATH` should be all set to work with the required binaries.

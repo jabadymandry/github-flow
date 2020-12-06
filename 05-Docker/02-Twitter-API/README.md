@@ -30,37 +30,114 @@ git push -u origin docker
 
 ---
 
-## 1. Sanity check - non-containerized stack
+## 1. Sanity check - non-containerized stack (⏰ reminder of day 3 and 4)
 
 The stack is not containerized yet. But let's make a sanity check to verify that everything is working. This also acts as a reminder of the two previous days on this challenge !
 
-### 1.a. Install the packages locally
+### 1.a. Install dependencies
+
+:point_right: Use `pipenv` to install the dependencies locally, for the development environment!
+
+<details><summary markdown='span'>View solution</summary>
 
 ```bash
 pipenv install --dev
 ```
 
-### 1.b. Make sure the tests are passing locally
+</details>
+
+### 1.b. Run the test suite locally
+
+:point_right: Make sure the tests are passing locally
+
+<details><summary markdown='span'>View solution</summary>
 
 ```bash
 pipenv run nosetests
 ```
 
-### 1.c. Make sure the web server can be run + show Swagger documentation
+</details>
+
+Does it work ? It should not ! Why ?
+:point_right: Try to fix ! You have been through this yesterday already !
+
+<details><summary markdown='span'>Hint</summary>
+
+Yesterday, we used a `.env` file to configure the used Database with an environment variable.
+
+</details>
+
+<details><summary markdown='span'>View solution</summary>
+
+Create a `.env` file:
+
+```bash
+touch .env
+```
+
+Reference the `DATABASE_URL` variable there:
+
+```bash
+# .env
+DATABASE_URL="postgresql://postgres@localhost/twitter_api_flask"
+```
+
+You should still have the `twitter_api_flask` and `twitter_api_flask_test` databases on your laptop. 
+Now running your test suite `pipenv run nosetests` should work !
+
+Please note that if you deleted the dev and test databases yesterday, you would have to re-set them up !
+
+Create the local and test Postgres databases (remember that we have 2 separate database for our development and test environments ! We <b>really</b> want to distinguish them no to mix data !!
+
+```bash
+winpty psql -U postgres -c "CREATE DATABASE twitter_api_flask"
+winpty psql -U postgres -c "CREATE DATABASE twitter_api_flask_test"
+```
+
+And now running your test suite `pipenv run nosetests` should work !
+
+</details>
+
+
+### 1.c. Run the app
+
+:point_right: Make sure the web server can be run 
+
+<details><summary markdown='span'>View solution</summary>
 
 ```bash
 FLASK_ENV=development pipenv run flask run
 ```
 
-:point_right: Go to [localhost:5000](http://localhost:5000/). Is everything fine ? Do you see the Swagger documentation ?
+</details>
+
+:point_right: Visit the Swagger documentation page in your web browser. Visit the `/tweets` page as well. Is everything fine ?
+
+<details><summary markdown='span'>View solution</summary>
+
+Go to <a href="http://localhost:5000/">localhost:5000</a> and <a href="http://localhost:5000/tweets">localhost:5000/tweets</a>.
+
+
+Note that if you deleted your dev database yesterday, you would have to run the migrations again: 
+
+```bash
+pipenv run python manage.py db upgrade
+```
+
+</details>
+
 
 ---
 
-## 2. Containerization - development mode
+## 2. Containerization - development environment
 
-When containerizing our app, we generally do not use `pipenv` anymore. We prefer having the requirements listed in a static file (typically named `requirements.txt`) and use `pip` directly (as we do not need a virtual environment) to install them.
+When containerizing our app, we generally do not use `pipenv` anymore. We prefer having the requirements listed in a static file (typically named `requirements.txt`) and use `pip` directly ti install them. Why ?
 
-We say "generally", because with Docker you can install and build pretty much anything, so we _could_ still use it. But here, we will use the common `requirements.txt` method.
+- Because we do not need a virtual environment - docker is already, by design, a layer of virtualization
+- And because it makes the docker image a bit lighter ! And lighter is better.
+
+
+We say "generally", because with Docker you can install and build pretty much anything, so we _could_ still use it. Here, we will use the common `requirements.txt` method.
 
 :point_right: Run the following commands:
 
@@ -95,7 +172,7 @@ touch Dockerfile
 FROM python:3.8-alpine as base
 
 RUN apk update && apk add postgresql-dev gcc musl-dev
-RUN pip install --upgrade pip
+RUN /usr/local/bin/python -m pip install --upgrade pip
 
 WORKDIR /code
 COPY . /code
@@ -106,13 +183,15 @@ ENV DATABASE_URL postgres://localhost/twitter_api_flask
 ENV FLASK_APP wsgi.py
 ENV FLASK_ENV development
 
+EXPOSE 5000
+
 CMD ["flask", "run", "--host", "0.0.0.0"]
 ```
 
-Do you understand the instructions ? If we decompose them, we see that:
+Do you understand the instructions ? If we decompose them one by one, we see that:
 
 * we start from the Python 3.8 image, and more specifically its `alpine` version. Alpine Linux is a Linux distribution known for its light weight, but still complete toolbox
-* we install a few packages required for our image to build
+* we install a few packages required for our image to build (among which `pip`)
 * we create a workspace directory (in the containers that will be run) called `/code`
 * we copy our local code folder into this container workspace directory
 * we install the requirements (in development mode for this challenge)
@@ -151,6 +230,12 @@ A few specs for this run:
 * you need to map a host port to the container port of your application, in order to access it from your host: add the `-p 5000:5000` option to your command. This way, the app will run in the container on port 5000, and you will be able to access it on your host (your machine) on port 5000 as well.
 * add the `--rm` option to your `docker run` command to automatically remove the container once it exits.
 
+<details><summary markdown='span'>Hint</summary>
+
+You need to use `docker run` with various options (the container name, a port mapping, the `--rm` flag, the name of the image). Check out `docker run --help` if needed !
+
+</details>
+
 <details><summary markdown='span'>View solution</summary>
 
 ```bash
@@ -161,7 +246,7 @@ docker run --name twitter-api -p 5000:5000 --rm twitter-api
 
 You now have a container running.
 
-:point_right: Let's check http://localhost:5000/ to see if it worked: does it ?
+:point_right: Let's check [localhost:5000](http://localhost:5000/) to see if it worked: is it fine ?
 
 <details><summary markdown='span'>View solution</summary>
 
@@ -170,8 +255,13 @@ It should ! If not, double check the command you have run and if the problem sti
 </details>
 
 
-:point_right: What happens with http://localhost:5000/tweets ? Why ?
+:point_right: What happens with the `/tweets` endpoint now ? Why ?
 
+<details><summary markdown='span'>Hint</summary>
+
+Visit <a href=http://localhost:5000/tweets>localhost:5000/tweets</a> in your web browser.
+
+</details>
 <details><summary markdown='span'>View solution</summary>
 
 When we hit this endpoint, it's crashing. Indeed, we are trying to make a call to our database, but it's not set up ! So our Flask app would not find its database ready for new connections, and it raises a `sqlalchemy.exc.OperationalError` exception.
@@ -180,7 +270,7 @@ So let's setup our database - and dockerize it at the same time to make the deve
 
 </details>
 
-:point_right: Hit `CTRL-C` to stop and remove your container.
+:point_right: Hit `CTRL-C` to stop your container (and also remove it - as you passed in the `--rm` flag in your `docker run` command !).
 
 ---
 
@@ -198,7 +288,7 @@ touch docker-compose.yml
 :point_right: Copy and paste the following content in it: here we define a single service: `web`, for our Flask app. It is mostly based on the Dockerfile previously created, through the `build` keyword.
 
 ```yaml
-version: '2.2'
+version: '3.8'
 
 services:
   web:
@@ -215,9 +305,9 @@ services:
 docker-compose up
 ```
 
-:point_right: Browse to http://localhost:5000
+:point_right: Browse to [localhost:5000](http://localhost:5000) and [localhost:5000/tweets](http://localhost:5000/tweets).
 
-Here, we have not changed much, as we only have one service (web) in our `docker-compose.yml` file, that relies on our previously defined `Dockerfile`.
+Yes, still the same errors as before ! Here, we have not changed much, as we only have one service (web) in our `docker-compose.yml` file, that relies on our previously defined `Dockerfile`.
 So in a way, we have only changed - so far - the way to run our container ! But we will do more now ...
 
 :point_right: You can now exit your container using `CTRL-C`
@@ -235,7 +325,7 @@ b. adjust our `docker-compose.yml` to account for the database service
 ```dockerfile
 FROM python:3.8-alpine as base
 
-RUN apk update && apk add postgresql-dev gcc musl-dev
+RUN apk update && apk add postgresql-dev gcc musl-dev bash
 RUN pip install --upgrade pip
 
 WORKDIR /code
@@ -243,43 +333,51 @@ COPY . /code
 
 RUN pip install -r requirements-dev.txt
 
+EXPOSE 5000
+
 ENV FLASK_APP wsgi.py
 ```
 
-#### 2.2.b Adjust our docker-compose.yml
+Note that we have simplified our `Dockerfile`: 
+
+- we removed some environment variables
+- we remove the `CMD` instruction that the container should run 
+
+... but don't worry we are going to reference those in the `docker-compose.yml` file - they are not "gone" !
+
+We also installed `bash` in our image, as we will need to run a script (maybe you noticed a `wait-for-it.sh` script in the repo: it's not an error, it's here on purpose. We will talk about it in the next paragraph).
+
+
+#### 2.2.b Add a database service to our docker-compose.yml
 :point_right: Update your `docker-compose.yml` file with the following:
 
 ```yaml
-version: '2.2'
+version: '3.8'
 
 services:
   db:
     image: postgres:12-alpine
     container_name: db
+    networks:
+      - default
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=flask_password
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-
+      - POSTGRES_PASSWORD=password
   web:
     build: .
     container_name: web
+    networks:
+      - default
     depends_on:
-      db:
-        condition: service_healthy
-    command: flask run
+      - db
+    command: ["./wait-for-it.sh", "db:5432", "--", "flask", "run"]
     volumes:
       - .:/code
     ports:
       - 5000:5000
     environment:
-      - DATABASE_URL=postgres://postgres:flask_password@db:5432/twitter_api_flask
+      - DATABASE_URL=postgres://postgres:password@db:5432/twitter_api_flask
       - FLASK_RUN_HOST=0.0.0.0
       - FLASK_ENV=development
 
@@ -289,17 +387,29 @@ volumes:
 
 The idea here it to migrate what is _configurable_ from the `Dockerfile` into the `docker-compose.yml`, and only keep what is static (such as packages, dependencies definition) in the `Dockerfile`.
 
-So now we have two services: `web` and `db`, that are respectively based on our custom image (created earlier through the `Dockerfile`), and the `postgres` image.
+We now have two services: `web` and `db`:
+  
+👀 Closer look on `db`:
 
-👀 See the `volumes` keyword here ? In a few words - just to introduce the concept:
+* This service is based on a `postgres` image (accessible on the Docker Hub)
+* We name the container that will be run `db`, for simplicity
+* Notice the `volumes` keyword ? In a few words - just to introduce the concept:
+  * In order to be able to save (persist) data and also to share data between containers, Docker came up with the concept of **volumes**
+  * Quite simply, volumes are directories (or files) that  live "outside" the container, on the host machine (in our case, your laptop)
+  * From the container, the volume acts like a folder which you can use to store and retrieve data. It is simply a _mount point_ to a directory on the host
+  * In other words: here the `/var/lib/postgresql/data/` directory from the `db` container "points towards" the `postgres_data` volume on your host. All the database data will end up in this volume
+  * **But why ?** 🤔 Well if you stop and remove your container, you do not want its persistent data to be lost as well. So it is kept safe on the docker host, and you can re-attach the volume to any new container you would like to run !
+* We specify an environment variables - that we know is mandatory for the `postgres` image !
+  
+👀 Closer look on `web`:
 
-* In order to be able to save (persist) data and also to share data between containers, Docker came up with the concept of **volumes**
-* Quite simply, volumes are directories (or files) that  live "outside" the container, on the host machine (in our case, your laptop)
-* From the container, the volume acts like a folder which you can use to store and retrieve data. It is simply a _mount point_ to a directory on the host
-* In other words: here the `/var/lib/postgresql/data/` directory from the `db` container "points towards" the `postgres_data` volume on your host. All the database data will end up in this volume
-* **But why ?** 🤔 Well if you stop and remove your container, you do not want its persistent data to be lost as well. So it is kept safe on the docker host, and you can re-attach the volume to any new container you would like to run !
+* This service is based on a custom image - instructed in our Dockerfile
+* We name the container that will be run `web`, for simplicity
+* It ["depends on"](https://docs.docker.com/compose/compose-file/#depends_on) the `db` service: services will be started in dependency order. We need our database to be up before running our app !
+* In order to make sure our dependency container is running, we need some kind of "control": that is the exact purpose of the `wait-for-it.sh` script ! You can read more [here](https://docs.docker.com/compose/startup-order/) if you are interested. The web container runs this script, that will make it wait until the DB is up and accepting connections, before running the flask app (`command: ["./wait-for-it.sh", "db:5432", "--", "flask", "run"]`).
 
 
+#### 2.2.c Initial operations
 
 Let's perform a few initial steps to setup the containers and databases we will need:
 
@@ -380,7 +490,7 @@ You will get a `psql` prompt where you can write SQL.
 
 ---
 
-## 3. Containerization - test mode
+## 3. Containerization - test environment
 
 Let's adjust our `docker-compose.yml` so we have a command to test locally and on Travis CI.
 Add the following paragraph to it:
@@ -403,9 +513,8 @@ services:
     build: .
     container_name: test
     depends_on:
-      db:
-        condition: service_healthy
-    command: nosetests -s --exe
+      - db
+    command: ["./wait-for-it.sh", "db:5432", "--", "nosetests", "-s"]
     volumes:
       - .:/code
     environment:
