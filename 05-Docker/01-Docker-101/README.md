@@ -148,7 +148,7 @@ docker run -e POSTGRES_PASSWORD=password postgres
 🍾 That's it! No need for a complex installer, no conflicts on your laptop, no long hours scrolling tech forums to fix your problem : you have a running database in a single command.
 
 
-The `-e` flag in `docker run -e ...` stands for environment variable. Here, we just created a password for the database superuser, and passed it the `docker run` command. Ideally a password should be more complex, but here we don't really care, we will get rid of this container in a few minutes anyway !
+The `-e` flag in `docker run -e ...` stands for environment variable. Here, we just created a password for the database superuser, and passed it to the `docker run` command. Ideally a password should be more complex, but here we don't really care, we will get rid of this container in a few minutes anyway !
 
 
 Now, you should see an output in your terminal: it looks like your database is initialized and ready to accept connections !
@@ -244,6 +244,7 @@ It gives you access to the Postgresql command line, where you could write SQL.
 <p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/psql-docker.png?raw=true" width="500"></p>
 
 👉 Exit the `psql` prompt: `\q` + **Enter**
+👉 Exit the container bash shell: `exit` + **Enter**
 
 
 That is typically what developers do locally when they work on a webapp project (like you did for the Twitter API): they dockerize the webserver application, and the database. This way their setup is standardized, and they can easily share it !
@@ -314,6 +315,8 @@ docker images
 docker rmi postgres
 docker images
 ```
+
+If you have other containers on your host using the `postgres` image, you will not be able to remove the image... Get rid of the containers first ! You already know how to do so !
 
 </details>
 
@@ -428,7 +431,28 @@ Here, the trick is to make use of the "pipe" (`|`) that will first generate a ra
 
 👉 It's now time to build your image: ```docker build -t $DOCKER_ID/custom-whale .```  - which will read instructions from the Dockerfile. Do not forget to replace `$DOCKER_ID` with your actual docker ID ⚠️ !
 
-You should see that it has been built layer by layer.
+<details><summary markdown='span'>You should see that it has been built layer by layer.</summary>
+
+```bash
+Sending build context to Docker daemon  2.048kB
+Step 1/3 : FROM docker/whalesay:latest
+ ---> 6b362a9f73eb
+Step 2/3 : RUN apt-get -y update && apt-get install -y fortunes
+ ---> Running in 4112a9cbddcd
+...
+...
+Removing intermediate container 4112a9cbddcd
+ ---> b02c2255a8e6
+Step 3/3 : CMD /usr/games/fortune -a | cowsay
+ ---> Running in 3e2cd7673b16
+Removing intermediate container 3e2cd7673b16
+ ---> 23e6cedd0cfe
+Successfully built 23e6cedd0cfe
+Successfully tagged $DOCKER_ID/custom-whale:latest
+```
+
+</details>
+
 
 👉 Run it to see what it does
 
@@ -439,6 +463,8 @@ docker run $DOCKER_ID/custom-whale
 ```
 
 </details>
+
+👉 Run it again ! It should generate different quotes each time - as they are randomized
 
 👉 You can now push your image to your own repository on the Docker Hub. Make sure you are logged in:
 ```docker login``` and run the following:
@@ -458,9 +484,9 @@ This way, since it is public, anyone would be able to pull it and run it as a co
 ## I'm done! 🎉
 
 That's it for this challenge ! Congratulations, you have seen how to:
-- pull an image (`docker pull $IMAGE_NAME`),
-- run a container from an image (`docker run $IMAGE_NAME`),
-- run a command in a running container (`docker exec -it $CONTAINER_NAME $SOME_COMMAND`),
+- pull an image (`docker pull $IMAGE_NAME`)
+- run a container from an image (`docker run $IMAGE_NAME`)
+- run a command in a running container (`docker exec -it $CONTAINER_NAME $SOME_COMMAND`)
 - list your containers and images (`docker ps`, `docker ps -a`, `docker images`)
 - stop and remove a container (`docker stop $CONTAINER_NAME`, `docker rm $CONTAINER_NAME`)
 - remove an image (`docker rmi $IMAGE_NAME`)

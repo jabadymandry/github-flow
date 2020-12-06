@@ -82,12 +82,12 @@ Reference the `DATABASE_URL` variable there:
 DATABASE_URL="postgresql://postgres@localhost/twitter_api_flask"
 ```
 
-You should still have the `twitter_api_flask` and `twitter_api_flask_test` databases on your laptop. 
+You should still have the `twitter_api_flask` and `twitter_api_flask_test` databases on your laptop.
 Now running your test suite `pipenv run nosetests` should work !
 
-Please note that if you deleted the dev and test databases yesterday, you would have to re-set them up !
+Please note that if you deleted the **dev** and **test** databases yesterday, you would have to re-set them up !
 
-Create the local and test Postgres databases (remember that we have 2 separate database for our development and test environments ! We <b>really</b> want to distinguish them no to mix data !!
+Create the **dev** and **test** Postgres databases (remember that we have 2 separate database for our _development_ and _test_ environments ! We <b>really</b> want to distinguish them not to mix any data - which could lead to unwanted behavior !!
 
 ```bash
 winpty psql -U postgres -c "CREATE DATABASE twitter_api_flask"
@@ -101,7 +101,7 @@ And now running your test suite `pipenv run nosetests` should work !
 
 ### 1.c. Run the app
 
-:point_right: Make sure the web server can be run 
+:point_right: Make sure the web server can be run
 
 <details><summary markdown='span'>View solution</summary>
 
@@ -111,14 +111,15 @@ FLASK_ENV=development pipenv run flask run
 
 </details>
 
-:point_right: Visit the Swagger documentation page in your web browser. Visit the `/tweets` page as well. Is everything fine ?
+:point_right: Visit the Swagger documentation page in your web browser.
+:point_right: Visit the `/tweets` page as well. Is everything fine ?
 
 <details><summary markdown='span'>View solution</summary>
 
 Go to <a href="http://localhost:5000/">localhost:5000</a> and <a href="http://localhost:5000/tweets">localhost:5000/tweets</a>.
 
 
-Note that if you deleted your dev database yesterday, you would have to run the migrations again: 
+Note that if you deleted your dev database yesterday, you would have to run the migrations again:
 
 ```bash
 pipenv run python manage.py db upgrade
@@ -127,27 +128,47 @@ pipenv run python manage.py db upgrade
 </details>
 
 
+Everything working ? 🎉 Perfect ! Now, let's adopt a new strategy, and do all of it in Docker containers:
+
+- first for the _development_ environment (where we run the app),
+- then for the _test_ environment (where we run the test suite).
+
 ---
 
 ## 2. Containerization - development environment
 
-When containerizing our app, we generally do not use `pipenv` anymore. We prefer having the requirements listed in a static file (typically named `requirements.txt`) and use `pip` directly ti install them. Why ?
+When containerizing our app, we generally do not use `pipenv` anymore. We prefer having the requirements listed in a static file (typically named `requirements.txt`) and use `pip` directly to install them. Why ?
 
 - Because we do not need a virtual environment - docker is already, by design, a layer of virtualization
-- And because it makes the docker image a bit lighter ! And lighter is better.
+- And because it makes the docker image a bit lighter ! And in software development, lighter is better 🙂
 
 
 We say "generally", because with Docker you can install and build pretty much anything, so we _could_ still use it. Here, we will use the common `requirements.txt` method.
 
+:point_right: Upgrade your `pipenv` version :
+
+```bash
+pip install --upgrade pipenv
+```
+
+and double check their versions:
+
+```bash
+pipenv --version
+```
+
+It must look like `2020.x`. If not, please ask a TA.
+Now that `pipenv` is up-to-date, we can safely lock the requirements in static text files.
+
 :point_right: Run the following commands:
 
-```
+```bash
 pipenv lock --requirements > requirements.txt
 ```
 
 and
 
-```
+```bash
 pipenv lock --requirements --dev > requirements-dev.txt
 ```
 
@@ -158,7 +179,6 @@ After running them, these files should have been created in your folder and fill
 ### 2.1 Dockerfile - Flask app
 
 Let's first Dockerize our Flask app: build an image, run a container and check all is fine.
-And for simplicity, **let's adopt a pure "development" point of view**: we build an image for development use, and generalize to other environments (test, CI, production) down the road. But let's start small !
 
 :point_right: Create an empty Dockerfile
 
@@ -198,7 +218,7 @@ Do you understand the instructions ? If we decompose them one by one, we see tha
 * we setup some environment variables for the container to run properly
 * we setup a command to be run when the container is run
 
-🤔 Why do we have --host 0.0.0.0 in the `CMD` instruction ?
+🤔 Why do we have `--host 0.0.0.0` in the `CMD` instruction ?
 
 <details><summary markdown='span'>View solution</summary>
 
@@ -259,7 +279,7 @@ It should ! If not, double check the command you have run and if the problem sti
 
 <details><summary markdown='span'>Hint</summary>
 
-Visit <a href=http://localhost:5000/tweets>localhost:5000/tweets</a> in your web browser.
+Visit <a href="http://localhost:5000/tweets">localhost:5000/tweets</a> in your web browser.
 
 </details>
 <details><summary markdown='span'>View solution</summary>
@@ -307,7 +327,7 @@ docker-compose up
 
 :point_right: Browse to [localhost:5000](http://localhost:5000) and [localhost:5000/tweets](http://localhost:5000/tweets).
 
-Yes, still the same errors as before ! Here, we have not changed much, as we only have one service (web) in our `docker-compose.yml` file, that relies on our previously defined `Dockerfile`.
+Yes, still the same errors as before when the app tries to reach the database ! Here, we have not changed much, as we only have one service (web) in our `docker-compose.yml` file, that relies on our previously defined `Dockerfile`.
 So in a way, we have only changed - so far - the way to run our container ! But we will do more now ...
 
 :point_right: You can now exit your container using `CTRL-C`
@@ -338,10 +358,10 @@ EXPOSE 5000
 ENV FLASK_APP wsgi.py
 ```
 
-Note that we have simplified our `Dockerfile`: 
+Note that we have simplified our `Dockerfile`:
 
 - we removed some environment variables
-- we remove the `CMD` instruction that the container should run 
+- we remove the `CMD` instruction that the container should run
 
 ... but don't worry we are going to reference those in the `docker-compose.yml` file - they are not "gone" !
 
@@ -387,26 +407,26 @@ volumes:
 
 The idea here it to migrate what is _configurable_ from the `Dockerfile` into the `docker-compose.yml`, and only keep what is static (such as packages, dependencies definition) in the `Dockerfile`.
 
-We now have two services: `web` and `db`:
-  
-👀 Closer look on `db`:
+We now have two services: `web` and `db`.
 
-* This service is based on a `postgres` image (accessible on the Docker Hub)
-* We name the container that will be run `db`, for simplicity
+👀  Closer look on `db`:
+
+* This service is based on the `postgres` image (accessible on the Docker Hub)
+* We name the container that will be run `db` - for simplicity
+* We specify environment variables - that we know is mandatory for the `postgres` image !
 * Notice the `volumes` keyword ? In a few words - just to introduce the concept:
   * In order to be able to save (persist) data and also to share data between containers, Docker came up with the concept of **volumes**
   * Quite simply, volumes are directories (or files) that  live "outside" the container, on the host machine (in our case, your laptop)
   * From the container, the volume acts like a folder which you can use to store and retrieve data. It is simply a _mount point_ to a directory on the host
   * In other words: here the `/var/lib/postgresql/data/` directory from the `db` container "points towards" the `postgres_data` volume on your host. All the database data will end up in this volume
   * **But why ?** 🤔 Well if you stop and remove your container, you do not want its persistent data to be lost as well. So it is kept safe on the docker host, and you can re-attach the volume to any new container you would like to run !
-* We specify an environment variables - that we know is mandatory for the `postgres` image !
-  
-👀 Closer look on `web`:
+
+👀  Closer look on `web`:
 
 * This service is based on a custom image - instructed in our Dockerfile
-* We name the container that will be run `web`, for simplicity
-* It ["depends on"](https://docs.docker.com/compose/compose-file/#depends_on) the `db` service: services will be started in dependency order. We need our database to be up before running our app !
-* In order to make sure our dependency container is running, we need some kind of "control": that is the exact purpose of the `wait-for-it.sh` script ! You can read more [here](https://docs.docker.com/compose/startup-order/) if you are interested. The web container runs this script, that will make it wait until the DB is up and accepting connections, before running the flask app (`command: ["./wait-for-it.sh", "db:5432", "--", "flask", "run"]`).
+* We name the container that will be run `web` - for simplicity
+* It ["depends on"](https://docs.docker.com/compose/compose-file/#depends_on) the `db` service: services will be started in dependency order. We need our database (`db`) to be up and ready for new connections before running our Flask app (`web`) !
+* In order to make sure our dependency container (that is, our database) is running, we need some kind of "control". It's the exact purpose of the `wait-for-it.sh` script ! You can read more [here](https://docs.docker.com/compose/startup-order/) if you are interested. The `web` container runs this script, that will **make it wait until the database is up and accepting connections**, before running the flask app (`command: ["./wait-for-it.sh", "db:5432", "--", "flask", "run"]`).
 
 
 #### 2.2.c Initial operations
@@ -414,25 +434,42 @@ We now have two services: `web` and `db`:
 Let's perform a few initial steps to setup the containers and databases we will need:
 
 
-:point_right: Bring up the stack (and run containers in the background): ```docker-compose up -d``` 🛠
+:point_right: Bring up the stack, running containers in the background, and re-building the image for `web` : ```docker-compose up -d --build``` 🛠
 
-:point_right: Let's create our databases for development and testing now
+:point_right: Double check it actually launched your tech stack: run `docker ps` to see the containers running on your host.
+
+<details><summary markdown='span'>View solution</summary>
+
+You should see your `web` and `db` containers running.
+
+</details>
+
+:point_right: Let's create our databases for **development** and **testing** now:
 * connect to the `db` container: `docker exec -it db psql -U postgres`
 * create databases for development and test environments: in the `psql` prompt, type:
   * `CREATE DATABASE twitter_api_flask;`
   * `CREATE DATABASE twitter_api_flask_test;`
   * Exit the `psql` prompt: `\q` + **Enter**
-  
+
 :point_right: Eventually, run your migrations: ```docker-compose run web python manage.py db upgrade```
-  
-⚠️ Note that is not something that we usually automate for **development** and **test** environments as we want to be able to play with migrations manually. But for **CI** and **production**, these commands would be scripted to be run programmatically. You would not have to manually enter the command and run it.
 
-If you run `docker ps`, you should see two containers running: `web` and `db`.
+<details><summary markdown='span'>View solution</summary>
 
+You should get an output like this:
 
-Now our endpoints are fixed:
+```bash
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> 3812f6776f12, Create tweets table
+```
 
-:point_right: Visit http://localhost:5000 and http://localhost:5000/tweets
+</details>
+
+⚠️ Note that is not something that we necessarily automate for **development** and **test** environments as we want to be able to play with migrations manually. But for **CI** and **production**, these commands would be scripted to be run programmatically. You would not have to manually enter the command and run it !
+
+Now our endpoints are fixed 🍾:
+
+:point_right: Visit the [Swagger documentation](http://localhost:5000) and the [`/tweets` index](http://localhost:5000/tweets)
 
 <details><summary markdown='span'>View solution</summary>
 
@@ -443,11 +480,11 @@ You should see: the Swagger documentation as usual for the first endpoint, and a
 Some details about what just happened:
 
 * Calling `docker-compose up` will launch `db` and `web`
-* `web` depends on `db` to be up and healthy (see the `condition: service_healthy` ? It relies on `db`'s `healthcheck`)
+* `web` depends on `db` to be up and healthy. The `docker-compose up` commands make sure of it by running a control script: `wait-for-it.sh`
 * once `db` is up and healthy, `web` can be run
-* our database is secured by a user/password, that Flask knows (we pass it throught the `DATABASE_URL` environment variable that you already know from yesterday)
+* our database is secured by a user/password, that Flask knows (we pass it through the `DATABASE_URL` environment variable that you already know from yesterday)
 
-⚠️ Note that we have **hard-coded** a dummy **database password** ("_flask_password_") here: we would of course do better going live (such as using an environment variable, or a secret from a Vault). But remember that we are industrializing our stack progressively: of course all our iterations are not perfect, but we are aiming at something robust in the end !
+⚠️ Note that we have **hard-coded** a dummy **database password** ("_password_") here. We would of course do better going live 💪 (such as using an environment variable, or a secret from a Vault). But remember that we are industrializing our stack progressively: of course all our iterations cannot perfect but we are aiming at something robust in the end !
 
 ---
 
@@ -469,7 +506,7 @@ Some details about what just happened:
 
 #### 2.3.b Check your data using the API
 
-Now that you have some data in your database, check the list of tweets through the GET `tweets` endpoint: make a `GET` request to `http://localhost:5000/tweets`
+Now that you have some data in your database, check the list of tweets through the [`GET /tweets` endpoint](http://localhost:5000/tweets). Note that you can do that in Postman (setting up the `GET` request yourself), or in your web browser ! It is exactly the same, both would hit your Flask API similarly !
 
 #### 2.3.c Check your data using the database directly
 
@@ -484,19 +521,53 @@ docker exec -it db psql -U postgres twitter_api_flask
 
 You will get a `psql` prompt where you can write SQL.
 
-* :bulb: **Tip** typing `\d+` and hitting **Enter** will show you the list of available tables in the database
+* 💡 **Tip** typing `\d+` and hitting **Enter** will show you the list of available tables in the database
+
+<details><summary markdown='span'>View solution</summary>
+
+You should get an output like this:
+
+```bash
+twitter_api_flask=# \d+
+                             List of relations
+ Schema |      Name       |   Type   |  Owner   |    Size    | Description
+--------+-----------------+----------+----------+------------+-------------
+ public | alembic_version | table    | postgres | 8192 bytes |
+ public | tweets          | table    | postgres | 8192 bytes |
+ public | tweets_id_seq   | sequence | postgres | 8192 bytes |
+(3 rows)
+```
+
+</details>
+
 * Running `SELECT * FROM tweets;` would display all your data
+
+<details><summary markdown='span'>View solution</summary>
+
+You should get an output like this - with your own tweets:
+
+```bash
+twitter_api_flask=# SELECT * FROM tweets;
+ id |           text            |         created_at
+----+---------------------------+----------------------------
+  1 | this is a tweet !!!       | 2020-12-06 18:53:59.493008
+  2 | this is another tweet !!! | 2020-12-06 18:54:15.282337
+(2 rows)
+```
+
+</details>
+
 * Exit the `psql` prompt: `\q` + **Enter**
 
 ---
 
 ## 3. Containerization - test environment
 
-Let's adjust our `docker-compose.yml` so we have a command to test locally and on Travis CI.
+Let's adjust our `docker-compose.yml` so we have a command to test locally.
 Add the following paragraph to it:
 
 ```yaml
-version: '2.2'
+version: '3.8'
 
 services:
   ...
@@ -505,7 +576,7 @@ services:
     ...
 
     environment:
-      - DATABASE_URL=postgres://postgres:flask_password@db:5432/twitter_api_flask
+      - DATABASE_URL=postgres://postgres:password@db:5432/twitter_api_flask
       - FLASK_RUN_HOST=0.0.0.0
       - FLASK_ENV=development
 
@@ -518,7 +589,7 @@ services:
     volumes:
       - .:/code
     environment:
-      - DATABASE_URL=postgres://postgres:flask_password@db:5432/twitter_api_flask
+      - DATABASE_URL=postgres://postgres:password@db:5432/twitter_api_flask
       - FLASK_ENV=test
 
 volumes:
@@ -529,16 +600,33 @@ volumes:
 
 Your tests should all pass:
 
-* you have not changed any python code, and it worked with the local setup at the beginning of the challenge
+<details><summary markdown='span'>View solution</summary>
+
+You should get an output like this:
+
+```bash
+test    | wait-for-it.sh: waiting 15 seconds for db:5432
+test    | wait-for-it.sh: db:5432 is available after 0 seconds
+test    | .......
+test    | ----------------------------------------------------------------------
+test    | Ran 7 tests in 0.979s
+test    |
+test    | OK
+test exited with code 0
+```
+
+</details>
+
+* you have not changed any Python code, and it worked with the local setup at the beginning of the challenge
 * so the only reason it could fail would be docker-based ! If you have an issue with your test suite, please ask a TA !
 
 
-🎉 That's it for our local setup: we now have a standard way to develop our app and run our test suite on it. 
-It might not seem super useful but trust us: **it is** !  
+🎉 That's it for our local setup: we now have a standard way to **develop** our app and **run our test suite** on it.
+It might not seem super useful but trust us: **it is** !
 With this kind of setup:
 
 * you will not have any compatibility issues
-* you will be able to develop and test in a standardized way, 
+* you will be able to develop and test in a standardized way,
 * you will be able to contribute with other developers on the exact same setup (that is now super easy to kick-off)
 
 ---

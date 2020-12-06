@@ -189,7 +189,7 @@ This repository has a `Pipfile`. You now can easily install dependencies with th
 pipenv install --dev # to install `packages` **and** `dev-packages`
 ```
 
-It will create the Virtualenv for this folder, using Python 3.7 as [specified](https://github.com/lewagon/reboot-python/blob/master/Pipfile#L15-L16)
+It will create the Virtualenv for this folder, using Python 3.8 as [specified](https://github.com/lewagon/reboot-python/blob/master/Pipfile#L15-L16)
 
 ## Getting the green dot
 
