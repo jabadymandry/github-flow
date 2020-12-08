@@ -11,9 +11,7 @@ If you were issued a physical Laptop from Le Wagon, here is what should already 
 
 ## Upgrade package managers (pip, pipenv)
 
-Open the Windows Command Prompt **as Administrator** (in your search menu, you will see 2 command prompt: the default one, and the Administrator one. Pick the latter !)
-
-Run the following commands:
+Please upgrade `pip` and `pipenv` to their latest versions: open up a terminal window (for instance _Command Prompt_/_Powershell_/_Git Bash_ on Windows, Terminal on MacOS, ...) and run the following commands:
 
 ```bash
 pip install --upgrade pip
@@ -32,11 +30,11 @@ python --version
 pipenv --version
 ```
 
-## Your turn!
+# Your turn!
 
 There still some configuration left for **you** to do.
 
-### GitHub
+## GitHub
 
 We will use your personal public `github.com` account. If you are reading this, it means that you have one and are logged in with it!
 
@@ -149,6 +147,105 @@ Then open the preferences (`Preferences > Settings` in the menu). On the right p
 You can also go to `View > Hide Minimap`.
 
 Last but not least, a keyboard shortcut is `Ctrl-K`, `Ctrl-B` to open/close the file drawer on the left. Closing it allows you to focus on a single file. To switch files, you don't have to click on the file drawer, you can just type `Ctrl` + `P` and start typing the filename / select it in the list. Very handy to switch files!
+
+## Docker
+
+Time to install **Docker** on your computer ! 🐳 You will need it for day 5.
+
+:point_right: If you were issued a physical Laptop from Le Wagon, it might already be installed: look for the **Docker Desktop** app: **if it is already here, you can skip this part !**
+
+:point_right: We will use the **Community Edition** (which is free and more than enough for our training purpose 👌!)
+
+---
+
+#### ⚠️ **WINDOWS USERS ONLY** ⚠️ Install Docker on Windows
+**Docker Desktop for Windows** is the Community version of Docker for Microsoft Windows.  
+You can download Docker Desktop for Windows from Docker Hub.
+
+* Head over to 👉 [this page](https://docs.docker.com/docker-for-windows/install/) and click the "Download from Docker Hub" button
+<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/download-docker-on-windows.png?raw=true" width="900"></p>
+* Follow the installation steps provided by Docker
+
+<details><summary markdown='span'><b>Details for laptops provided by Le Wagon</b></summary>
+
+:point_right: After being redirected, click on <b>"Get Docker Desktop for Windows (stable)"</b>
+<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/download-docker-on-windows-stable.png?raw=true" width="800"></p>
+<br>
+:point_right: Once the download is done, double-click the program `Docker Desktop Installer.exe` to run the installer
+<br>
+:point_right: You will be asked whether you want to <b>"allow this app to make changes to your device"</b>: click <b>"Yes"</b> !
+<br>
+:point_right_: If prompted, ensure that:
+<ul>
+  <li>"Enable Hyper-V Windows Features" is <b>enabled</b></li> 
+  <li>"Add shortcut to Desktop" is <b>enabled</b></li>
+  <li>"Install required Windows components for WSL2" is <b>disabled</b></li>
+</ul>
+<br>
+:point_right: Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
+<br>
+:point_right: When the installation is successful, click <b>"Close"</b> to complete the installation process.
+<br>
+:point_right: You might have to restart Windows to complete your installation: if asked, please do so !
+
+<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/restart_windows.png?raw=true" width="500"></p>
+<br>
+⚠️ Do not forget to <b>start</b> Docker Desktop !
+<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/docker-desktop.png?raw=true" width="400"></p>
+<br>
+:point_right: When the whale icon in the status bar stays steady, Docker Desktop is up-and-running, and is accessible from any terminal window.
+<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/status-bar.png?raw=true" width="250"></p>
+<br>
+:point_right: Note that if you do not see the whale, you might have to click on the up-arrow on the taskbar !
+<br>
+✅ That's it ! You're done !
+</details>
+
+<details><summary markdown='span'><b>⚠️ ONLY IF WHALE ICON TURNS RED AFTER INSTALLATIOn. OTHERWISE PLEASE SKIP ⚠️</b> If after 5 minutes, the whale icon is still not steady and turns red, follow these guidelines.</summary>
+
+:point_right: Try to use the Hyper-V backend and not WSL2:
+<ul>
+<li>In the Docker Desktop app, go to <b>"Settings"</b></li>
+<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/docker_desktop_settings.png?raw=true" width="600"></p>
+<li>Uncheck the <b>"Use the WSL 2 based engine"</b> option</li>
+<li>Click on <b>"Apply & Restart"</b></li>
+<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/uncheck_wsl.png?raw=true" width="600"></p>
+<li>The whale should get steady and white. If not, please ask a TA for help.</li>
+</ul>
+
+</details>
+
+<details><summary markdown='span'><b>⚠️ ONLY IF INSTALLATION CRASHES AND YOU ARE ASKED TO "Enable virtualization in the BIOS" ⚠️</b> Please double check with a TA before following these guidelines.</summary>
+  
+:point_right: This error is a bit tricky to solve, but do not worry, we are here to help ! It means Docker Desktop was not able to use Hyper-V and will have to use WSL 2.
+<ul>
+<li>You need to activate Virtualization in the BIOS - the easiest way to do it is to watch <a href="https://www.youtube.com/watch?v=MOuTxfzCvMY">this YouTube video</a> and replicate the actions
+</li>
+<li>Once this is done, you might have to update the WSL 2 Linux Kernel: follow <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10#step-4---download-the-linux-kernel-update-package">these steps</a>
+</li>
+<li>Relaunch Docker Desktop, and the whale icon should turn white and steady</li>
+</ul>
+
+</details>
+
+---
+
+#### ⚠️ **MAC USERS ONLY** ⚠️ Install Docker on MacOS
+**Docker Desktop for Mac** is the Community version of Docker for MacOS. You can download Docker Desktop for Mac from Docker Hub.
+
+* Head over to 👉 [this page](https://docs.docker.com/docker-for-mac/install/) and click the "Download from Docker Hub" button.
+<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/download-docker-on-mac.png?raw=true" width="700"></p>
+
+* Double-click Docker.dmg to open the installer, then drag the Docker icon to the Applications folder.
+
+* ⚠️ Do not forget to **start** Docker Desktop !
+
+<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/docker-desktop-mac.png?raw=true" width="400"></p>
+
+* When the whale icon in the status bar stays steady, Docker Desktop is up-and-running, and is accessible from any terminal window.
+<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/status-bar-mac.png?raw=true" width="300"></p>
+<br>
+✅ That's it ! You're done !
 
 ## About Git Bash copy/paste
 
