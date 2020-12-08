@@ -1,17 +1,18 @@
-# Setup
-
 ## Physical Laptop
 
-If you were issued a physical Laptop from Le Wagon, here is what should already be there:
+Here is the list of tools you will need installed on your laptop* for the week:
 
 - Google Chrome
 - [**Sublime Text 3**](https://www.sublimetext.com/) (Unlicensed but unlimited usage) with [Package Control](https://packagecontrol.io/) installed.
 - [Python 3.8](https://www.python.org/downloads/) & [`pip install pipenv`](https://pipenv.pypa.io/en/latest/)
-- `git` with [**Git Bash**](https://git-scm.com/downloads) which will be your main command line tool this week.
+- `git` with [**Git Bash**](https://git-scm.com/downloads) which will be your main command line tool this week
+- [Docker](https://docs.docker.com/get-docker/) - installation steps are detailed below
+
+_(*) If you were issued a physical Laptop from Le Wagon, these tools are already installed !_
 
 ## Upgrade package managers (pip, pipenv)
 
-Please upgrade `pip` and `pipenv` to their latest versions: open up a terminal window (for instance _Command Prompt_/_Powershell_/_Git Bash_ on Windows, Terminal on MacOS, ...) and run the following commands:
+Please upgrade `pip` and `pipenv` to their latest versions: open up a terminal window (for instance _Command Prompt_/_Powershell_/_Git Bash_ on Windows, _Terminal_ on MacOS, ...) and run the following commands:
 
 ```bash
 pip install --upgrade pip
@@ -152,21 +153,21 @@ Last but not least, a keyboard shortcut is `Ctrl-K`, `Ctrl-B` to open/close the 
 
 Time to install **Docker** on your computer ! 🐳 You will need it for day 5.
 
-:point_right: If you were issued a physical Laptop from Le Wagon, it might already be installed: look for the **Docker Desktop** app: **if it is already here, you can skip this part !**
+:point_right: If you were issued a physical Laptop from Le Wagon, it should already be installed: look for the **Docker Desktop** app. **If it is already here, you can skip this part !**
 
 :point_right: We will use the **Community Edition** (which is free and more than enough for our training purpose 👌!)
 
 ---
 
-#### ⚠️ **WINDOWS USERS ONLY** ⚠️ Install Docker on Windows
+#### ⛔️ **WINDOWS USERS ONLY** - Install Docker on Windows
 **Docker Desktop for Windows** is the Community version of Docker for Microsoft Windows.  
 You can download Docker Desktop for Windows from Docker Hub.
 
 * Head over to 👉 [this page](https://docs.docker.com/docker-for-windows/install/) and click the "Download from Docker Hub" button
 <p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/download-docker-on-windows.png?raw=true" width="900"></p>
-* Follow the installation steps provided by Docker
+* Follow the installation steps provided by the Docker documentation for your machine
 
-<details><summary markdown='span'><b>Details for laptops provided by Le Wagon</b></summary>
+<details><summary markdown='span'><b>⚠️ Details for laptops provided by Le Wagon ⚠️</b></summary>
 
 :point_right: After being redirected, click on <b>"Get Docker Desktop for Windows (stable)"</b>
 <p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/download-docker-on-windows-stable.png?raw=true" width="800"></p>
@@ -230,13 +231,13 @@ You can download Docker Desktop for Windows from Docker Hub.
 
 ---
 
-#### ⚠️ **MAC USERS ONLY** ⚠️ Install Docker on MacOS
+#### ⛔️ **MAC USERS ONLY** - Install Docker on MacOS
 **Docker Desktop for Mac** is the Community version of Docker for MacOS. You can download Docker Desktop for Mac from Docker Hub.
 
 * Head over to 👉 [this page](https://docs.docker.com/docker-for-mac/install/) and click the "Download from Docker Hub" button.
 <p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/download-docker-on-mac.png?raw=true" width="700"></p>
 
-* Double-click Docker.dmg to open the installer, then drag the Docker icon to the Applications folder.
+* Double-click `Docker.dmg` to open the installer, then drag the Docker icon to the Applications folder.
 
 * ⚠️ Do not forget to **start** Docker Desktop !
 
@@ -244,8 +245,6 @@ You can download Docker Desktop for Windows from Docker Hub.
 
 * When the whale icon in the status bar stays steady, Docker Desktop is up-and-running, and is accessible from any terminal window.
 <p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/status-bar-mac.png?raw=true" width="300"></p>
-<br>
-✅ That's it ! You're done !
 
 ## About Git Bash copy/paste
 

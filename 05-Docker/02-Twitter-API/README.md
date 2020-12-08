@@ -259,7 +259,7 @@ You need to use `docker run` with various options (the container name, a port ma
 <details><summary markdown='span'>View solution</summary>
 
 ```bash
-docker run --name twitter-api -p 5000:5000 --rm twitter-api
+docker run --name twitter-api -it -p 5000:5000 --rm twitter-api
 ```
 
 </details>
@@ -324,6 +324,8 @@ services:
 ```bash
 docker-compose up
 ```
+  
+You will probably be asked to share some files with `docker-compose` (as it needs access to your application code to run it): click "accept".
 
 :point_right: Browse to [localhost:5000](http://localhost:5000) and [localhost:5000/tweets](http://localhost:5000/tweets).
 
@@ -433,6 +435,7 @@ We now have two services: `web` and `db`.
 
 Let's perform a few initial steps to setup the containers and databases we will need:
 
+:point_right: Make sure you have _"Unix line endings"_ for your `wait-for-it.sh` script: open it with **Sublime Text**, and click `View` > `Line Endings` > `Unix`, then save it ⚠️. This way, it will be correctly interpreted in your containers.
 
 :point_right: Bring up the stack, running containers in the background, and re-building the image for `web` : ```docker-compose up -d --build``` 🛠
 
@@ -585,7 +588,7 @@ services:
     container_name: test
     depends_on:
       - db
-    command: ["./wait-for-it.sh", "db:5432", "--", "nosetests", "-s"]
+    command: ["./wait-for-it.sh", "db:5432", "--", "nosetests", "-s", "--exe"]
     volumes:
       - .:/code
     environment:
