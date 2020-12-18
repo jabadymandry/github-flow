@@ -108,7 +108,7 @@ touch tasks.py
 # pylint: disable=missing-docstring
 
 from celery import Celery
-from wsgi import application
+from wsgi import app
 
 def make_celery(app):
     celery = Celery(
@@ -125,7 +125,7 @@ def make_celery(app):
     celery.Task = ContextTask
     return celery
 
-celery = make_celery(application)
+celery = make_celery(app)
 ```
 
 We've just created the boilerplate code to run the Celery service. No background task has been defined yet. Still, we can launch the service to make sure everything is working properly:
