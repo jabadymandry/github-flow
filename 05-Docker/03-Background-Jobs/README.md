@@ -82,7 +82,7 @@ Open the `.env` file and add a new environment variable:
 
 ```bash
 # .env
-REDIS_URL="redis://localhost:6379"
+REDIS_URL="redis://localhost:6379"  # NEW LINE !
 ```
 
 We also need to prepare the application config with two new variables for the Celery Broker and Result backends. We will use `REDIS_URL` for both:
@@ -93,8 +93,8 @@ import os
 
 class Config(object):
     # [...]
-    CELERY_RESULT_BACKEND = os.environ['REDIS_URL']
-    CELERY_BROKER_URL = os.environ['REDIS_URL']
+    CELERY_RESULT_BACKEND = os.environ['REDIS_URL']  # NEW LINE !
+    CELERY_BROKER_URL = os.environ['REDIS_URL']  # NEW LINE !
 ```
 
 Then following the [Flask documentation's article on Celery](http://flask.pocoo.org/docs/1.0/patterns/celery/), we find out that we need to create a **factory** method for Celery.
@@ -199,11 +199,10 @@ That's it! You now know how to create function to be run by Celery as tasks, and
 ```python
 # wsgi.py
 
-from app import create_app
+# [...]
+from schemas import many_product_schema
 
-application = create_app()
-
-@application.route('/products', methods=['GET'])
+@app.route(f'{BASE_URL}/products', methods=['GET'])
 def get_many_product():
     from tasks import very_slow_add
     very_slow_add.delay(1, 2) # This pushes a task to Celery and does not block.
@@ -211,7 +210,6 @@ def get_many_product():
     products = db.session.query(Product).all() # SQLAlchemy request => 'SELECT * FROM products'
     return many_product_schema.jsonify(products), 200
 
-# [...]
 ```
 
 Exit from your previous `flask shell` typing `quit()` or `exit()` then pressing the `<ENTER>` key.
@@ -221,7 +219,7 @@ Then launch the Flask server:
 FLASK_ENV=development pipenv run flask run
 ```
 
-Go to [`http://localhost:5000/products`](http://localhost:5000/products) and watch the Celery logs. Can you see the job getting enqueued without slowing down your API endpoint?
+Go to [`http://localhost:5000/api/v1/products`](http://localhost:5000/api/v1/products) and watch the Celery logs. Can you see the job getting enqueued without slowing down your API endpoint?
 
 ## Deployment
 
@@ -295,7 +293,7 @@ Then launch the following command to observe production logs:
 heroku logs --tail
 ```
 
-And go to `/products`. Observe your log. Can you see the task getting enqueued and the result being process? Awesome job :clap: !
+And go to `/api/v1/products`. Observe your log. Can you see the task getting enqueued and the result being process? Awesome job :clap: !
 
 ## Remove your credit card from Heroku
 
