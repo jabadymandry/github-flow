@@ -464,14 +464,6 @@ GET /tweets
 
 Go ahead, you can TDD it!
 
-### Users
-
-Once you have basic CRUD for tweets, let's introduce a second model: `User`. There is a `1:n` association between `User` and `Tweet`, make sure it's correctly declared in the `models.py` file (cf [documentation](http://docs.sqlalchemy.org/en/latest/orm/basic_relationships.html#one-to-many)). A `User` should have the following properties:
-
-1. `username`
-1. `email`
-1. `api_key`
-
 ## I'm done!
 
 Let's mark your progress with the following:
