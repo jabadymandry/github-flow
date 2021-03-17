@@ -466,8 +466,8 @@ Before you jump to the next exercise, let's mark your progress with the followin
 
 ```bash
 cd ~/code/<user.github_nickname>/reboot-python
-cd 02-Best-Practices/06-Jenkins
+cd 02-Best-Practices/05-Optional-Jenkins
 touch DONE.md
-git add DONE.md && git commit -m "02-Best-Practices/06-Jenkins done"
+git add DONE.md && git commit -m "02-Best-Practices/05-Optional-Jenkins done"
 git push origin master
 ```

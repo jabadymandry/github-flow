@@ -306,8 +306,8 @@ Before you jump to the next exercise, let's mark your progress with the followin
 
 ```bash
 cd ~/code/<user.github_nickname>/reboot-python
-cd 02-Best-Practices/03-TDD
+cd 02-Best-Practices/02-TDD
 touch DONE.md
-git add DONE.md && git commit -m "02-Best-Practices/03-TDD done"
+git add DONE.md && git commit -m "02-Best-Practices/02-TDD done"
 git push origin master
 ```
