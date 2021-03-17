@@ -403,17 +403,9 @@ to it an auto-incremented id (starting at `1`). Last but not least, it should al
 to `get` a tweet based on its id.
 The list of tweets will be hold in memory.
 
+If we wanted to test the behaviour of our new class, here is what we could do (try to understand what it does and what cases we are testing):
 
-Let's use TDD to implement this class!
-
-```bash
-touch tests/test_repositories.py
-```
-
-:question: This time, try to write the test yourself.
-
-<details><summary markdown='span'>View solution (Really try first 🙏)
-</summary>
+💡 This is only informative, you don't need to copy-paste the test code
 
 ```python
 # tests/test_repositories.py
@@ -449,19 +441,8 @@ class TestTweetRepository(TestCase):
         self.assertIsNone(repository.get(2))
 ```
 
-</details>
 
-<br />
-
-:question: Once the test is written, try to implement the `TweetRepository` class using the
-same TDD technique we used to implement the `Tweet` class.
-
-<details><summary markdown='span'>View solution
-</summary>
-
-```bash
-touch app/repositories.py
-```
+Now let's create our `TweetRepository` class. Copy-paste this code in a new file `app/repositories.py`:
 
 ```python
 # app/repositories.py
@@ -489,12 +470,7 @@ class TweetRepository:
 
 💡 See how the test file is way longer than the actual implementation?
 
-</details>
-
-Let's run the test :
-```bash
-pipenv run nosetests tests/test_repositories.py
-```
+💡 Our `TweetRepository` class is a _mock_, i.e. it mimics the behavior of another feature, relieving us from the need of another dependency. Here we mock a database layer by using a simple `tweets` list.
 
 <br />
 
@@ -738,7 +714,9 @@ Try again [`localhost:5000/tweets/1`](http://localhost:5000/tweets/1). Do you ge
 
 :bulb: Don't forget to commit and deploy!
 
-## Bonus: Swagger documentation
+## Bonus
+
+### Swagger documentation
 
 The Flask-RESTx package comes with [swagger doc](https://flask-restx.readthedocs.io/en/stable/swagger.html) embeded. Run your server and access the root URL:
 
@@ -746,7 +724,7 @@ The Flask-RESTx package comes with [swagger doc](https://flask-restx.readthedocs
 
 Can you see the documentation? You can try your endpoints right within it!
 
-## Going further
+### Going further
 
 If you reached this part, you get the gist of building a RESTful API with Flask. It's time to practise!
 
