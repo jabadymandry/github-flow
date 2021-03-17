@@ -13,8 +13,10 @@ Here is the list of what we are going to install during this exercise:
 
 ## PostgreSQL
 
+:warning: **Don't install postgres if you're using a computer from Le Wagon**. It should be already installed. If not, install it
+
 You can now head over to [postgresql.org/download/windows/](https://www.postgresql.org/download/windows/) and `download` the installer for `PostgreSQL 10+`.
-(`Don't install postgres` if you're using a `computer from Le Wagon`. It should be already installed. If not, install it)
+
 Run it. It will install:
 
 - the PostgreSQL Server
