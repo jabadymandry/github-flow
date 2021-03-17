@@ -1,16 +1,19 @@
-# SQLAlchemy Recap
+# SQLAlchemy 
 
 Before going back to yesterday's `twitter-api` repository, let's create a brand new Flask app (without the factory pattern `create_app`).
-Here is the list of what you will need (`don't install anything for now`, we'll do it together in a few moments) :
 
-- Add [psycopg2](http://initd.org/psycopg/) to use PostgreSQL
-- Use [SQLAlchemy](https://www.sqlalchemy.org/) as the ORM on top of PostgreSQL
-- Add [Alembic](http://alembic.zzzcomputing.com/) to manage schema migration with the [`Flask-Migrate`](http://flask-migrate.readthedocs.io/) package.
-- Deploy to Heroku
+Here is the list of what we are going to install during this exercise:
+
+ :bulb: _**don't install these right now**, we'll do it progressively_
+
+- [psycopg2](http://initd.org/psycopg/) which will allow us to use PostgreSQL
+- [SQLAlchemy](https://www.sqlalchemy.org/) as the ORM on top of PostgreSQL
+- [Alembic](http://alembic.zzzcomputing.com/) to manage schema migration with the [`Flask-Migrate`](http://flask-migrate.readthedocs.io/) package.
+- We will deploy our app using Heroku
 
 ## PostgreSQL
 
-Head over to [postgresql.org/download/windows/](https://www.postgresql.org/download/windows/) and `download` the installer for `PostgreSQL 10+`.
+You can now head over to [postgresql.org/download/windows/](https://www.postgresql.org/download/windows/) and `download` the installer for `PostgreSQL 10+`.
 (`Don't install postgres` if you're using a `computer from Le Wagon`. It should be already installed. If not, install it)
 Run it. It will install:
 
@@ -446,7 +449,7 @@ heroku create --region=eu
 git push heroku master
 ```
 
-Once more, you can enjoy Heroku's **magic**! From the `Pipfile`, it detected the package psycopg2 so it automatically reserved a (free - hobby plan) PostgreSQL instance and configured the `DATABASE_URL`. You can check it with:
+Once more, you can enjoy Heroku's **magic**! From the `Pipfile`, it detected the [psycopg2](http://initd.org/psycopg/) package so it automatically reserved a (free - hobby plan) PostgreSQL instance and configured the `DATABASE_URL`. You can check it with:
 
 ```bash
 heroku config:get DATABASE_URL
@@ -503,8 +506,8 @@ Before you jump to the next exercise, let's mark your progress with the followin
 
 ```bash
 cd ~/code/<user.github_nickname>/reboot-python
-cd 04-Database/01-SQLAlchemy-Recap
+cd 04-Database/01-SQLAlchemy
 touch DONE.md
-git add DONE.md && git commit -m "04-Database/01-SQLAlchemy-Recap done"
+git add DONE.md && git commit -m "04-Database/01-SQLAlchemy done"
 git push origin master
 ```
