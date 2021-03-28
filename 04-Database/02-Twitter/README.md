@@ -1,10 +1,10 @@
 # Twitter API - Day 2
 
-The goal of this exercise is to continue the work on yesterday's exercise **Twitter API**. In this exercise, the database was _mocked_ with a made-up class `TweetRepository`.
+In this challenge we will resume the work started in yesterday's **Twitter API** exercise. In this exercise, the database was _mocked_ with a made-up `TweetRepository` class.
 
 ## Setup
 
-We're going to continue from yesterday correction :
+We're going to continue from yesterday correction:
 :point_right: [github.com/ssaunier/twitter-api](https://github.com/ssaunier/twitter-api)
 
 ```bash
@@ -43,7 +43,7 @@ FLASK_ENV=development pipenv run flask run
 
 ## Setting up SQLAlchemy
 
-Like in the previous exercise, we need to install some tools :
+Like in the previous exercise, we need to install some tools:
 
 ```bash
 pipenv install psycopg2-binary gunicorn
@@ -91,7 +91,7 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
 ```
 
-Now let's instantiate a `SQLAlchemy` instance, but first let's kill the fake repositories:
+Now let's instantiate an `SQLAlchemy` instance, but first let's kill the fake repositories:
 
 ```bash
 rm app/db.py
@@ -163,7 +163,7 @@ We need a local database for our application:
 winpty psql -U postgres -c "CREATE DATABASE twitter_api_flask"
 ```
 
-Then we need to isolate an utility file to run the commands without polluting the main `wsgi.py`. Here how it goes:
+Then we need to isolate a utility file to run the commands without polluting the main `wsgi.py`. Here is how it goes:
 
 ```bash
 touch manage.py
@@ -463,6 +463,14 @@ GET /tweets
 ```
 
 Go ahead, you can TDD it!
+
+### Users
+
+Once you have basic CRUD for tweets, let's introduce a second model: `User`. There is a `1:n` association between `User` and `Tweet`, make sure it's correctly declared in the `models.py` file (cf [documentation](http://docs.sqlalchemy.org/en/latest/orm/basic_relationships.html#one-to-many)). A `User` should have the following properties:
+
+1. `username`
+1. `email`
+1. `api_key`
 
 ## I'm done!
 
