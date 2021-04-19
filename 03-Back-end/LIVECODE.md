@@ -13,7 +13,7 @@ From the [HTTP section of `awesome-python`](https://github.com/vinta/awesome-pyt
 
 ```bash
 mkdir news && cd $_
-pipenv --python 3.7
+pipenv --python 3.8
 pipenv install requests
 pipenv install nose --dev
 

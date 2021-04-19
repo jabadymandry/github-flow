@@ -24,7 +24,7 @@ The vending machine should allow:
 
 ```bash
 mkdir vending-machine && cd $_
-pipenv --python 3.7
+pipenv --python 3.8
 pipenv install nose
 mkdir tests
 touch machine.py
