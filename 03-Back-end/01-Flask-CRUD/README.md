@@ -250,6 +250,12 @@ IDENTIFIER_GENERATOR = itertools.count(START_INDEX)
 print(next(IDENTIFIER_GENERATOR))
 ```
 
+:bulb: **Tip** To send a POST request **in your tests**, you can use the following method:
+
+```python
+response = self.client.post("/api/v1/products", json={'name': 'HistoVec'})
+```
+
 :bulb: **Tip** Here is a payload you can use in Postman to test this route:
 
 ```
