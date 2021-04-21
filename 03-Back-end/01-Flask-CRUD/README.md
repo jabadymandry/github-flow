@@ -171,10 +171,10 @@ class TestViews(TestCase):
         app.config['TESTING'] = True
         return app
 
-    def test_products_json(self):
+    def test_read_many_products(self):
         response = self.client.get("/api/v1/products")
         products = response.json
-        self.assertIsInstance(products, dict)
+        self.assertIsInstance(products, list)
         self.assertGreater(len(products), 2) # 2 is not a mistake here.
 ```
 
