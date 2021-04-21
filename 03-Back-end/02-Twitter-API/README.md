@@ -450,7 +450,7 @@ Now let's create our `TweetRepository` class. Copy-paste this code in a new file
 
 class TweetRepository:
     def __init__(self):
-        self.__clear()
+        self.clear()
 
     def add(self, tweet):
         self.tweets.append(tweet)
@@ -463,7 +463,7 @@ class TweetRepository:
               return tweet
       return None
 
-    def __clear(self):
+    def clear(self):
       self.tweets = []
       self.next_id = 1
 ```
@@ -527,7 +527,7 @@ class TestTweetViews(TestCase):
         return app
 
     def setUp(self):
-        tweet_repository.clear() # Upgrade the TweetRepository.__clear() method to public!
+        tweet_repository.clear() 
 
     def test_tweet_show(self):
         first_tweet = Tweet("First tweet")
