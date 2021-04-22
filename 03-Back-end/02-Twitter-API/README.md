@@ -65,47 +65,66 @@ FLASK_ENV=development pipenv run flask run
 
 The server should start. Open your browser and visit [`localhost:5000/hello`](http://localhost:5000/hello). You should see "Hello world!" as a text answer!
 
-### Blueprint
+### Namespace
 
 The code in `app/__init__.py` is a copy/paste from the previous exercise, we just took the code and put it into a `create_app` method, returning the instance of `Flask` created. We can do better!
 
-👉 Take some time to read about [Modular Flask Applications with Blueprints](http://flask.pocoo.org/docs/blueprints/).
-
-Let's create a new file to hold a Blueprint for the Homepage of our application. This will act as a placeholder for now and will be enhanced on the last day of this Track.
+We will use the [`flask-restx`](https://flask-restx.readthedocs.io/) package:
 
 ```bash
-mkdir app/main
-touch app/main/controllers.py
+pipenv install flask-restx
+```
+
+Take some time to read the following article:
+
+:point_right: [Quick Start](https://flask-restx.readthedocs.io/en/stable/quickstart.html)
+
+We want to start on the right foot in term of scalability, again take some time to read this:
+
+:point_right: [Scaling your project](https://flask-restx.readthedocs.io/en/stable/scaling.html)
+
+```bash
+mkdir app/apis
+touch app/apis/tweets.py
 ```
 
 ```python
-# app/main/controllers.py
+# app/apis/tweets.py
 # pylint: disable=missing-docstring
 
-from flask import Blueprint
+from flask_restx import Namespace, Resource
 
-main = Blueprint('main', __name__)
+api = Namespace("tweets")
 
-@main.route('/hello')
-def home():
-    return "Hello from a Blueprint!"
+
+@api.route("/hello")
+class TweetResource(Resource):
+    def get(self):
+        return "Hello from the 'tweets' namespace!"
 ```
 
-We can now import our simple blueprint into our main application, like this:
+:bulb: By using to our "tweets" namespace `api = Namespace("tweets")`, our "hello" API route will become `/tweets/hello` instead of just `/hello`
+
+:bulb: The `get` method defined above will be called when the server receives an HTTP GET request on `/tweets/hello`
+
+We can now import our simple namespace into our main application, like this:
 
 ```python
 # app/__init.py__
 # pylint: disable=missing-docstring
 
 from flask import Flask
+from flask_restx import Api
 
 def create_app():
     app = Flask(__name__)
 
-    # Remove the previous code using `@app` and replace it with:
-    from .main.controllers import main
-    app.register_blueprint(main)
+    from .apis.tweets import api as tweets
+    api = Api()
+    api.add_namespace(tweets)
+    api.init_app(app)
 
+    app.config['ERROR_404_HELP'] = False
     return app
 ```
 
@@ -114,9 +133,9 @@ If you stopped your server, restart it with:
 ```bash
 FLASK_ENV=development pipenv run flask run
 ```
-Open your browser and visit [`localhost:5000/hello`](http://localhost:5000/hello). You should see "Hello from a Blueprint!" as a text answer!
+Open your browser and visit [`localhost:5000/tweets/hello`](http://localhost:5000/tweets/hello). You should see "Hello from the 'tweets' namespace!" as a text answer!
 
-💡 It's important to understand the `from .main.controllers import main` line which happens before the blueprint registering. The `from .main.controllers` means that we look into the `main/controllers.py` file from the **same** package as the local `__init__.py`. It's a shortcut for `from app.main.controllers`. Then the `import main` means that we import the variable or method `main` defined in this `controllers.py` file (here it's a variable: an instance of `Blueprint`).
+💡 It's important to understand the `from .apis.tweets import api as tweets` line which happens before the namespace registering. The `from .apis.tweets` means that we look into the `apis/tweets.py` file from the **same** package as the local `__init__.py`. It's a shortcut for `from app.apis.tweets`. Then the `import api` means that we import the variable or method `api` defined in this `tweets.py` file (here it's a variable: an instance of `Namespace`). The `as tweets` just renames the `api` that we imported to `tweets`, for readability.
 
 ### Testing
 
@@ -130,24 +149,24 @@ Let's create our `tests` folders and a first file
 
 ```bash
 mkdir tests
-mkdir tests/main
-touch tests/main/__init__.py
-touch tests/main/test_home_view.py
+mkdir tests/apis
+touch tests/apis/__init__.py
+touch tests/apis/test_tweet_view.py
 ```
 
 ```python
-# tests/main/test_home_view.py
+# tests/apis/test_tweet_view.py
 from flask_testing import TestCase
 from app import create_app
 
-class TestHomeView(TestCase):
+class TestTweetView(TestCase):
     def create_app(self):
         app = create_app()
         app.config['TESTING'] = True
         return app
 
-    def test_home(self):
-        response = self.client.get("/hello")
+    def test_tweet(self):
+        response = self.client.get("/tweets/hello")
         text = response.data.decode()
         print(text)
         self.assertIn("Goodbye", text)
@@ -156,7 +175,7 @@ class TestHomeView(TestCase):
 Open the terminal and run:
 
 ```bash
-pipenv run nosetests -s tests/main/test_home_view.py
+pipenv run nosetests -s tests/apis/test_tweet_view.py
 ```
 
 The test should be red!
@@ -224,7 +243,7 @@ In the following section, we will implement the HTTP API serving a JSON of a sin
 
 ### Model
 
-Before rushing to the Flask blueprint we need to create to serve an HTTP response,
+Before rushing to the Flask namespace we need to create to serve an HTTP response,
 we need a model to hold some data. We don't have a database (yet) so we will
 create everything manually today.
 
@@ -476,7 +495,7 @@ class TweetRepository:
 
 ### Controller + Route
 
-It's now time to add a new route and a new controller to our app to serve our API endpoint.
+It's now time to add a new route to our app to serve our API endpoint.
 Remember, we want to have this:
 
 ```bash
@@ -485,35 +504,10 @@ GET /tweets/1
 => a JSON of the given tweet
 ```
 
-Instead of coding everyting manually like we did in the previous exercise, we will use the [`flask-restx`](https://flask-restx.readthedocs.io/) package.
-
-```bash
-pipenv install flask-restx
-```
-
-Take some time to read the following article:
-
-:point_right: [Quick Start](https://flask-restx.readthedocs.io/en/stable/quickstart.html)
-
-We want to start on the right foot in term of scalability, again take some time to read this:
-
-:point_right: [Scaling your project](https://flask-restx.readthedocs.io/en/stable/scaling.html)
-
-Let's put this into practise:
-
-```bash
-mkdir app/apis
-touch app/apis/__init__.py
-
-mkdir tests/apis
-touch tests/apis/__init__.py
-touch tests/apis/test_tweet_views.py
-```
-
 Let's write the test for our new route:
 
 ```python
-# tests/apis/test_tweet_views.py
+# tests/apis/test_tweet_view.py
 
 from flask_testing import TestCase
 from app import create_app
@@ -560,15 +554,7 @@ from .repositories import TweetRepository
 tweet_repository = TweetRepository()
 ```
 
-Since we are using Flask-RESTx `namespaces`, let's remove our `Blueprint`:
-```bash
-rm -rf app/main
-```
-
-Now, let's make the test pass! We need to create a new API namespace:
-```bash
-touch app/apis/tweets.py
-```
+Now, let's make the test pass! You can remove the `/hello` route by replacing the content of this file entirely:
 
 ```python
 # app/apis/tweets.py
@@ -588,31 +574,6 @@ class TweetResource(Resource):
             api.abort(404)
         else:
             return tweet
-```
-
-Connect this right away to the main Flask app, and don't forget to clean `Blueprint`. Here is the file content now:
-
-```python
-# app/__init__.py
-# pylint: disable=missing-docstring
-
-from flask import Flask
-from flask_restx import Api
-
-def create_app():
-    app = Flask(__name__)
-
-    @app.route('/hello')
-    def hello():
-        return "Goodbye World!"
-
-    from .apis.tweets import api as tweets
-    api = Api()
-    api.add_namespace(tweets)
-    api.init_app(app)
-
-    app.config['ERROR_404_HELP'] = False
-    return app
 ```
 
 :question: Implement the rest of `app/apis/tweets.py` to make the test pass.
