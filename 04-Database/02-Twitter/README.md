@@ -450,7 +450,7 @@ script:
   - pipenv run nosetests
 ```
 
-Commit & push this change. Then go to [github.com/marketplace/travis-ci](https://github.com/marketplace/travis-ci) to add this `<github-nickname>/twitter-api` to your free Travis plan if it's not the case yet.
+Commit & push this change. Then go to [github.com/marketplace/travis-ci](https://github.com/marketplace/travis-ci) to add this `<github-nickname>/twitter-api-database` to your free Travis plan if it's not the case yet.
 
 ## Going further
 
