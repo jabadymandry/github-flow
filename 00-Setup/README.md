@@ -4,15 +4,18 @@ Here is the list of tools you will need installed on your laptop* for the week:
 
 - Google Chrome
 - [**Sublime Text 3**](https://www.sublimetext.com/) (Unlicensed but unlimited usage) with [Package Control](https://packagecontrol.io/) installed.
-- [Python 3.8](https://www.python.org/downloads/) & [`pip install pipenv`](https://pipenv.pypa.io/en/latest/)
+- [Python 3.8](https://www.python.org/downloads/) (make sure you check "Add Python to PATH", see screenshot below)
+
+<p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/python_install_windows.png?raw=true" width="900"></p>
+
 - `git` with [**Git Bash**](https://git-scm.com/downloads) which will be your main command line tool this week
 - [Docker](https://docs.docker.com/get-docker/) - installation steps are detailed below
 
 _(*) If you were issued a physical Laptop from Le Wagon, these tools are already installed !_
 
-## Upgrade package managers (pip, pipenv)
+## Install and upgrade package managers (pip, pipenv)
 
-Please upgrade `pip` and `pipenv` to their latest versions: open up a terminal window (for instance _Command Prompt_/_Powershell_/_Git Bash_ on Windows, _Terminal_ on MacOS, ...) and run the following commands:
+In the previous section we installed Python, which also installed a package manager called `pip`. We are going to upgrade it (in case you already had it before) and install (or upgrade if you already have it) another package manager called `pipenv`. Please open up a terminal window (for instance _Command Prompt_/_Powershell_/_Git Bash_ on Windows, _Terminal_ on MacOS, ...) and run the following commands:
 
 ```bash
 pip install --upgrade pip
