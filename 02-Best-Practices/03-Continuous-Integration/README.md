@@ -75,6 +75,8 @@ You should have one commit. Now go back to the terminal:
 git push origin master
 ```
 
+:warning: Do NOT pass `--force` to your git push or it will probably prevent Travis from detecting your push
+
 When the push is done, go back to the page, and **reload** it. You should see the commit get a yellow circle, and then a green tick! This is the integration between GitHub and Travis CI. It will run everytime you push commits to GitHub, thanks to [GitHub webhooks](https://developer.github.com/webhooks/) and the [Travis API](https://docs.travis-ci.com/user/developer/#API-V3) integration.
 
 ## Continuous Integration & Pull Request
