@@ -670,7 +670,7 @@ class TweetResource(Resource):
 
 ### Running the server
 
-Let's leave the tests for now (running `pipenv run nosetests` should yield 6 passing tests) and launch the server:
+Let's leave the tests for now (running `nosetests` should yield 6 passing tests) and launch the server:
 
 ```bash
 FLASK_ENV=development pipenv run flask run

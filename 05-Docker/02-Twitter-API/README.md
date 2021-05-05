@@ -53,7 +53,7 @@ pipenv install --dev
 <details><summary markdown='span'>View solution</summary>
 
 ```bash
-pipenv run nosetests
+nosetests
 ```
 
 </details>
@@ -83,7 +83,7 @@ DATABASE_URL="postgresql://postgres@localhost/twitter_api_flask"
 ```
 
 You should still have the `twitter_api_flask` and `twitter_api_flask_test` databases on your laptop.
-Now running your test suite `pipenv run nosetests` should work !
+Now running your test suite `nosetests` should work !
 
 Please note that if you deleted the **dev** and **test** databases yesterday, you would have to re-set them up !
 
@@ -94,7 +94,7 @@ winpty psql -U postgres -c "CREATE DATABASE twitter_api_flask"
 winpty psql -U postgres -c "CREATE DATABASE twitter_api_flask_test"
 ```
 
-And now running your test suite `pipenv run nosetests` should work !
+And now running your test suite `nosetests` should work !
 
 </details>
 

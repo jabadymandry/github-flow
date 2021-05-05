@@ -34,7 +34,7 @@ type(4)
 cd ~/code/<user.github_nickname>/reboot-python
 cd 01-OOP/05-String-Manipulation
 subl .
-pipenv run nosetests
+nosetests
 pipenv run pylint string_methods.py
 ```
 

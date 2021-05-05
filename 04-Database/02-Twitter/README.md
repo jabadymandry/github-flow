@@ -30,7 +30,7 @@ pipenv install --dev
 Make sure that the tests are passing:
 
 ```bash
-pipenv run nosetests
+nosetests
 ```
 
 Make sure that the web server can be run and show the Swagger documentation:
@@ -322,7 +322,7 @@ Now go ahead and update the four tests replacing the `tweet_repository` former l
 To check if you are making some progress, run the tests:
 
 ```bash
-pipenv run nosetests
+nosetests
 ```
 
 <details><summary markdown='span'>View solution

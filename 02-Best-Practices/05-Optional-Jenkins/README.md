@@ -146,7 +146,7 @@ class TestMorse(unittest.TestCase):
 In your terminal, run the tests:
 
 ```bash
-pipenv run nosetests
+nosetests
 ```
 
 You should get 28 failing tests! Great, we have the "red" step of TDD. Let's proceed with the Jenkins configuration before making the tests green.
@@ -294,7 +294,7 @@ Jenkins uses a blue circle :large_blue_circle: to visualize a passing build and 
 Take some time to implement the `decode(self, message)` function in `morse.py`. To run the tests, you can locally launch:
 
 ```bash
-pipenv run nosetests
+nosetests
 ```
 
 Stuck? Ask your buddy! Still stuck? Ask a TA!

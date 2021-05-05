@@ -34,7 +34,7 @@ Let's build a currency converter in the `currencies.py` file. In this exercise, 
 Run the tests with:
 
 ```bash
-pipenv run nosetests
+nosetests
 ```
 
 You may notice some tests failing. Update your rates with the following values as results have been hard-coded in the tests:
