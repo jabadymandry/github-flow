@@ -110,7 +110,7 @@ alias subl="/c/Program\ Files/Sublime\ Text\ 3/subl.exe"
 # Python specifics
 alias python="winpty python" # https://stackoverflow.com/a/33696825/197944
 alias pr="pipenv run"
-alias prp="pipenv run python"
+alias prp="pipenv run winpty python"
 alias nosetests="pipenv run winpty nosetests --traverse-namespace"
 ```
 

@@ -645,5 +645,5 @@ cd ~/code/<user.github_nickname>/reboot-python
 cd 05-Docker/02-Twitter-API
 touch DONE.md
 git add DONE.md && git commit -m "05-Docker/02-Twitter-API"
-git push origin docker
+git push origin master
 ```

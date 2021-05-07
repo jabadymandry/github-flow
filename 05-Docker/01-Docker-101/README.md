@@ -148,10 +148,10 @@ docker run -e POSTGRES_PASSWORD=password postgres
 🍾 That's it! No need for a complex installer, no conflicts on your laptop, no long hours scrolling tech forums to fix your problem : you have a running database in a single command.
 
 
-The `-e` flag in `docker run -e ...` stands for environment variable. Here, we just created a password for the database superuser, and passed it to the `docker run` command. Ideally a password should be more complex, but here we don't really care, we will get rid of this container in a few minutes anyway !
+The `-e` flag in `docker run -e ...` stands for environment variable. Here, we just created a password for the database superuser, and passed it to the `docker run` command. Ideally a password should be more complex and we should not provide it from the command line, but here we'll do it this way for simplicity's sake.
 
 
-Now, you should see an output in your terminal: it looks like your database is initialized and ready to accept connections !
+Now, you should see an output in your terminal: it looks like your database is initialized and ready to accept connections!
 
 <details><summary markdown='span'>View solution</summary>
 
@@ -205,7 +205,7 @@ What happens if we do not give it a name ?
 
 <details><summary markdown='span'>Hint</summary>
 
-Hint know our to run a container already... Do you remember how to list all running containers ?
+Do you remember how to list all running containers ?
 
 </details>
 <details><summary markdown='span'>View solution</summary>
