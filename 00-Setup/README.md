@@ -110,7 +110,7 @@ alias subl="/c/Program\ Files/Sublime\ Text\ 3/subl.exe"
 # Python specifics
 alias python="winpty python" # https://stackoverflow.com/a/33696825/197944
 alias pr="pipenv run"
-alias prp="pipenv run python"
+alias prp="pipenv run winpty python"
 ```
 
 Save and quit with `Esc`, `:wq` and `Enter`. Close and start again Git Bash. It should ask for your SSH key passphrase as it stores it in the SSH agent. This way you won't have to re-type it for every `git` command further on.
