@@ -205,7 +205,7 @@ What happens if we do not give it a name ?
 
 <details><summary markdown='span'>Hint</summary>
 
-Hint know our to run a container already... Do you remember how to list all running containers ?
+Do you remember how to list all running containers ?
 
 </details>
 <details><summary markdown='span'>View solution</summary>
