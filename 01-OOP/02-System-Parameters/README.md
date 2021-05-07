@@ -8,7 +8,7 @@ Python scripts can read arguments passed on the command line. This may come in h
 cd ~/code/<user.github_nickname>/reboot-python
 cd 01-OOP/02-System-Parameters
 subl .
-pipenv run nosetests
+nosetests
 pipenv run pylint calc.py
 ```
 

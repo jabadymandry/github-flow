@@ -110,7 +110,7 @@ Read this code. If you have _any_ question about it, ask a teacher. You can copy
 Now it's time to run it first to make sure those tests are **failing**:
 
 ```bash
-pipenv run nosetests
+nosetests
 ```
 
 What next? Now you should **read the error message**, and try to **fix** it, and only this one (don't anticipate). Let's do the first one together:
@@ -156,7 +156,7 @@ class Game:
 Let's run the tests again:
 
 ```bash
-pipenv run nosetests
+nosetests
 ```
 
 We get this error message:
@@ -253,7 +253,7 @@ A possible implementation of the test would be:
 Run the tests to make sure they are not passing:
 
 ```bash
-pipenv run nosetests
+nosetests
 ```
 
 ❓ It's your turn! Update the `game.py` implementation to make the tests pass!

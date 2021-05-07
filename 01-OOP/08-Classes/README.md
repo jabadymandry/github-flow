@@ -23,7 +23,7 @@ Open the `vehicle.py` file and implement a simple class following these specs:
 To help you through this task, we implemented some tests you can run:
 
 ```bash
-pipenv run nosetests
+nosetests
 ```
 
 Do not hesitate to open and **read** the test file in `tests/test_vehicle.py`!

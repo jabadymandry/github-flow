@@ -53,7 +53,7 @@ grid[i][j]
 Open the `sudoku.py` file and implement the `is_valid()` instance method of the `SudokuSolver` class. To check if your code is working, you can run the tests with:
 
 ```bash
-pipenv run nosetests
+nosetests
 ```
 
 ## Done?

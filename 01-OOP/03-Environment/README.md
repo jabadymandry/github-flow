@@ -8,7 +8,7 @@ Another way of modifying the behavior of a Python script (other than command lin
 cd ~/code/<user.github_nickname>/reboot-python
 cd 01-OOP/03-Environment
 subl .
-pipenv run nosetests
+nosetests
 pipenv run pylint flask_option.py
 ```
 
