@@ -55,81 +55,60 @@ Please do not peek _before_ the livecode session!
 
 ```python
 # test/test_colorful.py
-
-import unittest
 from colorful import is_colorful
+import unittest
+
 
 class ColorfulTest(unittest.TestCase):
-    def test_one_digit_number(self):
-        self.assertTrue(is_colorful(0))
-        self.assertTrue(is_colorful(1))
-        self.assertTrue(is_colorful(2))
-        self.assertTrue(is_colorful(3))
-        self.assertTrue(is_colorful(4))
-        self.assertTrue(is_colorful(5))
-        self.assertTrue(is_colorful(6))
-        self.assertTrue(is_colorful(7))
-        self.assertTrue(is_colorful(8))
-        self.assertTrue(is_colorful(9))
+    def test_single_number(self):
+        for i in range(10):
+            self.assertTrue(is_colorful(i))
 
-    def test_many_digits_number_with_at_least_one_digit_0_or_1(self):
-        self.assertFalse(is_colorful(21))
-        self.assertFalse(is_colorful(301))
-        self.assertFalse(is_colorful(87610))
-        self.assertFalse(is_colorful(1034))
+    def test_with_one_or_zero(self):
+        self.assertFalse(is_colorful(1234))
+        self.assertFalse(is_colorful(2304))
 
-    def test_many_digits_number_with_a_duplicate_digit(self):
-        self.assertFalse(is_colorful(232))
-        self.assertFalse(is_colorful(8797))
-        self.assertFalse(is_colorful(34837))
+    def test_with_duplicate_numbers(self):
+        self.assertFalse(is_colorful(32453))
+        self.assertFalse(is_colorful(23456))
 
     def test_colorful_number(self):
-        self.assertTrue(is_colorful(23))
         self.assertTrue(is_colorful(3245))
+
 ```
 
 ```python
 # colorful.py
+from typing import List
+
 
 def is_colorful(number):
     number_as_string = str(number)
-    decomposed_number = [int(char) for char in number_as_string]
-    number_as_set = set(decomposed_number)
-
-    # Colorful if only one digit
-    if number <=9:
+    if len(number_as_string) == 1:
         return True
 
-    # Not colorful if digits 0 or 1 is present
     if "0" in number_as_string or "1" in number_as_string:
         return False
 
-    # Not colorful if there is a duplicate digit
-    if len(number_as_set) != len(number_as_string):
+    number_list = [int(number) for number in number_as_string]
+
+    if len(set(number_list)) != len(number_list):
         return False
 
-    # Main implementation
-    i = 0
-    j = 1
-    n = len(number_as_string)
+    for width in range(2, len(number_as_string) - 1):
+        for i in range(len(number_as_string) - width):
+            slice = number_as_string[i : i + width]
+            result = 1
+            for digit in slice:
+                result *= int(digit)
 
-    val1 = 0
-    val2 = 0
+            if result in number_list:
+                return False
 
-    while j < n :
-        val1 = int(number_as_string[i])
-        val2 = int(number_as_string[j])
-
-        product_val = val1 * val2
-        if product_val in number_as_set:
-            return False
-
-        number_as_set.add(product_val)
-
-        i = i+1
-        j = j+1
+            number_list.append(result)
 
     return True
+
 ```
 
 </details>
