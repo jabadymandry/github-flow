@@ -272,6 +272,262 @@ Don't forget to select "Raw" and "JSON" to automatically add a `Content-Type: ap
 
 Finally, add a test for the `PATCH /api/v1/products/:id` route which will **update** an existing `product` (based on its id). Return a `204` when completed, or `422` if there is a validation error (needs a separate test case, validation error could be that supplied product name is _empty_)
 
+### Solutions
+
+:warning: **Please read the solutions only once you have tried implementing all the tests and HTTP methods!**
+
+<details><summary markdown="span">View tests
+</summary>
+
+```python
+# tests/test_views.py
+from flask_testing import TestCase
+from wsgi import app
+
+class TestViews(TestCase):
+    def create_app(self):
+        app.config['TESTING'] = True
+        return app
+
+    def test_read_many_products(self):
+        response = self.client.get("/api/v1/products")
+        products = response.json
+        self.assertEqual(response.status_code, 200)
+        self.assertIsInstance(products, list)
+        self.assertGreater(len(products), 2) # 2 is not a mistake here.
+
+    def test_read_one_products(self):
+        response = self.client.get("/api/v1/products/1")
+        product = response.json
+        self.assertEqual(response.status_code, 200)
+        self.assertIsInstance(product, dict)
+        self.assertEqual(product['name'], 'Skello')
+
+    def test_read_one_product_not_found(self):
+        response = self.client.get("/api/v1/products/20")
+        product = response.json
+        self.assertEqual(response.status_code, 404)
+        self.assertIsNone(product)
+
+    def test_delete_product(self):
+        delete_response = self.client.delete("/api/v1/products/3")
+        deleted_product = delete_response.json
+        self.assertEqual(delete_response.status_code, 204)
+        self.assertIsNone(deleted_product)
+
+        read_one_response = self.client.get("/api/v1/products/3")
+        read_one_product = read_one_response.json
+        self.assertEqual(read_one_response.status_code, 404)
+        self.assertIsNone(read_one_product)
+
+    def test_delete_product_not_found(self):
+        response = self.client.delete("/api/v1/products/20")
+        product = response.json
+        self.assertEqual(response.status_code, 404)
+        self.assertIsNone(product)
+
+    def test_create_product(self):
+        response = self.client.post("/api/v1/products", json={'name': 'Netflix'})
+        product = response.json
+        self.assertEqual(response.status_code, 201)
+        self.assertIsInstance(product, dict)
+        self.assertEqual(product['name'], 'Netflix')
+
+    def test_create_product_validation_error(self):
+        response_1 = self.client.post("/api/v1/products", json={'name': 2})
+        product_1 = response_1.json
+        self.assertEqual(response_1.status_code, 422)
+        self.assertIsNone(product_1)
+
+        response_2 = self.client.post("/api/v1/products", json={'name': ''})
+        product_2 = response_2.json
+        self.assertEqual(response_2.status_code, 422)
+        self.assertIsNone(product_2)
+
+    def test_create_product_bad_request(self):
+        response_1 = self.client.post("/api/v1/products", json={'other': 2})
+        product_1 = response_1.json
+        self.assertEqual(response_1.status_code, 400)
+        self.assertIsNone(product_1)
+
+        response_2 = self.client.post("/api/v1/products", json={'other': 'what'})
+        product_2 = response_2.json
+        self.assertEqual(response_2.status_code, 400)
+        self.assertIsNone(product_2)
+
+        response_3 = self.client.post("/api/v1/products")
+        product_3 = response_3.json
+        self.assertEqual(response_3.status_code, 400)
+        self.assertIsNone(product_3)
+
+    def test_update_product(self):
+        update_response = self.client.patch("/api/v1/products/1", json={'name': 'Netlify'})
+        update_product = update_response.json
+        self.assertEqual(update_response.status_code, 204)
+        self.assertIsNone(update_product)
+
+        read_response = self.client.get("/api/v1/products/1")
+        product = read_response.json
+        self.assertEqual(read_response.status_code, 200)
+        self.assertIsInstance(product, dict)
+        self.assertEqual(product['name'], 'Netlify')
+
+    def test_update_product_not_found(self):
+        response = self.client.patch("/api/v1/products/20", json={'name': 'Doctolib'})
+        product = response.json
+        self.assertEqual(response.status_code, 404)
+        self.assertIsNone(product)
+
+    def test_update_product_validation_error(self):
+        response_1 = self.client.patch("/api/v1/products/1", json={'name': 2})
+        product_1 = response_1.json
+        self.assertEqual(response_1.status_code, 422)
+        self.assertIsNone(product_1)
+
+        response_2 = self.client.patch("/api/v1/products/1", json={'name': ''})
+        product_2 = response_2.json
+        self.assertEqual(response_2.status_code, 422)
+        self.assertIsNone(product_2)
+
+    def test_update_product_bad_request(self):
+        response_1 = self.client.patch("/api/v1/products/1", json={'other': 'what'})
+        product_1 = response_1.json
+        self.assertEqual(response_1.status_code, 400)
+        self.assertIsNone(product_1)
+
+        response_2 = self.client.patch("/api/v1/products/1")
+        product_2 = response_2.json
+        self.assertEqual(response_2.status_code, 400)
+        self.assertIsNone(product_2)
+```
+
+</details>
+<details><summary markdown="span">View wsgi.py
+</summary>
+
+```python
+# wsgi.py
+# pylint: disable=missing-docstring
+# pylint: disable=missing-docstring
+# pylint: disable=too-few-public-methods
+
+import itertools
+
+from flask import Flask, jsonify, abort, request
+app = Flask(__name__)
+
+# Prefix api path using a version number is really important to manage future breaking evolutions
+# This way, we can continue to offer the old service using /v1 url and offer the new one using /v2
+# We will remove /v1 api (and related code) when all our users will use /v2 url.
+BASE_URL = '/api/v1'
+
+# Remember this is only a really simple database simulation.
+# This data is only persisted in RAM : if you restart your server, modifications are lost.
+# Don't worry about this, our goal for today is to understand REST api, not to really persist data.
+PRODUCTS = {
+    1: { 'id': 1, 'name': 'Skello' },
+    2: { 'id': 2, 'name': 'Socialive.tv' },
+    3: { 'id': 3, 'name': 'Le Wagon'},
+}
+
+# This is a simple naive way to generate consecutive id (like a database will do)
+START_INDEX = len(PRODUCTS) + 1
+IDENTIFIER_GENERATOR = itertools.count(START_INDEX)
+
+
+@app.route(f'{BASE_URL}/products', methods=['GET'])
+def read_many_products():
+    products = list(PRODUCTS.values())
+
+    # Returns a tuple corresponding to flask.Response constructor arguments
+    # Cf: https://flask.palletsprojects.com/en/1.1.x/api/?highlight=response#flask.Response
+    # By default, 2nd argument is 200 (but we want to be explicit while learning concepts)
+    return jsonify(products), 200  # OK
+
+
+@app.route(f'{BASE_URL}/products/<int:product_id>', methods=['GET'])
+def read_one_product(product_id):
+    product = PRODUCTS.get(product_id)
+
+    if product is None:
+        abort(404)
+
+    return jsonify(product), 200  # OK
+
+
+@app.route(f'{BASE_URL}/products/<int:product_id>', methods=['DELETE'])
+def delete_one_product(product_id):
+    product = PRODUCTS.pop(product_id, None)
+
+    if product is None:
+        abort(404)  # No product of product_id found is a Not Found Error
+
+    # If 204, 1st argument (body) is ignored
+    # We can put anything we want in 1st argument (but we want to be explicit to make our code more maintenable)
+    # '' or None are common used values to explicit this case
+    #
+    # Delete action (DELETE method) no need to return the entity since we removed this entity
+    return '', 204  # No Content
+
+
+# No product_id in create (POST method) url since it is the database which implements the id counter
+# If api consumers could choose an id, it would lead to many erros :
+#  - race condition for a given id choosed by many users
+#  - how to know which is is not used for now
+#  - database can optimize ids management because they know the way they are created
+@app.route(f'{BASE_URL}/products', methods=['POST'])
+def create_one_product():
+    data = request.get_json()
+
+    if data is None:
+        abort(400)  # Missing needed field(s) is a Bad Request Error
+
+    name = data.get('name')
+
+    if name is None:
+        abort(400)  # Missing needed field is a Bad Request Error
+
+    if name == '' or not isinstance(name, str):
+        abort(422)  # Bad format for needed field is a Unprocessable Entity Error
+
+    next_id = next(IDENTIFIER_GENERATOR)
+    PRODUCTS[next_id] = {'id' : next_id , 'name' : name }
+
+    # We need to return the entire entity to comunicate the new id to the api consumer
+    # This way, he can act on this resource using his id.
+    #
+    # We could simply return the id, but it's not in the REST spirit
+    # => Don't forget : /<entity>/<entity_id> represents an entire entity
+    return jsonify(PRODUCTS[next_id]), 201  # Created
+
+
+@app.route(f'{BASE_URL}/products/<int:product_id>', methods=['PATCH'])
+def update_one_product(product_id):
+    data = request.get_json()
+    if data is None:
+        abort(400)
+
+    name = data.get('name')
+
+    if name is None:
+        abort(400)
+
+    if name == '' or not isinstance(name, str):
+        abort(422)
+
+    product = PRODUCTS.get(product_id)
+
+    if product is None:
+        abort(404)
+
+    PRODUCTS[product_id]['name'] = name
+
+    # Update action (UPDATE method) no need to return the entity since we know what we modified
+    return '', 204
+```
+
+</details>
+
 ## (Optional) PowerShell REST API Client
 
 Let's use Powershell to **consume** this API. Keep a tab with the API running so that we can run queries against it:
