@@ -29,7 +29,7 @@ Vous pouvez le sauvegarder dans un fichier `args.py` et l'exécuter :
 ```bash
 pipenv run python args.py arg1 arg2 arg3
 # Nombre d'arguments : 4 arguments.
-# List d'arguments : ['args.py', 'arg1', 'arg2', 'arg3']
+# Liste d'arguments : ['args.py', 'arg1', 'arg2', 'arg3']
 ```
 
 [`sys.argv`](https://docs.python.org/3/library/sys.html#sys.argv) est une **liste** python contenant les arguments de ligne de commande passés à un script Python. `argv[0]` est toujours le nom du script.
@@ -53,7 +53,7 @@ Ouvrez le fichier `calc.py` et implémentez ce comportement ! Vous trouverez une
 
 ## Aller plus loin
 
-Si vous devez construire un outil CLI sérieux avec Python, pensez à l'intégration de la fonction [`argparse`](https://docs.python.org/3/library/argparse.html).
+Si vous devez construire un outil CLI avec Python, pensez à l'intégration de la fonction [`argparse`](https://docs.python.org/3/library/argparse.html).
 
 ## (Optionnel) Arguments de ligne de commande dans PowerShell
 

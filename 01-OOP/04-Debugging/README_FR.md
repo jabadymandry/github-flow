@@ -2,7 +2,7 @@
 
 Le débogage est le processus consistant à _trouver_ et _résoudre_ les problèmes dans votre code. Comme le dit Wikipedia, le débogage est une tactique :
 
-> [...] peut impliquer le débogage **interactif**, l'analyse du flux de contrôle, les tests unitaires, les tests d'intégration, l'analyse des fichiers log, le monitoring au niveau de l'application ou du système, les vidages de mémoire et le profilage.
+> [...] qui peut impliquer le débogage **interactif**, l'analyse du flux de contrôle, les tests unitaires, les tests d'intégration, l'analyse des fichiers *log*, le monitoring au niveau de l'application ou du système, les vidages de mémoire et le profilage.
 
 Dans cet exercice, nous allons nous concentrer sur le débogage interactif et l'analyse du flux de contrôle, les bases du débogage.
 
@@ -120,7 +120,7 @@ Corrigez la méthode `full_name` dans `hello.py`, et exécutez à nouveau le pro
 
 La section précédente portait sur la compréhension des commandes de base du débogueur. Vous pouvez l'imaginer comme un lecteur DVD avec les boutons suivants :
 
-- Pause (`pdb.set_trace()` in the source code)
+- Pause (`pdb.set_trace()` dans le code source)
 - Next frame (`next`)
 - Play (`continue`)
 

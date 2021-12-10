@@ -1,24 +1,24 @@
-## String Manipulation
+## Manipulation de String
 
-The `String` class is one of the most used class of Python and programming languages in general. A lot of build-in methods already exist to make your life easier and your goal in these exercises will be to:
+La classe `String` est l'une des classes les plus utilisées de Python et des langages de programmation en général. De nombreuses méthodes intégrées existent déjà pour vous faciliter la vie et votre objectif dans ces exercices sera :
 
-- Learn to look for the right method in the Python doc
-- Get familiar with using the Python interpreter to experiment with new methods and make them yours
+- D'apprendre à rechercher la bonne méthode dans la documentation Python.
+- De vous familiariser avec l'utilisation de l'interpréteur Python pour expérimenter de nouvelles méthodes et se les approprier.
 
-The Python interpreter works like this:
+L'interpréteur Python fonctionne comme suit :
 
 ```bash
 pipenv run python
 ```
 
-1. It reads the expression written by the user, which can be any valid python expression like `"Hello"`, `2+2`, `"hello".upper()` ...
-2. It evaluates the result of this expression.
-3. It prints this result.
-4. It loops back to point 1, waiting for a new user input.
+1. Il lit l'expression écrite par l'utilisateur, qui peut être n'importe quelle expression python valide comme `"Hello"`, `2+2`, `"hello".upper()` ...
+2. Il évalue le résultat de cette expression.
+3. Il print ce résultat.
+4. Il retourne au point 1, en attendant une nouvelle entrée de l'utilisateur.
 
-Start it by typing the command "python" in your terminal.
+Démarrez-le en tapant la commande "python" dans votre terminal.
 
-* **Experiment the following lines** on the Python interpreter:
+* **Expérimentez les lignes suivantes** sur l'interpréteur Python :
 
 ```python
 1 + 1
@@ -27,7 +27,7 @@ Start it by typing the command "python" in your terminal.
 type(4)
 ```
 
-## Getting started
+## Pour commencer
 
 
 ```bash
@@ -38,19 +38,19 @@ nosetests
 pipenv run pylint string_methods.py
 ```
 
-In Python, everything (a string, an integer, a floating number, a list...) is an object. We can call methods on these objects. Such methods are called **instance methods** since they can only be called on instances of the class. The object on which we call the method is called the **receiver**.
+En Python, tout (une String, un Integer un Float, une Liste...) est un objet. Nous pouvons appeler des méthodes sur ces objets. Ces méthodes sont appelées **méthodes d'instance** car elles ne peuvent être appelées que sur des instances de la classe. L'objet sur lequel nous appelons la méthode est appelé le **récepteur** (*receiver*).
 
-## Exercise
+## Exercice
 
-Find the right Python methods of the [String class](https://docs.python.org/3/library/stdtypes.html#string-methods) to plug in and make the tests pass.
+Trouvez les bonnes méthodes Python de la [classe String](https://docs.python.org/3/library/stdtypes.html#string-methods) pour les insérer et faire passer les tests.
 
-Code is all about being smart and knowing how and where to look for the info you need! Often, the most difficult step is to ask google the right question. To find the methods you'll need for this challenge, use:
+Pour coder, il faut être intelligent et savoir comment et où chercher l'information dont on a besoin ! Souvent, l'étape la plus difficile est de poser la bonne question à Google. Pour trouver les méthodes dont vous aurez besoin pour ce défi, utilisez :
 
-* Google and [Stack Overflow](http://stackoverflow.com/)
-* [The python doc](https://docs.python.org/3) if you have a rough idea of the method you are looking for.
+* Google et [Stack Overflow](http://stackoverflow.com/)
+* [La doc python](https://docs.python.org/3) si vous avez une idée approximative de la méthode que vous recherchez.
 
-When you think you've found the method you're looking for, and you think you know how to use it, use the Python interpreter to test this method on something! Experimenting on the Python interpreter is a crucial step for beginners.
+Lorsque vous pensez avoir trouvé la méthode que vous recherchez, et que vous pensez savoir comment l'utiliser, utilisez l'interpréteur Python pour tester cette méthode sur quelque chose ! L'expérimentation sur l'interpréteur Python est une étape cruciale pour les débutants.
 
-## (Optional) Additional reading on Strings in PowerShell
+## (Optionnel) Lectures complémentaires sur les Strings dans PowerShell
 
-Like any programming language, PowerShell gives the developer a lot of built-in handy tools to use with Strings. [This article](https://4sysops.com/archives/strings-in-powershell-replace-compare-concatenate-split-substring/) is a good introduction to those.
+Comme tout langage de programmation, PowerShell offre au développeur un grand nombre d'outils pratiques intégrés à utiliser avec les Strings. [Cet article](https://4sysops.com/archives/strings-in-powershell-replace-compare-concatenate-split-substring/) est une bonne introduction à ces outils.
