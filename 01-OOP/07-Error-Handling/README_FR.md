@@ -7,7 +7,7 @@ Commencez par lire le chapitre 8 du Tutoriel Python sur [les Erreurs et les Exce
 
 ## Syntaxe
 
-Chaque langue propose des **mots-clés** spécifiques pour traiter les erreurs.
+Chaque langage propose des **mots-clés** spécifiques pour traiter les erreurs.
 
 Voici les plus importantes que vous devez connaître en Python :
 
@@ -57,7 +57,7 @@ pipenv run python square.py 42
 pipenv run python square.py wagon
 ```
 
-Il est maintenant temps d'utiliser `int()` pour convertir ces arguments de type String et les utiliser. Lors de l'exécution, votre programme devrait afficher le carré du nombre. Si l'argument n'est pas un nombre, il devrait afficher "Not a number". Pour tester votre code, exécutez simplement les commandes ci-dessus 👆, il n'y a pas de test unitaire associé à cet exercice. Appelez un professeur si vous avez besoin d'aide.
+Il est maintenant temps d'utiliser `int()` pour convertir ces arguments de type String et les utiliser. Lors de l'exécution, votre programme devrait afficher le carré du nombre. Si l'argument n'est pas un nombre, il devrait afficher "Not a number". Pour tester votre code, exécutez simplement les commandes ci-dessus 👆, il n'y a pas de test associé à cet exercice. Appelez un professeur si vous avez besoin d'aide.
 
 ## (Optionnel) Gestion des erreurs dans PowerShell
 

@@ -3,12 +3,12 @@
 Dans cet exercice, nous allons couvrir les structures de données intégrées les plus utiles.
 Avant de plonger dans le code, prenez le temps de lire ce qui suit :
 
-- [Lists](https://docs.python.org/3.8/tutorial/introduction.html#lists), appelées _array_ dans d'autres langages
+- [Listes](https://docs.python.org/3.8/tutorial/introduction.html#lists), appelées _array_ dans d'autres langages
 - [En savoir plus sur les listes](https://docs.python.org/3.8/tutorial/datastructures.html#more-on-lists)
 - [Comprehensions des listes](https://docs.python.org/3.8/tutorial/datastructures.html#list-comprehensions)
 - [Tuples](https://docs.python.org/3.8/tutorial/datastructures.html#tuples-and-sequences)
 - [Dictionnaires](https://docs.python.org/3.8/tutorial/datastructures.html#dictionaries), appelés _hash_ ou _hashmap_ dans d'autres langages
-- [Looping Techniques](https://docs.python.org/3.8/tutorial/datastructures.html#looping-techniques) avec le mot clé `for`
+- [Techniques de boucles](https://docs.python.org/3.8/tutorial/datastructures.html#looping-techniques) avec le mot clé `for`
 
 Vous avez tout lu ? C'est parti pour le codage !
 

@@ -24,7 +24,7 @@ Allons tout de suite au fond des choses. Dans ce dossier d'exercice, vous trouve
 pipenv run python hello.py john lennon
 ```
 
-Quel est le problème avec ce programme ? Essayons de déboguer ce problème ! Il semble qu'il y ait un problème avec la création du nom complet concaténé. Essayons de déboguer ça. Insert the following line just after the `def full_name` :
+Quel est le problème avec ce programme ? Essayons de déboguer ce problème ! Il semble qu'il y ait un problème avec la création du nom complet concaténé. Essayons de déboguer ça. Insérez la ligne suivante juste après le `def full_name` :
 
 ```python
 def full_name(first_name, last_name):
@@ -108,7 +108,7 @@ Vous voyez comment la petite flèche `->` a avancé ? Maintenant nous pouvons v�
 
 C'est fait ! Nous avons identifié la ligne coupable ! Il manque un espace dans l'interpolation.
 
-Vous pouvez laisser le programme s'exécuter jusqu'au prochain point d'arrêt (ou jusqu'à sa fin) avec :
+Vous pouvez laisser le programme s'exécuter jusqu'au prochain point d'arrêt (ou jusqu'à la fin) avec :
 
 ```bash
 (Pdb) continue

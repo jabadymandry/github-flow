@@ -58,7 +58,7 @@ Si vous devez construire un outil CLI avec Python, pensez à l'intégration de l
 ## (Optionnel) Arguments de ligne de commande dans PowerShell
 
 
-Écrivons un autre [script PowerShell](https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_scripts) en utilisant un argument passé sur la ligne de commande. Nous pouvons améliorer le script `hello.ps1` de l'exercice précédent avec quelque chose qui dira "Hello $SOMEONE", someone étant une variable passée sur la ligne de commande, comme ceci :
+Écrivons un autre [script PowerShell](https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_scripts) en utilisant un argument passé sur la ligne de commande. Nous pouvons améliorer le script `hello.ps1` de l'exercice précédent avec quelque chose qui dira "Hello $SOMEONE", *someone* étant une variable passée sur la ligne de commande, comme ceci :
 
 ```bash
 powershell -ExecutionPolicy bypass ./hello_name.ps1 -Name Boris

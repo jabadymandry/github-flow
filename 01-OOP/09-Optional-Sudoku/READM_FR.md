@@ -58,7 +58,7 @@ nosetests
 
 ## C'est fait ?
 
-Nous aurons très bientôt un livecode avec toute la classe. Vous pouvez pratiquer vos compétences en Python sur Codewars (connectez-vous avec GitHub !) avec les Kata suivants :
+Nous allons bientôt commencer un livecode avec toute la classe. Vous pouvez pratiquer vos compétences en Python sur Codewars (connectez-vous avec GitHub !) avec les Kata suivants :
 
 - [Snake and Ladders](https://www.codewars.com/kata/snakes-and-ladders-1/train/python)
 - [Decode the morse code](https://www.codewars.com/kata/decode-the-morse-code/train/python)
