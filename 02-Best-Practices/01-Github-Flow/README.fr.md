@@ -40,7 +40,7 @@ Commençons à travailler sur ce repository. Avant de toucher au code, nous devo
 git checkout -b html-skeleton
 ```
 
-Ces commandes _créent_ la branche et _s'y connectent_. Vous pouvez voir que l'invite Git Bash est mise à jour et n'affiche plus `master`. Vous êtes donc prêt à coder dans cette branche !
+Ces commandes _créent_ la branche et _s'y connectent_. Vous pouvez voir que l'invite de commande Git Bash est mise à jour et n'affiche plus `master`. Vous êtes donc prêt à coder dans cette branche !
 
 ```bash
 subl .
@@ -87,7 +87,7 @@ Cliquez sur le bouton vert pour créer votre première pull request.
 
 Vous avez maintenant besoin de quelqu'un pour examiner votre code, donner son avis et éventuellement le merger (une des règles dans l'utilisation  GitHub flow est que quelqu'un d'autre que l'auteur doit merge une Pull Request).
 
-Rendez-vous sur `github.com/<user.github_nickname>/github-flow/settings/collaboration` (accessible par `Settings` > `Collaborators`) et ajoutez votre voisin de siège au repository en lui demandant son nom sur GitHub. Il devrait recevoir une invitation par e-mail à accepter.
+Rendez-vous sur `github.com/<user.github_nickname>/github-flow/settings/collaboration` (accessible par `Settings` > `Collaborators`) et ajoutez votre voisin de table au repository en lui demandant son nom sur GitHub. Il devrait recevoir une invitation par e-mail à accepter.
 
 Une fois cette configuration effectuée, demandez-leur d'aller sur la page Pull Request (qui devrait être PR #1) et de revoir le code. S'ils ont des commentaires (indentation, erreur, etc.), c'est que vous devez faire quelques corrections: retournez dans Sublime Text, dans la même branche, mettez à jour le code et faites un autre commit. Pushez ce commit sur GitHub: vous verrez que la Pull Request se met automatiquement à jour!
 
@@ -100,19 +100,19 @@ Merger une Pull Request sur GitHub permet de créer un merge commit sur la branc
 Voici ce que vous devez faire :
 
 ```bash
-# Go back to the branch
+# Retournez sur la branche
 git checkout master
 
-# Get your `master` branch up to date with GitHub's
+# Mettez votre branche `master` à jour avec GitHub
 git pull origin master
 
-# The feature branch is dead. Remove it! Keep a clean repo
+# La branche de fonctionnalité est morte. Supprimez-la! Gardez un repo vide
 git branch -d html-skeleton
 ```
 
 C'est tout ! Vous êtes prêt à travailler sur la prochaine fonctionnalité sur une nouvelle branche. Recommencez à l'étape `git checkout -b <branch>`.
 
-## La pratique rend parfait
+## S'améliorer par la pratique
 
 Prenez le temps de vous entrainer avec ce flow. Par exemple, vous pouvez créer les branches de fonctionnalités suivantes:
 
@@ -123,7 +123,7 @@ Prenez le temps de vous entrainer avec ce flow. Par exemple, vous pouvez créer 
 Rappelez-vous, c'est toujours le même flow:
 
 ```bash
-# IMPORTANT: Commencez depuis `master` avec un `git status` **propre**.
+# IMPORTANT: Commencez depuis `master` avec un `git status` **vide**.
 
 git checkout -b $FEATURE_BRANCH
 

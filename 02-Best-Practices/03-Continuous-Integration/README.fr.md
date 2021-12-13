@@ -130,7 +130,7 @@ Au Wagon, les développeurs ouvrent des Pull Request très tôt pour leurs branc
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714921/kitt-wip-prs_obp6e7.png)
 
-Revenons à notre Pull Request. Si vous scrollez un peu en dessous de la description de la PR et de la liste des commits, vous verrez briller l'intégration Travis CI:
+Revenons à notre Pull Request. Si vous scrollez un peu en dessous de la description de la PR et de la liste des commits, vous verrez l'intégration de Travis CI:
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714687/github-travis-failing_n0d78e.png)
 
@@ -192,7 +192,7 @@ Retournez à votre page Pull Request, vous devriez voir les icônes passer de cr
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714701/github-travis-passing_vppc1l.png)
 
-Beau travail 🎉 ! Invitez votre ami en tant que collaborateur de repo pour revoir le code de la Pull Request et le **merger**.
+Beau travail 🎉 ! Invitez votre buddy en tant que collaborateur de repo pour revoir le code de la Pull Request et le **merger**.
 
 ## Conclusion
 
@@ -202,8 +202,8 @@ Avant de d'avancer plus loin dans le DevOps avec le prochain exercice sur le dé
 
 - Faites en sortes que les différences entre les Pull Request soient les plus minimes possible. Une bonne taille est de **moins de 100 lignes** de différence (onglet `Files changed` de la Pull Request).
 - Gardez une pull request centrée sur une _simple_ fonctionnalité. Ajoutez au moins un test pour chaque Pull Request
-- Avant de demander une révision, relisez votre code dans l'onglet `Files changed`. Voir le code sous cet angle (dans un navigateur web sous un format différent) vous aidera à repérer les problèmes de style, les possibilités de refactoring, etc. que vous ne pouviez pas voir directement dans votre éditeur de texte.
-- Enfin, vos amis de GitHub ont rédigé un excellent article sur [la manière d'écrire correctement](https://blog.github.com/2015-01-21-how-to-write-the-perfect-pull-request/) dans une Pull Request (à la fois pour la personne évaluée et pour l'évaluateur).
+- Avant de demander une révision, relisez votre code dans l'onglet `Files changed`. Voir le code sous cet angle (dans un navigateur web sous un format différent) vous aidera à repérer les problèmes de style, les possibilités de refactorisation, etc. que vous ne pouviez pas voir directement dans votre éditeur de texte.
+- Enfin, vos pairs GitHub ont rédigé un excellent article sur [la manière d'écrire correctement](https://blog.github.com/2015-01-21-how-to-write-the-perfect-pull-request/) dans une Pull Request (à la fois pour la personne évaluée et pour l'évaluateur).
 
 ## C'est terminé!
 

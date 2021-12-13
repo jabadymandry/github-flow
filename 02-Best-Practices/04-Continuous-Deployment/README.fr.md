@@ -1,6 +1,6 @@
 # Déploiement Continu
 
-Le graal du DevOps que les équipes veulent atteindre est le **Déploiement Continu**. L'idée est de configurer votre environnement d'hébergement de telle sorte que chaque changement dans `master` qui donne lieu à un build vert sur le moteur de production _puisse être_ et _sera_ pusher en production dès que possible.
+Le graal du DevOps que les équipes veulent atteindre est le **Déploiement Continu**. L'idée est de configurer votre environnement d'hébergement de telle sorte que chaque changement dans `master` qui donne lieu à un build vert sur le moteur de production _puisse être_ et _sera_ pushé en production dès que possible.
 
 Dans cet exercice, nous allons mettre en place un [**PaaS**](https://en.wikipedia.org/wiki/Platform_as_a_service) pour héberger notre jeu de mots le plus long.
 
@@ -231,7 +231,7 @@ S'il y a un problème, vous pouvez [avoir besoin d'utiliser `winpty`](https://gi
 Nous pouvons maintenant préparer notre application à être exécutée sur Heroku. Il ne manque qu'une petite chose: nous devons indiquer à Heroku comment **démarrer** notre application. Pour ce faire, nous devons créer un fichier spécial:
 
 ```bash
-git status # Est-ce que c'est propre?
+git status # Est-ce que c'est vide?
 git checkout master
 git pull origin master
 

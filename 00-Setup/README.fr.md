@@ -20,7 +20,7 @@ Pour vérifier si cette étape est effectuée, exécutez:
 ssh -T git@github.com
 ```
 
-S'il est indiqué "Permission denied", appelez un enseignant pour vous aider. S'il est indiqué "Hi <github_nickname>", tout va bien!
+S'il est indiqué "Permission denied", appelez un professeur pour vous aider. S'il est indiqué "Hi <github_nickname>", tout va bien!
 
 Enfin, nous devons configurer la commande locale `git` pour préciser qui vous êtes lorsque vous faites un commit:
 
@@ -42,18 +42,18 @@ git clone git@github.com:<user.github_nickname>/reboot-python.git
 cd reboot-python
 git remote add upstream git@github.com:lewagon/reboot-python.git
 
-pwd # This is your exercise repository!
+pwd # C'est votre repository d'exercices!
 ```
 
 Ce repository a un `Pipfile`. Vous pouvez maintenant installer facilement les dépendances avec la commande suivante:
 
 ```bash
-pipenv install --dev # to install `packages` **and** `dev-packages`
+pipenv install --dev # pour installer les `packages' **et** `dev-packages`
 ```
 
 Cela créera le Virtualenv pour ce dossier, en utilisant Python 3.8 comme [spécifié](https://github.com/lewagon/reboot-python/blob/master/Pipfile#L15-L16)
 
-## Obtenir le point vert
+## Valider le défi
 
 Pour chaque défi, nous vous encourageons à **commit** et **pusher** votre progression. Commençons maintenant avec:
 

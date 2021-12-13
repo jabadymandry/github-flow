@@ -17,8 +17,8 @@ La machine vend ces articles :
 
 Le distributeur automatique devrait permettre:
 
-- Un agent de service de remplir les articles
-- Un utilisateur d'introduire des pièces de monnaie et appuyer sur l'une des touches pour obtenir un article, et récupérer de la monnaie.
+- À un agent de service de remplir les articles
+- À un utilisateur d'introduire des pièces de monnaie et appuyer sur l'une des touches pour obtenir un article, et récupérer de la monnaie.
 
 ## Configuration
 
