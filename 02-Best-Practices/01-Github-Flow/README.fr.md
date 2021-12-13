@@ -152,13 +152,13 @@ git branch -d $FEATURE_BRANCH
 
 Si vous avez un simple site **statique** à héberger, GitHub propose une excellente solution: [GitHub Pages](https://pages.github.com/). Vous pouvez transformer un repository en un fournisseur d'hébergement !
 
-Il est très simple à activer. Dans votre repository `github-flow`, allez dans `Settings` > `Options` et faites défiler vers le bas jusqu'à ce que vous atteigniez la section `GitHub Pages` juste avant `Danger Zone`.
+Il est très simple à activer. Dans votre repository `github-flow`, allez dans `Settings` > `Options` et scrollez vers le bas jusqu'à ce que vous atteigniez la section `GitHub Pages` juste avant `Danger Zone`.
 
 Sous la rubrique `Source`, cliquez sur la liste déroulante et sélectionnez la branche `master`. Cliquez ensuite sur `Save`.
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714628/enable-github-pages_w5clbv.png)
 
-Cela va recharger la page. Si vous faites défiler vers le bas, vous devriez voir la phrase : Your site is ready to be published at:...  Et voilà, vous y êtes ! L'URL de votre site :
+Cela va recharger la page. Si vous scrollez vers le bas, vous devriez voir la phrase : Your site is ready to be published at:...  Et voilà, vous y êtes ! L'URL de votre site :
 
 ```bash
 https://<user.github_nickname>.github.io/$REPO_NAME/
@@ -174,7 +174,7 @@ La puissance du flow GitHub vient du fait qu'il est accessible même aux débuta
 
 Si vous discutez de `git` avec d'autres développeurs, certains concepts avancés peuvent être évoqués, comme `stash`, `cherry-pick`, `rebase`, `reset` ou `reflog`. Vous aurez le temps d'en apprendre plus sur ces sujets (`stash` étant à notre avis le plus facile et le plus utile) et adapter vos connaissances à votre équipe. Nous ne couvrirons pas ces sujets mais au moins vous avez quelques mots-clés à chercher sur Google !
 
-## J'ai terminé !
+## C'est terminé!
 
 Avant de passer à l'exercice suivant, sauvegardez vos progrès avec ce qui suit:
 
