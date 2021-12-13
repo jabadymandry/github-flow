@@ -1,6 +1,6 @@
 # Développements Pilotés par les Tests
 
-Le développement piloté par les tests (alias **TDD** Test Driven Development) est un processus de développement logiciel qui s'appuie sur la répétition d'un cycle de développement très court : red-green-refactor. L'idée de ce processus est de transformer une fonctionnalité du code en un ou deux cas de test spécifiques, d'exécuter ces tests pour s'assurer qu'ils sont rouges (red), puis d'implémenter le code pour rendre ces tests verts (green). Une troisième étape consiste à refactoriser le code tout en gardant les tests verts.
+Le développement piloté par les tests (alias **TDD** Test Driven Development) est un processus de développement logiciel qui s'appuie sur la répétition d'un cycle de développement très court: red-green-refactor. L'idée de ce processus est de transformer une fonctionnalité du code en un ou deux cas de test spécifiques, d'exécuter ces tests pour s'assurer qu'ils sont rouges (red), puis d'implémenter le code pour rendre ces tests verts (green). Une troisième étape consiste à refactoriser le code tout en gardant les tests verts.
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560715040/tdd_y0eq2v.png)
 
@@ -25,7 +25,7 @@ Notez que le mot [`bower`](https://en.wiktionary.org/wiki/bower) est également 
 
 Nous devons **décomposer** le problème en petits morceaux. Nous devons également trouver le bon niveau de **modélisation** par rapport au paradigme Orienté Objet.
 
-Dans le paradigme TDD, une question que nous posons toujours est:
+Dans le paradigme TDD, une question que nous nous posons toujours est:
 
 > Comment puis-je le tester?
 
@@ -43,7 +43,7 @@ def random_grid():
     pass
 ```
 
-Nous avons besoin d'une autre fonction qui, à partir d'une grille de neuf lettres, indique si un mot est valide:
+Nous avons aussi besoin d'une autre fonction qui, à partir d'une grille de neuf lettres, indique si un mot est valide:
 
 ```python
 def is_valid(word, grid):
@@ -59,7 +59,7 @@ def is_valid(word, grid):
 <details><summary markdown='span'>Voir la solution
 </summary>
 
-Nous pouvons créer une classe `Game` qui aura le modèle suivant :
+Nous pouvons créer une classe `Game` qui aura le modèle suivant:
 
 1. Générer et maintenir une liste aléatoire de 9 lettres
 1. Testez la validité d'un mot par rapport à cette grille
@@ -134,12 +134,12 @@ FAILED (errors=1)
 
 Le message d'erreur est donc `ImportError : cannot import name 'Game' from 'game'`. Il ne trouve pas le type `Game`.
 
-❓ Comment pouvons-nous le résoudre ?
+❓ Comment pouvons-nous le résoudre?
 
 <details><summary markdown='span'>Voir la solution
 </summary>
 
-Nous devons créer une classe `Game` dans le fichier`./game.py`:
+Nous devons créer une classe `Game` dans le fichier `./game.py`:
 
 ```python
 # game.py
@@ -183,7 +183,7 @@ FAILED (errors=1)
 
 ### A votre tour !
 
-Vous avez compris cette boucle de rétroaction rapide ? Nous exécutons le test, nous obtenons un message d'erreur, nous trouvons un moyen de le corriger, nous exécutons à nouveau le test et nous passons à un nouveau message d'erreur !
+Vous avez compris cette boucle de rétroaction rapide? Nous exécutons le test, nous obtenons un message d'erreur, nous trouvons un moyen de le corriger, nous exécutons à nouveau le test et nous passons à un nouveau message d'erreur !
 
 ❓ Essayez d'implémenter le code de la classe `Game` pour faire passer ce test. Ne regardez pas encore la solution, essayez d'appliquer le TDD sur ce problème!
 
@@ -287,7 +287,7 @@ Une implémentation possible est:
 
 ## Style
 
-Assurez-vous de rendre `pylint` heureux:
+Assurez-vous de rendre `pylint` content:
 
 ```bash
 pipenv run pylint game.py

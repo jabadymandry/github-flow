@@ -151,7 +151,7 @@ nosetests
 
 Vous devriez obtenir 28 tests défaillants! Super, nous avons l'étape "rouge" du TDD. Procédons à la configuration de Jenkins avant de faire passer les tests au vert.
 
-Avant de faire cela, nous avons besoin que notre projet soit pushé sur GitHub :
+Avant de faire cela, nous avons besoin que notre projet soit pushé sur GitHub:
 
 ```bash
 git init

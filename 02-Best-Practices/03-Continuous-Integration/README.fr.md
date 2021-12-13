@@ -1,18 +1,18 @@
 # Intégration Continue
 
-Avoir des tests sur un repository vous donne un avantage considérable : vous pouvez mettre en place une [**Intégration continue**](https://en.wikipedia.org/wiki/Continuous_integration). La section _Best Practices_ de cet article Wikipedia vaut la peine d'être lue.
+Avoir des tests sur un repository vous donne un avantage considérable: vous pouvez mettre en place une [**Intégration continue**](https://en.wikipedia.org/wiki/Continuous_integration). La section _Best Practices_ de cet article Wikipedia vaut la peine d'être lue.
 
 Le but de cet exercice est de lier notre logiciel de contrôle de version avec un moteur de production. L'idée est d'exécuter un moteur de production à chaque fois qu'un commit est envoyé à l'outil de contrôle de version. Quelque soit la branche, un processus de production est déclenché pour donner un retour aux développeurs sur ce commit, si il est _vert_ ou _rouge_ (ce qui signifie que les tests passent / que la production peut être terminée).
 
 ## Outils
 
-Comme pour les logiciels de contrôle de version, il existe de nombreux outils permettant de réaliser l'intégration continue :
+Comme pour les logiciels de contrôle de version, il existe de nombreux outils permettant de réaliser de l'intégration continue:
 
 - [Jenkins](https://jenkins.io/), le logiciel de CI le plus populaire (vous devez l'installer)
 - [Travis](https://travis-ci.com/), le service de CI **cloud** le plus populaire
 - [Beaucoup d'autres](https://en.wikipedia.org/wiki/Comparison_of_continuous_integration_software)
 
-Pour garder cet exercice simple, nous utiliserons Travis, car il s'intègre parfaitement à GitHub (et vous verrez que c'est important) sans aucun effort de configuration de la part du développeur. De plus, il est **gratuit** pour les repositories publics de GitHub !
+Pour garder cet exercice simple, nous utiliserons Travis, car il s'intègre facilement à GitHub (et vous verrez que c'est important) sans aucun effort de configuration de la part du développeur. De plus, il est **gratuit** pour les repositories publics de GitHub !
 
 ## Installation du service
 
@@ -30,13 +30,13 @@ git remote add origin git@github.com:<user.github_nickname>/longest-word.git
 git push origin master
 ```
 
-Allez sur [github.com/marketplace/travis-ci](https://github.com/marketplace/travis-ci) et cliquez sur le bouton vert "Set up a free trial". Vous arriverez à une section où vous pourrez choisir l'option `Open Source - $0`. Cliquez ensuite sur le bouton vert "Install it for free". Suivez les instructions.
+Allez sur [github.com/marketplace/travis-ci](https://github.com/marketplace/travis-ci) et cliquez sur le bouton vert "Set up a free trial". Vous arriverez sur une section où vous pourrez choisir l'option `Open Source - $0`. Cliquez ensuite sur le bouton vert "Install it for free". Suivez les instructions.
 
 Une fois cette étape de configuration effectuée, vous pouvez vous rendre sur [github.com/<user.github_nickname>/longest-word/settings/installations](https://github.com/<user.github_nickname>/longest-word/settings/installations) et voyez que **Travis CI** a été installé dans votre repository. Super!
 
 ## Configuration
 
-Vous devez maintenant écrire un script de configuration pour le CI. Ces outils sont _génériques_, ils peuvent construire des programmes dans de nombreux langages, avec de nombreux frameworks. Nous devons être spécifiques et expliquer à Travis que notre projet est un projet Python 3, que nous utilisons `pipenv` pour gérer les dépendances externes et que nous utilisons `nosetests` pour exécuter les tests.
+Vous devez maintenant écrire un script de configuration pour le CI (Intégration Continue). Ces outils sont _génériques_, ils peuvent construire des programmes dans de nombreux langages, avec de nombreux frameworks. Nous devons être spécifiques et expliquer à Travis que notre projet est un projet Python 3, que nous utilisons `pipenv` pour gérer les dépendances externes et que nous utilisons `nosetests` pour exécuter les tests.
 
 Pour ce faire, Travis lit le fichier `./.travis.yml` à la racine de votre repo :
 
@@ -75,9 +75,9 @@ Vous devriez avoir un commit. Maintenant retournez dans le terminal:
 git push origin master
 ```
 
-:warning: Ne PAS utiliser `--force` pour votre push git car cela pourrait empêcher Travis de détecter votre push.
+:warning: Ne PAS utiliser `--force` pour votre git push car cela pourrait empêcher Travis de détecter votre push.
 
-Quand le push est terminé, retournez à la page, et **rechargez** la page. Vous devriez voir le commit avec un cercle jaune, puis une coche verte ! Ceci est l'intégration entre GitHub et Travis CI. Elle s'exécutera à chaque fois que vous enverrez des commits à GitHub, grâce à la fonction [GitHub webhooks](https://developer.github.com/webhooks/) et l'intégration de [Travis API](https://docs.travis-ci.com/user/developer/#API-V3).
+Quand le push est terminé, retournez à la page, et **rechargez** la. Vous devriez voir le commit avec un cercle jaune, puis une coche verte! Ceci est l'intégration entre GitHub et Travis CI. Elle s'exécutera à chaque fois que vous enverrez des commits à GitHub, grâce à la fonction [GitHub webhooks](https://developer.github.com/webhooks/) et l'intégration de [Travis API](https://docs.travis-ci.com/user/developer/#API-V3).
 
 ## Intégration Continue & Pull Request
 
@@ -126,7 +126,7 @@ Maintenant, ouvrons une Pull Request sur GitHub pour cette branche. Vous trouver
 
 Si vous êtes bloqué dans le développement de votre fonctionnalité ou de votre branche et que vous avez besoin d'aide ou de conseils, ou si vous êtes un développeur et que vous avez besoin d'un designer pour revoir votre travail (ou vice versa), ou même si vous avez peu ou pas de code mais quelques captures d'écran ou des idées générales, vous ouvrez une pull request.
 
-Au Wagon, les développeurs ouvrent des Pull Request très tôt pour leurs branches de fonctionnalités afin de montrer à leurs coéquipiers ce qu'ils font et de solliciter des retours très tôt. Pas besoin d'attendre que le code soit complet pour ouvrir une Pull Request! Voici une capture d'écran de notre application principale, le préfixe `[WIP]` est utilisé dans les titres des Pull Request pour montrer le fait que la branche n'est pas encore prête à être fusionnée:
+Au Wagon, les développeurs ouvrent des Pull Request très tôt pour leurs branches de fonctionnalités afin de montrer à leurs coéquipiers ce qu'ils font et de solliciter des retours très tôt. Pas besoin d'attendre que le code soit complet pour ouvrir une Pull Request! Voici une capture d'écran de notre application principale, le préfixe `[WIP]` est utilisé dans les titres des Pull Request pour montrer que la branche n'est pas encore prête à être fusionnée:
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714921/kitt-wip-prs_obp6e7.png)
 
@@ -134,7 +134,7 @@ Revenons à notre Pull Request. Si vous scrollez un peu en dessous de la descrip
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714687/github-travis-failing_n0d78e.png)
 
-Cette fonctionnalité est vraiment importante. Vous avez un retour direct, et directement dans GitHub, sur l'état de construction de votre branche. Bien sûr, ici nous _voulons_ avoir une branche rouge car nous avons ajouté un test mais n'avons pas encore implémenté le comportement. Néanmoins, vous pouvez imaginer que quelqu'un qui push du code et oublie d'exécuter les tests localement sur sa machine sera averti directement sur GitHub qu'il a cassé quelque chose dans le code.
+Cette fonctionnalité est vraiment importante. Vous avez un retour direct, et directement dans GitHub, sur l'état de la construction de votre branche. Bien sûr, ici nous _voulons_ avoir une branche rouge car nous avons ajouté un test mais n'avons pas encore implémenté le comportement. Néanmoins, vous pouvez imaginer que quelqu'un qui push du code et oublie d'exécuter les tests localement sur sa machine sera averti directement sur GitHub qu'il a cassé quelque chose dans le code.
 
 ---
 
@@ -202,7 +202,7 @@ Avant de d'avancer plus loin dans le DevOps avec le prochain exercice sur le dé
 
 - Faites en sortes que les différences entre les Pull Request soient les plus minimes possible. Une bonne taille est de **moins de 100 lignes** de différence (onglet `Files changed` de la Pull Request).
 - Gardez une pull request centrée sur une _simple_ fonctionnalité. Ajoutez au moins un test pour chaque Pull Request
-- Avant de demander une révision, relisez votre code dans l'onglet `Files changed`. Voir le code sous cet angle (dans un navigateur web sous un format diff) vous aidera à repérer les problèmes de style, les possibilités de refactoring, etc. que vous ne pouviez pas voir directement dans votre éditeur de texte.
+- Avant de demander une révision, relisez votre code dans l'onglet `Files changed`. Voir le code sous cet angle (dans un navigateur web sous un format différent) vous aidera à repérer les problèmes de style, les possibilités de refactoring, etc. que vous ne pouviez pas voir directement dans votre éditeur de texte.
 - Enfin, vos amis de GitHub ont rédigé un excellent article sur [la manière d'écrire correctement](https://blog.github.com/2015-01-21-how-to-write-the-perfect-pull-request/) dans une Pull Request (à la fois pour la personne évaluée et pour l'évaluateur).
 
 ## C'est terminé!

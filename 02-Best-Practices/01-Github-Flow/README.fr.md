@@ -1,6 +1,6 @@
 # GitHub Flow
 
-Commençons la journée en suivant le **GitHub flow** du début jusqu'au déploiement. Nous allons déployer une page HTML très simple pour nous concentrer sur l'apprentissage de `git` et GitHub plutôt que sur le code Python.
+Commençons la journée en suivant le **GitHub flow** du tout début jusqu'au déploiement. Nous allons déployer une page HTML très simple pour nous concentrer sur l'apprentissage de `git` et GitHub plutôt que sur le code Python.
 
 ## Un peu de lecture
 
@@ -10,10 +10,10 @@ GitHub a mis en place un [joli petit guide](https://guides.github.com/introducti
 
 ## Pour commencer
 
-Avant de faire notre premier commit, nous devons créer un repository GitHub !
+Avant de faire notre premier commit, nous devons créer un repository GitHub!
 
 1. Connectez-vous à GitHub
-1. Allez sur [github.com/new](https://github.com/new) et créer un repository _public_  sur votre compte _personnel_ , nommez-le `github-flow`.
+1. Allez sur [github.com/new](https://github.com/new) et créez un repository _public_  sur votre compte _personnel_ , nommez-le `github-flow`.
 1. Allez dans votre terminal et créez un nouveau repository local. Ajoutez GitHub comme `origin` remote:
 
 ```bash
@@ -30,11 +30,11 @@ git remote add origin git@github.com:<user.github_nickname>/github-flow.git
 git push origin master
 ```
 
-Allez sur [github.com](https://github.com) et rafraîchissez la page de votre repo. Vous devriez voir le commit et les deux fichiers!
+Allez sur [github.com](https://github.com) et rafraîchissez la page de votre repository. Vous devriez voir le commit et les deux fichiers!
 
 ## Votre première Pull Request
 
-Commençons à travailler sur ce repository. Avant de toucher au code, nous devons créer une **branche feature**. Notre objectif ici est d'ajouter un squelette HTML de base au projet. Allons y:
+Commençons à travailler sur ce repository. Avant de toucher au code, nous devons créer une **branche de fonctionnalité** (branche feature). Notre objectif ici est d'ajouter un squelette HTML de base au projet. Allons y:
 
 ```bash
 git checkout -b html-skeleton
@@ -48,7 +48,7 @@ subl .
 
 Ouvrez le fichier `index.html` et écrivez du code HTML.
 
-<details><summary markdown='span'>Some inspiration
+<details><summary markdown='span'>Un peu d'inspiration
 </summary>
 
 👉 Voici quelques [inspirations](https://gist.github.com/ssaunier/faa9965201153555bc954fb4713eea7c) si besoin.
@@ -87,11 +87,11 @@ Cliquez sur le bouton vert pour créer votre première pull request.
 
 Vous avez maintenant besoin de quelqu'un pour examiner votre code, donner son avis et éventuellement le merger (une des règles dans l'utilisation  GitHub flow est que quelqu'un d'autre que l'auteur doit merge une Pull Request).
 
-Rendez-vous sur `github.com/<user.github_nickname>/github-flow/settings/collaboration` (accessible par `Settings` > `Collaborators`) et ajoutez votre voisin de siège au repository en lui demandant son nom sur GitHub. Ils devraient recevoir une invitation par e-mail à accepter.
+Rendez-vous sur `github.com/<user.github_nickname>/github-flow/settings/collaboration` (accessible par `Settings` > `Collaborators`) et ajoutez votre voisin de siège au repository en lui demandant son nom sur GitHub. Il devrait recevoir une invitation par e-mail à accepter.
 
 Une fois cette configuration effectuée, demandez-leur d'aller sur la page Pull Request (qui devrait être PR #1) et de revoir le code. S'ils ont des commentaires (indentation, erreur, etc.), c'est que vous devez faire quelques corrections: retournez dans Sublime Text, dans la même branche, mettez à jour le code et faites un autre commit. Pushez ce commit sur GitHub: vous verrez que la Pull Request se met automatiquement à jour!
 
-A la fin, si vous et votre relecteur êtes d'accord sur le code, le relecteur doit **merge** la Pull Request. Après le merge, il y a un bouton "Delete branch". Nous vous conseillons de cliquer dessus, car dans le GitHub flow, une branche **mergée est une branche morte** et plus rien ne doit être pushé sur cette branche désormais.
+A la fin, si vous et votre relecteur êtes d'accord sur le code, le relecteur doit **merger** la Pull Request. Après le merge, il y a un bouton "Delete branch". Nous vous conseillons de cliquer dessus, car dans le GitHub flow, une branche **mergée est une branche morte** et plus rien ne doit être pushé sur cette branche désormais.
 
 ### Que se passe-t-il ensuite ?
 
@@ -114,7 +114,7 @@ C'est tout ! Vous êtes prêt à travailler sur la prochaine fonctionnalité sur
 
 ## La pratique rend parfait
 
-Prenez le temps de vous entrainer avec ce flow. Vous pouvez créer les branches de fonctionnalités suivantes:
+Prenez le temps de vous entrainer avec ce flow. Par exemple, vous pouvez créer les branches de fonctionnalités suivantes:
 
 - `add-basic-css-style`
 - `add-background-image`
@@ -123,7 +123,7 @@ Prenez le temps de vous entrainer avec ce flow. Vous pouvez créer les branches 
 Rappelez-vous, c'est toujours le même flow:
 
 ```bash
-# IMPORTANT: Commencez depuis `master` avec un `git status` **propre** .
+# IMPORTANT: Commencez depuis `master` avec un `git status` **propre**.
 
 git checkout -b $FEATURE_BRANCH
 
@@ -140,17 +140,17 @@ git push origin $FEATURE_BRANCH
 
 # Votre budy est satisfait des modifications apportées et il **merge** la Pull Request.
 
-git status # ⚠️ Assurez-vous qu'il n'y a pas de travail en attente avant de changer de branche !
+git status # ⚠️ Assurez-vous qu'il n'y a pas de travail en attente avant de changer de branche!
 git checkout master
 git pull upstream master
 git branch -d $FEATURE_BRANCH
 
-# Recommencez !
+# Recommencez!
 ```
 
 ## Bonus - GitHub Pages
 
-Si vous avez un simple site **statique** à héberger, GitHub propose une excellente solution: [GitHub Pages](https://pages.github.com/). Vous pouvez transformer un repository en un fournisseur d'hébergement !
+Si vous avez un simple site **statique** à héberger, GitHub propose une excellente solution: [GitHub Pages](https://pages.github.com/). Vous pouvez transformer un repository en un fournisseur d'hébergement!
 
 Il est très simple à activer. Dans votre repository `github-flow`, allez dans `Settings` > `Options` et scrollez vers le bas jusqu'à ce que vous atteigniez la section `GitHub Pages` juste avant `Danger Zone`.
 
@@ -158,7 +158,7 @@ Sous la rubrique `Source`, cliquez sur la liste déroulante et sélectionnez la 
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714628/enable-github-pages_w5clbv.png)
 
-Cela va recharger la page. Si vous scrollez vers le bas, vous devriez voir la phrase : Your site is ready to be published at:...  Et voilà, vous y êtes ! L'URL de votre site :
+Cela va recharger la page. Si vous scrollez vers le bas, vous devriez voir la phrase: Your site is ready to be published at:...  Et voilà, vous y êtes! L'URL de votre site:
 
 ```bash
 https://<user.github_nickname>.github.io/$REPO_NAME/
@@ -166,13 +166,13 @@ https://<user.github_nickname>.github.io/$REPO_NAME/
 
 Chaque fois qu'un commit se produit dans `master` (par le biais d'une Pull Request en utilisant le GitHub flow), GitHub Pages va automatiquement déployer les changements sur cette URL. Avec cette configuration, le bouton `Merge` dans une Pull Request devient un bouton **Deploy**.
 
-Si vous possédez un nom domaine, vous pouvez le mettre en place avec la configuartion du [`CNAME`](https://help.github.com/articles/using-a-custom-domain-with-github-pages/) via GitHub Pages.
+Si vous possédez un nom domaine, vous pouvez le mettre en place avec la configuration du [`CNAME`](https://help.github.com/articles/using-a-custom-domain-with-github-pages/) via GitHub Pages.
 
 ## Dernières réflexions
 
-La puissance du flow GitHub vient du fait qu'il est accessible même aux débutants de `git`. `git` est un outil très puissant et peut être intimidant s'il n'est pas introduit correctement. Avec ce flow, n'importe qui dans l'équipe peut s'approprier le processus de collaboration avec un peu d'entraînement (ce que vous venez de faire !) et en apprenant ces quelques commandes : `status` (et `diff`), `checkout -b`, `add`, `commit -m`, `push`, `checkout`, `pull`, `branch -d` et c'est tout.
+La puissance du flow GitHub vient du fait qu'il est accessible même aux débutants de `git`. `git` est un outil très puissant et peut être intimidant s'il n'est pas introduit correctement. Avec ce flow, n'importe qui dans l'équipe peut s'approprier le processus de collaboration avec un peu d'entraînement (ce que vous venez de faire!) et en apprenant ces quelques commandes: `status` (et `diff`), `checkout -b`, `add`, `commit -m`, `push`, `checkout`, `pull`, `branch -d` et c'est tout.
 
-Si vous discutez de `git` avec d'autres développeurs, certains concepts avancés peuvent être évoqués, comme `stash`, `cherry-pick`, `rebase`, `reset` ou `reflog`. Vous aurez le temps d'en apprendre plus sur ces sujets (`stash` étant à notre avis le plus facile et le plus utile) et adapter vos connaissances à votre équipe. Nous ne couvrirons pas ces sujets mais au moins vous avez quelques mots-clés à chercher sur Google !
+Si vous discutez de `git` avec d'autres développeurs, certains concepts avancés pourront être évoqués, comme `stash`, `cherry-pick`, `rebase`, `reset` ou `reflog`. Vous aurez le temps d'en apprendre plus sur ces sujets (`stash` étant à notre avis le plus facile et le plus utile) et d'adapter vos connaissances à votre équipe. Nous ne couvrirons pas ces sujets mais au moins vous avez quelques mots-clés à chercher sur Google!
 
 ## C'est terminé!
 

@@ -8,7 +8,7 @@ Dans cet exercice, nous allons mettre en place un [**PaaS**](https://en.wikipedi
 
 Avant de pusher notre code chez un hébergeur, nous aimerions pouvoir interagir avec lui. La façon la plus simple de le faire est d'encapsuler le jeu autour d'un petit serveur HTTP.
 
-Nous allons construire une page simple qui affichera la grille aléatoire. En dessous de cette grille, un formulaire avec un input pour taper un mot, et un bouton submit.
+Nous allons construire une page simple qui affichera la grille aléatoire. En dessous de cette grille, un formulaire avec un champ input pour taper un mot, et un bouton submit.
 
 En cliquant sur le bouton, le formulaire sera envoyé et la page sera rechargée pour afficher les résultats.
 
@@ -54,7 +54,7 @@ Vous pouvez commencer cette application Flask très basique avec:
 FLASK_ENV=development pipenv run flask run
 ```
 
-Ouvrez votre navigateur et allez sur [localhost:5000](http://localhost:5000/). Est-ce que cela fonctionne, est-ce que vous obtenez "Hello World" comme réponse texte du serveur ? Si ce n'est pas le cas, appelez un professeur.
+Ouvrez votre navigateur et allez sur [localhost:5000](http://localhost:5000/). Est-ce que cela fonctionne, est-ce que vous obtenez "Hello World" comme réponse texte du serveur? Si ce n'est pas le cas, appelez un professeur.
 
 Le but de cet exercice n'est pas d'implémenter une petite application, nous parlerons de Flask en détail dans le cours de demain. Alors construisons ensemble notre application:
 
@@ -142,7 +142,7 @@ body {
 }
 ```
 
-Ouf ! Maintenant essayons ceci, allez dans votre navigateur et rechargez la page. Pouvez-vous voir la grille avec un formulaire? C'est génial!
+Ouf! Maintenant essayons ceci, allez dans votre navigateur et rechargez la page. Pouvez-vous voir la grille avec un formulaire? C'est génial!
 
 Si vous essayez de jouer, vous obtiendrez une erreur. C'est parce que nous n'avons pas encore implémenté le endpoint `/check` (celui où le formulaire est soumis).
 Faisons-le:
@@ -215,7 +215,7 @@ git push origin http-server
 
 ## Installation de Heroku
 
-Avant de pouvoir déployer notre petite application web, nous devons créer un compte Heroku. Si vous en avez déjà un, vous pouvez l'utiliser. Sinon, [inscrivez-vous] (https://signup.heroku.com/) (c'est gratuit pour essayer). Mettez une adresse e-mail à laquelle vous pouvez accéder facilement car vous devrez cliquer sur un lien de confirmation.
+Avant de pouvoir déployer notre petite application web, nous devons créer un compte Heroku. Si vous en avez déjà un, vous pouvez l'utiliser. Sinon, [inscrivez-vous](https://signup.heroku.com/) (c'est gratuit pour essayer). Mettez une adresse e-mail à laquelle vous pouvez accéder facilement car vous devrez cliquer sur un lien de confirmation.
 
 Une fois votre compte créé, vous devez installer l'outil de ligne de commande. Allez sur [cette page Heroku Dev Center](https://devcenter.heroku.com/articles/getting-started-with-python#set-up), téléchargez le CLI et installez-le. Ne laissez pas l'option `Git` cochée dans les composants à installer car vous l'avez déjà! Laissez les options `Heroku CLI` et `Set PATH...` cochées.
 
@@ -255,7 +255,7 @@ git commit -m "Add Procfile to prepare Heroku deployment"
 git push origin master
 ```
 
-Notre application est maintenant prête à être déployée sur Heroku. Tout d'abord, nous devons créer une application distante qui approvisionnera un [dyno](https://www.heroku.com/dynos) dans leur cloud.
+Notre application est maintenant prête à être déployée sur Heroku. Tout d'abord, nous devons créer une application distante qui approvisionnera un [dyno](https://www.heroku.com/dynos) dans le cloud.
 
 ```bash
 heroku create --region=eu # Nous voulons utiliser le datacenter de l'UE pour être plus proche de nous.
@@ -281,7 +281,7 @@ Nous y sommes presque. Voici un rapide récapitulatif:
 
 Automatisons cette dernière partie et atteignons le Graal!
 
-Allez sur [dashboard.heroku.com](https://dashboard.heroku.com). CCliquez sur votre application hébergeant `longest-word`.
+Allez sur [dashboard.heroku.com](https://dashboard.heroku.com). Cliquez sur votre application hébergeant `longest-word`.
 
  Allez sur l'onglet `Deploy` (le troisième). Si vous scrollez vers le bas, vous verrez une section "Deployment method". Cliquez sur `GitHub`. Scrollez vers le bas et cliquez sur le bouton violet `Connect to GitHub`.
 

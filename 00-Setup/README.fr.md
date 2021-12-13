@@ -7,7 +7,7 @@ Nous utiliserons votre compte public personnel `github.com`. Si vous lisez ceci,
 
 Tout d'abord, assurez-vous que ce repo soit correctement copié (fork) sur votre compte personnel GitHub.
 
-Nous devons créer une clé SSH sur votre ordinateur et la lier à votre compte GitHub. À la fin de la semaine, n'oubliez pas de supprimer cette clé de votre compte GitHub, comme ce n'est pas votre ordinateur. Protéger votre clé avec un **mot de passe** fort garantira une bonne sécurité pendant la semaine.
+Nous devons créer une clé SSH sur votre ordinateur et la lier à votre compte GitHub. À la fin de la semaine, n'oubliez pas de supprimer cette clé de votre compte GitHub, comme ce n'est pas votre ordinateur. Protégez votre clé avec un **mot de passe** compliqué garantira une bonne sécurité pendant la semaine.
 
 GitHub propose des tutoriels pratiques. Suivez-les:
 
@@ -20,9 +20,9 @@ Pour vérifier si cette étape est effectuée, exécutez:
 ssh -T git@github.com
 ```
 
-S'il est indiqué "Permission denied", appelez un enseignant pour vous aider.S'il est indiqué "Hi <github_nickname>", tout va bien!
+S'il est indiqué "Permission denied", appelez un enseignant pour vous aider. S'il est indiqué "Hi <github_nickname>", tout va bien!
 
-Enfin, nous devons configurer la commande locale `git` pour préciser qui vous êtes lorsque vous faites un commit :
+Enfin, nous devons configurer la commande locale `git` pour préciser qui vous êtes lorsque vous faites un commit:
 
 ```bash
 git config --global user.email "your_github_email@domain.com"
@@ -34,7 +34,7 @@ Il est important d'utiliser la même adresse électronique que celle que vous ut
 
 ## Exercices
 
-Le repository que vous venez de forker contient tous les exercices de la semaine. Pour travailler dessus, clonez-les sur votre ordinateur. Toujours dans Git Bash, exécutez:
+Le repository que vous venez de forker contient tous les exercices de la semaine. Pour travailler dessus, clonez-les sur votre ordinateur. Puis, toujours dans Git Bash, exécutez:
 
 ```bash
 mkdir -p ~/code/<user.github_nickname> && cd $_
@@ -51,11 +51,11 @@ Ce repository a un `Pipfile`. Vous pouvez maintenant installer facilement les d�
 pipenv install --dev # to install `packages` **and** `dev-packages`
 ```
 
-Il créera le Virtualenv pour ce dossier, en utilisant Python 3.8 comme [spécifié](https://github.com/lewagon/reboot-python/blob/master/Pipfile#L15-L16)
+Cela créera le Virtualenv pour ce dossier, en utilisant Python 3.8 comme [spécifié](https://github.com/lewagon/reboot-python/blob/master/Pipfile#L15-L16)
 
 ## Obtenir le point vert
 
-Pour chaque défi, nous vous encourageons à **commit** et **push** votre progression. Commençons maintenant avec:
+Pour chaque défi, nous vous encourageons à **commit** et **pusher** votre progression. Commençons maintenant avec:
 
 ```bash
 cd 00-Setup
@@ -65,4 +65,4 @@ git commit -m "I am ready"
 git push origin master
 ```
 
-Vous devriez obtenir un point vert à gauche pour suivre votre progression. Cheers !
+Vous devriez obtenir un point vert à gauche pour suivre votre progression. Cheers!
