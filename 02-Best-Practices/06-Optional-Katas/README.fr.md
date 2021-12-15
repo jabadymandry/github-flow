@@ -8,4 +8,4 @@ En attendant le livecode, vous pouvez vous entraîner avec des Katas triés sur 
 - [Decode the morse code](https://www.codewars.com/kata/decode-the-morse-code/train/python)
 - [Escape the mines!](https://www.codewars.com/kata/escape-the-mines/train/python)
 
-Cheers!
+Cheers !

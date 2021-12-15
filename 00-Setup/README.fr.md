@@ -55,7 +55,7 @@ Cela créera le Virtualenv pour ce dossier, en utilisant Python 3.8 comme [spéc
 
 ## Valider le défi
 
-Pour chaque défi, nous vous encourageons à **commit** et **pusher** votre progression. Commençons maintenant avec:
+Pour chaque défi, nous vous encourageons à **versionner** et **pousser** votre progression. Commençons maintenant avec :
 
 ```bash
 cd 00-Setup
@@ -65,4 +65,4 @@ git commit -m "I am ready"
 git push origin master
 ```
 
-Vous devriez obtenir un point vert à gauche pour suivre votre progression. Cheers!
+Vous devriez obtenir un point vert à gauche pour suivre votre progression. Cheers !

@@ -2,7 +2,7 @@
 
 Pratiquons le **TDD** avec un problème de distributeur automatique.
 
-La machine accepte **4 pièces**:
+La machine accepte **4 pièces** :
 
 - **NICKEL** (5 cents)
 - **DIME** (10 cents)
@@ -15,7 +15,7 @@ La machine vend ces articles :
 - **B** - Une canette de coca - 1.20$
 - **C** - Une bouteille d'eau - 0.85$
 
-Le distributeur automatique devrait permettre:
+Le distributeur automatique devrait permettre :
 
 - À un agent de service de remplir les articles
 - À un utilisateur d'introduire des pièces de monnaie et appuyer sur l'une des touches pour obtenir un article, et récupérer de la monnaie.
@@ -30,11 +30,11 @@ mkdir tests
 touch machine.py
 touch tests/test_machine.py
 
-# We now can run:
+# Nous pouvons maintenant éxecuter :
 pipenv run nosetests # => 0 tests for now
 ```
 
-Bootstrap de la classe de test:
+Bootstrap de la classe de test :
 
 ```python
 # tests/test_machine.py
@@ -46,7 +46,7 @@ class MachineTest(unittest.TestCase):
 
 ## Solution
 
-Veuillez ne pas regarder _avant_ le livecode!
+Veuillez ne pas regarder _avant_ le livecode !
 
 <details><summary markdown="span">Voir la solution
 </summary>
@@ -123,10 +123,10 @@ class Machine:
                 self.amount -= rack.price
                 return True
             else:
-                # TODO: give feedback to user that more coins are needed!
+                # TODO: informer l'utilisateur que plus de pièces sont nécessaires !
                 return False
         else:
-            # TODO: give feedback to user that this product is sold out!
+            # TODO: informer l'utilisateur que ce produit est épuisé !
             return False
 
     def __give_change(self, change):
