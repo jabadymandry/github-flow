@@ -12,7 +12,7 @@ cd 01-OOP/01-Sum-Of-Three
 subl . # Ouvrez le dossier dans Sublime Text
 ```
 
-## Procedure
+## Procédure
 
 Votre but est d'implémenter la méthode `sum3` dans le fichier `sum_of_three.py`. Avant d'essayer de le faire, exécutez les **tests** que nous avons préparés :
 
