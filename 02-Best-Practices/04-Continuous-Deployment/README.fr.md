@@ -275,7 +275,7 @@ Nous y sommes presque. Voici un rapide récapitulatif :
 
 1. Notre code est sur GitHub
 1. Nous avons mis en place l'Intégration Continue grâce à Travis
-1. Chaque commit (dans `master` ou une branche de fonctionnalité) déclenche une compilation de Travis
+1. Chaque versionnage (dans `master` ou une branche de fonctionnalité) déclenche une compilation de Travis
 1. Le statut d'une Pull Request est mis à jour par Travis et donne le contexte à l'examinateur.
 1. Nous devons toujours **manuellement** exécuter la commande `git push heroku master` pour déployer
 
@@ -313,7 +313,7 @@ git checkout -b yellow-letter
 
 Vous pouvez tester localement avec `FLASK_ENV=development pipenv run flask run`. Si les changements CSS ne sont pas pris en compte, faites un[force-refresh](https://superuser.com/a/89811).
 
-La couleur vous convient ? Vous pouvez commit :
+La couleur vous convient ? Vous pouvez versionner :
 
 ```bash
 git add static/style.css
@@ -326,9 +326,9 @@ Allez sur github.com, créez une Pull Request et attendez que Travis la passe au
 Pendant que Travis travaille, ouvrez un autre onglet Chrome et retournez sur [dashboard.heroku.com](https://dashboard.heroku.com), puis sélectionnez votre projet `longest-word`.
 Regardez l'onglet `Activity` (le 5ème) de votre application Heroku pour visualiser votre flux d'activité. Laissez cet onglet ouvert.
 
-Revenez sur la Pull Request, et dès qu'elle est verte, mergez-la vers `master`. Retournez sur l'onglet Heroku, et attendez ~1 minute (dans GitHub vous pouvez jeter un coup d'oeil à la page `Commits` et voir que le dernier merge de commit est en train d'être testé par Travis, grâce au petit point orange).
+Revenez sur la Pull Request, et dès qu'elle est verte, mergez-la vers `master`. Retournez sur l'onglet Heroku, et attendez ~1 minute (dans GitHub vous pouvez jeter un coup d'oeil à la page `Commits` et voir que le dernier merge de versionnage est en train d'être testé par Travis, grâce au petit point orange).
 
-Avez-vous réussi ? Avez-vous pu obtenir une compilation/un déploiement automatique sur Heroku grâce à un feu vert de Travis sur le nouveau merge de commit GitHub sur `master` ?
+Avez-vous réussi ? Avez-vous pu obtenir une compilation/un déploiement automatique sur Heroku grâce à un feu vert de Travis sur le nouveau merge de versionnage GitHub sur `master` ?
 
 👏 👏 👏
 

@@ -29,7 +29,7 @@ git config --global user.email "your_github_email@domain.com"
 git config --global user.name "Your Full Name"
 ```
 
-Il est important d'utiliser la même adresse électronique que celle que vous utilisez sur [GitHub](https://github.com/settings/emails) afin que [les commits soient liés à votre profil](https://help.github.com/articles/why-are-my-commits-linked-to-the-wrong-user/#commits-are-not-linked-to-any-user).
+Il est important d'utiliser la même adresse électronique que celle que vous utilisez sur [GitHub](https://github.com/settings/emails) afin que [les versionnages soient liés à votre profil](https://help.github.com/articles/why-are-my-commits-linked-to-the-wrong-user/#commits-are-not-linked-to-any-user).
 
 
 ## Exercices

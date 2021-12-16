@@ -2,7 +2,7 @@
 
 Avoir des tests sur un repository vous donne un avantage considérable : vous pouvez mettre en place une [**Intégration continue**](https://en.wikipedia.org/wiki/Continuous_integration). La section _Best Practices_ de cet article Wikipedia vaut la peine d'être lue.
 
-Le but de cet exercice est de lier notre logiciel de contrôle de version avec un moteur de production. L'idée est d'exécuter un moteur de production à chaque fois qu'un commit est envoyé à l'outil de contrôle de version. Quelle que soit la branche, un processus de production est déclenché pour donner un retour aux développeurs sur ce commit, si il est _vert_ ou _rouge_ (ce qui signifie que les tests passent / que la production peut être terminée).
+Le but de cet exercice est de lier notre logiciel de contrôle de version avec un moteur de production. L'idée est d'exécuter un moteur de production à chaque fois qu'un versionnage est envoyé à l'outil de contrôle de version. Quelle que soit la branche, un processus de production est déclenché pour donner un retour aux développeurs sur ce versionnage, si il est _vert_ ou _rouge_ (ce qui signifie que les tests passent / que la production peut être terminée).
 
 ## Outils
 
@@ -58,7 +58,7 @@ script:
   - pipenv run nosetests
 ```
 
-Enregistrez ce fichier dans Sublime Text, et effectuez un commit :
+Enregistrez ce fichier dans Sublime Text, et effectuez un versionnage :
 
 ```bash
 git add .travis.yml
@@ -69,7 +69,7 @@ Génial ! Avant de pousser, allez sur cette page :
 
 [github.com/<user.github_nickname>/longest-word/commits/master](https://github.com/<user.github_nickname>/longest-word/commits/master)
 
-Vous devriez avoir un commit. Maintenant retournez dans le terminal :
+Vous devriez avoir un versionnage. Maintenant retournez dans le terminal :
 
 ```bash
 git push origin master
@@ -77,7 +77,7 @@ git push origin master
 
 :warning: Ne passe PAS l'option `--force` lorsque tu pousses ton code avec git car cela empêchera sûrement Travis de détecter tes changements.
 
-Quand le push est terminé, retournez à la page, et **rechargez** la. Vous devriez voir le commit avec un cercle jaune, puis une coche verte ! Ceci est l'intégration entre GitHub et Travis CI. Elle s'exécutera à chaque fois que vous enverrez des commits à GitHub, grâce à la fonction [GitHub webhooks](https://developer.github.com/webhooks/) et l'intégration de [Travis API](https://docs.travis-ci.com/user/developer/#API-V3).
+Quand le push est terminé, retournez à la page, et **rechargez** la. Vous devriez voir le versionnage avec un cercle jaune, puis une coche verte ! Ceci est l'intégration entre GitHub et Travis CI. Elle s'exécutera à chaque fois que vous enverrez des versionnages à GitHub, grâce à la fonction [GitHub webhooks](https://developer.github.com/webhooks/) et l'intégration de [Travis API](https://docs.travis-ci.com/user/developer/#API-V3).
 
 ## Intégration Continue & Pull Request
 
@@ -130,7 +130,7 @@ Au Wagon, les développeurs ouvrent des Pull Request très tôt pour leurs branc
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714921/kitt-wip-prs_obp6e7.png)
 
-Revenons à notre Pull Request. Si vous scrollez un peu en dessous de la description de la PR et de la liste des commits, vous verrez l'intégration de Travis CI :
+Revenons à notre Pull Request. Si vous scrollez un peu en dessous de la description de la PR et de la liste des versionnages, vous verrez l'intégration de Travis CI :
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714687/github-travis-failing_n0d78e.png)
 
@@ -188,7 +188,7 @@ git commit -m "Feature complete: Dictionary check of attempt"
 git push origin dictionary-api
 ```
 
-Retournez à votre page Pull Request, vous devriez voir les icônes passer de croix rouges à points jaunes. Cela signifie que Travis CI est en train de compiler le code avec le dernier commit. Attendez quelques secondes, et il devrait mettre à jour le statut. Voici ce que vous devriez voir :
+Retournez à votre page Pull Request, vous devriez voir les icônes passer de croix rouges à points jaunes. Cela signifie que Travis CI est en train de compiler le code avec le dernier versionnage. Attendez quelques secondes, et il devrait mettre à jour le statut. Voici ce que vous devriez voir :
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714701/github-travis-passing_vppc1l.png)
 
@@ -196,7 +196,7 @@ Beau travail 🎉 ! Invitez votre buddy en tant que collaborateur de repo pour r
 
 ## Conclusion
 
-L'ajout de tests dans un repository et coupler GitHub avec un service comme Travis CI permet au développeur d'avoir l'esprit tranquille lorsqu'il ajoute du code, de vérifier les éventuelles régressions, et d'exercer l'ensemble des tests à _chaque_ commit !
+L'ajout de tests dans un repository et coupler GitHub avec un service comme Travis CI permet au développeur d'avoir l'esprit tranquille lorsqu'il ajoute du code, de vérifier les éventuelles régressions, et d'exercer l'ensemble des tests à _chaque_ versionnage !
 
 Avant de d'avancer plus loin dans le DevOps avec le prochain exercice sur le déploiement continu, quelques derniers conseils :
 

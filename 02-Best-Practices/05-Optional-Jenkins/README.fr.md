@@ -183,7 +183,7 @@ Vous devriez arriver sur cet écran :
 Une fois que "GitHub" a été sélectionné comme source, les choses se compliquent. L'idée est que nous allons fournir un moyen pour Jenkins de :
 
 1. Téléchargez la source depuis GitHub. Pour un repository public, cela peut sembler évident puisque le code est open-source, donc pas besoin d'authentification, n'est-ce pas ? Eh bien, c'est vrai, mais il faudrait supprimer le deuxième élément :
-1. Définir le statut de chaque commit de chaque branche et de chaque Pull Request, ce qui permet aux développeurs d'être au courant des failles directement depuis GitHub
+1. Définir le statut de chaque versionnage de chaque branche et de chaque Pull Request, ce qui permet aux développeurs d'être au courant des failles directement depuis GitHub
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714760/jenkins-add-2_tz9oso.png)
 
@@ -246,7 +246,7 @@ pipeline {
 
 Comparez ceci au `.travis.yml` que vous aviez dans l'exercice précédent. Quelles sont les similitudes ? Quelles sont les différences ? Discutez-en avec votre buddy.
 
-Avant de commit et de pousser, nous devons établir le lien entre GitHub et Jenkins en configurant un webhook sur le repository. Allez à l'adresse suivante :
+Avant de versionner et de pousser, nous devons établir le lien entre GitHub et Jenkins en configurant un webhook sur le repository. Allez à l'adresse suivante :
 
 ```
 https://github.com/<user.github_nickname>/morse/settings/hooks
@@ -446,7 +446,7 @@ git push origin multi-word-decode
 
 Vous voulez fusionner le `multi-word-decode` (`HEAD`) dans `master` (branche de base). Allez sur GitHub et cliquez sur le bouton "New pull request". Créez la Pull Request et profitez de l'intégration entre Jenkins et GitHub, grâce au webhook **et** à votre token d'accès personnel.
 
-Allez-y et mergez la branche. Retournez sur Jenkins, vous devriez voir `master` compilé une fois de plus (car la fusion d'une branche sur GitHub crée en fait un commit supplémentaire, un merge commit). Vous pouvez le voir ici :
+Allez-y et mergez la branche. Retournez sur Jenkins, vous devriez voir `master` compilé une fois de plus (car la fusion d'une branche sur GitHub crée en fait un versionnage supplémentaire, un merge de versionnage). Vous pouvez le voir ici :
 
 ```
 https://github.com/<user.github_nickname>/morse/network
@@ -456,7 +456,7 @@ https://github.com/<user.github_nickname>/morse/network
 
 ## Conclusion
 
-Comme pour Travis CI, l'ajout de tests à un repository et le couplage de GitHub avec Jenkins permettent au développeur d'avoir l'esprit tranquille lorsqu'il ajoute du code, de vérifier les éventuelles régressions, et d'exercer l'ensemble des tests à _chaque_ commit !
+Comme pour Travis CI, l'ajout de tests à un repository et le couplage de GitHub avec Jenkins permettent au développeur d'avoir l'esprit tranquille lorsqu'il ajoute du code, de vérifier les éventuelles régressions, et d'exercer l'ensemble des tests à _chaque_ versionnage !
 
 Gardez à l'esprit qu'en fonction de votre projet, le `Jenkinsfile` variera. Pour cet exercice, nous utilisons un **Agent Docker** exécuté par Jenkins, avec `pipenv` pour installer les dépendances du `Pipfile` et `nose` comme lanceur de tests. D'autres projets pourraient utiliser une distribution Python comme [Anaconda](https://www.anaconda.com/) et [`tox`](https://tox.readthedocs.io/en/latest/) en tant que gestionnaire de virtualenv / lanceur de tests. Parlez-en avec votre équipe !
 
