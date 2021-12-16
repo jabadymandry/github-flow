@@ -75,7 +75,7 @@ Vous devriez avoir un commit. Maintenant retournez dans le terminal :
 git push origin master
 ```
 
-:warning: Ne PAS utiliser `--force` pour votre git push car cela pourrait empêcher Travis de détecter votre push.
+:warning: Ne passe PAS l'option `--force` lorsque tu pousses ton code avec git car cela empêchera sûrement Travis de détecter tes changements.
 
 Quand le push est terminé, retournez à la page, et **rechargez** la. Vous devriez voir le commit avec un cercle jaune, puis une coche verte ! Ceci est l'intégration entre GitHub et Travis CI. Elle s'exécutera à chaque fois que vous enverrez des commits à GitHub, grâce à la fonction [GitHub webhooks](https://developer.github.com/webhooks/) et l'intégration de [Travis API](https://docs.travis-ci.com/user/developer/#API-V3).
 

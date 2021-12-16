@@ -22,7 +22,7 @@ ssh -T git@github.com
 
 S'il est indiqué "Permission denied", appelez un professeur pour vous aider. S'il est indiqué "Hi <github_nickname>", tout va bien!
 
-Enfin, nous devons configurer la commande locale `git` pour préciser qui vous êtes lorsque vous faites un commit:
+Enfin, nous devons configurer `git` sur ton ordinateur pour que tu sois identifié lorsque tu versionnes ton code
 
 ```bash
 git config --global user.email "your_github_email@domain.com"
