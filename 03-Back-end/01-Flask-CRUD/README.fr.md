@@ -8,7 +8,7 @@ Dans cet exercice, nous allons passer rapidement en revue toutes les fonctionnal
 
 ## Pour commencer
 
-Vous travaillerez dans un référentiel dédié pour appliquer les bonnes pratiques abordées dans le cours précédent.
+Vous travaillerez dans un repository dédié pour appliquer les bonnes pratiques abordées dans le cours précédent.
 
 ```bash
 cd ~/code/<user.github_nickname>
