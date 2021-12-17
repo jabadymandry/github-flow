@@ -496,7 +496,7 @@ def create_one_product():
     next_id = next(IDENTIFIER_GENERATOR)
     PRODUCTS[next_id] = {'id' : next_id , 'name' : name }
 
-    # Nous devons renvoyer l'entité entière pour communiquer le nouvel id à l'utilisateur de l'Api.
+    # Nous devons renvoyer l'entité entière pour communiquer le nouvel id à l'utilisateur de l'API.
     # De cette façon, il peut agir sur cette ressource en utilisant son id.
     #
     # Nous pourrions simplement retourner l'id, mais ce n'est pas dans l'esprit REST.

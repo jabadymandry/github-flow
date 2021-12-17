@@ -1,6 +1,6 @@
 # API Twitter
 
-Maintenant que nous avons joué un peu avec Flask, il est temps de commencer les exercices qui nous occuperont pendant les trois prochains jours. L'objectif est de construire un clone de l'[API Twitter](https://developer.twitter.com/en/docs/api-reference-index) en utilisant Flask et différents plugins Flask (comme [ceux-ci](https://github.com/humiaozuzu/awesome-flask)).
+Maintenant que nous avons joué un peu avec Flask, il est temps de commencer les exercices qui nous occuperont pendant les trois prochains jours. L'objectif est de construire un clone de l'[API Twitter](https://developer.twitter.com/en/docs/api-reference-index) en utilisant Flask et différents modules externes Flask (comme [ceux-ci](https://github.com/humiaozuzu/awesome-flask)).
 
 ⚠️ Dans cet exercice, nous allons implémenter quelques points de terminaison d'API avec une grosse contrainte : nous n'avons pas encore de base de données relationnelle ! Cette contrainte vous aidera à vous concentrer sur la couche HTTP de l'API, et non sur la récupération des informations. Pour faire abstraction de la base de données, nous utiliserons le modèle [data access object (DAO)](https://en.wikipedia.org/wiki/Data_access_object) et demain, nous le remplacerons par des requêtes réelles vers la base de données.
 
@@ -18,7 +18,7 @@ touch wsgi.py
 
 ### Modèle d'usine (Factory Pattern)
 
-Dans l'exemple précédent, nous avons initialisé l'application `Flask` directement dans le fichier `wsgi.py`. En faisant cela, `app` était une variable globale. Le problème avec cette approche est qu'il est plus difficile de tester en isolant. La solution à ce problème est d'utiliser [Application Factories](http://flask.pocoo.org/docs/patterns/appfactories/), un modèle qui s'avérera utile pour rendre notre application plus modulaire (c'est-à-dire avec plusieurs "petits" fichiers plutôt que quelques "gros").
+Dans l'exemple précédent, nous avons initialisé l'application `Flask` directement dans le fichier `wsgi.py`. En faisant cela, `app` était une variable globale. Le problème avec cette approche est qu'il est plus difficile de tester en isolant. La solution à ce problème est d'utiliser [Application Factories](http://flask.pocoo.org/docs/patterns/appfactories/), un modèle qui s'avérera utile pour rendre notre application plus modulable (c'est-à-dire avec plusieurs "petits" fichiers plutôt que quelques "gros").
 
 👉 Prenez le temps de lire [cette page de la documentation de Flask](http://flask.pocoo.org/docs/patterns/appfactories/)
 
@@ -63,7 +63,7 @@ Allez-y et lancez l'application :
 FLASK_ENV=development pipenv run flask run
 ```
 
-Le serveur devrait démarrer. Ouvrez votre navigateur et visitez [`localhost:5000/hello`](http://localhost:5000/hello). Vous devriez voir "Hello world !" comme réponse !
+Le serveur devrait démarrer. Ouvrez votre navigateur et visitez [`localhost:5000/hello`](http://localhost:5000/hello). Vous devriez voir s'afficher "Hello world !" !
 
 ### Espace de noms (Namespace)
 
@@ -133,7 +133,7 @@ Si vous avez arrêté votre serveur, redémarrez-le avec :
 ```bash
 FLASK_ENV=development pipenv run flask run
 ```
-Open your browser and visit [`localhost:5000/tweets/hello`](http://localhost:5000/tweets/hello). You should see "Hello from the 'tweets' namespace!" as a text answer!
+Ouvrez votre navigateur et visitez [`localhost:5000/tweets/hello`](http://localhost:5000/tweets/hello). Vous devriez voir s'afficher "Hello from the 'tweets' namespace !" !
 
 💡 Il est important de comprendre la ligne `from .apis.tweets import api as tweets` qui se trouve avant l'enregistrement de l'espace de nom. Le `from .apis.tweets` signifie que nous regardons dans le fichier `apis/tweets.py` du **même** dossier que le `__init__.py` local. C'est un raccourci pour `from app.apis.tweets`. Ensuite, le `import api` signifie que nous importons la variable ou la méthode `api` définie dans ce fichier `tweets.py` (ici c'est une variable : une instance de `Namespace`). Le `as tweets` renomme simplement l'`api` que nous avons importé en `tweets`, pour plus de lisibilité.
 
@@ -197,7 +197,7 @@ Enfin, nous allons configurer git :
 ```bash
 git init
 git add .
-git commit -m "New flask project boilerplate"
+git commit -m "Nouveau projet Flask"
 ```
 
 À ce moment-là, vous devriez déjà avoir créé 5 applications (ce qui est la limite gratuite).
