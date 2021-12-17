@@ -21,7 +21,7 @@ Vous devez déjà avoir installé Docker Desktop sur votre ordinateur - dans le 
 <p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/docker-desktop.png?raw=true" width="400"></p>
 
 
-👀 Si vous n'avez pas installé **Docker Desktop** :point_right : veuillez consulter la section **"Avant votre formation "** (ici, sur Learn) et suivre les étapes d'installation.
+👀 Si vous n'avez pas installé **Docker Desktop** :point_right: veuillez consulter la section **"Avant votre formation "** (ici, sur Learn) et suivre les étapes d'installation.
 
 ---
 
@@ -30,7 +30,7 @@ Assurons-nous maintenant que tout va bien, et familiarisons-nous avec les concep
 ### 0.b. Docker Hub 💻
 
 ##### S'inscrire
-Docker Hub est un service de dépôt hébergé fourni par Docker pour trouver et partager des images de conteneurs avec votre équipe. Une fois que vous aurez créé un identifiant Docker (un utilisateur), vous serez en mesure de tirer et de pousser des images vers le Hub.
+Docker Hub est un service de dépôt hébergé fourni par Docker pour trouver et partager des images de conteneurs avec votre équipe. Une fois que vous aurez créé un identifiant Docker (un utilisateur), vous serez en mesure de récupérer et de pousser des images vers le Hub.
 
 Créer un compte personnel 👉  [ici](https://hub.docker.com/signup).
 
@@ -58,8 +58,8 @@ docker run hello-world
 
 Puisque vous n'avez pas d'images docker sur votre hôte (puisque vous venez d'installer docker),
 
-* il va d'abord tirer l'image `hello-world` du Hub
-* puis lancera un conteneur à partir de cette image (celui-ci _seulement_ affiche un message)
+* il va d'abord récupérer l'image `hello-world` du Hub
+* puis il lancera un conteneur à partir de cette image (celui-ci _seulement_ affiche un message)
 
 Vous devriez vous retrouver avec quelque chose comme ça :
 <p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/hello-world.png?raw=true" width="700"></p>
@@ -72,7 +72,7 @@ docker ps
 ```
 
 Vous ne voyez rien 🤔 ? C'est normal !
-Votre conteneur `hello-world` ne tourne plus : il s'est éteint dès qu'il a eu terminé. Son travail consistait simplement à afficher un message.
+Votre conteneur `hello-world` ne tourne plus : il s'est éteint dès qu'il a terminé. Son travail consistait simplement à afficher un message.
 
 En fait, la commande `docker ps` peut prendre des arguments : la documentation peut être récupérée [ici](https://docs.docker.com/engine/reference/commandline/ps/), ou vous pouvez demander l'utilisation de la commande avec `docker ps --help`.
 
@@ -90,8 +90,8 @@ docker images
 
 Vous devriez voir votre image `hello-world`, fraîchement récupérée. Vous avez également accès à d'autres détails tels que
 
-* L'ID de l'image,
-* le tag de l'image (utilisé pour transmettre des informations importantes sur l'image. Par défaut, le tag est "latest". Vous pouvez jeter un coup d'oeil à [cette liste de balises](https://hub.docker.com/_/python) : comprenez-vous à quoi elles servent ?),
+* l'id de l'image,
+* la balise de l'image (utilisé pour transmettre des informations importantes sur l'image. Par défaut, la balise est "latest". Vous pouvez jeter un coup d'oeil à [cette liste de balises](https://hub.docker.com/_/python) : comprenez-vous à quoi elles servent ?),
 * la taille de l'image
 
 ---
