@@ -59,7 +59,7 @@ Retournez à votre terminal et exécutez :
 FLASK_ENV=development pipenv run flask run
 ```
 
-Le serveur devrait démarrer. Ouvrez votre navigateur et visitez [`localhost:5000`](http://localhost:5000). Vous devriez voir "Hello world !" comme réponse textuelle !
+Le serveur devrait démarrer. Ouvrez votre navigateur et aller sur [`localhost:5000`](http://localhost:5000). Vous devriez voir "Hello world !" comme réponse textuelle !
 
 Essayez de modifier le code et de recharger la page dans le navigateur. 💡 Que se passe-t-il ?
 
@@ -70,11 +70,11 @@ En production, nous ne voulons pas utiliser le serveur Flask par défaut, optimi
 Le serveur de production exécutera ce code :
 
 ```bash
-# Ctrl-C pour tuer le serveur précédent
+# Ctrl-C pour arrêter le serveur précédent
 pipenv run gunicorn wsgi:app --access-logfile=-
 ```
 
-:bulb : Si vous le lancez sous Windows, il échouera car gunicorn ne prend pas (encore ?) en charge Windows :
+:bulb: Si vous le lancez sous Windows, il échouera car gunicorn ne prend pas (encore ?) en charge Windows :
 
 - [github.com/benoitc/gunicorn/issues/524](https://github.com/benoitc/gunicorn/issues/524)
 - [stackoverflow.com/questions/11087682/does-gunicorn-run-on-windows](https://stackoverflow.com/questions/11087682/does-gunicorn-run-on-windows) (ils parlent de [`waitress`](https://docs.pylonsproject.org/projects/waitress))
@@ -211,26 +211,26 @@ Pratiquez le **GitHub Flow** avec quatre branches de fonctionnalités (une par l
 
 ### Read
 
-Ajoutez d'abord un test pour la route `GET /api/v1/products/:id`. Ensuite, implémentez-le. Cette route récupère un seul `produit` et renvoie une représentation JSON de celui-ci (Code d'état : `200`). `:id` représente la partie dynamique de l'url demandant notre api. Voici quelques exemples d'urls de requête correspondantes à notre route url : `/api/v1/products/3`, `/api/v1/products/1`, etc.
+Ajoutez d'abord un test pour la route `GET /api/v1/products/:id`. Ensuite, implémentez-le. Cette route récupère un seul `produit` et renvoie une représentation JSON de celui-ci (Code d'état : `200`). `:id` représente la partie dynamique de l'url faisant appel à notre api. Voici quelques exemples d'urls de requête correspondantes à notre route url : `/api/v1/products/3`, `/api/v1/products/1`, etc.
 
 Si `:id` ne correspond à aucun id de `produit` connu dans la fausse base de données `PRODUCTS`, renvoyer un [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404).
 Ajoutez un scénario de test séparé pour cela.
 
-:bulb: **Conseil** : Jetez un coup d'œil aux [Règles de Variables](http://flask.pocoo.org/docs/1.0/quickstart/#variable-rules) dans la documentation Flask.
+:bulb: **Conseil** : Jetez un coup d'œil aux [Règles de Variable](http://flask.pocoo.org/docs/1.0/quickstart/#variable-rules) dans la documentation Flask.
 
 ### Delete
 
 Ajout d'un test pour la route `DELETE /api/v1/products/:id`. Cette route va **supprimer** un seul `produit` de la fausse base de données `PRODUCTS`. Le test renvoie une réponse vide avec le code d'état [`204`] (https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204).
 
-:bulb : **Tip** : Regardez comment Flask définit une [méthode HTTP] (http://flask.pocoo.org/docs/quickstart/#http-methods) pour une route donnée.
+:bulb: **Tip** : Regardez comment Flask définit une [méthode HTTP] (http://flask.pocoo.org/docs/quickstart/#http-methods) pour une route donnée.
 
-:bulb : **Tip** : Si vous voulez faire du TDD avec cette méthode, vous aurez du mal car la base de données est simulée dans une liste constante. Allez-y et écrivez seulement le code dans wsgi.py, nous verrons plus tard comment isoler l'environnement de test et utiliser une configuration de base de données appropriée pour cela. Cette remarque sera la même pour les deux prochaines sections "Create" & "Update".
+:bulb: **Tip** : Si vous voulez faire du TDD avec cette méthode, vous aurez du mal car la base de données est simulée dans une liste constante. Allez-y et écrivez seulement le code dans wsgi.py, nous verrons plus tard comment isoler l'environnement de test et utiliser une configuration de base de données appropriée pour cela. Cette remarque sera la même pour les deux prochaines sections "Create" & "Update".
 
 ### Create
 
 Commencez par ajouter un test pour la route `POST /api/v1/products`. Cette route **créera** un nouveau `produit` dans la fausse base de données `PRODUCTS` et renverra la représentation JSON de la ressource nouvellement créée (Status code : [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201))
 
-:bulb : **Conseil** Vous devrez peut-être utiliser la méthode [`Request.get_json`](http://flask.pocoo.org/docs/1.0/api/#flask.Request.get_json).
+:bulb: **Conseil** Vous devrez peut-être utiliser la méthode [`Request.get_json`](http://flask.pocoo.org/docs/1.0/api/#flask.Request.get_json).
 
 ```python
 from flask import request
@@ -238,7 +238,7 @@ from flask import request
 request.get_json()
 ```
 
-:bulb : **Tip** Vous devrez peut-être trouver un moyen de générer des identifiants auto-incrémentés :
+:bulb: **Conseil** Vous devrez peut-être trouver un moyen de générer des id auto-incrémentés :
 
 ```python
 import itertools
@@ -252,13 +252,13 @@ IDENTIFIER_GENERATOR = itertools.count(START_INDEX)
 print(next(IDENTIFIER_GENERATOR))
 ```
 
-:bulb : **Conseil** Pour envoyer une requête POST **dans vos tests**, vous pouvez utiliser la méthode suivante :
+:bulb: **Conseil** Pour envoyer une requête POST **dans vos tests**, vous pouvez utiliser la méthode suivante :
 
 ```python
 response = self.client.post("/api/v1/products", json={'name': 'HistoVec'})
 ```
 
-:bulb : **Conseil** Voici une charge utile que vous pouvez utiliser dans Postman pour tester cette route :
+:bulb: **Conseil** Voici une charge utile que vous pouvez utiliser dans Postman pour tester cette route :
 
 ```
 {
@@ -276,9 +276,9 @@ Enfin, ajoutez un test pour la route `PATCH /api/v1/products/:id` qui va **mettr
 
 ### Solutions
 
-:avertissement : **Veuillez ne lire les solutions qu'une fois que vous aurez essayé de mettre en œuvre tous les tests et toutes les méthodes HTTP**.
+:warning: **Veuillez ne lire les solutions qu'une fois que vous aurez essayé de mettre en œuvre tous les tests et toutes les méthodes HTTP**.
 
-<details><summary markdown="span">View tests
+<details><summary markdown="span">Voir les tests
 </summary>
 
 ```python
@@ -404,7 +404,7 @@ class TestViews(TestCase):
 ```
 
 </details>
-<details><summary markdown="span">View wsgi.py
+<details><summary markdown="span">Voir wsgi.py
 </summary>
 
 ```python
@@ -420,7 +420,7 @@ app = Flask(__name__)
 
 
 # Préfixer le chemin de l'api en utilisant un numéro de version est vraiment important pour gérer les futures évolutions.
-# De cette façon, nous pouvons continuer à offrir l'ancien service en utilisant l'url /v1 et offrir le nouveau service en utilisant /v2.
+# De cette façon, nous pouvons continuer à proposer l'ancien service en utilisant l'url /v1 et proposer le nouveau service en utilisant /v2.
 # Nous supprimerons l'api /v1 (et le code associé) lorsque tous nos utilisateurs utiliseront l'url /v2.
 BASE_URL = '/api/v1'
 
@@ -473,7 +473,7 @@ def delete_one_product(product_id):
     return '', 204  # Pas de contenu
 
 
-# Pas de product_id dans l'url de création (méthode POST) puisque c'est la base de données qui implémente le compteur d'identifiants.
+# Pas de product_id dans l'url de création (méthode POST) puisque c'est la base de données qui implémente le compteur d'id.
 # Si les utilisateurs de l'api pouvaient choisir un id, cela conduirait à de nombreuses erreurs :
 # - problème de compétition pour un id donné choisi par de nombreux utilisateurs.
 # Comment savoir quel est l'id qui n'est pas utilisé pour le moment ?
