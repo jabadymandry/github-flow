@@ -2,7 +2,7 @@
 
 Maintenant que nous avons joué un peu avec Flask, il est temps de commencer les exercices qui nous occuperont pendant les trois prochains jours. L'objectif est de construire un clone de l'[API Twitter](https://developer.twitter.com/en/docs/api-reference-index) en utilisant Flask et différents modules externes Flask (comme [ceux-ci](https://github.com/humiaozuzu/awesome-flask)).
 
-⚠️ Dans cet exercice, nous allons implémenter quelques points de terminaison d'API avec une grosse contrainte : nous n'avons pas encore de base de données relationnelle ! Cette contrainte vous aidera à vous concentrer sur la couche HTTP de l'API, et non sur la récupération des informations. Pour faire abstraction de la base de données, nous utiliserons le modèle [data access object (DAO)](https://en.wikipedia.org/wiki/Data_access_object) et demain, nous le remplacerons par des requêtes réelles vers la base de données.
+⚠️ Dans cet exercice, nous allons implémenter quelques points d'entrée (endpoints) d'API avec une grosse contrainte : nous n'avons pas encore de base de données relationnelle ! Cette contrainte vous aidera à vous concentrer sur la couche HTTP de l'API, et non sur la récupération des informations. Pour faire abstraction de la base de données, nous utiliserons le modèle [data access object (DAO)](https://en.wikipedia.org/wiki/Data_access_object) et demain, nous le remplacerons par des requêtes réelles vers la base de données.
 
 ## Pour commencer
 
@@ -237,7 +237,7 @@ git push heroku master
 heroku open # Vérifier que l'application fonctionne bien.
 ```
 
-## Premier point de terminaison de l'API - `/tweets/:id`
+## Premier point d'entrée de l'API - `/tweets/:id`
 
 Dans la section suivante, nous allons implémenter l'API HTTP servant un JSON d'un seul tweet.
 
@@ -355,7 +355,7 @@ La prochaine erreur devrait être :
 <details><summary markdown='span'>Voir la solution
 </summary>
 
-Notre classe `Tweet` est vide et a besoin d'une [variable d'instance].(https://docs.python.org/3/tutorial/classes.html#class-and-instance-variables) `text`:
+Notre classe `Tweet` est vide et a besoin d'une [variable d'instance](https://docs.python.org/3/tutorial/classes.html#class-and-instance-variables) `text`:
 
 ```python
 # app/models.py
@@ -412,9 +412,9 @@ Cette classe sera remplacée dans le prochain chapitre par un véritable [ORM](h
 qui interagit avec une base de données relationnelle. En attendant, nous avons besoin d'en **créer un faux**.
 
 **Spécification** : La classe *repository* contiendra une liste de tweets, vide au début,
-mais va "ajouter" de nouveaux tweets. Lors de l'ajout d'un nouveau tweet, elle lui attribuera
+mais va `ajouter` de nouveaux tweets. Lors de l'ajout d'un nouveau tweet, elle lui attribuera
 automatiquement un id auto-incrémenté (en commençant par `1`). Enfin, il devrait permettre
-d'obtenir un tweet basé sur son id.
+`d'obtenir` un tweet basé sur son id.
 La liste des tweets sera conservée en mémoire.
 
 
@@ -491,7 +491,7 @@ class TweetRepository:
 
 ### Controller + Route
 
-Il est maintenant temps d'ajouter une nouvelle route à notre application pour servir notre point de terminaison API.
+Il est maintenant temps d'ajouter une nouvelle route à notre application pour servir notre point d'entrée API.
 Rappelez-vous, nous voulons avoir ceci :
 
 ```bash
@@ -679,15 +679,15 @@ Le paquet Flask-RESTx est livré avec [swagger doc](https://flask-restx.readthed
 
 :point_right: [http://localhost:5000](http://localhost:5000)
 
-Vous pouvez voir la documentation ? Vous pouvez essayer vos points de terminaison directement dans celle-ci !
+Vous pouvez voir la documentation ? Vous pouvez essayer vos points d'entrée directement dans celle-ci !
 
 ### Pour aller plus loin
 
 Si vous avez atteint cette partie, vous avez compris l'essentiel de la construction d'une API RESTful avec Flask. Il est temps de s'exercer !
 
-- Implémentez les autres points de terminaison pour avoir une API RESTful `CRUD` complète ! Aujourd'hui, nous ne nous soucions pas de l'autorisation de l'utilisateur pour la création, la mise à jour et la suppression. [Le document est votre ami](https://flask-restx.readthedocs.io/en/stable/)
-- Utilisez le flux GitHub pour chaque nouveau point de terminaison !
-- Déployez souvent ! Chaque fois que vous intégrez une branche avec un nouveau point de terminaison, `git push heroku master`
+- Implémentez les autres points d'entrée pour avoir une API RESTful `CRUD` complète ! Aujourd'hui, nous ne nous soucions pas de l'autorisation de l'utilisateur pour la création, la mise à jour et la suppression. [Le document est votre ami](https://flask-restx.readthedocs.io/en/stable/)
+- Utilisez le flux GitHub pour chaque nouveau point d'entrée !
+- Déployez souvent ! Chaque fois que vous intégrez une branche avec un nouveau point d'entrée, `git push heroku master`
 
 Bonne chance 😉
 

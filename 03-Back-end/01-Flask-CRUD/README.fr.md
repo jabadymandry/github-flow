@@ -100,7 +100,7 @@ git commit -m "Premier déploiement du boilerplate Flask"
 heroku create --region=eu
 git push heroku master
 
-heroku ps                  # Vous avez un banc d'essai (dyno) gratuit `gunicorn` en service?
+heroku ps                  # Vous avez un dyno `gunicorn` gratuit en service?
 
 heroku open                # Obtenez-vous un "Hello world" dans le navigateur ?
 heroku logs -n 1000 --tail # Vérifiez que les registres d'accès s'affichent. Rechargez le navigateur.
@@ -139,11 +139,11 @@ heroku open
 heroku logs -n 1000 --tail
 ```
 
-Vérifiez que le nouveau point de terminaison (endpoint) `/api/v1/produits` fonctionne en **production**.
+Vérifiez que le nouveau point d'entrée (endpoint) `/api/v1/produits` fonctionne en **production**.
 
 ## Tests
 
-Tester nos API sera obligatoire. Que nous utilisions ou non le TDD strict pendant le processus de développement, à un moment donné, l'application devrait avoir des tests pour chaque point de terminaison.
+Tester nos API sera obligatoire. Que nous utilisions ou non le TDD strict pendant le processus de développement, à un moment donné, l'application devrait avoir des tests pour chaque point d'entrée.
 
 Nous utilisons un module externe appelé [`Flask Testing`](https://pythonhosted.org/Flask-Testing/).
 
@@ -205,7 +205,7 @@ PRODUCTS = {
 
 ## CRUD
 
-Félicitations :tada: ! Vous avez écrit la première route de l'API RESTful. Maintenant, il est temps d'implémenter les quatre autres points de terminaison pour implémenter correctement le CRUD sur la ressource `product`.
+Félicitations :tada: ! Vous avez écrit la première route de l'API RESTful. Maintenant, il est temps d'implémenter les quatre autres points d'entrées pour implémenter correctement le CRUD sur la ressource `product`.
 
 Pratiquez le **GitHub Flow** avec quatre branches de fonctionnalités (une par lettre de l'acronyme `CRUD`), et poussez vers `heroku` après chaque intégration de Pull Request !
 
@@ -266,7 +266,7 @@ response = self.client.post("/api/v1/products", json={'name': 'HistoVec'})
 }
 ```
 
-N'oubliez pas de sélectionner "Raw" et "JSON" pour ajouter automatiquement un en-tête `Content-Type : application/json`. Sans cet en-tête, votre appel `request.get_json()` ignorera les données utiles, comme indiqué dans la [documentation `Request.get_json`](http://flask.pocoo.org/docs/1.0/api/#flask.Request.get_json).
+N'oubliez pas de sélectionner "Raw" et "JSON" pour ajouter automatiquement un en-tête `Content-Type : application/json`. Sans cet en-tête, votre appel `request.get_json()` ignorera les données contenues dans le corps de la requête (body payload), comme indiqué dans la [documentation `Request.get_json`](http://flask.pocoo.org/docs/1.0/api/#flask.Request.get_json).
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560715014/postman-workelo_ztvqyf.png)
 
