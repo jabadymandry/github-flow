@@ -1,17 +1,17 @@
-# Database - Livecode
+# Base de données - Livecode
 
-Today, our livecode is not about database. It's about **Algorithmic**!
-Let's practise with the "colorful number" problem using **TDD**.
+Aujourd'hui, notre livecode ne concerne pas la base de données. Il s'agit d' **Algorithmique** !
+Entraînons-nous avec le problème du "nombre coloré" en utilisant **TDD**.
 
 
-For a given number N find if it's a COLORFUL number or not :
+Pour un nombre donné, N trouve si c'est un nombre COLORÉ ou non :
 
-A number can be broken into different contiguous sub-subsequence parts.
-Suppose, a number 3245 can be broken into parts like 3 2 4 5 32 24 45 324 245.
-This number is a COLORFUL number, since product of every digit of a contiguous subsequence is different.
+Un nombre peut être décomposé en différentes parties de sous-séquence contiguës.
+Supposons qu'un nombre 3245 puisse être décomposé en parties comme 3 2 4 5 32 24 45 324 245.
+Ce nombre est un nombre COLORÉ, car le produit de chaque chiffre d'une sous-séquence contiguë est différent.
 
 ```
-Example:
+Exemple :
 
 N = 23
 2 3 23
@@ -19,10 +19,10 @@ N = 23
 3 -> 3
 23 -> 6
 ```
-23 is a COLORFUL number since product of every digit of a sub-sequence are different.
+23 est un nombre COLORE puisque les produits de chaque chiffre d'une sous-séquence sont différents.
 
 
-## Setup
+## Configuration
 
 ```bash
 mkdir -p colorful && cd $_
@@ -36,7 +36,7 @@ touch tests/test_colorful.py
 pipenv run nosetests # => 0 tests for now
 ```
 
-Bootstrap the testing class:
+Créez la classe de test :
 
 ```python
 # tests/test_colorful.py
@@ -48,9 +48,9 @@ class ColorfulTest(unittest.TestCase):
 
 ## Solution
 
-Please do not peek _before_ the livecode session!
+Veuillez ne pas regarder _avant_ la session livecode !
 
-<details><summary markdown="span">View solution
+<details><summary markdown="span">Voir la solution
 </summary>
 
 ```python

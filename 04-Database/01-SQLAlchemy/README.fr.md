@@ -1,6 +1,6 @@
 # SQLAlchemy
 
-Avant de retourner au repository `twitter-api` d'hier, créons une toute nouvelle application Flask (sans le factory pattern `create_app`).
+Avant de retourner sur le repository `twitter-api` d'hier, créons une toute nouvelle application Flask (sans le factory pattern `create_app`).
 
 Voici la liste de ce que nous allons installer au cours de cet exercice :
 
@@ -21,7 +21,7 @@ Exécutez-le. Il installera :
 
 - le serveur PostgreSQL
 - pgAdmin 4, un client GUI très utile pour exécuter des requêtes et administrer le serveur
-- Les outils de ligne de commande, utiles pour installer le package `psycopg2`
+- Les outils de ligne de commande qui seront utiles pour installer le package `psycopg2`
 
 L'assistant d'installation vous demandera un mot de passe superadmin. Mettez quelque chose dont vous pouvez vous souvenir facilement (généralement `root`).
 
@@ -72,7 +72,7 @@ FLASK_ENV=development pipenv run flask run
 
 Et allez sur [`localhost:5000/hello`](http://localhost:5000/hello)
 
-Nous devrons manipuler des variables d'environnement pour configurer l'accès à la base de données.
+Nous allons devoir manipuler des variables d'environnement pour configurer l'accès à la base de données.
 
 ```bash
 touch .env
@@ -138,7 +138,7 @@ import os
 
 class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    # The replace() call is to ensure that the URI starts with 'postgresql://' and not just 'postgres://' as it used to be (this is a back-compability hack)
+    # L'appel de replace() permet de s'assurer que l'URI commence par 'postgresql://' et non par 'postgres://' comme c'était le cas auparavant (il s'agit d'un hack de rétrocompatibilité).
     SQLALCHEMY_DATABASE_URI = os.environ["DATABASE_URL"].replace("postgres://", "postgresql://", 1)
 ```
 
@@ -186,7 +186,7 @@ DATABASE_URL="postgresql://postgres:root@localhost/flask_db"
 DATABASE_URL="postgresql://postgres:<root>@localhost/flask_db"
 ```
 
-Cela signifie que nous utilisons le serveur PostgreSQL que nous avons installé plus tôt et la base de données `flask_db`. Base de données que nous devons d'ailleurs créer!
+Cela signifie que nous utilisons le serveur PostgreSQL que nous avons installé plus tôt ainsi que la base de données `flask_db`. Base de données que nous devons d'ailleurs créer!
 
 Pour la première commande, utilisez votre `numéro de version postgreSQL` selon l'installateur que vous avez choisi (généralement `10` sur les ordinateurs du Wagon, `12` pour une nouvelle installation).
 
@@ -283,7 +283,7 @@ Tu vois comme c'était facile ?
 
 ## Mettre à jour un modèle
 
-Alembic (le package derrière `manage.py db`) se démarque lorsque nous mettons à jour un modèle. Il va automatiquement générer une nouvelle migration avec le "diff" sur cette définition de modèle.
+Alembic (le package derrière `manage.py db`) se démarque lorsque nous mettons à jour un modèle. Il va automatiquement générer une nouvelle migration avec la "différence" dans la définition du modèle.
 
 ```python
 # models.py
@@ -348,7 +348,7 @@ C'est pour cette raison que, à chaque création/mise à jour de modèle, nous d
 
 ## Création de notre premier point d'accès à l'API
 
-Nous allons coder le endpoint `/products`, listant _tous_ les produits (nous ne paginons pas ici).
+Nous allons coder le point de terminaison `/products`, listant _tous_ les produits (ici nous ne paginons pas).
 
 Hier, nous avons utilisé une fausse base de données et n'avons pas eu de problème avec `jsonify`. Maintenant que nous récupérons des données depuis la base de données et que nous utilisons des sous-classes `db.Model`, nous allons avoir des problèmes de **sérialisation**. Pour les anticiper, nous devons introduire un autre package : [`marshmallow`](https://marshmallow.readthedocs.io/)
 
@@ -356,7 +356,7 @@ Hier, nous avons utilisé une fausse base de données et n'avons pas eu de probl
 pipenv install flask-marshmallow marshmallow-sqlalchemy
 ```
 
-Nous pouvons maintenant instancier l'application `Marshmallow` (`s'occuper` des lignes `NEW LINE` et de leur position) :
+Nous pouvons maintenant instancier l'application `Marshmallow` (`faites attention` aux lignes `NEW LINE` et à leur position) :
 
 ```python
 # wsgi.py
@@ -380,7 +380,7 @@ ma = Marshmallow(app)  # NEW LINE
 # [ 'hello' route definition ]
 ```
 
-Nous devons également définir un schéma de sérialisation pour chaque modèle que nous voulons produire en tant que ressource JSON via nos endpoints d'API :
+Nous devons également définir un schéma de sérialisation dont nous attendons une réponse sous le format JSON via nos points de terminaison d'API :
 
 ```bash
 touch schemas.py
@@ -402,7 +402,7 @@ one_product_schema = ProductSchema()
 many_product_schema = ProductSchema(many=True)
 ```
 
-Maintenant que nous avons nos schémas, nous pouvons les utiliser et implémenter notre endpoint d'API !
+Maintenant que nous avons nos schémas, nous pouvons les utiliser et implémenter notre point de terminaison pour l'API !
 
 ```python
 # wsgi.py
@@ -469,7 +469,7 @@ heroku open
 <details><summary markdown='span'>Voir la solution
 </summary>
 
-La base de données de production et la base de données locale (de développement) sont **différentes** !
+La base de données de production et la base de données locale (de développement) ne sont **pas les mêmes** !
 
 Pour ajouter des produits à la base de données de production, vous pouvez utiliser le shell Flask, en vous connectant à distance au dyno Heroku (_comme avec SSH_) :
 
@@ -485,7 +485,7 @@ heroku run flask shell
 >>> quit()
 ```
 
-Maintenant, rechargez la page. Vous voyez, vous avez le nouveau produit ajouté !
+Maintenant, rechargez la page. Vous voyez, le nouveau produit a été ajouté !
 
 </details>
 
@@ -493,10 +493,10 @@ Maintenant, rechargez la page. Vous voyez, vous avez le nouveau produit ajouté 
 
 Nous avons établi l'architecture de base de Flask en utilisant SQLAlchemy et un package de sérialisation pour obtenir des JSON de ces modèles. Vous devez maintenant implémenter ce qui suit :
 
-- `READ` : L'endpoint pour lister **un seul produit** à partir de son id.
-- `CREATE` : L'endpoint pour créer un nouveau produit à partir du corps de la requête `POST`
-- `DELETE` : L'endpoint pour supprimer un produit d'une base de données
-- `UPDATE` : L'endpoint pour mettre à jour un produit existant à partir du corps de la requête `PATCH` et de son id dans l'URL.
+- `READ` : Le point de terminaison pour lister **un seul produit** à partir de son id.
+- `CREATE` : Le point de terminaison pour créer un nouveau produit à partir du corps de la requête `POST`
+- `DELETE` : Le point de terminaison pour supprimer un produit d'une base de données
+- `UPDATE` : Le point de terminaison pour mettre à jour un produit existant à partir du corps de la requête `PATCH` et de son id dans l'URL.
 
 Ces liens de documentation devraient vous aider :
 

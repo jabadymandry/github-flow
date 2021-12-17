@@ -1,10 +1,10 @@
-# Twitter API - Day 2
+# API Twitter - Jour 2
 
-In this challenge we will resume the work started in yesterday's **Twitter API** exercise. In this exercise, the database was _mocked_ with a made-up `TweetRepository` class.
+Dans ce défi, nous allons reprendre le travail commencé dans l'exercice **Twitter API** d'hier. Dans cet exercice, la base de données a été _simulée_ par une classe inventée `TweetRepository`.
 
-## Setup
+## Configuration
 
-We're going to continue from yesterday correction:
+Nous allons poursuivre la correction d'hier :
 :point_right: [github.com/ssaunier/twitter-api](https://github.com/ssaunier/twitter-api)
 
 ```bash
@@ -14,50 +14,50 @@ cd twitter-api-database
 git remote rm origin
 ```
 
-Go to [github.com/new](https://github.com/new) and create a _public_ repository under your _personal_ account, name it `twitter-api-database`.
+Allez sur [github.com/new](https://github.com/new) créez un repository _public_ sous votre compte _personnel_, nommez-le `twitter-api-database`.
 
 ```bash
 git remote add origin git@github.com:<user.github_nickname>/twitter-api-database.git
 git push -u origin master
 ```
 
-Now that you have the repo, you need to create the virtualenv and install the packages:
+Maintenant que vous avez le repository, vous devez créer le virtualenv et installer les packages :
 
 ```bash
 pipenv install --dev
 ```
 
-Make sure that the tests are passing:
+Assurez-vous que les tests passent :
 
 ```bash
 nosetests
 ```
 
-Make sure that the web server can be run and show the Swagger documentation:
+Assurez-vous que le serveur web peut être exécuté et affichez la documentation Swagger :
 
 ```bash
 FLASK_ENV=development pipenv run flask run
 ```
 
-:point_right: Go to [localhost:5000](http://localhost:5000/). Is everything fine?
+:point_right: Allez sur [localhost:5000](http://localhost:5000/). Est-ce que tout va bien ?
 
-## Setting up SQLAlchemy
+## Configuration de SQLAlchemy
 
-Like in the previous exercise, we need to install some tools:
+Comme dans l'exercice précédent, nous devons installer quelques outils :
 
 ```bash
 pipenv install psycopg2-binary gunicorn
 pipenv install flask-sqlalchemy flask-migrate flask-script
 ```
 
-We will need to configure the used Database from an environment variable, the easiest is to use the `python-dotenv` package with a `.env` file:
+Nous devons configurer la base de données utilisée en utilisant une variable d'environnement, le plus simple est d'utiliser le package `python-dotenv` avec un fichier `.env` :
 
 ```bash
 touch .env
 echo ".env" >> .gitignore
 ```
 
-And add the `DATABASE_URL` variable:
+Et ajoutez la variable `DATABASE_URL` :
 
 ```bash
 # .env
@@ -67,17 +67,17 @@ DATABASE_URL="postgresql://postgres:<password_if_necessary>@localhost/twitter_ap
 # DATABASE_URL="postgresql://localhost/twitter_api_flask"
 ```
 
-If you got a `sqlalchemy.exc.OperationalError` verify your `DATABASE_URL`. Your password shouldn't contains `<`, `>` symbols.
+Si vous obtenez un `sqlalchemy.exc.OperationalError`, vérifiez votre `DATABASE_URL`. Votre mot de passe ne doit pas contenir les symboles `<`, `>`.
 
 ```bash
-# Valid example
+# Exemple valide
 DATABASE_URL="postgresql://postgres:root@localhost/twitter_api_flask"
 
-# Invalid example
+# Exemple invalide
 DATABASE_URL="postgresql://postgres:<root>@localhost/twitter_api_flask"
 ```
 
-We now need to create a config object to pass to the Flask application. This will link the env variables to the actual Flask / SQLAlchemy configuration:
+Nous devons maintenant créer un objet de configuration à passer à l'application Flask. Cela permettra de lier les variables d'environnement à la configuration actuelle de Flask / SQLAlchemy :
 
 ```bash
 touch config.py
@@ -91,7 +91,7 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
 ```
 
-Now let's instantiate an `SQLAlchemy` instance, but first let's kill the fake repositories:
+Maintenant, nous allons instancier une instance de `SQLAlchemy`, mais d'abord nous allons supprimer les faux repositories :
 
 ```bash
 rm app/db.py
@@ -99,14 +99,14 @@ rm app/repositories.py
 rm tests/test_repositories.py
 ```
 
-Open the `app/apis/tweets.py` and the `tests/apis/test_tweet_views.py` and remove the following line in both files:
+Ouvrez le fichier `app/apis/tweets.py` et le fichier `tests/apis/test_tweet_views.py` et supprimez la ligne suivante dans les deux fichiers :
 
 ```python
 from app.db import tweet_repository
 ```
 
-It's official, the tests are now broken :scream: But the `flask run` is still working :muscle: !
-Let's continue bravely by instantiating our SQLAlchemy session we will use for all SQL queries (CRUD).
+C'est officiel, les tests sont maintenant cassés :scream : Mais le `flask run` fonctionne toujours :muscle : !
+Continuons courageusement en instanciant notre session SQLAlchemy que nous utiliserons pour toutes les requêtes SQL (CRUD).
 
 ```python
 # app/__init__.py
@@ -127,9 +127,9 @@ def create_app():
     # [...]
 ```
 
-### Model
+### Modèle
 
-Now it's time to **convert** our existing `Tweet` model to a proper SQLAlchemy model, and not just a regular class. Open the `app/models.py` file and update it:
+Maintenant, il est temps de **convertir** notre modèle `Tweet` existant en un modèle SQLAlchemy approprié, et pas seulement une classe ordinaire. Ouvrez le fichier `app/models.py` et mettez-le à jour :
 
 ```python
 # app/models.py
@@ -149,21 +149,21 @@ class Tweet(db.Model):
         return f"<Tweet #{self.id}>"
 ```
 
-We can also get rid of the tests on the model as it's no longer a regular class. We trust SQLAlchemy with the column behavior, and as we have no instance method here, no need for unit testing:
+Nous pouvons également nous débarrasser des tests sur le modèle puisqu'il ne s'agit plus d'une classe normale. Nous faisons confiance à SQLAlchemy pour le comportement des colonnes, et comme nous n'avons pas de méthode d'instance ici, pas besoin de tests unitaires :
 
 ```bash
 rm tests/test_models.py
 ```
 
-### Alembic setup
+### Configurer Alembic
 
-We need a local database for our application:
+Nous avons besoin d'une base de données locale pour notre application :
 
 ```bash
 winpty psql -U postgres -c "CREATE DATABASE twitter_api_flask"
 ```
 
-Then we need to isolate a utility file to run the commands without polluting the main `wsgi.py`. Here is how it goes:
+Ensuite, nous devons isoler un fichier utilitaire pour exécuter les commandes sans polluer le fichier principal `wsgi.py`. Voici comment cela se passe :
 
 ```bash
 touch manage.py
@@ -189,35 +189,35 @@ if __name__ == '__main__':
     manager.run()
 ```
 
-Now we can use Alembic (run `pipenv graph` to see where it stands)!
+Maintenant nous pouvons utiliser Alembic (lancez `pipenv graph` pour voir où il en est) !
 
 ```bash
 pipenv run python manage.py db init
 ```
 
-This command has created a `migrations` folder, with an empty `versions` in it. Time to run the first migration with the creation of the `tweets` table from the `app/models.py`'s `Tweet` class.
+Cette commande a créé un dossier `migrations`, avec `versions` qui est vide dedans. Il est temps de lancer la première migration avec la création de la table `tweets` à partir de la classe `Tweet` de `app/models.py`.
 
 ```bash
 pipenv run python manage.py db migrate -m "Create tweets table"
 ```
 
-Open the `migrations/versions` folder: can you see a first migration file? Go ahead, open it and read it! That's a file you **can** modify if you are not happy with what has been automatically generated. Actually that's something the tool tells you:
+Ouvrez le dossier `migrations/versions` : voyez-vous un premier fichier de migration ? Allez-y, ouvrez-le et lisez-le ! C'est un fichier que vous **pouvez** modifier si vous n'êtes pas satisfait de ce qui a été généré automatiquement. En fait, c'est quelque chose que l'outil vous dit :
 
 ```bash
 # ### commands auto generated by Alembic - please adjust! ###
 ```
 
-When you are happy with the migration, time to run it against the local database:
+Lorsque vous êtes satisfait de la migration, il est temps de l'exécuter sur la base de données locale :
 
 ```bash
 pipenv run python manage.py db upgrade
 ```
 
-And that's it! There is now a `tweets` table in the `twitter_api_flask` local database. It's empty for now, but it does exist!
+Et c'est tout ! Il y a maintenant une table `tweets` dans la base de données locale `witter_api_flask`. Elle est vide pour l'instant, mais elle existe bel et bien !
 
-## Adding a first tweet from a shell
+## Ajouter un premier tweet à partir de shell
 
-We want to go the "manual testing route" to update the API controller code by adding manually a first Tweet in the database. It will validate that all our efforts to add SQLAlchemy are starting to pay off:
+Nous voulons aller voir le "manual testing route" pour mettre à jour le code du contrôleur de l'API en ajoutant manuellement un premier Tweet dans la base de données. Cela permettra de confirmer que tous nos efforts pour ajouter SQLAlchemy commencent à porter leurs fruits :
 
 ```bash
 pipenv run flask shell
@@ -232,21 +232,21 @@ pipenv run flask shell
 # Hooray!
 ```
 
-## Updating the API controller code
+## Mise à jour du code du contrôleur de l'API
 
-Now that the models have been migrated from dumb Python class to SQLAlchemy proper models backed by a local Postgresql database, we want to update the code in `app/apis/tweets.py` so that it does not use the `tweet_repository` anymore.
+Maintenant que les modèles ont été migrés d'une classe Python muette vers des modèles SQLAlchemy appropriés reposant sur une base de données Postgresql locale, nous voulons mettre à jour le code dans `app/apis/tweets.py` afin qu'il n'utilise plus le `tweet_repository`.
 
-We won't use the (outdated) tests to try to make our server _work again_. Run the server:
+Nous n'utiliserons pas les tests ( obsolètes ) pour essayer de faire en sorte que notre serveur _fonctionne à nouveau_. Exécutez le serveur :
 
 ```bash
 FLASK_ENV=development pipenv run flask run
 ```
 
-:point_right: Go to [localhost:5000/tweets/1](http://localhost:5000/tweets/1). Let's make this work and return a JSON containing the first tweet we created in the `flask shell`.
+:point_right: Allez sur [localhost:5000/tweets/1](http://localhost:5000/tweets/1). Faites le fonctionner et renvoyez un JSON contenant le premier tweet que nous avons créé dans le `flask shell`.
 
-Look at the error message in the terminal and try to fix the code _yourself_. There's only one line of code to add (an `import`) and another one to change. You can do it :muscle: !
+Regardez le message d'erreur dans le terminal et essayez de corriger le code _vous-mêmes_. Il y a seulement une ligne de code à ajouter (un `import`) et une autre à modifier. Vous pouvez le faire :muscle: !
 
-<details><summary markdown='span'>View solution
+<details><summary markdown='span'>Voir la solution
 </summary>
 
 ```python
@@ -260,17 +260,17 @@ from app import db
 tweet = db.session.query(Tweet).get(tweet_id)
 ```
 
-Congrats! [localhost:5000/tweets/1](http://localhost:5000/tweets/1) is now working!
+Félicitations ! Le site [localhost:5000/tweets/1](http://localhost:5000/tweets/1) fonctionne maintenant !
 
 </details>
 
-Let's leave only the `GET /tweets/:id` route working, not touching the ones, and try to fix the tests first before going back to it.
+Laissons seulement la route `GET /tweets/:id` fonctionner, sans toucher aux autres, et essayons de corriger les tests d'abord avant d'y revenir.
 
-## Updating the tests
+## Mettre à jour les tests
 
-Open the `tests/apis/test_tweet_views.py`. Before we dive into replacing the `tweet_repository` with some `db.session` in here, let's pause and think about what we are doing.
+Ouvrez le fichier `tests/apis/test_tweet_views.py`. Avant de se lancer dans le remplacement du `tweet_repository` par un `db.session`, faisons une pause et réfléchissons à ce que nous faisons.
 
-What happens if you run the following in one of your test method?
+Que se passe-t-il si vous exécutez ce qui suit dans une de vos méthodes de test ?
 
 ```python
 tweet = Tweet(text="A test tweet")
@@ -278,20 +278,20 @@ db.session.add(tweet)
 db.session.commit()
 ```
 
-That's right! It will **create a record** on the database. Which means that if you run the tests 10 times, it will create 10 records! Way to pollute your development environment :disappointed_relieved:
+C'est bien cela ! Il va **créer un enregistrement** dans la base de données. Ce qui signifie que si vous exécutez les tests 10 fois, il créera 10 enregistrements ! Ceci va polluer votre environnement de développement :disappointed_relieved :
 
-The solution is to:
+La solution est de :
 
-- Run the test against _another_ database schema
-- Clean up the schema (deleting all tables/recreating them) between every test run (every method even!)
+- Exécuter le test avec un _autre_ schéma de base de données.
+- Vider le schéma (en supprimant toutes les tables/en les recréant) pour chaque exécution du test (même chaque méthode !).
 
-Here is how we are going to achieve this goal. First we need to create a new database locally:
+Voici comment nous allons atteindre cet objectif. Tout d'abord, nous devons créer une nouvelle base de données en local :
 
 ```bash
 winpty psql -U postgres -c "CREATE DATABASE twitter_api_flask_test"
 ```
 
-And then we can update our `TestTweetViews` class with:
+Et puis nous pouvons mettre à jour notre classe `TestTweetViews` avec :
 
 ```python
 # tests/apis/test_tweet_views.py
@@ -317,18 +317,18 @@ class TestTweetViews(TestCase):
     # [...]
 ```
 
-Now go ahead and update the four tests replacing the `tweet_repository` former logic with some `db.session`. Once you are done, go back to the `app/apis/tweets.py` to fix the API code as well! You can do it :muscle: !
+Maintenant, continuez et mettez à jour les quatre tests en remplaçant l'ancienne logique `tweet_repository` par celle de `db.session`. Une fois que vous avez terminé, retournez dans le fichier `app/apis/tweets.py` pour corriger le code de l'API également ! Vous pouvez le faire :muscle : !
 
-To check if you are making some progress, run the tests:
+Pour vérifier si vous progressez correctement, exécutez les tests :
 
 ```bash
 nosetests
 ```
 
-<details><summary markdown='span'>View solution
+<details><summary markdown='span'>Voir la solution
 </summary>
 
-Here is the updated code for the `TestTweetViews` test case:
+Voici le code mis à jour pour le scénario de test `TestTweetViews` :
 
 ```python
     # tests/apis/test_tweet_views.py
@@ -370,7 +370,7 @@ Here is the updated code for the `TestTweetViews` test case:
         self.assertIsNone(db.session.query(Tweet).get(1))
 ```
 
-And here is the code for `app/apis/tweets.py` where we need to update occurrences of `tweet_repository`:
+Et voici le code de `app/apis/tweets.py` où nous devons mettre à jour les occurrences de `tweet_repository` :
 
 ```python
 # [...]
@@ -422,9 +422,9 @@ class TweetsResource(Resource):
 
 </details>
 
-## Setting up Travis
+## Mettre en place Travis
 
-Setting up Travis for a project where you have a real PostgreSQL database is not as trivial as for a project without. Let's see how we can iterate on the **Travis setup** already covered:
+La configuration de Travis pour un projet où vous avez une vraie base de données PostgreSQL n'est pas aussi triviale que pour un projet sans base de données. Voyons comment nous pouvons reprendre la **configuration de Travis** déjà évoquée :
 
 ```bash
 touch .travis.yml
@@ -450,23 +450,23 @@ script:
   - pipenv run nosetests
 ```
 
-Commit & push this change. Then go to [github.com/marketplace/travis-ci](https://github.com/marketplace/travis-ci) to add this `<github-nickname>/twitter-api-database` to your free Travis plan if it's not the case yet.
+Versionnez & poussez ce changement. Allez ensuite sur [github.com/marketplace/travis-ci](https://github.com/marketplace/travis-ci) pour ajouter `<github-nickname>/twitter-api-database` à votre plan Travis gratuit si ce n'est pas encore le cas.
 
-## Going further
+## En savoir plus
 
-### Tweet list
+### Liste des Tweets
 
-Let's add another endpoint to our API to retrieve **all tweets**:
+Ajoutons un autre endpoint à notre API pour récupérer **tous les tweets** :
 
 ```bash
 GET /tweets
 ```
 
-Go ahead, you can TDD it!
+Allez-y, vous pouvez utiliser le TDD !
 
-## I'm done!
+## C'est terminé !
 
-Let's mark your progress with the following:
+Sauvegardez votre avancement avec ce qui suit :
 
 ```bash
 cd ~/code/<user.github_nickname>/reboot-python
