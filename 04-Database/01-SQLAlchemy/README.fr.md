@@ -380,7 +380,7 @@ ma = Marshmallow(app)  # NEW LINE
 # [ 'hello' route definition ]
 ```
 
-Nous devons également définir un schéma de sérialisation dont nous attendons une réponse sous le format JSON via nos points de terminaison d'API :
+Nous devons également définir un schéma de sérialisation pour les modèles pour lesquels nous attendons une réponse sous le format JSON via nos points de terminaison d'API :
 
 ```bash
 touch schemas.py
