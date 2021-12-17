@@ -26,10 +26,10 @@ Au lieu de renvoyer une phrase en texte brut, nous voulons construire une belle 
 
 Nous voulons que vous construisiez deux pages :
 - une page `d'accueil` avec une grille de produits (`/`)
-- et une page `detail` dynamique en fonction du produit donné (`/:id`)
+- et une page `détail` dynamique en fonction du produit donné (`/:id`)
 Lorsqu'un utilisateur navigue sur la page d'accueil, il doit pouvoir se rendre facilement sur une page "show" en cliquant sur un lien.
 
-Prenez d'abord le temps de lire la documentation de [Flask Templates](http://flask.pocoo.org/docs/1.0/tutorial/templates/). Ceci fait partie du package `flask`. Prenez également le temps d'en savoir plus sur [Jinja](http://jinja.pocoo.org/docs/2.10/templates/), le langage de templating utilisé par Flask.
+Prenez d'abord le temps de lire la documentation de [Flask Templates](http://flask.pocoo.org/docs/1.0/tutorial/templates/). Ceci fait partie du paquet `flask`. Prenez également le temps d'en savoir plus sur [Jinja](http://jinja.pocoo.org/docs/2.10/templates/), le langage de modélisation utilisé par Flask.
 
 ```bash
 mkdir templates
@@ -139,7 +139,7 @@ Si vous rechargez votre page d'accueil `/`, vous devriez pouvoir cliquer sur un 
 <details><summary markdown="span">Voir la solution
 </summary>
 
-Vous devez exécutez:
+Vous devez exécuter:
 
 ```bash
 touch templates/product.html

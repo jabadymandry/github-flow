@@ -1,29 +1,29 @@
-# Authentication
+# Authentification
 
-Let's go back to our Twitter API. You can start from the following code (using the `sqlalchemy` branch):
+Revenons à notre API Twitter. Vous pouvez commencer par le code suivant (en utilisant la branche `sqlalchemy`) :
 
 ```bash
 cd ~/code/<user.github_nickname>
 git clone git@github.com:ssaunier/twitter-api.git twitter-api-authentication
 cd twitter-api-authentication
-git checkout sqlalchemy  # get these branch before changing the remote
+git checkout sqlalchemy  # obtenir cette branche avant de changer la télécommande
 git remote rm origin
 ```
 
-Go to [github.com/new](https://github.com/new) and create a _public_ repository under your _personal_ account, name it `twitter-api-authentication`.
+Allez sur [github.com/new](https://github.com/new) et créez un repository _public_ sur votre compte _personnel_, nommez-le `twitter-api-authentication`.
 
 ```bash
 git remote add origin https://github.com/<user.github_nickname>/twitter-api-authentication.git
 git push -u origin master
 ```
 
-Now that you have the repo, you need to create the virtualenv and install the packages:
+Maintenant que vous avez le repo, vous devez créer le virtualenv et installer les paquets :
 
 ```bash
 pipenv install --dev
 ```
 
-Let's set the DB:
+Configurons la base de données :
 
 ```bash
 touch .env
@@ -40,27 +40,27 @@ winpty psql -U postgres -c "CREATE DATABASE twitter_api_flask_authentication"
 pipenv run python manage.py db upgrade
 ```
 
-If you got a `sqlalchemy.exc.OperationalError` verify your `DATABASE_URL`. Your password shouldn't contains `<`, `>` symbols.
+Si vous obtenez un `sqlalchemy.exc.OperationalError`, vérifiez votre `DATABASE_URL`. Votre mot de passe ne doit pas contenir les symboles `<`, `>`.
 
 ```bash
-# Valid example
+# Exemple valide
 DATABASE_URL="postgresql://postgres:root@localhost/twitter_api_flask_authentication"
 
-# Invalid example
+# Exemple invalide
 DATABASE_URL="postgresql://postgres:<root>@localhost/twitter_api_flask_authentication"
 ```
 
-All the API endpoints are available for anyone to call. Nothing is protected. Still, we need to apply some basic security rules like:
+Tous les points d'entrée de l'API sont accessibles à tous. Rien n'est protégé. Pourtant, nous devons appliquer quelques règles de sécurité de base comme :
 
-- A user must be "logged in" to the API to create a Tweet
-- Only a user may delete their tweet
+- Un utilisateur doit être "connecté" à l'API pour créer un tweet.
+- Seul un utilisateur peut supprimer son tweet
 - etc.
 
-## Key Based Authentication
+## Authentification par clé
 
-You should have a `User` model. If you don't, add one.
+ Vous devriez avoir un modèle `User`. Si vous n'en avez pas, ajoutez-en un.
 
-<details><summary markdown='span'>View solution
+<details><summary markdown='span'>Voir la solution
 </summary>
 
 ```python
@@ -97,44 +97,44 @@ class User(db.Model):
 
 <br />
 
-Add a new column to your model: `api_key`. The goal is to store a long, unique and random token for a user at creation. You can achieve this unsing [`uuid` lib and `sqlalchemy.dialects.postgresql.UUID` on your field declaration](https://stackoverflow.com/a/49398042).
+Ajoutez une nouvelle colonne à votre modèle : `api_key`. Le but est de stocker une clé d'accès (token) longue, unique et aléatoire pour un utilisateur à la création. Vous pouvez y parvenir en utilisant [`uuid` lib et `sqlalchemy.dialects.postgresql.UUID` sur votre déclaration de champ](https://stackoverflow.com/a/49398042).
 
-Once a user has an `API key`, implement the logic to make sure that a valid user can create a tweet / only a tweet author can delete his/her tweet.
+Une fois qu'un utilisateur a une `clé API`, implémentez la logique pour vous assurer qu'un utilisateur valide peut créer un tweet / seulement un auteur de tweet peut supprimer son tweet.
 
-The API key can be used in the `Authorization` HTTP request header or an `?api_key=...` query string argument. A handy package to implement this feature is [`flask-login`](https://flask-login.readthedocs.io/en/latest/).
+La clé API peut être utilisée dans l'en-tête de requête HTTP `Authorization` ou dans un argument de strings `?api_key=...`. Un paquet pratique pour implémenter cette fonctionnalité est [`flask-login`](https://flask-login.readthedocs.io/en/latest/).
 
-We want to protect the following three APIs routes behind a user auth (as a tweet can be only manipulated by its creator)
+Nous voulons protéger les trois routes API suivantes derrière une authentification utilisateur (car un tweet ne peut être manipulé que par son créateur)
 
-- `POST /tweets/` (we need a login user to tie it to the new tweet)
-- `PATCH /tweets/1` (only the tweet author can edit it)
-- `DELETE /tweets/1` (only the tweet author can delete it)
+- `POST /tweets/` (nous avons besoin d'un utilisateur connecté pour le lier au nouveau tweet)
+- `PATCH /tweets/1` (seul l'auteur du tweet peut le modifier)
+- `DELETE /tweets/1` (seul l'auteur du tweet peut le supprimer)
 
 
-## OAuth with a sample code
+## OAuth avec un exemple de code
 
 ```bash
 pipenv install "requests-oauthlib<1.2.0"
 pipenv install flask-oauthlib
 ```
 
-Consider the official Twitter API, or the GitHub API. They both provide authentication through OAuth meaning they allow third-party developers to let their users connect to Twitter/GitHub and grant access to a given `scope` of their API.
+Prenons l'API officielle de Twitter ou l'API de GitHub. Toutes deux fournissent une authentification par le biais d'OAuth, ce qui signifie qu'elles permettent aux développeurs tiers de laisser leurs utilisateurs se connecter à Twitter/GitHub et d'accorder l'accès dans un `périmètre` donné de leur API.
 
-As we are building an API ourselves, we may want to protect it using the same kind of mechanism. Instead of having an API key for each user stored in the database, we may provide third-party developers who want to use our API with a OAuth service. This way, they would let users of our service log in through our OAuth server, and generate a token for them to use and query the API.
+Comme nous créons nous-mêmes une API, nous pouvons vouloir la protéger en utilisant le même type de mécanisme. Au lieu d'avoir une clé d'API pour chaque utilisateur stockée dans la base de données, nous pouvons fournir aux développeurs tiers qui veulent utiliser notre API un service OAuth. Ainsi, ils laisseront les utilisateurs de notre service se connecter via notre serveur OAuth et généreront une clé qui leur permettra d'utiliser et d'interroger l'API.
 
 - [Twitter OAuth](https://developer.twitter.com/en/docs/basics/authentication/overview/oauth.html)
 - [GitHub OAuth](https://developer.github.com/apps/building-oauth-apps/)
 
-Before you jump to the server code, you may want to impersonate a third-party developer of an API using OAuth. You can do so with the GitHub one!
+Avant de passer au code du serveur, vous voudrez peut-être vous faire passer pour un développeur tiers d'une API utilisant OAuth. Vous pouvez le faire avec celui de GitHub !
 
-1. Go to [github.com/settings/applications/new](https://github.com/settings/applications/new) and register a new OAuth application
-1. Download [this code](https://github.com/lepture/flask-oauthlib/blob/master/example/github.py) to a `./github.py` file in your project
-1. Update the `consumer_key` and `consumer_secret` with the actual value you got from step 1
-1. Launch the server with: `pipenv run python github.py`
+1. Allez sur [github.com/settings/applications/new](https://github.com/settings/applications/new) et enregistrer une nouvelle application OAuth
+1. Téléchargez [ce code](https://github.com/lepture/flask-oauthlib/blob/master/example/github.py) à un fichier `./github.py` dans votre projet
+1. Mettez à jour la `consumer_key` et la `consumer_secret` avec la valeur réelle que vous avez obtenue à l'étape 1.
+1. Lancez le serveur avec : `pipenv run python github.py`
 
-Now open the browser and navigate to `localhost:5000`. What is happenning?
+Maintenant, ouvrez le navigateur et allez sur `localhost:5000`. Que se passe-t-il ?
 
-1. You are redirected to a GitHub page where you, as a GitHub user, decide to grant (or not) this `github.py` service with an access (with a given **score**) to your GitHub information
-1. Once accepted, you are redirected to your local service. The code stores _in session_ (that could be in DB!) the `github_token`
-1. With that token, the code is able to perform requests to the GitHub API **on the user's behalf**
+1. Vous êtes redirigé vers une page GitHub où vous, en tant qu'utilisateur de GitHub, décidez d'accorder (ou non) à ce service `github.py` un accès (avec un **score** donné) à vos informations GitHub
+1. Une fois accepté, vous êtes redirigé vers votre service local. Le code stocke _en session_ (qui pourrait être dans la DB !) le `github_token`.
+1. Avec cette clé, le code est capable d'effectuer des requêtes à l'API GitHub **au nom de l'utilisateur**.
 
-How can you update the `twitter-api` to use this GitHub OAuth gateway instead of an key-based auth?
+Comment mettre à jour le `twitter-api` pour utiliser cette passerelle OAuth de GitHub au lieu d'une authentification basée sur une clé ?
