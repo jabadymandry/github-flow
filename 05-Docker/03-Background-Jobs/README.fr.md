@@ -4,7 +4,7 @@ Pour cet exercice, nous n'utiliserons **pas** Docker et nous travaillerons sur d
 
 ---
 
-Lors de la création d'une API, il arrive que le travail à effectuer dans le contrôleur recevant une requête HTTP prenne beaucoup de temps (plus d'une seconde). Il peut s'agir de l'envoi d'un courrier électronique (SMTP est un protocole lent), de la mise à jour de nombreux enregistrements dans la base de données, de l'appel d'une autre API qui peut mettre un certain temps à répondre, etc.
+Lors de la création d'une API, il arrive que le traitement à effectuer dans le contrôleur recevant une requête HTTP prenne beaucoup de temps (plus d'une seconde). Il peut s'agir de l'envoi d'un courrier électronique (SMTP est un protocole lent), de la mise à jour de nombreux enregistrements dans la base de données, de l'appel d'une autre API qui peut mettre un certain temps à répondre, etc.
 
 Nous utiliserons le projet [Celery](https://docs.celeryproject.org/en/stable/getting-started/introduction.html) qui fournit une **file de tâches distribuées** pour exécuter ces tâches en arrière-plan. Voici un diagramme de séquence de ce que nous voulons faire :
 
@@ -143,13 +143,13 @@ Vous devriez voir quelque chose de ce genre :
 [2019-04-04 15:42:39,543: INFO/MainProcess] celery@Macbook ready.
 ```
 
-Si non, vérifiez que le serveur Redis fonctionne ! Si tu n'arrives pas à le faire fonctionner, demande à ton pote ou à un TA !
+Si non, vérifiez que le serveur Redis fonctionne ! Si vous n'arrivez pas à le faire fonctionner, demandez à votre buddy ou à un TA !
 
 ## Ajout d'une toute première tâche
 
 Vous pouvez maintenant faire `Ctrl` + `C` (deux fois) le processus de Celery.
 
-Il est temps d'ajouter une première tâche. Retournez dans Sublime Text dans le fichier `tasks.py` et ajoutez le bas définir une fonction. Cette fonction doit être une tâche longue puisqu'elle va être exécutée par le robot (worker). Pour en simuler une, nous pouvons utiliser [`time.sleep()`](https://stackoverflow.com/questions/510348/how-can-i-make-a-time-delay-in-python).
+Il est temps d'ajouter une première tâche. Retournez dans Sublime Text dans le fichier `tasks.py` et ajoutez le bas définir une fonction. Cette fonction doit être une tâche longue puisqu'elle va être exécutée par le programme (worker). Pour en simuler une, nous pouvons utiliser [`time.sleep()`](https://stackoverflow.com/questions/510348/how-can-i-make-a-time-delay-in-python).
 
 Nous allons accompagner cette tâche avec `@celery.task()` pour que le processus Celery en soit conscient.
 
@@ -167,7 +167,7 @@ def very_slow_add(a, b):
 
 Nous venons d'implémenter une méthode `very_slow_add(a, b)`. Testons-la !
 
-Relancez le robot Celery avec :
+Relancez le programme Celery avec :
 
 ```bash
 pipenv run celery -A tasks.celery worker --loglevel=INFO --pool=solo
@@ -187,14 +187,14 @@ job = very_slow_add.delay(5, 7)
 response = job.wait()
 ```
 
-La `réponse` devrait prendre exactement 3 secondes. Regardez les registres du robot Celery, vous devriez voir le travail être mis en file d'attente, être traité, et ensuite retourner un résultat !
+La `réponse` devrait prendre exactement 3 secondes. Regardez les registres du programme Celery, vous devriez voir le travail être mis en file d'attente, être traité, et ensuite retourner un résultat !
 
 ```bash
 [... INFO/MainProcess] Received task: tasks.very_slow_add[7da941c2-...]
 [... INFO/ForkPoolWorker-2] Task tasks.very_slow_add[7da941c2-...] succeeded in 3.00225233499998s: 12
 ```
 
-Voilà, c'est fait ! Vous savez maintenant comment créer des fonctions qui seront exécutées par Celery en tant que tâches, et les mettre en file d'attente ! Vous pouvez les ajouter au fichier `wsgi.py` dans la méthode qui reçoit les requêtes HTTP pour votre API. Elles ne bloqueront pas l'exécution du thread et garderont vos points d'entrée API rapides :
+Voilà, c'est fait ! Vous savez maintenant comment créer des fonctions qui seront exécutées par Celery en tant que tâches, et les mettre en file d'attente ! Vous pouvez les ajouter au fichier `wsgi.py` dans la méthode qui reçoit les requêtes HTTP pour votre API. Elles ne bloqueront pas l'exécution du déroulement et garderont vos points d'entrée API rapides :
 
 ```python
 # wsgi.py
@@ -205,7 +205,7 @@ from schemas import many_product_schema
 @app.route(f'{BASE_URL}/products', methods=['GET'])
 def get_many_product():
     from tasks import very_slow_add
-    very_slow_add.delay(1, 2) # This pushes a task to Celery and does not block.
+    very_slow_add.delay(1, 2) # Cela pousse une tâche vers Celery et ne bloque pas.
 
     products = db.session.query(Product).all() # SQLAlchemy request => 'SELECT * FROM products'
     return many_product_schema.jsonify(products), 200
@@ -226,7 +226,7 @@ Allez sur [`http://localhost:5000/api/v1/products`](http://localhost:5000/api/v1
 Nous avons presque terminé avec Celery, un dernier point que nous devons couvrir est le **déploiement**. Cela peut devenir un peu confus, récapitulons ce dont nous avons besoin :
 
 1. Nous avons besoin que Redis soit opérationnel sur l'hôte (donc nous en avons besoin aussi sur Heroku !)
-2. Nous avons besoin d'exécuter le `celery` dans un processus séparé (pareil pour Heroku !)
+2. Nous avons besoin d'exécuter le `celery` dans un processus séparé (même chose pour Heroku !)
 3. Nous devons configurer l'application avec des variables d'environnement pour que Celery trouve Redis.
 
 Pour le point `1.`, nous devons ajouter une **adjonction** (add-on) sur notre application Heroku. Nous allons utiliser [Heroku Redis](https://elements.heroku.com/addons/heroku-redis) qui est gratuit jusqu'à 25M, assez pour bricoler.
@@ -303,7 +303,7 @@ Il est maintenant temps de `supprimer votre carte de crédit` de votre compte He
 Affichez vos applications afin de `supprimer la dernière application` (**qui utilise 2 dynos**) :
 
 ```bash
-heroku apps  # Display created apps
+heroku apps  # Afficher les applications créées
 # === <your_mail> Apps
 # <app_name_1> (eu)
 # <app_name_2> (eu)
@@ -312,7 +312,7 @@ heroku apps  # Display created apps
 # <app_name_5> (eu)
 ```
 
-Une fois que vous avez reconnu le `dernier`, utilisez son nom pour le `supprimer` :
+Une fois que vous avez reconnu la `dernière`, utilisez son nom pour la `supprimer` :
 
 ```bash
 heroku apps:destroy <nom_derniere_application>

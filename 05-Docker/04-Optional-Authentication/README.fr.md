@@ -1,6 +1,6 @@
 # Optionnel - Authentification
 
-Pour cet exercice, nous n'utiliserons **pas** Docker et travaillerons sur l'authentification sur notre **structure locale** (comme nous l'avons fait les jours précédents). En effet, il est plus facile de traiter ce sujet sans la complexité de la conteneurisation dans un premier temps.
+Pour cet exercice, nous n'utiliserons **pas** Docker et nous travaillerons sur l'authentification sur notre **structure locale** (comme nous l'avons fait les jours précédents). En effet, il est plus facile de traiter ce sujet sans la complexité de la conteneurisation dans un premier temps.
 
 ---
 
@@ -48,10 +48,10 @@ pipenv run python manage.py db upgrade
 Si vous obtenez un `sqlalchemy.exc.OperationalError`, vérifiez votre `DATABASE_URL`. Votre mot de passe ne doit pas contenir les symboles `<`, `>`.
 
 ```bash
-# Example valide
+# Exemple valide
 DATABASE_URL="postgresql://postgres:root@localhost/twitter_api_flask_authentication"
 
-# Example invalide
+# Exemple invalide
 DATABASE_URL="postgresql://postgres:<root>@localhost/twitter_api_flask_authentication"
 ```
 
@@ -106,7 +106,7 @@ Ajoutez une nouvelle colonne à votre modèle : `api_key`. Le but est de stocker
 
 Une fois qu'un utilisateur a une `clé API`, implémentez la logique pour vous assurer qu'un utilisateur valide peut créer un tweet / seulement un auteur de tweet peut supprimer son tweet.
 
-La clé API peut être utilisée dans l'en-tête de requête HTTP `Authorization` ou dans un argument de strings `?api_key=...`. Un paquetage pratique pour implémenter cette fonctionnalité est [`flask-login`](https://flask-login.readthedocs.io/en/latest/).
+La clé API peut être utilisée dans l'en-tête de requête HTTP `Authorization` ou dans un argument de strings `?api_key=...`. Un paquet pratique pour implémenter cette fonctionnalité est [`flask-login`](https://flask-login.readthedocs.io/en/latest/).
 
 Nous voulons protéger les trois routes API suivantes derrière une authentification utilisateur (car un tweet ne peut être manipulé que par son créateur)
 
@@ -122,7 +122,7 @@ pipenv install "requests-oauthlib<1.2.0"
 pipenv install flask-oauthlib
 ```
 
-Prenons l'API officielle de Twitter ou l'API de GitHub. Toutes deux fournissent une authentification par le biais d'OAuth, ce qui signifie qu'elles permettent aux développeurs tiers de laisser leurs utilisateurs se connecter à Twitter/GitHub et d'accorder l'accès à une "portée" donnée de leur API.
+Prenons l'API officielle de Twitter ou l'API de GitHub. Toutes deux fournissent une authentification par le biais d'OAuth, ce qui signifie qu'elles permettent aux développeurs tiers de laisser leurs utilisateurs se connecter à Twitter/GitHub et d'accorder l'accès dans un "périmètre" donné de leur API.
 
 Comme nous créons nous-mêmes une API, nous pouvons vouloir la protéger en utilisant le même type de mécanisme. Au lieu d'avoir une clé d'API pour chaque utilisateur stockée dans la base de données, nous pouvons fournir aux développeurs tiers qui veulent utiliser notre API un service OAuth. Ainsi, ils laisseront les utilisateurs de notre service se connecter via notre serveur OAuth et généreront une clé qui leur permettra d'utiliser et d'interroger l'API.
 

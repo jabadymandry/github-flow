@@ -230,7 +230,7 @@ Commençons par obtenir un interpréteur (bash shell) dans le conteneur :
 
 Qu'avons-nous fait ici 🤔 ? Nous avons demandé à Docker d'exécuter une commande (`/bin/bash` : pour obtenir un interpréteur) dans le conteneur, en passant les indicateurs `-i` et `-t` ensemble :
 
-* L'indicateur `-i` signifie mode "interactif" : il nous donne une entrée standard **stdin** (par défaut, un conteneur fonctionne en mode non-interactif : il n'écoute pas les entrées de votre côté). Pour fournir une entrée, vous devez passer cet indicateur `-i`.
+* L'indicateur `-i` signifie mode "interactif" : il nous donpropose une saisie standard **stdin** (par défaut, un conteneur fonctionne en mode non-interactif : il ne tient pas compte des saisies de votre côté). Pour transmettre une saisie, vous devez passer cet indicateur `-i`.
 * L'indicateur `-t` signifie "tty", et est une commande de système d'exploitation de type Unix : avec cet indicateur, vous obtiendrez un "invite" ("prompt").
 
 Ainsi, la combinaison de ces deux indicateurs nous donne accès à un "terminal", dans le conteneur 🎉 !
@@ -256,7 +256,7 @@ C'est typiquement ce que les développeurs font localement lorsqu'ils travaillen
 #### arrêter et effacer les conteneurs
 
 Pour arrêter un conteneur, utilisez la commande [`docker stop`](https://docs.docker.com/engine/reference/commandline/stop/). Vous devrez passer l'ID du conteneur, ou le nom du conteneur.
-👉 Arrêtez votre conteneur `pg`, et vérifiez la liste des conteneurs en cours d'exécution, et la liste des conteneurs non en cours d'exécution.
+👉 Arrêtez votre conteneur `pg`, et vérifiez la liste des conteneurs en cours d'exécution, et la liste des conteneurs qui ne sont pas en cours d'exécution.
 
 
 <details><summary markdown='span'>Voir la solution</summary>
@@ -266,7 +266,7 @@ Arrêter le conteneur:
 docker stop pg
 ```
 
-Et la liste des conteneurs en cours d'exécution et arrêtés :
+Et la liste des conteneurs en cours d'exécution et des conteneurs arrêtés :
 ```bash
 docker ps
 docker ps --filter "status=exited"
@@ -345,7 +345,7 @@ Eh bien, il faudrait :
 
 Nous allons jouer avec l'image `docker/whalesay`, et créer une image personnalisée à partir de celle-ci.
 
-👉 Tirez l'image `docker/whalesay` du Hub.
+👉 Récupérez l'image `docker/whalesay` du Hub.
 
 <details><summary markdown='span'>Indice</summary>
 
@@ -415,7 +415,7 @@ FROM docker/whalesay:latest
 RUN apt-get -y update && apt-get install -y fortunes
 ```
 
-> L'instruction **RUN** exécutera toutes les commandes dans une nouvelle couche par-dessus l'image actuelle et versionnera les résultats. Chaque ligne de Dockerfile représente une " couche " de l'image complète.
+> L'instruction **RUN** exécutera toutes les commandes dans une nouvelle couche par-dessus l'image actuelle et soumettra les résultats. Chaque ligne de Dockerfile représente une " couche " de l'image complète.
 Ici, la commande met à jour la liste des paquets disponibles et leurs versions, et installe le programme `fortune` pour la génération de citations aléatoires.
 
 ```dockerfile
@@ -462,7 +462,7 @@ docker run $DOCKER_ID/custom-whale
 
 </details>
 
-👉 Exécutez-le à nouveau ! Il devrait générer des cotations différentes à chaque fois - car elles sont aléatoires.
+👉 Exécutez-le à nouveau ! Il devrait générer des citations différentes à chaque fois - car elles sont aléatoires.
 
 👉 Vous pouvez maintenant pousser votre image vers votre propre repository sur le Docker Hub. Assurez-vous que vous êtes connecté :
 ```docker login``` et exécutez ce qui suit :
@@ -481,7 +481,7 @@ De cette façon, puisqu'il est public, n'importe qui pourrait le récupérer et 
 
 ## J'ai fini! 🎉
 
-C'est tout pour ce défi ! Félicitations, vous avez vu comment faire :
+C'est tout pour ce défi ! Félicitations, vous avez vu comment faire pour :
 - récupérer une image (`docker pull $IMAGE_NAME`)
 - exécuter un conteneur à partir d'une image (`docker run $IMAGE_NAME`)
 - exécuter une commande dans un conteneur en cours d'exécution (`docker exec -it $CONTAINER_NAME $SOME_COMMAND`)

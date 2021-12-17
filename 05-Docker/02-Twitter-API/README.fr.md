@@ -58,7 +58,7 @@ nosetests
 
 </details>
 
-Est-ce que ça marche ? Il ne devrait pas ! Pourquoi ?
+Est-ce que ça marche ? Ça ne devrait pas ! Pourquoi ?
 :point_right: Essayez de réparer ça ! Vous êtes déjà passé par là hier !
 
 <details><summary markdown='span'>Indice</summary>
@@ -137,7 +137,7 @@ Tout fonctionne ? 🎉 Parfait ! Maintenant, adoptons une nouvelle stratégie, e
 
 ## 2. Conteneurisation - environnement de développement
 
-Lorsque nous conteneurisons notre application, nous n'utilisons généralement plus `pipenv`. Nous préférons avoir les exigences listées dans un fichier statique (typiquement nommé `requirements.txt`) et utiliser `pip` directement pour les installer. Pourquoi ?
+Lorsque nous conteneurisons notre application, nous n'utilisons généralement plus `pipenv`. Nous préférons avoir les configurations listées dans un fichier statique (typiquement nommé `requirements.txt`) et utiliser `pip` directement pour les installer. Pourquoi ?
 
 - Parce que nous n'avons pas besoin d'un environnement virtuel - docker est déjà, par conception, une couche de virtualisation
 - Et parce que cela rend l'image docker un peu plus légère ! Et dans le développement de logiciels, plus léger c'est mieux 🙂
@@ -210,7 +210,7 @@ CMD ["flask", "run", "--host", "0.0.0.0"]
 
 Comprenez-vous les instructions ? Si nous les décomposons une par une, nous voyons que :
 
-* nous partons de l'image de Python 3.8, et plus particulièrement de sa version `alpine`. Alpine Linux est une distribution Linux connue pour sa panoplie d'outils légère, mais néanmoins complète.
+* nous partons de l'image de Python 3.8, et plus particulièrement de sa version `alpine`. Alpine Linux est une solution Linux connue pour sa panoplie d'outils légère, mais néanmoins complète.
 * Nous installons quelques paquets nécessaires à la construction de notre image (dont `pip`).
 * Nous créons un répertoire de travail (dans les conteneurs qui seront exécutés) appelé `/code`.
 * Nous copions notre dossier de code local dans le répertoire de l'espace de travail du conteneur.
@@ -231,7 +231,7 @@ Nous ne voulons pas seulement nous lier à l'interface `localhost` comme nous le
 
 <details><summary markdown='span'>Indice</summary>
 
-Il y a un exemple pour construire et marquer une image dans la même commande, dans l'exercice précédent (`Docker-101`).
+Il y a un exemple pour construire et baliser une image dans la même commande, dans l'exercice précédent (`Docker-101`).
 
 </details>
 
@@ -284,7 +284,7 @@ Allez sur <a href="http://localhost:5000/tweets">localhost:5000/tweets</a> dans 
 </details>
 <details><summary markdown='span'>Voir la solution</summary>
 
-Lorsque nous atteignons ce point d'entrée, il y a un problème. En effet, nous essayons de faire un appel à notre base de données, mais elle n'est pas configurée ! Donc notre application Flask ne trouve pas sa base de données prête pour de nouvelles connexions, et elle soulève une erreur `sqlalchemy.exc.OperationalError`.
+Lorsque nous atteignons ce point d'entrée, il y a un problème. En effet, nous essayons de faire un appel à notre base de données, mais elle n'est pas configurée ! Donc notre application Flask ne trouve pas sa base de données prête pour de nouvelles connexions, et elle renvoie une erreur `sqlalchemy.exc.OperationalError`.
 
 Nous allons donc configurer notre base de données - et la dockeriser en même temps pour faciliter le flux de développement et de test !
 
@@ -429,7 +429,7 @@ Nous avons maintenant deux services : `web` et `db`.
 * Ce service est basé sur une image personnalisée - instruite dans notre Dockerfile
 * Nous nommons le conteneur qui sera lancé `web` - pour plus de simplicité.
 * Il ["dépend du"](https://docs.docker.com/compose/compose-file/#depends_on) service `db` : les services seront démarrés dans l'ordre des dépendances. Nous avons besoin que notre base de données (`db`) soit opérationnelle et prête pour de nouvelles connexions avant de lancer notre application Flask (`web`) !
-* Afin de s'assurer que notre conteneur de dépendances (c'est-à-dire notre base de données) fonctionne, nous avons besoin d'une sorte de "contrôle". C'est le but exact du script `wait-for-it.sh` ! Vous pouvez en lire plus [ici] (https://docs.docker.com/compose/startup-order/) si vous êtes intéressés. Le conteneur `web` exécute ce script, qui **lui fera attendre que la base de données soit opérationnelle et accepte les connexions**, avant de lancer l'application flask (`command : ["./wait-for-it.sh", "db:5432", "--", "flask", "run"]`).
+* Afin de s'assurer que notre conteneur de dépendances (c'est-à-dire notre base de données) fonctionne, nous avons besoin d'une sorte de "contrôle". C'est le but exact du script `wait-for-it.sh` ! Vous pouvez en lire plus [ici](https://docs.docker.com/compose/startup-order/) si vous êtes intéressés. Le conteneur `web` exécute ce script, qui **lui fera attendre que la base de données soit opérationnelle et accepte les connexions**, avant de lancer l'application flask (`command : ["./wait-for-it.sh", "db:5432", "--", "flask", "run"]`).
 
 #### 2.2.c Opérations initiales
 
@@ -437,9 +437,9 @@ Effectuons quelques opérations initiales pour configurer les conteneurs et les 
 
 :point_right: Assurez-vous d'avoir des _"terminaisons de ligne Unix"_ pour votre script `wait-for-it.sh` : ouvrez-le avec **Sublime Text**, et cliquez sur `View` > `Line Endings` > `Unix`, puis enregistrez-le ⚠️. De cette façon, il sera correctement interprété dans vos conteneurs.
 
-:point_right: Assemblez les applications, exécuter les conteneurs en arrière-plan, et recompilez l'image pour `web` : ``docker-compose up -d --build`` 🛠
+:point_right: Assemblez les applications, exécutez les conteneurs en arrière-plan, et recompilez l'image pour `web` : ``docker-compose up -d --build`` 🛠
 
-:point_right: Vérifiez qu'il a bien lancé votre ensemble d'applications technologique : exécutez `docker ps` pour voir les conteneurs qui tournent sur votre hôte.
+:point_right: Vérifiez qu'il a bien lancé votre ensemble d'applications technologique : exécutez `docker ps` pour voir les conteneurs qui sont exécutés sur votre hôte.
 
 <details><summary markdown='span'>Voir la solution</summary>
 
@@ -472,7 +472,7 @@ INFO  [alembic.runtime.migration] Running upgrade  -> 3812f6776f12, Create tweet
 
 Maintenant, nos points d'entrée sont fixés 🍾 :
 
-:point_right : Consultez la [documentation Swagger] (http://localhost:5000) et l'index [`/tweets`] (http://localhost:5000/tweets).
+:point_right: Consultez la [documentation Swagger](http://localhost:5000) et l'index [`/tweets`] (http://localhost:5000/tweets).
 
 <details><summary markdown='span'>Voir la solution</summary>
 
@@ -487,7 +487,7 @@ Quelques détails sur ce qui vient de se passer :
 * une fois que `db` est opérationnel et sain, `web` peut être lancé.
 * notre base de données est sécurisée par un utilisateur/mot de passe, que Flask connaît (nous le passons par la variable d'environnement `DATABASE_URL` que vous connaissez déjà depuis hier)
 
-⚠️ Notez que nous avons **hard-codé** un mot de passe fictif **de la base de données** ("_password_") ici. Nous ferions bien sûr mieux de passer en direct 💪 (en utilisant par exemple une variable d'environnement, ou un secret d'un coffre-fort). Mais n'oubliez pas que nous industrialisons notre ensemble d'applications progressivement : bien sûr, toutes nos évolutions ne peuvent pas être parfaites, mais nous visons quelque chose de robuste au final !
+⚠️ Notez que nous avons **hard-codé** un mot de passe fictif **de la base de données** ("_password_") ici. Nous ferions bien sûr mieux de passer en direct 💪 (en utilisant par exemple une variable d'environnement, ou la clé d'un coffre-fort). Mais n'oubliez pas que nous industrialisons notre ensemble d'applications progressivement : bien sûr, toutes nos évolutions ne peuvent pas être parfaites, mais nous visons quelque chose de robuste au final !
 
 ---
 
