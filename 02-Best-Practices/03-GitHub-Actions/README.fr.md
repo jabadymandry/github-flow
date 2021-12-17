@@ -222,7 +222,7 @@ jobs:
 </details>
 
 
-:tada: Toutes nos félicitations! Vous avez mis en place un premier pipeline CI sur votre projet :tada:
+:tada: Toutes nos félicitations ! Vous avez mis en place un premier pipeline CI sur votre projet :tada:
 
 ## Aller plus loin avant l'exercice 2
 ### Contexte
@@ -328,7 +328,7 @@ jobs:
 Avant de passer à l'exercice suivant, marquer vos progrès avec les éléments suivants :
 
 ```bash
-cd ~/code/<user.github_nickname>/engineering-basics
+cd ~/code/<user.github_nickname>/reboot-python
 cd 02-Best-Practices/03-GitHub-Actions
 touch DONE.md
 git add DONE.md && git commit -m "02-Best-Practices/03-GitHub-Actions done"

@@ -22,7 +22,7 @@ Let's write our first workflow. A workflow is defined in a YAML file by one or m
 
 :bulb: Github provides a marketplace of Actions that can be reused. They are provided either by Github itself (see https://github.com/actions) or by the community.
 
-First, create a new empty repository on your Github account and clone it. Don't create a new branch for now, we will push directly to the `master` branch. 
+First, create a new empty repository on your Github account and clone it. Don't create a new branch for now, we will push directly to the `master` branch.
 
 Then we need to create a special folder at the root of your project, that will be recognized by Github:
 
@@ -235,7 +235,7 @@ For example, `github.event_name` contains the name of the event that triggered t
 
 ### Secrets
 
-One of the available context variables is `secrets`, which allows you to access special variables that are used for authentication purposes. You can define them yourself (for instance by creating one from the Github interface in your account by going to Settings => Secrets) but one is made available by Github during the workflow execution: `${{ secrets.GITHUB_TOKEN }}`. 
+One of the available context variables is `secrets`, which allows you to access special variables that are used for authentication purposes. You can define them yourself (for instance by creating one from the Github interface in your account by going to Settings => Secrets) but one is made available by Github during the workflow execution: `${{ secrets.GITHUB_TOKEN }}`.
 
 At the start of each workflow run, Github automatically creates a unique `GITHUB_TOKEN` secret and makes it accessible to the workflow. This token can be used to authenticate and bring changes to the repository for which it is currently running; for example add a comment, create a Pull Request, add a reviewer, etc.
 
@@ -258,7 +258,7 @@ git checkout -b test_workflow
 ```
 
 Let's go! Add another job to the workflow from exercise 1 (**work on the same file, don't create another one!**) which will create a pull request (PR) with the following requirements:
-- The new job will be named `review` 
+- The new job will be named `review`
 - The PR should be created only if we are **not** on the `master` branch
 - The PR title should have the following format: `Awesome PR by <actor>` where `<actor>` is the Github username of the person who triggered the workflow
 - This new job should only be executed if the previous `build` job that we created above succeeded
@@ -326,7 +326,7 @@ jobs:
 Before you jump to the next exercise, let's mark your progress with the following:
 
 ```bash
-cd ~/code/<user.github_nickname>/engineering-basics
+cd ~/code/<user.github_nickname>/reboot-python
 cd 02-Best-Practices/03-GitHub-Actions
 touch DONE.md
 git add DONE.md && git commit -m "02-Best-Practices/03-GitHub-Actions done"
