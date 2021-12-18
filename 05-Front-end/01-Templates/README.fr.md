@@ -99,7 +99,7 @@ touch templates/home.html
 {% endblock %}
 ```
 
-La classe `list-unstyled` provient de [Bootstrap] (https://getbootstrap.com/docs/4.1/content/typography/#unstyled).
+La classe `list-unstyled` provient de [Bootstrap](https://getbootstrap.com/docs/4.1/content/typography/#unstyled).
 
 Le contenu du `block content` est réinséré dans le fichier `base.html`.
 

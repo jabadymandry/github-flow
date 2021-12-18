@@ -1,6 +1,6 @@
 # Django
 
-Flask n'est pas le seul cadre d'application web Python, il y a aussi [Django](https://www.djangoproject.com/), le "cadre d'application web pour les perfectionnistes avec des délais".
+Flask n'est pas le seul cadre d'application web Python, il y a aussi [Django](https://www.djangoproject.com/), le "cadre d'application web pour les perfectionnistes avec des échéances".
 
 ```bash
 cd ~/code/<github_nickname>

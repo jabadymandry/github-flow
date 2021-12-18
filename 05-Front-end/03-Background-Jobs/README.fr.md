@@ -1,6 +1,6 @@
 # Programme d'arrière-plan
 
-Lors de la création d'une API, il arrive que le travail à effectuer dans le contrôleur recevant une requête HTTP prenne beaucoup de temps (plus d'une seconde). Il peut s'agir de l'envoi d'un courrier électronique (SMTP est un protocole lent), de la mise à jour de nombreux enregistrements dans la base de données, de l'appel d'une autre API qui peut mettre un certain temps à répondre, etc.
+Lors de la création d'une API, il arrive que le travail à effectuer dans le contrôleur recevant une requête HTTP prenne beaucoup de temps (plus d'une seconde). Il peut s'agir de l'envoi d'un courrier électronique (SMTP est un protocole lent), de la mise à jour de nombreuses sauvegardes dans la base de données, de l'appel d'une autre API qui peut mettre un certain temps à répondre, etc.
 
 Nous utiliserons le projet [Celery](https://docs.celeryproject.org/en/stable/getting-started/introduction.html) qui fournit une **file de tâches distribuées** pour exécuter ces tâches en arrière-plan. Voici un diagramme de séquence de ce que nous voulons faire :
 
