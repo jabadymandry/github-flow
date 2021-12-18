@@ -122,7 +122,7 @@ pipenv install "requests-oauthlib<1.2.0"
 pipenv install flask-oauthlib
 ```
 
-Prenons l'API officielle de Twitter ou l'API de GitHub. Toutes deux fournissent une authentification par le biais d'OAuth, ce qui signifie qu'elles permettent aux développeurs tiers de laisser leurs utilisateurs se connecter à Twitter/GitHub et d'accorder l'accès dans un "périmètre" donné de leur API.
+Prenons l'API officielle de Twitter ou l'API de GitHub. Toutes deux fournissent une authentification par le biais d'OAuth, ce qui signifie qu'elles permettent aux développeurs tiers de laisser leurs utilisateurs se connecter à Twitter/GitHub et d'accorder l'accès dans un `périmètre` donné de leur API.
 
 Comme nous créons nous-mêmes une API, nous pouvons vouloir la protéger en utilisant le même type de mécanisme. Au lieu d'avoir une clé d'API pour chaque utilisateur stockée dans la base de données, nous pouvons fournir aux développeurs tiers qui veulent utiliser notre API un service OAuth. Ainsi, ils laisseront les utilisateurs de notre service se connecter via notre serveur OAuth et généreront une clé qui leur permettra d'utiliser et d'interroger l'API.
 
@@ -131,7 +131,7 @@ Comme nous créons nous-mêmes une API, nous pouvons vouloir la protéger en uti
 
 Avant de passer au code du serveur, vous voudrez peut-être vous faire passer pour un développeur tiers d'une API utilisant OAuth. Vous pouvez le faire avec celui de GitHub !
 
-1. Allez sur [github.com/settings/applications/new](https://github.com/settings/applications/new) et enregistrer une nouvelle application OAuth
+1. Allez sur [github.com/settings/applications/new](https://github.com/settings/applications/new) et enregistrez une nouvelle application OAuth
 1. Téléchargez [ce code](https://github.com/lepture/flask-oauthlib/blob/master/example/github.py) à un fichier `./github.py` dans votre projet
 1. Mettez à jour la `consumer_key` et la `consumer_secret` avec la valeur réelle que vous avez obtenue à l'étape 1.
 1. Lancez le serveur avec : `pipenv run python github.py`
@@ -149,7 +149,7 @@ Comment mettre à jour le `twitter-api` pour utiliser cette passerelle OAuth de 
 
 ## J'ai fini! 🎉
 
-C'est tout pour aujourd'hui ! Indiquez vos progrès avec les éléments suivants :
+C'est tout pour aujourd'hui ! Sauvegardez vos progrès avec les éléments suivants :
 
 ```bash
 cd ~/code/<user.github_nickname>/reboot-python

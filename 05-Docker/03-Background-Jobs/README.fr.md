@@ -179,7 +179,7 @@ Ouvrez une autre fenêtre de terminal et lancez un Flask Shell :
 pipenv run flask shell
 ```
 
-Et maintenant nous allons **mettre en file d'attente** notre premier travail !
+Et maintenant nous allons **mettre en file d'attente** notre programme d'arrère-plan !
 
 ```python
 from tasks import very_slow_add
@@ -187,7 +187,7 @@ job = very_slow_add.delay(5, 7)
 response = job.wait()
 ```
 
-La `réponse` devrait prendre exactement 3 secondes. Regardez les registres du programme Celery, vous devriez voir le travail être mis en file d'attente, être traité, et ensuite retourner un résultat !
+La `réponse` devrait prendre exactement 3 secondes. Regardez les registres du programme Celery, vous devriez voir le programme être mis en file d'attente, être traité, et ensuite retourner un résultat !
 
 ```bash
 [... INFO/MainProcess] Received task: tasks.very_slow_add[7da941c2-...]
@@ -278,7 +278,7 @@ Par défaut, Heroku démarre seulement un [dyno](https://www.heroku.com/dynos) p
 heroku ps:scale worker=1 web=1
 ```
 
-Vous pouvez vérifier que cela a été activé sur votre [tableau de bord Heroku](https://dashboard.heroku.com/apps) en sélectionnant votre application. Vous devriez voir quelque chose de ce genre :
+Vous pouvez vérifier que cela a été activé sur votre [tableau de bord Heroku](https://dashboard.heroku.com/apps) en `sélectionnant votre application`. Vous devriez voir quelque chose de ce genre :
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714714/heroku_celery_nr43t1.png)
 
@@ -326,6 +326,6 @@ heroku apps:destroy <nom_derniere_application>
 
 Si vous ne vous souvenez pas du nom de votre dernière application, allez sur votre [tableau de bord Heroku](https://dashboard.heroku.com/apps) et cliquez sur chaque application pour trouver `l'application avec 2 dyno` (avec un `celery worker`).
 
-Ou vous pouvez simplement "supprimer toutes vos applications".
+Ou vous pouvez simplement `supprimer toutes vos applications`.
 
-Il suffit d'aller [ici](https://dashboard.heroku.com/account/billing) et de cliquer sur le bouton rouge "Supprimer la carte de crédit".
+Il suffit d'aller [ici](https://dashboard.heroku.com/account/billing) et de cliquer sur le bouton rouge `Supprimer la carte de crédit`.

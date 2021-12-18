@@ -94,7 +94,7 @@ winpty psql -U postgres -c "CREATE DATABASE twitter_api_flask"
 winpty psql -U postgres -c "CREATE DATABASE twitter_api_flask_test"
 ```
 
-Et maintenant l'exécution de votre suite de test `nosetests` devrait fonctionner !
+Et maintenant l'exécution de votre suite de tests `nosetests` devrait fonctionner !
 
 </details>
 
@@ -158,7 +158,7 @@ pipenv --version
 ```
 
 Il doit ressembler à `2020.x`. Si ce n'est pas le cas, demandez à un TA.
-Maintenant que `pipenv` est à jour, nous pouvons verrouiller en toute sécurité les configurations dans des fichiers texte statiques.
+Maintenant que `pipenv` est à jour, nous pouvons sauvegarder en toute sécurité les configurations dans des fichiers texte statiques.
 
 :point_right: Exécutez les commandes suivantes :
 
@@ -210,7 +210,7 @@ CMD ["flask", "run", "--host", "0.0.0.0"]
 
 Comprenez-vous les instructions ? Si nous les décomposons une par une, nous voyons que :
 
-* nous partons de l'image de Python 3.8, et plus particulièrement de sa version `alpine`. Alpine Linux est une solution Linux connue pour sa panoplie d'outils légère, mais néanmoins complète.
+* nous partons de l'image de Python 3.8, et plus particulièrement de sa version `alpine`. Alpine Linux est une solution Linux connue pour sa panoplie d'outils légère, et complète.
 * Nous installons quelques paquets nécessaires à la construction de notre image (dont `pip`).
 * Nous créons un répertoire de travail (dans les conteneurs qui seront exécutés) appelé `/code`.
 * Nous copions notre dossier de code local dans le répertoire de l'espace de travail du conteneur.
@@ -246,7 +246,7 @@ docker build -t twitter-api .
 C'est fait ? Parfait ! Maintenant, exécutons un conteneur à partir de cette image, et vérifions que notre application fonctionne.
 Quelques spécifications pour cette exécution :
 
-* nommez-le `twitter-api-docker`.
+* nommez-la `twitter-api-docker`.
 * vous devez attribuer un port hôte au port du conteneur de votre application, afin d'y accéder depuis votre hôte : ajoutez l'option `-p 5000:5000` à votre commande. De cette façon, l'application sera exécutée dans le conteneur sur le port 5000, et vous serez en mesure d'y accéder sur votre hôte (votre machine) sur le port 5000 également.
 * ajoutez l'option `--rm` à votre commande `docker run` pour supprimer automatiquement le conteneur une fois qu'il aura terminé.
 
@@ -426,7 +426,7 @@ Nous avons maintenant deux services : `web` et `db`.
 
 👀 Regardons de plus près le `web` :
 
-* Ce service est basé sur une image personnalisée - instruite dans notre Dockerfile
+* Ce service est basé sur une image personnalisée - renseignée dans notre Dockerfile
 * Nous nommons le conteneur qui sera lancé `web` - pour plus de simplicité.
 * Il ["dépend du"](https://docs.docker.com/compose/compose-file/#depends_on) service `db` : les services seront démarrés dans l'ordre des dépendances. Nous avons besoin que notre base de données (`db`) soit opérationnelle et prête pour de nouvelles connexions avant de lancer notre application Flask (`web`) !
 * Afin de s'assurer que notre conteneur de dépendances (c'est-à-dire notre base de données) fonctionne, nous avons besoin d'une sorte de "contrôle". C'est le but exact du script `wait-for-it.sh` ! Vous pouvez en lire plus [ici](https://docs.docker.com/compose/startup-order/) si vous êtes intéressés. Le conteneur `web` exécute ce script, qui **lui fera attendre que la base de données soit opérationnelle et accepte les connexions**, avant de lancer l'application flask (`command : ["./wait-for-it.sh", "db:5432", "--", "flask", "run"]`).
@@ -638,7 +638,7 @@ Avec ce type de configuration :
 
 Nettoyez votre hôte docker en exécutant ``docker-compose down -v`` pour arrêter et supprimer les conteneurs, et supprimer les volumes utilisés ci-dessus.
 
-Et c'est tout pour cet exercice ! Avant de passer au prochain exercice (`03-Background-Jobs`), indiquons vos progrès avec ce qui suit :
+Et c'est tout pour cet exercice ! Avant de passer au prochain exercice (`03-Background-Jobs`), sauvergardez vos progrès avec ce qui suit :
 
 ```bash
 cd ~/code/<user.github_nickname>/reboot-python

@@ -11,10 +11,10 @@
 ## 0. Validation de l'installation ✅
 ### 0.a. Docker Desktop est-il déjà installé ? 🐳
 
-Vous devez déjà avoir installé Docker Desktop sur votre ordinateur - dans le cadre de la section **"Avant votre formation "** sur Learn.
+Vous devez déjà avoir installé Docker Desktop sur votre ordinateur - dans le cadre de la section **"Avant votre formation"** sur Learn.
 
 
-👀 Si vous voyez une icône de baleine dans la barre d'état qui  reste stable, **Docker Desktop** est en marche et est accessible depuis n'importe quelle fenêtre de terminal. Vous êtes prêt ✅
+👀 Si vous voyez une icône de baleine dans la barre d'état qui reste stable, **Docker Desktop** est en marche et est accessible depuis n'importe quelle fenêtre de terminal. Vous êtes prêt ✅
 <p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/status-bar.png?raw=true" width="250"></p>
 
 👀 Si vous ne voyez pas cette icône de baleine, mais que vous avez déjà **Docker Desktop** installé sur votre machine, il suffit de le démarrer ! Attendez que l'icône de la baleine soit stable et c'est parti ✅
@@ -72,11 +72,11 @@ docker ps
 ```
 
 Vous ne voyez rien 🤔 ? C'est normal !
-Votre conteneur `hello-world` ne tourne plus : il s'est éteint dès qu'il a terminé. Son travail consistait simplement à afficher un message.
+Votre conteneur `hello-world` ne tourne plus : il s'est éteint dès qu'il a eu terminé. Son travail consistait simplement à afficher un message.
 
 En fait, la commande `docker ps` peut prendre des arguments : la documentation peut être récupérée [ici](https://docs.docker.com/engine/reference/commandline/ps/), ou vous pouvez demander l'utilisation de la commande avec `docker ps --help`.
 
-##### Pour afficher tous les conteneurs (même ceux qui ne fonctionnent pas), exécutez :
+##### Pour afficher tous les conteneurs (même ceux qui ne sont pas en cours d'exécution), exécutez :
 ```
 docker ps -a
 ```
@@ -91,7 +91,7 @@ docker images
 Vous devriez voir votre image `hello-world`, fraîchement récupérée. Vous avez également accès à d'autres détails tels que
 
 * l'id de l'image,
-* la balise de l'image (utilisé pour transmettre des informations importantes sur l'image. Par défaut, la balise est "latest". Vous pouvez jeter un coup d'oeil à [cette liste de balises](https://hub.docker.com/_/python) : comprenez-vous à quoi elles servent ?),
+* la balise de l'image (utilisée pour transmettre des informations importantes sur l'image. Par défaut, la balise est "latest". Vous pouvez jeter un coup d'oeil à [cette liste de balises](https://hub.docker.com/_/python) : comprenez-vous à quoi elles servent ?),
 * la taille de l'image
 
 ---
@@ -230,7 +230,7 @@ Commençons par obtenir un interpréteur (bash shell) dans le conteneur :
 
 Qu'avons-nous fait ici 🤔 ? Nous avons demandé à Docker d'exécuter une commande (`/bin/bash` : pour obtenir un interpréteur) dans le conteneur, en passant les indicateurs `-i` et `-t` ensemble :
 
-* L'indicateur `-i` signifie mode "interactif" : il nous donpropose une saisie standard **stdin** (par défaut, un conteneur fonctionne en mode non-interactif : il ne tient pas compte des saisies de votre côté). Pour transmettre une saisie, vous devez passer cet indicateur `-i`.
+* L'indicateur `-i` signifie mode "interactif" : il nous propose une saisie standard **stdin** (par défaut, un conteneur fonctionne en mode non-interactif : il ne tient pas compte des saisies de votre côté). Pour transmettre une saisie, vous devez passer cet indicateur `-i`.
 * L'indicateur `-t` signifie "tty", et est une commande de système d'exploitation de type Unix : avec cet indicateur, vous obtiendrez un "invite" ("prompt").
 
 Ainsi, la combinaison de ces deux indicateurs nous donne accès à un "terminal", dans le conteneur 🎉 !
@@ -239,7 +239,7 @@ Nous pouvons maintenant accéder à notre base de données en utilisant la CLI `
 
 👉 Exécutez ```psql -U postgres```
 
-Il vous donne accès à la ligne de commande Postgresql, où vous pouvez écrire du SQL.
+Cela vous donne accès à la ligne de commande Postgresql, où vous pouvez écrire du SQL.
 
 <p><img src="https://github.com/lewagon/fullstack-images/blob/master/reboot-python/psql-docker.png?raw=true" width="500"></p>
 
@@ -385,7 +385,7 @@ Nous avons donc besoin de différentes choses ici :
 * Poussez cette image construite vers votre repository Docker Hub personnel.
 
 
-👉 Créer un fichier nommé Dockerfile dans ce dossier d'exercice.
+👉 Créez un fichier nommé Dockerfile dans ce dossier d'exercice.
 
 ```bash
 cd ~/code/<user.github_nickname>/reboot-python
@@ -415,7 +415,7 @@ FROM docker/whalesay:latest
 RUN apt-get -y update && apt-get install -y fortunes
 ```
 
-> L'instruction **RUN** exécutera toutes les commandes dans une nouvelle couche par-dessus l'image actuelle et soumettra les résultats. Chaque ligne de Dockerfile représente une " couche " de l'image complète.
+> L'instruction **RUN** exécutera toutes les commandes dans une nouvelle couche par-dessus l'image actuelle et soumettra les résultats. Chaque ligne de Dockerfile représente une "couche" de l'image complète.
 Ici, la commande met à jour la liste des paquets disponibles et leurs versions, et installe le programme `fortune` pour la génération de citations aléatoires.
 
 ```dockerfile
@@ -423,7 +423,7 @@ CMD /usr/games/fortune -a | cowsay
 ```
 
 > Il ne peut y avoir qu'une seule instruction **CMD** dans un Dockerfile. Le but principal d'une **CMD** est de fournir des valeurs par défaut pour un conteneur en cours d'exécution.
-Ici, l'astuce consiste à utiliser le " pipe " (`|`) qui va d'abord générer une citation aléatoire (en utilisant `/usr/games/fortune -a`) et la transmettre à la commande [`cowsay`](https://en.wikipedia.org/wiki/Cowsay).
+Ici, l'astuce consiste à utiliser le "pipe" (`|`) qui va d'abord générer une citation aléatoire (en utilisant `/usr/games/fortune -a`) et la transmettre à la commande [`cowsay`](https://en.wikipedia.org/wiki/Cowsay).
 
 ---
 
@@ -485,7 +485,7 @@ C'est tout pour ce défi ! Félicitations, vous avez vu comment faire pour :
 - récupérer une image (`docker pull $IMAGE_NAME`)
 - exécuter un conteneur à partir d'une image (`docker run $IMAGE_NAME`)
 - exécuter une commande dans un conteneur en cours d'exécution (`docker exec -it $CONTAINER_NAME $SOME_COMMAND`)
-- listez vos conteneurs et images (`docker ps`, `docker ps -a`, `docker images`)
+- lister vos conteneurs et images (`docker ps`, `docker ps -a`, `docker images`)
 - arrêter et supprimer un conteneur (`docker stop $CONTAINER_NAME`, `docker rm $CONTAINER_NAME`)
 - supprimer une image (`docker rmi $IMAGE_NAME`)
 - écrire un fichier Docker
@@ -494,7 +494,7 @@ C'est tout pour ce défi ! Félicitations, vous avez vu comment faire pour :
 
 Vous connaissez donc déjà toutes les commandes de base pour interagir avec les images et les conteneurs !
 
-Avant de passer au défi suivant (Twitter-API), indiquons vos progrès avec ce qui suit :
+Avant de passer à l'execice suivant (Twitter-API), sauvegardez vos progrès avec ce qui suit :
 
 ```bash
 cd ~/code/<user.github_nickname>/reboot-python
