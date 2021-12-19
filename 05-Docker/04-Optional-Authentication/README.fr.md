@@ -10,7 +10,7 @@ Revenons à notre API Twitter d'hier. Vous pouvez commencer par le code suivant 
 cd ~/code/<user.github_nickname>
 git clone git@github.com:ssaunier/twitter-api.git twitter-api-authentication
 cd twitter-api-authentication
-git checkout sqlalchemy  # récupérer cette branche avant de changer la version distante
+git checkout sqlalchemy  # récupérer cette branche avant de changer le dépôt distant
 
 git remote rm origin
 ```

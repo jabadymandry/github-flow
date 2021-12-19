@@ -147,7 +147,7 @@ Si non, vérifiez que le serveur Redis fonctionne ! Si vous n'arrivez pas à le 
 
 ## Ajout d'une toute première tâche
 
-Vous pouvez maintenant faire `Ctrl` + `C` (deux fois) le processus de Celery.
+Vous pouvez maintenant arrêter le processus Celery en pressant `Ctrl` + `C` deux fois.
 
 Il est temps d'ajouter une première tâche. Retournez dans Sublime Text dans le fichier `tasks.py` et ajoutez le bas définir une fonction. Cette fonction doit être une tâche longue puisqu'elle va être exécutée par le programme (worker). Pour en simuler une, nous pouvons utiliser [`time.sleep()`](https://stackoverflow.com/questions/510348/how-can-i-make-a-time-delay-in-python).
 
@@ -229,7 +229,7 @@ Nous avons presque terminé avec Celery, un dernier point que nous devons couvri
 2. Nous avons besoin d'exécuter le `celery` dans un processus séparé (même chose pour Heroku !)
 3. Nous devons configurer l'application avec des variables d'environnement pour que Celery trouve Redis.
 
-Pour le point `1.`, nous devons ajouter une **adjonction** (add-on) sur notre application Heroku. Nous allons utiliser [Heroku Redis](https://elements.heroku.com/addons/heroku-redis) qui est gratuit jusqu'à 25M, assez pour bricoler.
+Pour le point `1.`, nous devons ajouter une **extension** (add-on) sur notre application Heroku. Nous allons utiliser [Heroku Redis](https://elements.heroku.com/addons/heroku-redis) qui est gratuit jusqu'à 25M, assez pour bricoler.
 
 
 Afin d'utiliser Heroku Redis, Heroku vous demande de `vérifier votre compte` en `entrant une carte de crédit` comme mentionné [ici](https://devcenter.heroku.com/articles/account-verification#how-to-verify-your-heroku-account).
@@ -288,7 +288,7 @@ Observons notre application dans la nature.
 heroku open
 ```
 
-Lancez ensuite la commande suivante pour observer les registres de production :
+Lancez ensuite la commande suivante pour observer le journal (logs) de production :
 
 ```bash
 heroku logs --tail

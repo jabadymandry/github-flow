@@ -224,14 +224,14 @@ Eh bien, Docker génère des noms pour nous si nous n'en passons aucun.
 ### 1.c. Accéder à la base de données Postgres
 
 Maintenant que votre conteneur est en cours d'exécution, vous pourriez vouloir exécuter une requête SQL.
-Commençons par obtenir un interpréteur (bash shell) dans le conteneur :
+Commençons par lancer un terminal bash dans le conteneur :
 
 👉 Exécutez ```docker exec -it pg /bin/bash```
 
 Qu'avons-nous fait ici 🤔 ? Nous avons demandé à Docker d'exécuter une commande (`/bin/bash` : pour obtenir un interpréteur) dans le conteneur, en passant les indicateurs `-i` et `-t` ensemble :
 
 * L'indicateur `-i` signifie mode "interactif" : il nous propose une saisie standard **stdin** (par défaut, un conteneur fonctionne en mode non-interactif : il ne tient pas compte des saisies de votre côté). Pour transmettre une saisie, vous devez passer cet indicateur `-i`.
-* L'indicateur `-t` signifie "tty", et est une commande de système d'exploitation de type Unix : avec cet indicateur, vous obtiendrez un "invite" ("prompt").
+* L'indicateur `-t` signifie "tty", qui est une commande de système d'exploitation de type Unix : avec cet indicateur, vous obtiendrez un invite de commande.
 
 Ainsi, la combinaison de ces deux indicateurs nous donne accès à un "terminal", dans le conteneur 🎉 !
 
