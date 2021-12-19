@@ -280,10 +280,10 @@ db.session.commit()
 
 C'est bien cela ! Il va **créer un enregistrement** dans la base de données. Ce qui signifie que si vous exécutez les tests 10 fois, il créera 10 enregistrements ! Ceci va polluer votre environnement de développement :disappointed_relieved :
 
-La solution est de :
+La solution est :
 
-- Exécuter le test avec un _autre_ schéma de base de données.
-- Vider le schéma (en supprimant toutes les tables/en les recréant) pour chaque exécution du test (même chaque méthode !).
+- d'exécuter le test avec un _autre_ schéma de base de données.
+- de vider le schéma (en supprimant toutes les tables/en les recréant) pour chaque exécution du test (même chaque méthode !).
 
 Voici comment nous allons atteindre cet objectif. Tout d'abord, nous devons créer une nouvelle base de données en local :
 
@@ -297,7 +297,7 @@ Et puis nous pouvons mettre à jour notre classe `TestTweetViews` avec :
 # tests/apis/test_tweet_views.py
 
 from flask_testing import TestCase
-from app import create_app, db  # Don't forget to take the db import
+from app import create_app, db  # N'oubliez pas d'importer db
 from app.models import Tweet
 
 class TestTweetViews(TestCase):
@@ -317,7 +317,7 @@ class TestTweetViews(TestCase):
     # [...]
 ```
 
-Maintenant, continuez et mettez à jour les quatre tests en remplaçant l'ancienne logique `tweet_repository` par celle de `db.session`. Une fois que vous avez terminé, retournez dans le fichier `app/apis/tweets.py` pour corriger le code de l'API également ! Vous pouvez le faire :muscle : !
+Maintenant, continuez et mettez à jour les quatre tests en remplaçant l'ancienne logique `tweet_repository` par celle de `db.session`. Une fois que vous avez terminé, retournez dans le fichier `app/apis/tweets.py` pour corriger le code de l'API également ! Vous pouvez le faire :muscle: !
 
 Pour vérifier si vous progressez correctement, exécutez les tests :
 
@@ -456,7 +456,7 @@ Versionnez & poussez ce changement. Allez ensuite sur [github.com/marketplace/tr
 
 ### Liste des Tweets
 
-Ajoutons un autre endpoint à notre API pour récupérer **tous les tweets** :
+Ajoutons un autre point d'entrée à notre API pour récupérer **tous les tweets** :
 
 ```bash
 GET /tweets
