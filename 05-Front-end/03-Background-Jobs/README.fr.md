@@ -116,7 +116,7 @@ Si non, vérifiez que le serveur Redis fonctionne ! Si vous n'arrivez pas à le 
 
 Vous pouvez maintenant faire `Ctrl` + `C` (deux fois) le processus de Celery.
 
-Il est temps d'ajouter une première tâche. Retournez dans Sublime Text dans le fichier `tasks.py` et ajoutez le bas définir une fonction. Cette fonction doit être une tâche longue puisqu'elle va être exécutée par le programme (worker). Pour en simuler une, nous pouvons utiliser [`time.sleep()`](https://stackoverflow.com/questions/510348/how-can-i-make-a-time-delay-in-python).
+Il est temps d'ajouter une première tâche. Retournez dans Sublime Text dans le fichier `tasks.py` et, en bas du fichier, définissez une fonction. Cette fonction doit être une tâche longue puisqu'elle va être exécutée par le programme (worker). Pour en simuler une, nous pouvons utiliser [`time.sleep()`](https://stackoverflow.com/questions/510348/how-can-i-make-a-time-delay-in-python).
 
 Nous allons accompagner cette tâche avec `@celery.task()` pour que le processus Celery en soit conscient.
 
