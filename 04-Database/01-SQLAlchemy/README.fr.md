@@ -8,7 +8,7 @@ Voici la liste de ce que nous allons installer au cours de cet exercice :
 
 - [psycopg2](http://initd.org/psycopg/) qui nous permettra d'utiliser PostgreSQL
 - [SQLAlchemy](https://www.sqlalchemy.org/) comme ORM en plus de PostgreSQL
-- [Alembic](http://alembic.zzzcomputing.com/) pour gérer les migrations de schéma avec le package [`Flask-Migrate`](http://flask-migrate.readthedocs.io/).
+- [Alembic](http://alembic.zzzcomputing.com/) pour gérer les migrations de schéma avec le paquet [`Flask-Migrate`](http://flask-migrate.readthedocs.io/).
 - Nous allons déployer notre application avec Heroku
 
 ## PostgreSQL
@@ -21,7 +21,7 @@ Exécutez-le. Il installera :
 
 - le serveur PostgreSQL
 - pgAdmin 4, un client GUI très utile pour exécuter des requêtes et administrer le serveur
-- Les outils de ligne de commande qui seront utiles pour installer le package `psycopg2`
+- Les outils de ligne de commande qui seront utiles pour installer le paquet `psycopg2`
 
 L'assistant d'installation vous demandera un mot de passe superadmin. Mettez quelque chose dont vous pouvez vous souvenir facilement (généralement `root`).
 
@@ -262,7 +262,7 @@ pipenv run python manage.py db migrate -m "create products"
 
 Ouvrez le fichier dans `./migrations/versions` et lisez la méthode auto-générée `upgrade()`. Avez-vous vu comment elle crée les deux colonnes `id` et `name` ?
 
-Pour appliquer cette migration à la réelle base de données, exécutez ceci :
+Pour appliquer cette migration à la base de données, exécutez ceci :
 
 ```bash
 pipenv run python manage.py db upgrade
@@ -279,7 +279,7 @@ flask_db#= \d products
 flask_db#= \q
 ```
 
-Tu vois comme c'était facile ?
+Vous voyez comme c'est facile ?
 
 ## Mettre à jour un modèle
 
