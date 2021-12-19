@@ -278,7 +278,7 @@ db.session.add(tweet)
 db.session.commit()
 ```
 
-C'est bien cela ! Il va **créer un enregistrement** dans la base de données. Ce qui signifie que si vous exécutez les tests 10 fois, il créera 10 enregistrements ! Ceci va polluer votre environnement de développement :disappointed_relieved :
+C'est bien cela ! Il va **créer un enregistrement** dans la base de données. Ce qui signifie que si vous exécutez les tests 10 fois, il créera 10 enregistrements ! Ceci va polluer votre environnement de développement :disappointed_relieved:
 
 La solution est :
 
