@@ -103,7 +103,7 @@ git push heroku master
 heroku ps                  # Vous avez un dyno `gunicorn` gratuit en service?
 
 heroku open                # Obtenez-vous un "Hello world" dans le navigateur ?
-heroku logs -n 1000 --tail # Vérifiez que les registres d'accès s'affichent. Rechargez le navigateur.
+heroku logs -n 1000 --tail # Vérifiez que le journal (logs) s'affiche. Rechargez le navigateur.
 ```
 
 ## JSON

@@ -218,12 +218,12 @@ heroku apps  # Affiche les applications créées
 Alors nous pouvons la supprimer :
 ```bash
 heroku apps:destroy <app_name_1>
-# !    AVERTISSEMENT : Cela supprimera <nom_de_l'application_1>, y compris tous les modules complémentaires.
-# !    Pour continuer, tapez <nom_de_l'application_1> ou ré-exécutez cette commande avec
-# !    --confirm <nom_de_l'application_1>
+# !    WARNING: This will delete <app_name_1> including all add-ons.
+# !    To proceed, type <app_name_1> or re-run this command with
+# !    --confirm <app_name_1>
 
 <app_name_1>  # Tapez <nom_app_1> et appuyez sur <Entrée>.
-# Destruction de l'application <nom_1> (y compris tous les modules complémentaires)... terminé
+# Destroying <app_name_1> (including all add-ons)... done
 ```
 
 **Procédez à cette opération chaque fois que nécessaire**
