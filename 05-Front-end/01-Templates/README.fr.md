@@ -1,20 +1,20 @@
-# Flask templates
+# Templates Flask
 
-In this exercise, we will re-use the yesterday's application from the `01-SQLAlchemy-Recap` exercise:
+Dans cet exercice, nous allons réutiliser l'application de l'exercice `01-SQLAlchemy-Recap` d'hier  :
 
 ```bash
 cd ~/code/<user.github_nickname>/flask-with-sqlalchemy
 ```
 
-Make sure your `git status` is clean (`add` and `commit` the WIP), and that your server can still be started:
+Assurez-vous que votre `git status` est vide (`add` et `commit` le WIP), et que votre serveur peut toujours être démarré :
 
 ```bash
 FLASK_ENV=development pipenv run flask run
 ```
 
-## Homepage
+## Page d'accueil
 
-The goal of this exercise will be to replace the following action:
+Le but de cet exercice sera de remplacer l'action suivante :
 
 ```python
 @app.route('/')
@@ -22,21 +22,21 @@ def hello():
     return "Hello World!"
 ```
 
-Instead of returning a plain text sentence, we want to actually build a nice HTML page.
+Au lieu de renvoyer une phrase en texte brut, nous voulons construire une belle page HTML.
 
-We want you to build two pages:
-- a `home` page with a grid of products (`/`)
-- and a dynamic `detail` page with a given product (`/:id`)
-When a user browses the home page, it should be able to easily go to a "show" page by clicking on a link.
+Nous voulons que vous construisiez deux pages :
+- une page `d'accueil` avec une grille de produits (`/`)
+- et une page `détail` dynamique en fonction du produit donné (`/:id`)
+Lorsqu'un utilisateur navigue sur la page d'accueil, il doit pouvoir se rendre facilement sur une page "show" en cliquant sur un lien.
 
-First take some time to read the [Flask Templates](http://flask.pocoo.org/docs/1.0/tutorial/templates/) documentation. This is part of the `flask` package. Take also some time to read more about [Jinja](http://jinja.pocoo.org/docs/2.10/templates/), the templating language used by Flask.
+Prenez d'abord le temps de lire la documentation de [Flask Templates](http://flask.pocoo.org/docs/1.0/tutorial/templates/). Ceci fait partie du paquet `flask`. Prenez également le temps d'en savoir plus sur [Jinja](http://jinja.pocoo.org/docs/2.10/templates/), le langage de modélisation utilisé par Flask.
 
 ```bash
 mkdir templates
 touch templates/base.html
 ```
 
-Let's start with the [Bootstrap template](https://getbootstrap.com/docs/4.1/getting-started/introduction/) adapted to insert a Jinja **block**
+Commençons par le [Bootstrap template](https://getbootstrap.com/docs/4.1/getting-started/introduction/) adapté pour insérer un **bloc** Jinja.
 
 ```html
 <!DOCTYPE html>
@@ -61,7 +61,7 @@ Let's start with the [Bootstrap template](https://getbootstrap.com/docs/4.1/gett
 </html>
 ```
 
-In the controller (`wsgi.py`), you can instantiate:
+Dans le contrôleur (`wsgi.py`), vous pouvez instancier :
 
 ```python
 from flask import Flask, abort, request, render_template
@@ -75,9 +75,9 @@ def home():
     return render_template('home.html', products=products)
 ```
 
-Try to navigate to the [`localhost:5000`](http://localhost:5000) on the Homepage. What error do you get? What should we do?
+Essayez de naviguer vers [`localhost:5000`](http://localhost:5000) sur la page d'accueil. Quelle erreur obtenez-vous ? Que devons-nous faire ?
 
-We need to create a new file `templates/home.html` and use the `products` variable from the `wsgi.py` to the `home.html` file thanks to the `render_template` arguments.
+Nous devons créer un nouveau fichier `templates/home.html` et utiliser la variable `products` du fichier `wsgi.py` dans le fichier `home.html` grâce aux arguments `render_template`.
 
 ```bash
 touch templates/home.html
@@ -99,21 +99,21 @@ touch templates/home.html
 {% endblock %}
 ```
 
-The `list-unstyled` class is from [Bootstrap](https://getbootstrap.com/docs/4.1/content/typography/#unstyled).
+La classe `list-unstyled` provient de [Bootstrap](https://getbootstrap.com/docs/4.1/content/typography/#unstyled).
 
-The content within the `block content` is inserted back into the `base.html`.
+Le contenu du `block content` est réinséré dans le fichier `base.html`.
 
-## Product page
+## La page produit
 
-We now want to implement a **dynamic** product page display information about a single one. The idea is to change the `<li>` elements from the `home.html` and put **links** on them:
+Nous voulons maintenant implémenter une page de produit **dynamique** affichant les informations d'un seul produit. L'idée est de changer les éléments `<li>` du fichier `home.html` et de mettre des **liens** dessus :
 
-Before:
+Avant:
 
 ```html
 <li>{{ product.name }}</li>
 ```
 
-After (using [`url_for`](http://flask.pocoo.org/docs/1.0/api/#flask.url_for)):
+Après (en utilisant [`url_for`](http://flask.pocoo.org/docs/1.0/api/#flask.url_for)) :
 
 ```html
 <li>
@@ -121,7 +121,7 @@ After (using [`url_for`](http://flask.pocoo.org/docs/1.0/api/#flask.url_for)):
 </li>
 ```
 
-First, we need to add a new route to the controller (`wsgi.py`):
+D'abord, nous devons ajouter une nouvelle route au contrôleur (`wsgi.py`) :
 
 ```python
 # [...]
@@ -132,14 +132,14 @@ def product_html(product_id):
     return render_template('product.html', product=product)
 ```
 
-If you reload your `/` home page, you should be able to click on a link in the list. If you do so, you should get a `jinja2.exceptions.TemplateNotFound` once again, which tells you which file you are missing.
+Si vous rechargez votre page d'accueil `/`, vous devriez pouvoir cliquer sur un lien de la liste. Si vous le faites, vous devriez obtenir à nouveau un `jinja2.exceptions.TemplateNotFound`, qui vous indique le fichier manquant.
 
-:point_right: Go ahead and **create** the missing template.
+:point_right: Allez-y et **créez** le fichier manquant.
 
-<details><summary markdown="span">View solution
+<details><summary markdown="span">Voir la solution
 </summary>
 
-You need to run:
+Vous devez exécuter:
 
 ```bash
 touch templates/product.html
@@ -148,7 +148,7 @@ touch templates/product.html
 </details>
 
 
-Let's create the Product page with the `product` variable passed in the `render_template` call:
+Créons la page Produit avec la variable `product` passée dans l'appel de `render_template` :
 
 ```html
 <!-- templates/product.html -->
@@ -160,15 +160,15 @@ Let's create the Product page with the `product` variable passed in the `render_
 
   <h1>{{ product.name }}</h1>
 
-  <!-- What other columns do you have in the `products` table? Use them here! -->
+  <!-- Quelles autres colonnes avez-vous dans la table `products` ? Utilisez-les ici ! -->
 {% endblock %}
 ```
 
-Do not forget to commit and push your changes to your GitHub repository.
+N'oubliez pas de valider et de pousser vos modifications dans votre repository GitHub.
 
-## I'm done!
+## C'est terminé!
 
-Before you jump to the next exercise, let's mark your progress with the following:
+Avant de passer à l'exercice suivant, sauvegardez vos progrès avec ce qui suit:
 
 ```bash
 cd ~/code/<user.github_nickname>/reboot-python
