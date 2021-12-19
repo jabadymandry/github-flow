@@ -6,7 +6,7 @@ Dans cet exercice, nous allons mettre en place un [**PaaS**](https://en.wikipedi
 
 ## Serveur HTTP
 
-Avant de pusher notre code chez un hébergeur, nous aimerions pouvoir interagir avec lui. La façon la plus simple de le faire est d'encapsuler le jeu autour d'un petit serveur HTTP.
+Avant de pousser notre code chez un hébergeur, nous aimerions pouvoir interagir avec lui. La façon la plus simple de le faire est d'encapsuler le jeu autour d'un petit serveur HTTP.
 
 Nous allons construire une page simple qui affichera la grille aléatoire. En dessous de cette grille, un formulaire avec un champ input pour taper un mot, et un bouton submit.
 
@@ -19,7 +19,7 @@ Retournez à votre code, et créez une branche pour commencer à travailler sur 
 ```bash
 cd ~/code/<user.github_nickname>/longest-word
 
-git status # is that clean?
+git status # Est-ce que c'est vide ?
 git checkout master
 git pull origin master
 git branch -d dictionary-api
@@ -34,7 +34,7 @@ touch wsgi.py
 subl .
 ```
 
-Ouvrez le fichier `wsgi.py` et copiez-collez le code suivant:
+Ouvrez le fichier `wsgi.py` et copiez-collez le code suivant :
 
 ```python
 # wsgi.py
@@ -48,15 +48,15 @@ def home():
     return "Hello world!"
 ```
 
-Vous pouvez commencer cette application Flask très basique avec:
+Vous pouvez commencer cette application Flask très basique avec :
 
 ```bash
 FLASK_ENV=development pipenv run flask run
 ```
 
-Ouvrez votre navigateur et allez sur [localhost:5000](http://localhost:5000/). Est-ce que cela fonctionne, est-ce que vous obtenez "Hello World" comme réponse texte du serveur? Si ce n'est pas le cas, appelez un professeur.
+Ouvrez votre navigateur et allez sur [localhost:5000](http://localhost:5000/). Est-ce que cela fonctionne, est-ce que vous obtenez "Hello World" comme réponse texte du serveur ? Si ce n'est pas le cas, appelez un professeur.
 
-Le but de cet exercice n'est pas d'implémenter une petite application, nous parlerons de Flask en détail dans le cours de demain. Alors construisons ensemble notre application:
+Le but de cet exercice n'est pas d'implémenter une petite application, nous parlerons de Flask en détail dans le cours de demain. Alors construisons ensemble notre application :
 
 ```bash
 mkdir static
@@ -65,7 +65,7 @@ mkdir templates
 touch templates/home.html
 ```
 
-Nous venons de créer une feuille de style CSS et le template HTML pour la page d'accueil. Ajoutons la logique métier dans `wsgi.py`:
+Nous venons de créer une feuille de style CSS et le template HTML pour la page d'accueil. Ajoutons la logique métier dans `wsgi.py` :
 
 ```python
 # wsgi.py
@@ -84,7 +84,7 @@ def home():
 
 Dans le code ci-dessus, nous initialisons une nouvelle instance de `Game` pour générer une grille. Nous passons cette grille comme variable locale au modèle `home.html`, afin de pouvoir l'utiliser dans la vue.
 Comme la logique de `Game` ne s'occupe que des lettres majuscules, nous avons décidé de forcer le contenu de `<input name="word">` en majuscules en utilisant du JavaScript.
-Ajoutons ce code dans `templates/home.html`:
+Ajoutons ce code dans `templates/home.html` :
 
 ```html
 <!-- templates/home.html -->
@@ -111,7 +111,7 @@ Ajoutons ce code dans `templates/home.html`:
 </html>
 ```
 
-Nous vous donnons également quelques lignes de CSS à ajouter dans `static/style.css`:
+Nous vous donnons également quelques lignes de CSS à ajouter dans `static/style.css` :
 
 ```css
 /* static/style.css */
@@ -142,10 +142,10 @@ body {
 }
 ```
 
-Ouf! Maintenant essayons ceci, allez dans votre navigateur et rechargez la page. Pouvez-vous voir la grille avec un formulaire? C'est génial!
+Ouf ! Maintenant essayons ceci, allez dans votre navigateur et rechargez la page. Pouvez-vous voir la grille avec un formulaire ? C'est génial !
 
 Si vous essayez de jouer, vous obtiendrez une erreur. C'est parce que nous n'avons pas encore implémenté le endpoint `/check` (celui où le formulaire est soumis).
-Faisons-le:
+Faisons-le :
 
 ```python
 # wsgi.py
@@ -204,22 +204,22 @@ touch templates/check.html
 </html>
 ```
 
-Voilà, c'est fait ! Votre application devrait fonctionner correctement. Il est temps de commit, pusher et _ouvrir une Pull Request_ sur GitHub:
+Voilà, c'est fait ! Votre application devrait fonctionner correctement. Il est temps de versionner, pousser et _ouvrir une Pull Request_ sur GitHub :
 
 ```bash
 git add .
 git commit -m "Small web app wrapper around the Game"
 git push origin http-server
-# head to github.com to open a Pull Request!
+# rendez-vous sur github.com pour ouvrir une Pull Request !
 ```
 
 ## Installation de Heroku
 
 Avant de pouvoir déployer notre petite application web, nous devons créer un compte Heroku. Si vous en avez déjà un, vous pouvez l'utiliser. Sinon, [inscrivez-vous](https://signup.heroku.com/) (c'est gratuit pour essayer). Mettez une adresse e-mail à laquelle vous pouvez accéder facilement car vous devrez cliquer sur un lien de confirmation.
 
-Une fois votre compte créé, vous devez installer l'outil de ligne de commande. Allez sur [cette page Heroku Dev Center](https://devcenter.heroku.com/articles/getting-started-with-python#set-up), téléchargez le CLI et installez-le. Ne laissez pas l'option `Git` cochée dans les composants à installer car vous l'avez déjà! Laissez les options `Heroku CLI` et `Set PATH...` cochées.
+Une fois votre compte créé, vous devez installer l'outil de ligne de commande. Allez sur [cette page Heroku Dev Center](https://devcenter.heroku.com/articles/getting-started-with-python#set-up), téléchargez le CLI et installez-le. Ne laissez pas l'option `Git` cochée dans les composants à installer car vous l'avez déjà ! Laissez les options `Heroku CLI` et `Set PATH...` cochées.
 
-Ouvrez Git Bash et connectez-vous:
+Ouvrez Git Bash et connectez-vous :
 
 ```bash
 heroku update
@@ -228,10 +228,10 @@ heroku login
 
 S'il y a un problème, vous pouvez [avoir besoin d'utiliser `winpty`](https://github.com/heroku/cli/issues/84)
 
-Nous pouvons maintenant préparer notre application à être exécutée sur Heroku. Il ne manque qu'une petite chose: nous devons indiquer à Heroku comment **démarrer** notre application. Pour ce faire, nous devons créer un fichier spécial:
+Nous pouvons maintenant préparer notre application à être exécutée sur Heroku. Il ne manque qu'une petite chose : nous devons indiquer à Heroku comment **démarrer** notre application. Pour ce faire, nous devons créer un fichier spécial :
 
 ```bash
-git status # Est-ce que c'est vide?
+git status # Est-ce que c'est vide ?
 git checkout master
 git pull origin master
 
@@ -239,14 +239,14 @@ git pull origin master
 touch Procfile
 ```
 
-And put the following in this `Procfile`:
+Et mettez ce qui suit dans le `Procfile` :
 
 ```bash
 # Procfile
 web: gunicorn wsgi:app
 ```
 
-Nous ne pouvons pas utiliser la commande normale `flask run` en production, nous devons utiliser [`gunicorn`](https://devcenter.heroku.com/articles/python-gunicorn) qui doit encore être ajouté au `Pipfile`:
+Nous ne pouvons pas utiliser la commande normale `flask run` en production, nous devons utiliser [`gunicorn`](https://devcenter.heroku.com/articles/python-gunicorn) qui doit encore être ajouté au `Pipfile` :
 
 ```bash
 pipenv install gunicorn
@@ -260,10 +260,10 @@ Notre application est maintenant prête à être déployée sur Heroku. Tout d'a
 ```bash
 heroku create --region=eu # Nous voulons utiliser le datacenter de l'UE pour être plus proche de nous.
 git remote -v
-# Vous voyez ? Il n'y a pas que `origin` comme remote maintenant!
-git push heroku master # C'est d'ailleurs la commande de déploiement!
+# Vous voyez ? Il n'y a pas que `origin` comme remote maintenant !
+git push heroku master # C'est d'ailleurs la commande de déploiement !
 
-# Une fois que notre application est déployée, nous pouvons l'ouvrir sur Chrome avec:
+# Une fois que notre application est déployée, nous pouvons l'ouvrir sur Chrome avec :
 heroku open
 ```
 
@@ -271,15 +271,15 @@ Tout va bien ? Si non, vous pouvez débugger la production avec `heroku logs --t
 
 ## Déploiement continu
 
-Nous y sommes presque. Voici un rapide récapitulatif:
+Nous y sommes presque. Voici un rapide récapitulatif :
 
 1. Notre code est sur GitHub
 1. Nous avons mis en place l'Intégration Continue grâce à Travis
-1. Chaque commit (dans `master` ou une branche de fonctionnalité) déclenche une compilation de Travis
+1. Chaque versionnage (dans `master` ou une branche de fonctionnalité) déclenche une compilation de Travis
 1. Le statut d'une Pull Request est mis à jour par Travis et donne le contexte à l'examinateur.
 1. Nous devons toujours **manuellement** exécuter la commande `git push heroku master` pour déployer
 
-Automatisons cette dernière partie et atteignons le Graal!
+Automatisons cette dernière partie et atteignons le Graal !
 
 Allez sur [dashboard.heroku.com](https://dashboard.heroku.com). Cliquez sur votre application hébergeant `longest-word`.
 
@@ -289,11 +289,11 @@ Allez sur [dashboard.heroku.com](https://dashboard.heroku.com). Cliquez sur votr
 
  Après cette étape, si vous descendez encore un peu, vous trouverez la section `Automatic deploys`. C'est là que vous pourrez cocher la case `Wait for CI to pass before deploy`, sélectionnez `master` (par défaut) dans la liste déroulante, et cliquer sur le bouton noir **Enable Automatic Deploys**.
 
- Voilà, c'est fait! Mais est-ce que ça marche vraiment?
+ Voilà, c'est fait ! Mais est-ce que ça marche vraiment ?
 
  ---
 
- Testons!
+ Testons !
 
  Faisons un changement très simple. Nous allons mettre à jour la couleur de fond des lettres de la grille.
 
@@ -313,7 +313,7 @@ git checkout -b yellow-letter
 
 Vous pouvez tester localement avec `FLASK_ENV=development pipenv run flask run`. Si les changements CSS ne sont pas pris en compte, faites un[force-refresh](https://superuser.com/a/89811).
 
-La couleur vous convient ? Vous pouvez commit:
+La couleur vous convient ? Vous pouvez versionner :
 
 ```bash
 git add static/style.css
@@ -326,9 +326,9 @@ Allez sur github.com, créez une Pull Request et attendez que Travis la passe au
 Pendant que Travis travaille, ouvrez un autre onglet Chrome et retournez sur [dashboard.heroku.com](https://dashboard.heroku.com), puis sélectionnez votre projet `longest-word`.
 Regardez l'onglet `Activity` (le 5ème) de votre application Heroku pour visualiser votre flux d'activité. Laissez cet onglet ouvert.
 
-Revenez sur la Pull Request, et dès qu'elle est verte, mergez-la vers `master`. Retournez sur l'onglet Heroku, et attendez ~1 minute (dans GitHub vous pouvez jeter un coup d'oeil à la page `Commits` et voir que le dernier merge de commit est en train d'être testé par Travis, grâce au petit point orange).
+Revenez sur la Pull Request, et dès qu'elle est verte, mergez-la vers `master`. Retournez sur l'onglet Heroku, et attendez ~1 minute (dans GitHub vous pouvez jeter un coup d'oeil à la page `Commits` et voir que le dernier merge de versionnage est en train d'être testé par Travis, grâce au petit point orange).
 
-Avez-vous réussi ? Avez-vous pu obtenir une compilation/un déploiement automatique sur Heroku grâce à un feu vert de Travis sur le nouveau merge de commit GitHub sur `master`?
+Avez-vous réussi ? Avez-vous pu obtenir une compilation/un déploiement automatique sur Heroku grâce à un feu vert de Travis sur le nouveau merge de versionnage GitHub sur `master` ?
 
 👏 👏 👏
 
@@ -340,11 +340,11 @@ Ce type de développement avec de petites branches de fonctionnalités qui sont 
 
 Si vous avez terminé tous les exercices du jour, revenez au sudoku facultatif d'hier si vous ne l'avez pas terminé (ou aux exercices précédents).
 
-Si vous l'avez déjà terminé, jetez un coup d'œil à la [documentation Flask](http://flask.pocoo.org/). Nous aborderons Flask dans le cours de demain, en attendant, vous pouvez essayer d'implémenter une fonctionnalité dans le jeu du "mot le plus long" : un **score** global! L'idée est que chaque fois qu'un utilisateur trouve un mot valide, vous incrémentez le score (1 point par lettre). Comme HTTP est sans état, vous devez utiliser l'extension Flask [Flask-Session](https://flask-session.readthedocs.io/en/latest/) pour gérer le concept de **session** (avec `SESSION_TYPE='filesystem'`).
+Si vous l'avez déjà terminé, jetez un coup d'œil à la [documentation Flask](http://flask.pocoo.org/). Nous aborderons Flask dans le cours de demain, en attendant, vous pouvez essayer d'implémenter une fonctionnalité dans le jeu du "mot le plus long" : un **score** global ! L'idée est que chaque fois qu'un utilisateur trouve un mot valide, vous incrémentez le score (1 point par lettre). Comme HTTP est sans état, vous devez utiliser l'extension Flask [Flask-Session](https://flask-session.readthedocs.io/en/latest/) pour gérer le concept de **session** (avec `SESSION_TYPE='filesystem'`).
 
-## C'est terminé!
+## C'est terminé !
 
-Avant de passer à l'exercice suivant, sauvegardez vos progrès avec ce qui suit:
+Avant de passer à l'exercice suivant, sauvegardez votre avancement avec ce qui suit :
 
 ```bash
 cd ~/code/<user.github_nickname>/reboot-python

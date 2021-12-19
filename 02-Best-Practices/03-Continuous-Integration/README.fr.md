@@ -1,12 +1,12 @@
 # Intégration Continue
 
-Avoir des tests sur un repository vous donne un avantage considérable: vous pouvez mettre en place une [**Intégration continue**](https://en.wikipedia.org/wiki/Continuous_integration). La section _Best Practices_ de cet article Wikipedia vaut la peine d'être lue.
+Avoir des tests sur un repository vous donne un avantage considérable : vous pouvez mettre en place une [**Intégration continue**](https://en.wikipedia.org/wiki/Continuous_integration). La section _Best Practices_ de cet article Wikipedia vaut la peine d'être lue.
 
-Le but de cet exercice est de lier notre logiciel de contrôle de version avec un moteur de production. L'idée est d'exécuter un moteur de production à chaque fois qu'un commit est envoyé à l'outil de contrôle de version. Quelque soit la branche, un processus de production est déclenché pour donner un retour aux développeurs sur ce commit, si il est _vert_ ou _rouge_ (ce qui signifie que les tests passent / que la production peut être terminée).
+Le but de cet exercice est de lier notre logiciel de contrôle de version avec un moteur de production. L'idée est d'exécuter un moteur de production à chaque fois qu'un versionnage est envoyé à l'outil de contrôle de version. Quelle que soit la branche, un processus de production est déclenché pour donner un retour aux développeurs sur ce versionnage, si il est _vert_ ou _rouge_ (ce qui signifie que les tests passent / que la production peut être terminée).
 
 ## Outils
 
-Comme pour les logiciels de contrôle de version, il existe de nombreux outils permettant de réaliser de l'intégration continue:
+Comme pour les logiciels de contrôle de version, il existe de nombreux outils permettant de réaliser de l'intégration continue :
 
 - [Jenkins](https://jenkins.io/), le logiciel de CI le plus populaire (vous devez l'installer)
 - [Travis](https://travis-ci.com/), le service de CI **cloud** le plus populaire
@@ -16,7 +16,7 @@ Pour garder cet exercice simple, nous utiliserons Travis, car il s'intègre faci
 
 ## Installation du service
 
-Nous allons déployer le repository que vous avez créé dans l'exercice précédent. D'abord, créez un repository vide `longest-word` dans votre compte Github. Après cela, vous pouvez pusher vos changements:
+Nous allons déployer le repository que vous avez créé dans l'exercice précédent. D'abord, créez un repository vide `longest-word` dans votre compte Github. Après cela, vous pouvez pousser vos changements :
 
 ```bash
 cd ~/code/<user.github_nickname>/longest-word
@@ -32,7 +32,7 @@ git push origin master
 
 Allez sur [github.com/marketplace/travis-ci](https://github.com/marketplace/travis-ci) et cliquez sur le bouton vert "Set up a free trial". Vous arriverez sur une section où vous pourrez choisir l'option `Open Source - $0`. Cliquez ensuite sur le bouton vert "Install it for free". Suivez les instructions.
 
-Une fois cette étape de configuration effectuée, vous pouvez vous rendre sur [github.com/<user.github_nickname>/longest-word/settings/installations](https://github.com/<user.github_nickname>/longest-word/settings/installations) et voyez que **Travis CI** a été installé dans votre repository. Super!
+Une fois cette étape de configuration effectuée, vous pouvez vous rendre sur [github.com/<user.github_nickname>/longest-word/settings/installations](https://github.com/<user.github_nickname>/longest-word/settings/installations) et voyez que **Travis CI** a été installé dans votre repository. Super !
 
 ## Configuration
 
@@ -58,26 +58,26 @@ script:
   - pipenv run nosetests
 ```
 
-Enregistrez ce fichier dans Sublime Text, et effectuez un commit:
+Enregistrez ce fichier dans Sublime Text, et effectuez un versionnage :
 
 ```bash
 git add .travis.yml
 git commit -m "Configure Travis to run nosetests"
 ```
 
-Génial ! Avant de pusher, allez sur cette page :
+Génial ! Avant de pousser, allez sur cette page :
 
 [github.com/<user.github_nickname>/longest-word/commits/master](https://github.com/<user.github_nickname>/longest-word/commits/master)
 
-Vous devriez avoir un commit. Maintenant retournez dans le terminal:
+Vous devriez avoir un versionnage. Maintenant retournez dans le terminal :
 
 ```bash
 git push origin master
 ```
 
-:warning: Ne PAS utiliser `--force` pour votre git push car cela pourrait empêcher Travis de détecter votre push.
+:warning: Ne passe PAS l'option `--force` lorsque tu pousses ton code avec git car cela empêchera sûrement Travis de détecter tes changements.
 
-Quand le push est terminé, retournez à la page, et **rechargez** la. Vous devriez voir le commit avec un cercle jaune, puis une coche verte! Ceci est l'intégration entre GitHub et Travis CI. Elle s'exécutera à chaque fois que vous enverrez des commits à GitHub, grâce à la fonction [GitHub webhooks](https://developer.github.com/webhooks/) et l'intégration de [Travis API](https://docs.travis-ci.com/user/developer/#API-V3).
+Quand le push est terminé, retournez à la page, et **rechargez** la. Vous devriez voir le versionnage avec un cercle jaune, puis une coche verte ! Ceci est l'intégration entre GitHub et Travis CI. Elle s'exécutera à chaque fois que vous enverrez des versionnages à GitHub, grâce à la fonction [GitHub webhooks](https://developer.github.com/webhooks/) et l'intégration de [Travis API](https://docs.travis-ci.com/user/developer/#API-V3).
 
 ## Intégration Continue & Pull Request
 
@@ -97,24 +97,24 @@ new_game.is_valid('FEUN')
 
 Bien sûr, c'est syntaxiquement valide (chaque lettre de `FEUN` peut être trouvée dans la grille), mais ce n'est pas un mot anglais valide du dictionnaire !
 
-Travaillons sur ce point dans une nouvelle branche de fonctionnalité:
+Travaillons sur ce point dans une nouvelle branche de fonctionnalité :
 
 ```bash
 git checkout -b dictionary-api
 ```
 
-Comme nous suivons le paradigme TDD, nous devons ajouter un test:
+Comme nous suivons le paradigme TDD, nous devons ajouter un test :
 
 ```python
 # tests/test_game.py
 # [...]
     def test_unknown_word_is_invalid(self):
       new_game = Game()
-      new_game.grid = list('KWIENFUQW') # Force the grid to a test case:
+      new_game.grid = list('KWIENFUQW') # Forcer la grille à un scénario de test :
       self.assertIs(new_game.is_valid('FEUN'), False)
 ```
 
-Nous pouvons commit dès maintenant :
+Nous pouvons versionner dès maintenant :
 
 ```bash
 git add test_game.py
@@ -122,15 +122,15 @@ git commit -m "TDD: Check that attempt exists in the English dictionary"
 git push origin dictionary-api
 ```
 
-Maintenant, ouvrons une Pull Request sur GitHub pour cette branche. Vous trouverez peut-être que c'est un peu tôt, mais c'est quelque chose qui est en fait encouragé par le [flow GitHub](http://scottchacon.com/2011/08/31/github-flow.html):
+Maintenant, ouvrons une Pull Request sur GitHub pour cette branche. Vous trouverez peut-être que c'est un peu tôt, mais c'est quelque chose qui est en fait encouragé par le [flow GitHub](http://scottchacon.com/2011/08/31/github-flow.html) :
 
 Si vous êtes bloqué dans le développement de votre fonctionnalité ou de votre branche et que vous avez besoin d'aide ou de conseils, ou si vous êtes un développeur et que vous avez besoin d'un designer pour revoir votre travail (ou vice versa), ou même si vous avez peu ou pas de code mais quelques captures d'écran ou des idées générales, vous ouvrez une pull request.
 
-Au Wagon, les développeurs ouvrent des Pull Request très tôt pour leurs branches de fonctionnalités afin de montrer à leurs coéquipiers ce qu'ils font et de solliciter des retours très tôt. Pas besoin d'attendre que le code soit complet pour ouvrir une Pull Request! Voici une capture d'écran de notre application principale, le préfixe `[WIP]` est utilisé dans les titres des Pull Request pour montrer que la branche n'est pas encore prête à être fusionnée:
+Au Wagon, les développeurs ouvrent des Pull Request très tôt pour leurs branches de fonctionnalités afin de montrer à leurs coéquipiers ce qu'ils font et de solliciter des retours très tôt. Pas besoin d'attendre que le code soit complet pour ouvrir une Pull Request ! Voici une capture d'écran de notre application principale, le préfixe `[WIP]` est utilisé dans les titres des Pull Request pour montrer que la branche n'est pas encore prête à être fusionnée :
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714921/kitt-wip-prs_obp6e7.png)
 
-Revenons à notre Pull Request. Si vous scrollez un peu en dessous de la description de la PR et de la liste des commits, vous verrez l'intégration de Travis CI:
+Revenons à notre Pull Request. Si vous scrollez un peu en dessous de la description de la PR et de la liste des versionnages, vous verrez l'intégration de Travis CI :
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714687/github-travis-failing_n0d78e.png)
 
@@ -138,14 +138,14 @@ Cette fonctionnalité est vraiment importante. Vous avez un retour direct, et di
 
 ---
 
-Revenons à l'implémentation de notre fonctionnalité. Nous voulons faire passer le test suivant:
+Revenons à l'implémentation de notre fonctionnalité. Nous voulons faire passer le test suivant :
 
 ```python
 pipenv run nosetests tests/test_game.py:TestGame.test_unknown_word_is_invalid
 # Vous voyez que nous n'exécutons qu'*un* seul test et pas toute la série ?
 ```
 
-❓ Voici quelques conseils pour implémenter cette fonctionnalité:
+❓ Voici quelques conseils pour implémenter cette fonctionnalité :
 
 - Vous pouvez utiliser la solution simple du Wagon. [Dictionary API](https://wagon-dictionary.herokuapp.com/)
 - Vous pouvez `pipenv install requests` pour faire des [requêtes HTTP](http://docs.python-requests.org/en/master/) à cette API.
@@ -180,7 +180,7 @@ class Game:
 
 <br>
 
-N'oubliez pas d'exécuter les tests localement jusqu'à ce que vous ayez 5 tests réussis. Lorsque vous avez terminé, il est temps d'observer le résultat sur GitHub / Travis CI!
+N'oubliez pas d'exécuter les tests localement jusqu'à ce que vous ayez 5 tests réussis. Lorsque vous avez terminé, il est temps d'observer le résultat sur GitHub / Travis CI !
 
 ```bash
 git add .
@@ -188,7 +188,7 @@ git commit -m "Feature complete: Dictionary check of attempt"
 git push origin dictionary-api
 ```
 
-Retournez à votre page Pull Request, vous devriez voir les icônes passer de croix rouges à points jaunes. Cela signifie que Travis CI est en train de compiler le code avec le dernier commit. Attendez quelques secondes, et il devrait mettre à jour le statut. Voici ce que vous devriez voir:
+Retournez à votre page Pull Request, vous devriez voir les icônes passer de croix rouges à points jaunes. Cela signifie que Travis CI est en train de compiler le code avec le dernier versionnage. Attendez quelques secondes, et il devrait mettre à jour le statut. Voici ce que vous devriez voir :
 
 ![](https://res.cloudinary.com/wagon/image/upload/v1560714701/github-travis-passing_vppc1l.png)
 
@@ -196,18 +196,18 @@ Beau travail 🎉 ! Invitez votre buddy en tant que collaborateur de repo pour r
 
 ## Conclusion
 
-L'ajout de tests dans un repository et coupler GitHub avec un service comme Travis CI permet au développeur d'avoir l'esprit tranquille lorsqu'il ajoute du code, de vérifier les éventuelles régressions, et d'exercer l'ensemble des tests à _chaque_ commit!
+L'ajout de tests dans un repository et coupler GitHub avec un service comme Travis CI permet au développeur d'avoir l'esprit tranquille lorsqu'il ajoute du code, de vérifier les éventuelles régressions, et d'exercer l'ensemble des tests à _chaque_ versionnage !
 
-Avant de d'avancer plus loin dans le DevOps avec le prochain exercice sur le déploiement continu, quelques derniers conseils:
+Avant de d'avancer plus loin dans le DevOps avec le prochain exercice sur le déploiement continu, quelques derniers conseils :
 
 - Faites en sortes que les différences entre les Pull Request soient les plus minimes possible. Une bonne taille est de **moins de 100 lignes** de différence (onglet `Files changed` de la Pull Request).
 - Gardez une pull request centrée sur une _simple_ fonctionnalité. Ajoutez au moins un test pour chaque Pull Request
 - Avant de demander une révision, relisez votre code dans l'onglet `Files changed`. Voir le code sous cet angle (dans un navigateur web sous un format différent) vous aidera à repérer les problèmes de style, les possibilités de refactorisation, etc. que vous ne pouviez pas voir directement dans votre éditeur de texte.
 - Enfin, vos pairs GitHub ont rédigé un excellent article sur [la manière d'écrire correctement](https://blog.github.com/2015-01-21-how-to-write-the-perfect-pull-request/) dans une Pull Request (à la fois pour la personne évaluée et pour l'évaluateur).
 
-## C'est terminé!
+## C'est terminé !
 
-Avant de passer à l'exercice suivant, sauvegardez vos progrès avec ce qui suit:
+Avant de passer à l'exercice suivant, sauvegardez votre avancement avec ce qui suit :
 
 ```bash
 cd ~/code/<user.github_nickname>/reboot-python
