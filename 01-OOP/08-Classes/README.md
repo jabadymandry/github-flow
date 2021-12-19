@@ -55,3 +55,4 @@ $dev
 The difference with Python here is that you are invited to specify the type of each instance variable in the class definition (`[string]` for the `$Brand` instance variable).
 
 You can read the [whole Microsoft Docs article](https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_classes) to dive into PowerShell user-defined classes.
+

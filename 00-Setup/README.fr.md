@@ -22,14 +22,14 @@ ssh -T git@github.com
 
 S'il est indiqué "Permission denied", appelez un professeur pour vous aider. S'il est indiqué "Hi <github_nickname>", tout va bien!
 
-Enfin, nous devons configurer la commande locale `git` pour préciser qui vous êtes lorsque vous faites un commit:
+Enfin, nous devons configurer `git` sur ton ordinateur pour que tu sois identifié lorsque tu versionnes ton code
 
 ```bash
 git config --global user.email "your_github_email@domain.com"
 git config --global user.name "Your Full Name"
 ```
 
-Il est important d'utiliser la même adresse électronique que celle que vous utilisez sur [GitHub](https://github.com/settings/emails) afin que [les commits soient liés à votre profil](https://help.github.com/articles/why-are-my-commits-linked-to-the-wrong-user/#commits-are-not-linked-to-any-user).
+Il est important d'utiliser la même adresse électronique que celle que vous utilisez sur [GitHub](https://github.com/settings/emails) afin que [les versionnages soient liés à votre profil](https://help.github.com/articles/why-are-my-commits-linked-to-the-wrong-user/#commits-are-not-linked-to-any-user).
 
 
 ## Exercices
@@ -55,7 +55,7 @@ Cela créera le Virtualenv pour ce dossier, en utilisant Python 3.8 comme [spéc
 
 ## Valider le défi
 
-Pour chaque défi, nous vous encourageons à **commit** et **pusher** votre progression. Commençons maintenant avec:
+Pour chaque défi, nous vous encourageons à **versionner** et **pousser** votre progression. Commençons maintenant avec :
 
 ```bash
 cd 00-Setup
@@ -65,4 +65,4 @@ git commit -m "I am ready"
 git push origin master
 ```
 
-Vous devriez obtenir un point vert à gauche pour suivre votre progression. Cheers!
+Vous devriez obtenir un point vert à gauche pour suivre votre progression. Cheers !

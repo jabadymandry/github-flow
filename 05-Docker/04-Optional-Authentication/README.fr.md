@@ -1,20 +1,25 @@
-# Authentification
+# Optionnel - Authentification
 
-Revenons à notre API Twitter. Vous pouvez commencer par le code suivant (en utilisant la branche `sqlalchemy`) :
+Pour cet exercice, nous n'utiliserons **pas** Docker et nous travaillerons sur l'authentification sur notre **structure locale** (comme nous l'avons fait les jours précédents). En effet, il est plus facile de traiter ce sujet sans la complexité de la conteneurisation dans un premier temps.
+
+---
+
+Revenons à notre API Twitter d'hier. Vous pouvez commencer par le code suivant (en utilisant la branche `sqlalchemy`) :
 
 ```bash
 cd ~/code/<user.github_nickname>
 git clone git@github.com:ssaunier/twitter-api.git twitter-api-authentication
 cd twitter-api-authentication
-git checkout sqlalchemy  # obtenir cette branche avant de changer la télécommande
+git checkout sqlalchemy  # récupérer cette branche avant de changer le dépôt distant
+
 git remote rm origin
 ```
 
 Allez sur [github.com/new](https://github.com/new) et créez un repository _public_ sur votre compte _personnel_, nommez-le `twitter-api-authentication`.
 
 ```bash
-git remote add origin https://github.com/<user.github_nickname>/twitter-api-authentication.git
-git push -u origin master
+git remote add origin git@github.com:<user.github_nickname>/twitter-api-authentication.git
+git push -u origin sqlalchemy
 ```
 
 Maintenant que vous avez le repo, vous devez créer le virtualenv et installer les paquets :
@@ -23,7 +28,7 @@ Maintenant que vous avez le repo, vous devez créer le virtualenv et installer l
 pipenv install --dev
 ```
 
-Configurons la base de données :
+Let's set the DB:
 
 ```bash
 touch .env
@@ -58,7 +63,7 @@ Tous les points d'entrée de l'API sont accessibles à tous. Rien n'est protég�
 
 ## Authentification par clé
 
- Vous devriez avoir un modèle `User`. Si vous n'en avez pas, ajoutez-en un.
+Vous devriez avoir un modèle `User`. Si vous n'en avez pas, ajoutez-en un.
 
 <details><summary markdown='span'>Voir la solution
 </summary>
@@ -126,7 +131,7 @@ Comme nous créons nous-mêmes une API, nous pouvons vouloir la protéger en uti
 
 Avant de passer au code du serveur, vous voudrez peut-être vous faire passer pour un développeur tiers d'une API utilisant OAuth. Vous pouvez le faire avec celui de GitHub !
 
-1. Allez sur [github.com/settings/applications/new](https://github.com/settings/applications/new) et enregistrer une nouvelle application OAuth
+1. Allez sur [github.com/settings/applications/new](https://github.com/settings/applications/new) et enregistrez une nouvelle application OAuth
 1. Téléchargez [ce code](https://github.com/lepture/flask-oauthlib/blob/master/example/github.py) à un fichier `./github.py` dans votre projet
 1. Mettez à jour la `consumer_key` et la `consumer_secret` avec la valeur réelle que vous avez obtenue à l'étape 1.
 1. Lancez le serveur avec : `pipenv run python github.py`
@@ -138,3 +143,18 @@ Maintenant, ouvrez le navigateur et allez sur `localhost:5000`. Que se passe-t-i
 1. Avec cette clé, le code est capable d'effectuer des requêtes à l'API GitHub **au nom de l'utilisateur**.
 
 Comment mettre à jour le `twitter-api` pour utiliser cette passerelle OAuth de GitHub au lieu d'une authentification basée sur une clé ?
+
+
+---
+
+## J'ai fini! 🎉
+
+C'est tout pour aujourd'hui ! Sauvegardez vos progrès avec les éléments suivants :
+
+```bash
+cd ~/code/<user.github_nickname>/reboot-python
+cd 05-Docker/04-Optional-Authentication
+touch DONE.md
+git add DONE.md && git commit -m "05-Docker/04-Optional-Authentication terminé"
+git push origin sqlalchemy
+```
