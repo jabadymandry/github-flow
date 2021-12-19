@@ -231,7 +231,7 @@ Let's first get a bash shell in the container:
 What have we done here 🤔 ? We have asked Docker to run a command (`/bin/bash`: to get a bash shell) in the container, passing the flag `-i` and `-t` together:
 
 * the `-i` flag stands for "interactive" mode: it gets us a standard input **stdin** (by default, a container runs in a non-interactive mode: it does not listen for input from your side). To provide an input, you need to pass this `-i` flag.
-* the `-t` flag stands for "tty", and is a Unix-like operating system command: with this flag, you will get a "prompt"
+* the `-t` flag stands for "tty", which is a Unix-like operating system command: with this flag, you will get a command prompt.
 
 So the combination of these two flags give us access to a "terminal", in the container 🎉 !
 
