@@ -1,6 +1,6 @@
 # API Twitter - Containerisation
 
-Le but de cet exercice est de poursuivre le travail des exercices de mercredi et jeudi : **Api Twitter**.
+Le but de cet exercice est de poursuivre le travail des exercices des jours 3 et 4 : **API Twitter**.
 
 Nous avons déjà mis en place une application web et une base de données, et aujourd'hui nous allons nous concentrer sur la conteneurisation de ces éléments localement, pour pouvoir développer par dessus, et exécuter nos tests à l'intérieur des conteneurs.
 
