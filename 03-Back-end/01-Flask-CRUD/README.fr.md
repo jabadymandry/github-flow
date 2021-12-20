@@ -2,7 +2,7 @@
 
 ![](http://flask.palletsprojects.com/en/1.1.x/_images/flask-logo.png)
 
-[Flask](http://flask.palletsprojects.com/en/1.1.x/) est un **micro cadre d'appplication** pour Python permettant de construire rapidement une application web.
+[Flask](http://flask.palletsprojects.com/en/1.1.x/) est un **micro cadre d'application** pour Python permettant de construire rapidement une application web.
 
 Dans cet exercice, nous allons passer rapidement en revue toutes les fonctionnalités importantes de Flask.
 
