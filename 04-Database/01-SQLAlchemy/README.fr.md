@@ -441,7 +441,7 @@ heroku create --region=eu
 git push heroku master
 ```
 
-Une fois de plus, vous pouvez profiter de la **magie** de Heroku ! Avec les 3 lignes suivantes, vous pouvez déployez votre base de donnée en production:
+Une fois de plus, vous pouvez profiter de la **magie** de Heroku ! Avec les 3 lignes suivantes, vous pouvez déployer votre base de donnée en production :
 
 ```bash
 heroku config:get DATABASE_URL
