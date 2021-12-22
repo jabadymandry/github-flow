@@ -50,7 +50,6 @@ Nous allons également installer `python-dotenv` qui nous permet de charger les 
 ```bash
 pipenv install python-dotenv
 ```
-</details>
 
 ### 1.b. Exécuter la suite de tests localement
 
@@ -122,7 +121,7 @@ FLASK_ENV=development pipenv run flask run
 
 <details><summary markdown='span'>Voir la solution</summary>
 
-Allez sur<a href="http://localhost:5000/">localhost:5000</a> et <a href="http://localhost:5000/tweets">localhost:5000/tweets</a>.
+Allez sur <a href="http://localhost:5000/">localhost:5000</a> et <a href="http://localhost:5000/tweets">localhost:5000/tweets</a>.
 
 
 Notez que si vous avez supprimé votre base de données dev hier, vous devrez exécuter à nouveau les migrations :
