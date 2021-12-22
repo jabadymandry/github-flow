@@ -236,7 +236,7 @@ from flask_migrate import Migrate
 # [...] After `from models import Product`
 
 migrate = Migrate(app, db)
-
+```
 
 Ceci nous permet de créer un dossier de migration et d'initialiser les fichiers d'Alembic :
 
