@@ -48,7 +48,7 @@ pipenv install --dev
 
 Nous allons également installer `python-dotenv` qui nous permet de charger les variables d'environnement que nous allons disposer dans le fichier `.env` :
 ```bash
-pipenv install python-dotenv
+pip install python-dotenv
 ```
 
 ### 1.b. Exécuter la suite de tests localement
