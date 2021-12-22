@@ -43,7 +43,13 @@ Cet ensemble d'applications n'est pas encore conteneurisé. Mais faisons un cont
 ```bash
 pipenv install --dev
 ```
+</details>
 
+
+Nous allons également installer `python-dotenv` qui nous permet de charger les variables d'environnement que nous allons disposer dans le fichier `.env` :
+```bash
+pipenv install python-dotenv
+```
 </details>
 
 ### 1.b. Exécuter la suite de tests localement
@@ -320,12 +326,12 @@ services:
       - 5000:5000
 ```
 
-:point_right: Assembler l'ensemble d'applications en exécutant : 
+:point_right: Assembler l'ensemble d'applications en exécutant :
 
 ```bash
 docker-compose up
 ```
-  
+
 Il vous sera probablement demandé de partager certains fichiers avec `docker-compose` (car il a besoin d'accéder au code de votre application pour l'exécuter) : cliquez sur "accepter".
 
 :point_right: Allez sur [localhost:5000](http://localhost:5000) et [localhost:5000/tweets](http://localhost:5000/tweets).
@@ -448,9 +454,12 @@ Vous devriez voir vos conteneurs `web` et `db` fonctionner.
 </details>
 
 :point_right: Créons maintenant nos bases de données pour le **développement** et les **tests** :
-* connectez-vous au conteneur `db` : `docker exec -it db psql -U postgres`.
+* connectez-vous au conteneur `db` :
+```bash
+docker exec -it db psql -U postgres
+```
 * créez des bases de données pour les environnements de développement et de test : dans l'invite `psql`, tapez :
-  * `CREATE DATABASE twitter_api_flask;``
+  * `CREATE DATABASE twitter_api_flask;`
   * `CREATE DATABASE twitter_api_flask_test;`
   * Quittez l'invite `psql` : `\q` + **Entrer**
 
