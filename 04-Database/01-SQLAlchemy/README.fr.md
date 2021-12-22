@@ -39,7 +39,7 @@ mkdir flask-with-sqlalchemy
 cd flask-with-sqlalchemy
 git init
 pipenv --python 3.8
-pipenv install flask psycopg2-binary gunicorn flask-sqlalchemy flask-migrate flask-script
+pipenv install flask psycopg2-binary gunicorn flask-sqlalchemy flask-migrate python-dotenv
 pipenv install pylint --dev
 ```
 
@@ -228,36 +228,26 @@ from models import Product
 
 Nous allons maintenant configurer Alembic pour générer notre première migration et mettre à jour la base de données pour **créer** la table `products`.
 
-```bash
-touch manage.py
-```
+Ajoutez dans `wsgi.py` le code suivant:
 
 ```python
-# manage.py
-from flask_script import Manager
-from flask_migrate import Migrate, MigrateCommand
-
-from wsgi import app, db
+# wsgi.py
+from flask_migrate import Migrate
+# [...] After `from models import Product`
 
 migrate = Migrate(app, db)
 
-manager = Manager(app)
-manager.add_command('db', MigrateCommand)
 
-if __name__ == '__main__':
-    manager.run()
-```
-
-Cela nous donne la commande `python manage.py` que nous pouvons utiliser pour initialiser les fichiers d'Alembic :
+Ceci nous permet de créer un dossier de migration et d'initialiser les fichiers d'Alembic :
 
 ```bash
-pipenv run python manage.py db init
+pipenv run flask db init
 ```
 
 Ensuite, nous pouvons exécuter une migration pour capturer l'état du fichier `models.py` :
 
 ```bash
-pipenv run python manage.py db migrate -m "create products"
+pipenv run flask db migrate -m "create products"
 ```
 
 Ouvrez le fichier dans `./migrations/versions` et lisez la méthode auto-générée `upgrade()`. Avez-vous vu comment elle crée les deux colonnes `id` et `name` ?
@@ -265,7 +255,7 @@ Ouvrez le fichier dans `./migrations/versions` et lisez la méthode auto-génér
 Pour appliquer cette migration à la base de données, exécutez ceci :
 
 ```bash
-pipenv run python manage.py db upgrade
+pipenv run flask db upgrade
 ```
 
 Pour vérifier manuellement que le schéma contient maintenant une table `product`, reconnectez-vous à la base de données PostgreSQL :
@@ -297,14 +287,14 @@ class Product(db.Model):
 Retournez dans le terminal et exécutez la commande `migrate` :
 
 ```bash
-pipenv run python manage.py db migrate -m "add description to products"
+pipenv run flask db migrate -m "add description to products"
 ```
 
 Que s'est-il passé dans `migrations/versions` ?
 Lisez ce nouveau fichier et exécutez ensuite la commande `upgrade` :
 
 ```bash
-pipenv run python manage.py db upgrade
+pipenv run flask db upgrade
 ```
 
 Vous pouvez vérifier que cela a fonctionné avec :
@@ -422,14 +412,14 @@ def get_many_product():
     return many_product_schema.jsonify(products), 200
 ```
 
-Et ça devrait être bon ! Lancez votre serveur et allez sur `localhost:5000/api/v1/produits`. Vous devriez voir les deux produits dans la base de données sous le format JSON !
+Et ça devrait être bon ! Lancez votre serveur et allez sur `localhost:5000/api/v1/products`. Vous devriez voir les deux produits dans la base de données sous le format JSON !
 
 ## Déploiement sur Heroku
 
 Il est temps de pousser notre fantastique code en production. Nous allons créer une nouvelle application Heroku, mais avant cela, nous devons configurer le `Procfile`. Avec SQLAlchemy, il y a un léger changement :
 
 1. Nous devons indiquer à Heroku que nous avons besoin d'une base de données PostgreSQL
-1. Nous avons besoin qu'Heroku exécute `manage.py db upgrade` à chaque déploiement pour garder le schéma de la base de données de production en synchronisation avec le code !
+1. Nous avons besoin qu'Heroku exécute `pipenv run flask db upgrade` à chaque déploiement pour garder le schéma de la base de données de production en synchronisation avec le code !
 
 ```bash
 touch Procfile
@@ -438,7 +428,6 @@ touch Procfile
 ```bash
 # Procfile
 
-release: python manage.py db upgrade
 web: gunicorn wsgi:app --access-logfile=-
 ```
 
@@ -452,10 +441,12 @@ heroku create --region=eu
 git push heroku master
 ```
 
-Une fois de plus, vous pouvez profiter de la **magie** de Heroku ! A partir du `Pipfile`, il a détecté le package [psycopg2](http://initd.org/psycopg/) donc il a automatiquement réservé une instance PostgreSQL (gratuite - hobby plan) et configuré `DATABASE_URL`. Vous pouvez le vérifier avec :
+Une fois de plus, vous pouvez profiter de la **magie** de Heroku ! Avec les 3 lignes suivantes, vous pouvez déployer votre base de donnée en production :
 
 ```bash
 heroku config:get DATABASE_URL
+heroku addons:create heroku-postgresql:hobby-dev
+heroku run flask db upgrade
 ```
 
 Ouvrez votre application !
@@ -464,7 +455,7 @@ Ouvrez votre application !
 heroku open
 ```
 
-:question: Vous devriez obtenir le `Hello world` sur la page d'accueil. Allez sur `/products`. Combien de produits voyez-vous ? Pourquoi est-ce différent de `localhost` ?
+:question: Vous devriez obtenir le `Hello world` sur la page d'accueil. Allez sur `/api/v1/products`. Combien de produits voyez-vous ? Pourquoi est-ce différent de `localhost` ?
 
 <details><summary markdown='span'>Voir la solution
 </summary>
