@@ -9,7 +9,7 @@ cd ~/code/<user.github_nickname>/reboot-python
 git pull upstream master # Récupérer la dernière version de l'exercice
 
 cd 01-OOP/01-Sum-Of-Three
-subl . # Ouvrez le dossier dans Sublime Text
+code . # Ouvrez le dossier dans VS Code
 ```
 
 ## Procédure
