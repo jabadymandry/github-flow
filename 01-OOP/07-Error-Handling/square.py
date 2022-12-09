@@ -3,4 +3,7 @@
 import sys
 
 if __name__ == "__main__":
-    print(type(sys.argv[1]))
+    try:
+       print(int(sys.argv[1])**2)
+    except ValueError:
+        print("Not a number")
