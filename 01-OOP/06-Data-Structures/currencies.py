@@ -3,9 +3,9 @@
 # pylint: disable=unused-argument
 
 RATES = { 
-         "USDEUR": 0.95,
-         "GBPEUR": 1.17,
-         "CHFEUR": 1.02
+         "USDEUR": 0.85,
+         "GBPEUR": 1.13,
+         "CHFEUR": 0.86
         } # TODO: add some currency rates
 
 # `amount` is a `tuple` like (100, EUR). `currency` is a `string`
@@ -16,6 +16,6 @@ def convert(amount, currency):
     elif amount[1] == "GBP":
         return round(amount[0] * RATES["GBPEUR"])
     elif amount[1] == "CHF":
-        return round(amount[0] * RATES["USDEUR"])
+        return round(amount[0] * RATES["CHFEUR"])
     else:
         return  None
